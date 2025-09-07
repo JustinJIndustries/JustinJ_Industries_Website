@@ -3,36 +3,53 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuButton = document.getElementById('menu-toggle');
   const overlay = document.getElementById('overlay');
   const brandLogo = document.getElementById('brand-logo');
-  const themeBtn = document.getElementById('theme-toggle');
+  const segWrap = document.querySelector('.segmented');
+  const segButtons = [...document.querySelectorAll('.segmented .seg')];
   const media = window.matchMedia('(prefers-color-scheme: dark)');
   const LS_KEY = 'theme'; // 'auto'|'dark'|'light'
 
   const getTheme = () => localStorage.getItem(LS_KEY) || 'auto';
   const setTheme = (v) => localStorage.setItem(LS_KEY, v);
 
+  function updateSegmentedActive(pref){
+    segButtons.forEach(btn => {
+      const active = btn.dataset.theme === pref;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
+  }
+
   function applyTheme(){
     const pref = getTheme();
     doc.classList.remove('theme-dark','theme-light');
     if (pref === 'dark') doc.classList.add('theme-dark');
     if (pref === 'light') doc.classList.add('theme-light');
-
-    // Update icon visibility
-    themeBtn.querySelector('.icon-auto').style.display = pref === 'auto' ? 'block' : 'none';
-    themeBtn.querySelector('.icon-moon').style.display = pref === 'dark' ? 'block' : 'none';
-    themeBtn.querySelector('.icon-sun').style.display = pref === 'light' ? 'block' : 'none';
-
-    const label = pref.charAt(0).toUpperCase() + pref.slice(1);
-    themeBtn.setAttribute('aria-label', `Theme: ${label} (click to change)`);
-    themeBtn.title = `Theme: ${label} (click to change)`;
+    updateSegmentedActive(pref);
 
     const effectiveDark = pref === 'dark' || (pref === 'auto' && media.matches);
     brandLogo.src = effectiveDark ? 'JJI-Logo-Only-white.png' : 'JJI-Logo-Only-grey.png';
   }
 
-  themeBtn.addEventListener('click', () => {
-    const next = getTheme() === 'auto' ? 'dark' : getTheme() === 'dark' ? 'light' : 'auto';
-    setTheme(next);
-    applyTheme();
+  // Click handlers
+  segButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.dataset.theme;
+      setTheme(val);
+      applyTheme();
+    });
+  });
+
+  // Keyboard arrows cycle choices (within group)
+  segWrap.addEventListener('keydown', (e) => {
+    const idx = segButtons.findIndex(b => b.classList.contains('is-active'));
+    if (['ArrowRight','ArrowLeft'].includes(e.key)){
+      e.preventDefault();
+      let next = idx + (e.key === 'ArrowRight' ? 1 : -1);
+      if (next < 0) next = segButtons.length - 1;
+      if (next >= segButtons.length) next = 0;
+      segButtons[next].focus();
+      segButtons[next].click();
+    }
   });
 
   media.addEventListener('change', () => {
@@ -40,14 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Menu
-  menuButton.addEventListener('click', () => {
+  menuButton?.addEventListener('click', () => {
     const active = overlay.classList.toggle('active');
     menuButton.classList.toggle('active', active);
     document.body.classList.toggle('menu-open', active);
     menuButton.setAttribute('aria-expanded', String(active));
     if (active) overlay.querySelector('a')?.focus();
   });
-  overlay.addEventListener('click', (e) => {
+  overlay?.addEventListener('click', (e) => {
     if (e.target === overlay) {
       overlay.classList.remove('active');
       menuButton.classList.remove('active');
@@ -56,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+    if (e.key === 'Escape' && overlay?.classList.contains('active')) {
       overlay.classList.remove('active');
       menuButton.classList.remove('active');
       document.body.classList.remove('menu-open');
@@ -74,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         el.scrollIntoView({behavior:'smooth', block:'start'});
       }
-      if(overlay.classList.contains('active')){
+      if(overlay?.classList.contains('active')){
         overlay.classList.remove('active');
         menuButton.classList.remove('active');
         document.body.classList.remove('menu-open');
