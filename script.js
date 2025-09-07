@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Form success/error logic
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('contact');
+  const form = document.getElementById('contact-form');
   const statusEl = document.getElementById('form-status');
   if (!form) return;
 
