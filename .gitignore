@@ -1,0 +1,8 @@
+# Capture opportunity documents (keep structure/readme tracked)
+capture/opportunity/*
+!capture/opportunity/README.md
+!capture/opportunity/.gitkeep
+
+# Local dependency artifacts
+node_modules/
+npm-debug.log*

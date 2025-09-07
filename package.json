@@ -1,0 +1,22 @@
+{
+  "name": "justinj-industries-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lightweight QA toolchain for JustinJ Industries static website",
+  "scripts": {
+    "serve": "http-server . -p 8080 -s",
+    "check:html": "html-validate \"*.html\"",
+    "check:links": "start-server-and-test serve http://127.0.0.1:8080 \"linkinator http://127.0.0.1:8080 --recurse --skip 'mailto:|tel:|javascript:|#'\"",
+    "check:a11y": "start-server-and-test serve http://127.0.0.1:8080 \"pa11y http://127.0.0.1:8080 http://127.0.0.1:8080/government-buyers.html http://127.0.0.1:8080/capability-statement.html --standard WCAG2AA --timeout 120000\"",
+    "check:format": "prettier --check \"*.{html,css,js,md,xml,txt}\" \"docs/**/*.md\"",
+    "check": "npm run check:html && npm run check:links && npm run check:a11y && npm run check:format"
+  },
+  "devDependencies": {
+    "html-validate": "^10.0.0",
+    "http-server": "^14.1.1",
+    "linkinator": "^6.1.2",
+    "pa11y": "^9.0.1",
+    "prettier": "^3.3.3",
+    "start-server-and-test": "^2.0.3"
+  }
+}

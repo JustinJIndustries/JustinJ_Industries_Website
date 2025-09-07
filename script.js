@@ -48,27 +48,51 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Menu toggle
+  const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  const closeMenu = () => {
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    menuButton.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open menu');
+    menuButton.focus();
+  };
+
   menuButton.addEventListener('click', () => {
     const active = overlay.classList.toggle('active');
+    overlay.setAttribute('aria-hidden', String(!active));
     menuButton.classList.toggle('active', active);
     document.body.classList.toggle('menu-open', active);
     menuButton.setAttribute('aria-expanded', String(active));
+    menuButton.setAttribute('aria-label', active ? 'Close menu' : 'Open menu');
     if (active) overlay.querySelector('a')?.focus();
   });
+
   overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) {
-      overlay.classList.remove('active');
-      menuButton.classList.remove('active');
-      document.body.classList.remove('menu-open');
-      menuButton.setAttribute('aria-expanded','false');
-    }
+    if (e.target === overlay) closeMenu();
   });
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && overlay.classList.contains('active')) {
-      overlay.classList.remove('active');
-      menuButton.classList.remove('active');
-      document.body.classList.remove('menu-open');
-      menuButton.setAttribute('aria-expanded','false');
+      closeMenu();
+      return;
+    }
+
+    if (e.key === 'Tab' && overlay.classList.contains('active')) {
+      const focusables = Array.from(overlay.querySelectorAll(focusableSelector));
+      if (!focusables.length) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
   });
 
@@ -80,14 +104,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const el = document.querySelector(id);
       if(el){
         e.preventDefault();
-        el.scrollIntoView({behavior:'smooth', block:'start'});
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        el.scrollIntoView({behavior: reduceMotion ? 'auto' : 'smooth', block:'start'});
       }
-      if(overlay.classList.contains('active')){
-        overlay.classList.remove('active');
-        menuButton.classList.remove('active');
-        document.body.classList.remove('menu-open');
-        menuButton.setAttribute('aria-expanded','false');
-      }
+      if(overlay.classList.contains('active')) closeMenu();
     });
   });
 
@@ -113,16 +133,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Form success/error logic
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('contact');
+  const form = document.getElementById('contact-form');
   const statusEl = document.getElementById('form-status');
-  if (!form) return;
+  const inquiryTypeField = document.getElementById('inquiry-type');
+  if (!form || !statusEl) return;
+
+  const resetFieldError = (field) => field.setAttribute('aria-invalid', 'false');
+  const markFieldError = (field) => field.setAttribute('aria-invalid', 'true');
+
+  const setStatus = (message, type) => {
+    statusEl.textContent = message;
+    statusEl.classList.remove('is-success', 'is-error');
+    if (type) statusEl.classList.add(type);
+  };
+
+  const setInquiryType = (value) => {
+    if (!inquiryTypeField || !value) return;
+    const optionValues = Array.from(inquiryTypeField.options).map((opt) => opt.value);
+    if (optionValues.includes(value)) {
+      inquiryTypeField.value = value;
+      resetFieldError(inquiryTypeField);
+    }
+  };
+
+  // Route government-buyer CTAs into a matching inquiry type.
+  document.querySelectorAll('.gov-inquiry-link[data-inquiry-type]').forEach((link) => {
+    link.addEventListener('click', () => {
+      setInquiryType(link.dataset.inquiryType);
+    });
+  });
+
+  // Optional support for direct links like #contact?inquiry_type=RFQ/RFP
+  const url = new URL(window.location.href);
+  const inquiryTypeParam = url.searchParams.get('inquiry_type');
+  if (inquiryTypeParam) setInquiryType(inquiryTypeParam);
+
+  form.querySelectorAll('input, select, textarea').forEach((field) => {
+    field.addEventListener('input', () => {
+      if (field.checkValidity()) resetFieldError(field);
+    });
+    field.addEventListener('blur', () => {
+      if (!field.checkValidity()) markFieldError(field);
+    });
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    setStatus('', '');
 
-    // Honeypot: if filled, drop the submission silently
+    const invalidFields = Array.from(form.querySelectorAll('input, select, textarea')).filter(
+      (field) => !field.checkValidity()
+    );
+
+    invalidFields.forEach(markFieldError);
+    if (invalidFields.length) {
+      setStatus('Please complete the required fields and correct any invalid values.', 'is-error');
+      invalidFields[0].focus();
+      return;
+    }
+
+    // Honeypot: if filled, drop the submission silently.
     if (form.querySelector('[name="_website"]').value) {
-      statusEl.textContent = 'Thanks!'; // pretend success to bots
+      setStatus('Thanks. Your message was received.', 'is-success');
       form.reset();
       return;
     }
@@ -133,20 +205,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch(form.action, {
         method: 'POST',
         body: data,
-        headers: { 'Accept': 'application/json' }
+        headers: { Accept: 'application/json' }
       });
 
       if (res.ok) {
         form.reset();
-        statusEl.textContent = 'Thanks! I’ll be in touch shortly.';
+        setStatus('Thanks. Your inquiry was received. JustinJ Industries will follow up with next steps.', 'is-success');
       } else {
-        // Try to surface Formspree validation errors
         const json = await res.json().catch(() => ({}));
-        const msg = json?.errors?.map(e => e.message).join(' ') || 'Submission failed.';
-        statusEl.textContent = `${msg} You can also email info@justinjindustries.com.`;
+        const msg = json?.errors?.map((err) => err.message).join(' ') || 'Submission failed.';
+        setStatus(`${msg} You can also email info@justinjindustries.com.`, 'is-error');
       }
     } catch {
-      statusEl.textContent = 'Network error — please try again or email info@justinjindustries.com.';
+      setStatus('Network error. Please try again or email info@justinjindustries.com.', 'is-error');
     }
   });
 });

@@ -75,6 +75,11 @@ body{
 a{color:inherit}
 img{max-width:100%;display:block}
 
+:where(a, button, input, textarea, select):focus-visible{
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
 .container{width:min(1120px, 90%);margin-inline:auto}
 
 .skip-link{
@@ -138,6 +143,7 @@ img{max-width:100%;display:block}
   border:0;
   border-radius:.8rem;
   padding:.8rem 1rem;
+  min-height:44px;
   font-weight:700;
   box-shadow:var(--shadow);
   text-decoration:none;
@@ -150,6 +156,7 @@ img{max-width:100%;display:block}
 
 .nav-buttons{display:flex;align-items:center;gap:.5rem}
 #menu-toggle{display:none;width:44px;height:44px;border:0;background:transparent;cursor:pointer}
+#theme-toggle{min-height:44px}
 #menu-toggle .bar{display:block;width:24px;height:2px;background:var(--text);margin:5px auto;transition:.25s}
 #menu-toggle.active .bar:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 #menu-toggle.active .bar:nth-child(2){opacity:0}
@@ -195,7 +202,8 @@ img{max-width:100%;display:block}
 .card img{aspect-ratio:16/10;object-fit:cover}
 .card__body{padding:1rem}
 .card__body h3{margin:.25rem 0 .35rem;font-size:1.05rem}
-.card__body p{color:var(--muted)}
+.card__body p{color:var(--muted);margin:.25rem 0}
+.case-disclaimer{margin-top:.8rem}
 
 /* Space after the services grid before the CTA row */
 .section .cta-row{
@@ -208,6 +216,31 @@ img{max-width:100%;display:block}
 .service h3{margin:0 0 .5rem}
 .service ul{margin:0;padding-left:1.1rem}
 .service li{margin:.25rem 0}
+
+/* Government buyers */
+.gov-hero{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:1rem;
+  padding:1rem;
+  box-shadow:var(--shadow);
+  margin-bottom:1rem;
+}
+.gov-hero h3{margin-top:0}
+.gov-grid{grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));margin-bottom:1rem}
+.gov-procurement{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:1rem;
+  padding:1rem;
+  box-shadow:var(--shadow);
+  margin-bottom:1rem;
+}
+.procurement-list{display:grid;gap:.6rem;margin:0}
+.procurement-list div{display:grid;gap:.15rem;padding:.45rem .6rem;border:1px solid var(--border);border-radius:.6rem;background:var(--bg-elev)}
+.procurement-list dt{font-weight:700}
+.procurement-list dd{margin:0;color:var(--muted)}
+.gov-cta-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem}
 
 /* KPI stripe */
 .stripe{background:linear-gradient(90deg, rgba(98,168,255,.08), rgba(124,255,225,.08));border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -224,14 +257,21 @@ img{max-width:100%;display:block}
 .contact{display:grid;gap:1rem}
 .grid--2{grid-template-columns:repeat(2,1fr)}
 label{display:grid;gap:.35rem;font-weight:600}
-input, textarea{
+input, textarea, select{
   font:inherit;color:inherit;background:var(--bg-elev);
   border:1px solid var(--border);border-radius:.7rem;padding:.75rem;
   outline-color:transparent;outline-offset:2px
 }
-input:focus, textarea:focus{box-shadow:0 0 0 .25rem var(--ring);border-color:transparent}
+input:focus, textarea:focus, select:focus{box-shadow:0 0 0 .25rem var(--ring);border-color:transparent}
 .contact__actions{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
 .small{font-size:.9rem;color:var(--muted)}
+.contact-note{margin:0}
+.consent-row{display:flex;align-items:flex-start;gap:.65rem;font-weight:500}
+.consent-row input{margin-top:.2rem;flex:0 0 auto}
+.form-status{margin:0;min-height:1.4em}
+.form-status.is-success{color:#7cffe1}
+.form-status.is-error{color:#ffb4b4}
+input[aria-invalid="true"], textarea[aria-invalid="true"], select[aria-invalid="true"]{border-color:#ff8f8f}
 
 /* Footer */
 .site-footer{border-top:1px solid var(--border);margin-top:2rem}
