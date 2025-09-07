@@ -1,87 +1,78 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const doc = document.documentElement; // root for theme override classes
+  const doc = document.documentElement; // use root for CSS var overrides
   const menuButton = document.getElementById('menu-toggle');
   const overlay = document.getElementById('overlay');
   const brandLogo = document.getElementById('brand-logo');
   const themeBtn = document.getElementById('theme-toggle');
+
   const media = window.matchMedia('(prefers-color-scheme: dark)');
-  const LS_KEY = 'theme'; // 'auto'|'dark'|'light'
+  const LS_KEY = 'theme'; // 'auto' | 'dark' | 'light'
 
-  // --- Theme helpers
-  const getTheme = () => localStorage.getItem(LS_KEY) || 'auto';
-  const setTheme = (v) => localStorage.setItem(LS_KEY, v);
+  function getStoredTheme() {
+    return localStorage.getItem(LS_KEY) || 'auto';
+  }
 
-  function applyTheme(){
-    const pref = getTheme();
-    // reset
+  function setStoredTheme(val) {
+    localStorage.setItem(LS_KEY, val);
+  }
+
+  function applyTheme() {
+    const pref = getStoredTheme();
     doc.classList.remove('theme-dark','theme-light');
     if (pref === 'dark') doc.classList.add('theme-dark');
     if (pref === 'light') doc.classList.add('theme-light');
 
-    // Update button label + accessibility
-    const label = pref.charAt(0).toUpperCase() + pref.slice(1);
-    if (themeBtn){
-      themeBtn.textContent = label;
-      themeBtn.setAttribute('aria-label', `Theme: ${label} (click to change)`);
-      themeBtn.title = `Theme: ${label} (click to change)`;
-    }
+    // Set chip label
+    const label = pref === 'auto' ? 'Auto' : (pref[0].toUpperCase() + pref.slice(1));
+    themeBtn.dataset.state = pref;
+    themeBtn.setAttribute('aria-label', `Theme: ${label}`);
+    themeBtn.title = `Theme: ${label} (click to change)`;
+    themeBtn.querySelector('.chip__text').textContent = label;
 
-    // Effective theme decides logo
+    // Decide effective theme for logo (override wins, else system)
     const effectiveDark = pref === 'dark' || (pref === 'auto' && media.matches);
-    if (brandLogo){
-      brandLogo.src = effectiveDark ? 'JJI-Logo-Only-white.png' : 'JJI-Logo-Only-grey.png';
-    }
+    brandLogo.src = effectiveDark ? 'JJI-Logo-Only-white.png' : 'JJI-Logo-Only-grey.png';
   }
 
   // Cycle Auto -> Dark -> Light -> Auto
-  if (themeBtn){
-    themeBtn.addEventListener('click', () => {
-      const cur = getTheme();
-      const next = cur === 'auto' ? 'dark' : cur === 'dark' ? 'light' : 'auto';
-      setTheme(next);
-      applyTheme();
-    });
-  }
-
-  // React to system changes only when Auto
-  media.addEventListener('change', () => {
-    if (getTheme() === 'auto') applyTheme();
+  themeBtn.addEventListener('click', () => {
+    const current = getStoredTheme();
+    const next = current === 'auto' ? 'dark' : current === 'dark' ? 'light' : 'auto';
+    setStoredTheme(next);
+    applyTheme();
   });
 
-  // Initialize theme
-  if (!localStorage.getItem(LS_KEY)) setTheme('auto');
-  applyTheme();
+  // React to OS changes only when Auto
+  media.addEventListener('change', () => {
+    if (getStoredTheme() === 'auto') applyTheme();
+  });
 
-  // --- Menu toggle (mobile overlay)
-  if (menuButton && overlay){
-    menuButton.addEventListener('click', () => {
-      const active = overlay.classList.toggle('active');
-      menuButton.classList.toggle('active', active);
-      document.body.classList.toggle('menu-open', active);
-      menuButton.setAttribute('aria-expanded', String(active));
-      if (active) overlay.querySelector('a')?.focus();
-    });
+  // Menu toggle
+  menuButton.addEventListener('click', () => {
+    const active = overlay.classList.toggle('active');
+    menuButton.classList.toggle('active', active);
+    document.body.classList.toggle('menu-open', active);
+    menuButton.setAttribute('aria-expanded', String(active));
+    if (active) overlay.querySelector('a')?.focus();
+  });
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+      menuButton.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      menuButton.setAttribute('aria-expanded','false');
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+      overlay.classList.remove('active');
+      menuButton.classList.remove('active');
+      document.body.classList.remove('menu-open');
+      menuButton.setAttribute('aria-expanded','false');
+    }
+  });
 
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        overlay.classList.remove('active');
-        menuButton.classList.remove('active');
-        document.body.classList.remove('menu-open');
-        menuButton.setAttribute('aria-expanded','false');
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && overlay.classList.contains('active')) {
-        overlay.classList.remove('active');
-        menuButton.classList.remove('active');
-        document.body.classList.remove('menu-open');
-        menuButton.setAttribute('aria-expanded','false');
-      }
-    });
-  }
-
-  // --- Smooth scroll for hash links
+  // Smooth scroll
   document.querySelectorAll('a[href^=\"#\"]').forEach(a => {
     a.addEventListener('click', (e) => {
       const id = a.getAttribute('href');
@@ -91,16 +82,16 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         el.scrollIntoView({behavior:'smooth', block:'start'});
       }
-      if(overlay?.classList.contains('active')){
+      if(overlay.classList.contains('active')){
         overlay.classList.remove('active');
-        menuButton?.classList.remove('active');
+        menuButton.classList.remove('active');
         document.body.classList.remove('menu-open');
-        menuButton?.setAttribute('aria-expanded','false');
+        menuButton.setAttribute('aria-expanded','false');
       }
     });
   });
 
-  // --- Reveal on scroll
+  // Intersection Observer reveal
   const observer = new IntersectionObserver((entries)=>{
     entries.forEach(entry => {
       if(entry.isIntersecting){
@@ -111,7 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }, {threshold: .12});
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // --- Year in footer
+  // Year
   const yearEl = document.getElementById('year');
   if(yearEl){ yearEl.textContent = new Date().getFullYear(); }
+
+  // Initial
+  if (!localStorage.getItem(LS_KEY)) setStoredTheme('auto');
+  applyTheme();
 });
