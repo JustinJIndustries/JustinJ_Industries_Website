@@ -33,8 +33,10 @@
       </ul>
 
       <div class="nav-buttons">
-        <!-- Toggle button -->
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">Auto</button>
+        <button id="theme-toggle" class="chip" aria-label="Theme: Auto" title="Theme: Auto (click to change)" data-state="auto">
+          <!-- icon changes via CSS text -->
+          <span class="chip__dot"></span><span class="chip__text">Auto</span>
+        </button>
 
         <button id="menu-toggle" aria-label="Open menu" aria-expanded="false">
           <span class="bar"></span>
