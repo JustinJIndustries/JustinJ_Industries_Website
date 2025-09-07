@@ -110,3 +110,30 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!localStorage.getItem(LS_KEY)) setStoredTheme('auto');
   applyTheme();
 });
+
+// Form success/error logic
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('contact');
+  const statusEl = document.getElementById('form-status');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    if (form.querySelector('[name="_company"]').value) { // honeypot
+      e.preventDefault();
+      return;
+    }
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' }});
+      if (res.ok) {
+        form.reset();
+        statusEl.textContent = 'Thanks! I’ll be in touch shortly.';
+      } else {
+        statusEl.textContent = 'Hmm, there was a problem—please email hello@justinjindustries.com.';
+      }
+    } catch {
+      statusEl.textContent = 'Network error—try again or email hello@justinjindustries.com.';
+    }
+  });
+});
