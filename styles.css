@@ -109,9 +109,12 @@ img{max-width:100%;display:block}
 #menu-toggle.active .bar:nth-child(2){opacity:0}
 #menu-toggle.active .bar:nth-child(3){transform:rotate(-45deg) translate(-5px,5px)}
 
-/* Theme toggle button (3-state) */
-.theme-toggle{padding:.4rem .8rem;border-radius:.5rem;border:1px solid var(--border);background:var(--bg-elev);color:var(--text);cursor:pointer;font-size:.85rem}
-.theme-toggle:hover{box-shadow:0 0 0 .2rem var(--ring)}
+/* Small "chip" button for theme toggle (3-state) */
+.chip{display:inline-flex;align-items:center;gap:.45rem;padding:.35rem .6rem;border-radius:999px;border:1px solid var(--border);background:var(--bg-elev);cursor:pointer;font-weight:600}
+.chip__dot{width:.6rem;height:.6rem;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand-2));}
+.chip__text{font-size:.85rem;color:var(--muted)}
+
+#dark-mode-toggle svg{width:20px;height:20px}
 
 /* Overlay menu */
 .overlay{position:fixed;inset:0;display:grid;place-items:center;visibility:hidden;opacity:0;background:rgba(0,0,0,.88);transition:.25s}
