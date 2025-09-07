@@ -10,6 +10,7 @@
   --border: #232a36;
   --ring: rgba(98,168,255,.35);
   --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --btn-ink: #0a1018;
 }
 @media (prefers-color-scheme: light){
   :root{
