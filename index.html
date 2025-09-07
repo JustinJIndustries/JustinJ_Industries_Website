@@ -1,166 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JustinJ Industries</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JustinJ Industries — Web, Data & Growth</title>
+  <meta name="description" content="Web development, digital tagging, and growth marketing. I build fast, accessible sites and rigorous analytics that move the numbers." />
+  <link rel="canonical" href="https://www.justinjindustries.com/" />
+  <meta property="og:title" content="JustinJ Industries — Web, Data & Growth" />
+  <meta property="og:description" content="Web development, digital tagging, and growth marketing. I build fast, accessible sites and rigorous analytics that move the numbers." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&fit=crop" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preload" href="styles_wow_icons.css" as="style" />
+  <link rel="stylesheet" href="styles_wow_icons.css" />
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <ul class="nav-links">
-                <li><a href="#digital-media">Digital Media</a></li>
-                <li><a href="#web-development">Web Development</a></li>
-                <li><a href="#marketing">Marketing</a></li>
-            </ul>
-            <div class="nav-buttons">
-                <button id="dark-mode-toggle" aria-label="Toggle dark mode" aria-pressed="false">
-                    <!-- Moon Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <!-- Sun Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-                <button id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
-            </div>
-        </nav>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-        <!-- Overlay Menu -->
-        <div id="overlay" class="overlay">
-            <ul class="overlay-menu">
-                <li><a href="#digital-media">Digital Media</a></li>
-                <li><a href="#web-development">Web Development</a></li>
-                <li><a href="#marketing">Marketing</a></li>
-            </ul>
+  <header class="site-header" role="banner">
+    <nav class="nav container" aria-label="Primary">
+      <a href="#" class="brand" aria-label="JustinJ Industries home">
+        <img id="brand-logo" src="JJI-Logo-Only-grey.png" alt="" width="34" height="34" />
+        <span class="brand__text">JustinJ <strong>Industries</strong></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact" class="btn btn--small">Let's Talk</a></li>
+      </ul>
+
+      <div class="nav-buttons">
+        <button id="theme-toggle" class="icon-btn" aria-label="Theme: Auto (click to change)" title="Theme: Auto (click to change)" data-state="auto">
+          <span class="sr-only">Toggle theme</span>
+          <svg class="icon icon-auto" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10H3V5zm19 12H2a2 2 0 0 0 0 4h22a2 2 0 0 0 0-4h-2zM5 5h14v8H5V5z" fill="currentColor"/></svg>
+          <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+
+        <button id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+
+    <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-label="Mobile menu">
+      <ul class="overlay-menu">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact" class="btn">Let's Talk</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero container">
+      <div class="hero__content">
+        <p class="eyebrow">Web • Data • Growth</p>
+        <h1 class="hero__title">Pixel-perfect sites. <span class="underline">Bulletproof analytics</span>. Measurable growth.</h1>
+        <p class="hero__sub">I help teams ship fast, accessible websites with airtight tagging—so product, design, and marketing can move with confidence.</p>
+        <div class="hero__cta">
+          <a href="#work" class="btn">See recent work</a>
+          <a href="#contact" class="btn btn--ghost">Get a quote</a>
         </div>
-    </header>
+        <ul class="hero__badges" aria-label="Highlights">
+          <li>GA4 • GTM • Marketo</li>
+          <li>WordPress • Craft CMS</li>
+          <li>Cloud • Automation</li>
+        </ul>
+      </div>
+      <picture class="hero__art" aria-hidden="true">
+        <source srcset="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&fit=crop" media="(min-width: 900px)">
+        <img loading="eager" decoding="async" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&fit=crop" alt="" />
+      </picture>
+    </section>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1>Welcome to JustinJ Industries</h1>
-                <p>Transforming ideas into digital realities through innovative media, development, and marketing solutions.</p>
-                <!-- <a href="#" class="cta-button">Explore Our Services</a> -->
-            </div>
-        </section>
+    <section id="work" class="section container">
+      <div class="section__head">
+        <h2>Recent Work</h2>
+        <p>Hand-picked projects that showcase speed, clarity, and measurable impact.</p>
+      </div>
+      <div class="grid cards">
+        <article class="card reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=900&fit=crop" alt="Banking website dashboard concept" />
+          <div class="card__body">
+            <h3>Financial Services Site Refresh</h3>
+            <p>Rebuilt homepage and product journeys; implemented consent-mode tagging and GA4. <strong>+28% CTR</strong> to key products.</p>
+          </div>
+        </article>
+        <article class="card reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1487611459768-bd414656ea10?q=80&w=900&fit=crop" alt="Analytics dashboard with charts" />
+          <div class="card__body">
+            <h3>Analytics Hardening</h3>
+            <p>End-to-end audit of GTM containers, event taxonomy, and server-side tracking. <strong>98.7% hit integrity</strong>.</p>
+          </div>
+        </article>
+        <article class="card reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1493723843671-1d655e66ac1c?q=80&w=900&fit=crop" alt="Marketing landing page" />
+          <div class="card__body">
+            <h3>Conversion Landing System</h3>
+            <p>ACF-powered component library for rapid test-and-learn. <strong>−32% build time</strong>, <strong>+19% lead rate</strong>.</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-        <section id="digital-media" class="service">
-            <div class="container">
-                <h2>Digital Media</h2>
-                <div class="service-content">
-                    <div class="service-text">
-                        <h3>Captivating Content Creation</h3>
-                        <p>Our digital media team crafts compelling narratives that resonate with your audience across all platforms.</p>
-                        <!-- <a href="#" class="learn-more">Learn More</a> -->
-                    </div>
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Digital Media Illustration" width="600" height="400">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="web-development" class="service">
-            <div class="container">
-                <h2>Web Development</h2>
-                <div class="service-content reverse">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Web Development Illustration" width="600" height="400">
-                    </div>
-                    <div class="service-text">
-                        <h3>Cutting-Edge Web Solutions</h3>
-                        <p>We build responsive, scalable, and user-friendly websites that drive engagement and conversions.</p>
-                        <!-- <a href="#" class="learn-more">Discover Our Process</a> -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="marketing" class="service">
-            <div class="container">
-                <h2>Marketing</h2>
-                <div class="service-content">
-                    <div class="service-text">
-                        <h3>Strategic Digital Marketing</h3>
-                        <p>Our data-driven marketing strategies help you reach the right audience and achieve measurable results.</p>
-                        <!-- <a href="#" class="learn-more">Explore Our Strategies</a> -->
-                    </div>
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1497493292307-31c376b6e479?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Marketing Illustration" width="600" height="400">
-                    </div>
-                </div>
-            </div>
-        </section>
-    <!--
-        <section class="cta">
-            <div class="container">
-                <h2>Ready to Transform Your Digital Presence?</h2>
-                <p>Let's collaborate to bring your vision to life with our expertise in digital media, web development, and marketing.</p>
-                <form class="cta-form">
-                    <input type="email" placeholder="Enter your email" required>
-                    <button type="submit" class="cta-button">Get Started</button>
-                </form>
-            </div>
-        </section>
-    -->
-
-    </main>
-
-    <footer>
-        <div class="container">
-            <!-- <div class="footer-content">
-                <div class="footer-section">
-                    <h3>JustinJ Industries</h3>
-                    <p>Transforming ideas into digital realities.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Services</h4>
-                    <ul>
-                        <li>Digital Media</li>
-                        <li>Web Development</li>
-                        <li>Marketing</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li>About Us</li>
-                        <li>Careers</li>
-                        <li>Contact</li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Connect</h4>
-                    <ul>
-                        <li>Twitter</li>
-                        <li>LinkedIn</li>
-                        <li>Instagram</li>
-                    </ul>
-                </div>
-            </div>
-        -->
-            <div class="footer-bottom">
-                <p>&copy; 2025 JustinJ Industries. All rights reserved.</p>
-            </div>
+    <section id="services" class="section container">
+      <div class="section__head">
+        <h2>Services</h2>
+        <p>Modular engagements that meet you where you are.</p>
+      </div>
+      <div class="grid services">
+        <div class="service reveal">
+          <h3>Web Development</h3>
+          <ul>
+            <li>Custom WordPress & CraftCMS</li>
+            <li>ACF flexible blocks, theme hardening</li>
+            <li>Performance: Core Web Vitals, image strategy</li>
+          </ul>
         </div>
-    </footer>
+        <div class="service reveal">
+          <h3>Digital Tagging & Analytics</h3>
+          <ul>
+            <li>GA4 & GTM specs, event design</li>
+            <li>Server-side tagging & consent mode</li>
+            <li>Looker Studio dashboards</li>
+          </ul>
+        </div>
+        <div class="service reveal">
+          <h3>Growth & Marketing Ops</h3>
+          <ul>
+            <li>Landing pages & CRO</li>
+            <li>Marketing automation & integrations</li>
+            <li>Technical SEO & schema</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a href="#contact" class="btn">Start a project</a>
+        <a href="#about" class="link">View process</a>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <section id="results" class="stripe">
+      <div class="container stripe__inner">
+        <div class="kpi reveal"><span class="kpi__big">+28%</span><span>Product CTR</span></div>
+        <div class="kpi reveal"><span class="kpi__big">−32%</span><span>Build time</span></div>
+        <div class="kpi reveal"><span class="kpi__big">98.7%</span><span>Hit integrity</span></div>
+        <div class="kpi reveal"><span class="kpi__big">+19%</span><span>Lead rate</span></div>
+      </div>
+    </section>
+
+    <section id="about" class="section container">
+      <div class="section__head">
+        <h2>About</h2>
+        <p>Boston-based builder partnering with product & engineering to ship clean code and clean data.</p>
+      </div>
+      <div class="about">
+        <p class="reveal">I’m Justin — a digital tagging manager and full-stack web generalist. I combine design sense with disciplined analytics so decisions are grounded in truth.</p>
+        <ul class="about__list reveal">
+          <li>Accessibility-first, keyboard & screen-reader tested</li>
+          <li>Security-minded: escaping, sanitization, and least-privilege by default</li>
+          <li>Docs & handoffs that scale beyond a single contributor</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact" class="section container">
+      <div class="section__head">
+        <h2>Let’s talk</h2>
+        <p>Tell me about your goals. I’ll reply with next steps and a clear estimate.</p>
+      </div>
+      <form class="contact" name="contact" method="post" netlify data-netlify="true">
+        <div class="grid grid--2">
+          <label> Name
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label> Email
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+        </div>
+        <label> How can I help?
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+        <div class="contact__actions">
+          <button type="submit" class="btn">Send</button>
+          <p class="small">Prefer email? <a href="mailto:hello@justinjindustries.com">hello@justinjindustries.com</a></p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <p>&copy; <span id="year"></span> JustinJ Industries.</p>
+      <ul class="social">
+        <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
+        <li><a href="#" aria-label="GitHub">GitHub</a></li>
+        <li><a href="#" aria-label="X">X</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="script_wow_icons.js" defer></script>
 </body>
 </html>
