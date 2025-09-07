@@ -180,7 +180,7 @@
         <p>Tell me about your goals. I’ll reply with next steps and a clear estimate.</p>
       </div>
       
-<form id="contact" action="https://formspree.io/f/mgvlrzdq" method="POST" novalidate>
+<form action="https://formspree.io/f/mgvlrzdq" method="POST">
   <div class="grid grid--2">
     <label> Name
       <input type="text" name="name" autocomplete="name" required />
@@ -194,22 +194,25 @@
     <textarea name="message" rows="5" required></textarea>
   </label>
 
-  <!-- Visible company field (optional) -->
+  <!-- Optional visible field -->
   <label> Company
     <input type="text" name="company" autocomplete="organization" />
   </label>
 
-  <!-- Honeypot (spam trap) — hidden from users -->
-  <label class="sr-only">Website
-    <input type="text" name="_website" tabindex="-1" autocomplete="off" />
-  </label>
+  <!-- Honeypot (hidden to humans) -->
+  <p class="sr-only">
+    <label>Website
+      <input type="text" name="_website" tabindex="-1" autocomplete="off" />
+    </label>
+  </p>
 
-  <!-- Subject shown in the email you receive -->
-  <input type="hidden" name="_subject" value="New website inquiry from justinjindustries.com" />
+  <!-- Email subject -->
+  <input type="hidden" name="_subject" value="New website inquiry" />
+  <!-- Where replies should go -->
+  <input type="hidden" name="_replyto" value="info@justinjindustries.com" />
 
   <div class="contact__actions">
     <button type="submit" class="btn">Send</button>
-    <p class="small" id="form-status" aria-live="polite"></p>
   </div>
 </form>
       
