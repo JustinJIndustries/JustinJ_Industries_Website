@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Decide effective theme for logo (override wins, else system)
     const effectiveDark = pref === 'dark' || (pref === 'auto' && media.matches);
-    brandLogo.src = effectiveDark ? 'JJI-Logo-Only-white.png' : 'JJI-Logo-Only-grey.png';
+    brandLogo.src = effectiveDark ? 'assets/logos/JJI-Logo-Only-white.png' : 'assets/logos/JJI-Logo-Only-grey.png';
   }
 
   // Cycle Auto -> Dark -> Light -> Auto
