@@ -95,8 +95,29 @@ img{max-width:100%;display:block}
 .brand__text{display:inline-flex;align-items:center;gap:.35rem}
 
 .nav-links{display:flex;gap:1.25rem;list-style:none;margin:0;padding:0}
-.nav-links a{padding:.4rem .6rem;border-radius:.6rem;text-decoration:none;color:var(--muted)}
-.nav-links a:hover{background:var(--bg-elev);color:var(--text)}
+.nav-links a{
+  padding:.4rem .6rem;
+  border-radius:.6rem;
+  text-decoration:none;
+/* Normal nav items only */
+.nav-links a:not(.btn){
+  color: var(--muted);
+}
+.nav-links a:not(.btn):hover{
+  background: var(--bg-elev);
+  color: var(--text);
+}
+/* Keep CTA readable on the gradient */
+.nav-links a.btn{
+  color: var(--btn-ink);
+}
+.nav-links a.btn:hover{
+  background: linear-gradient(135deg,var(--brand),var(--brand-2));
+  color: var(--btn-ink);
+}
+.nav-links a:hover{
+  background:var(--bg-elev);
+  color:var(--text)}
 
 .btn{
   display:inline-flex;
@@ -104,7 +125,6 @@ img{max-width:100%;display:block}
   justify-content:center;
   gap:.5rem;
   background:linear-gradient(135deg,var(--brand),var(--brand-2));
-  color: var(--btn-ink);
   border:0;
   border-radius:.8rem;
   padding:.8rem 1rem;
