@@ -11,8 +11,8 @@
   <meta property="og:type" content="website" />
   <meta property="og:image" content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&fit=crop" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preload" href="styles.css" as="style" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="preload" href="styles_wow_segment.css" as="style" />
+  <link rel="stylesheet" href="styles_wow_segment.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -33,12 +33,12 @@
       </ul>
 
       <div class="nav-buttons">
-        <button id="theme-toggle" class="icon-btn" aria-label="Theme: Auto (click to change)" title="Theme: Auto (click to change)" data-state="auto">
-          <span class="sr-only">Toggle theme</span>
-          <svg class="icon icon-auto" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10H3V5zm19 12H2a2 2 0 0 0 0 4h22a2 2 0 0 0 0-4h-2zM5 5h14v8H5V5z" fill="currentColor"/></svg>
-          <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="2" fill="none"/></svg>
-          <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-        </button>
+        <!-- Segmented control: Auto | Dark | Light -->
+        <div class="segmented" role="group" aria-label="Theme">
+          <button class="seg is-active" data-theme="auto" aria-pressed="true" title="Follow system">Auto</button>
+          <button class="seg" data-theme="dark" aria-pressed="false" title="Force dark">Dark</button>
+          <button class="seg" data-theme="light" aria-pressed="false" title="Force light">Light</button>
+        </div>
 
         <button id="menu-toggle" aria-label="Open menu" aria-expanded="false">
           <span class="bar"></span>
@@ -208,6 +208,6 @@
     </div>
   </footer>
 
-  <script src="script.js" defer></script>
+  <script src="script_wow_segment.js" defer></script>
 </body>
 </html>
