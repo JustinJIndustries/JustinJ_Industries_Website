@@ -118,22 +118,35 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!form) return;
 
   form.addEventListener('submit', async (e) => {
-    if (form.querySelector('[name="_company"]').value) { // honeypot
-      e.preventDefault();
+    e.preventDefault();
+
+    // Honeypot: if filled, drop the submission silently
+    if (form.querySelector('[name="_website"]').value) {
+      statusEl.textContent = 'Thanks!'; // pretend success to bots
+      form.reset();
       return;
     }
-    e.preventDefault();
+
     const data = new FormData(form);
+
     try {
-      const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' }});
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
       if (res.ok) {
         form.reset();
         statusEl.textContent = 'Thanks! I’ll be in touch shortly.';
       } else {
-        statusEl.textContent = 'Hmm, there was a problem—please email hello@justinjindustries.com.';
+        // Try to surface Formspree validation errors
+        const json = await res.json().catch(() => ({}));
+        const msg = json?.errors?.map(e => e.message).join(' ') || 'Submission failed.';
+        statusEl.textContent = `${msg} You can also email info@justinjindustries.com.`;
       }
     } catch {
-      statusEl.textContent = 'Network error—try again or email hello@justinjindustries.com.';
+      statusEl.textContent = 'Network error — please try again or email info@justinjindustries.com.';
     }
   });
 });
