@@ -147,7 +147,6 @@
       </div>
       <div class="cta-row">
         <a href="#contact" class="btn">Start a project</a>
-        <a href="#about" class="link">View process</a>
       </div>
     </section>
 
@@ -180,34 +179,48 @@
         <h2>Let’s talk</h2>
         <p>Tell me about your goals. I’ll reply with next steps and a clear estimate.</p>
       </div>
-      <form class="contact" name="contact" method="post" netlify data-netlify="true">
-        <div class="grid grid--2">
-          <label> Name
-            <input type="text" name="name" autocomplete="name" required />
-          </label>
-          <label> Email
-            <input type="email" name="email" autocomplete="email" required />
-          </label>
-        </div>
-        <label> How can I help?
-          <textarea name="message" rows="5" required></textarea>
-        </label>
-        <div class="contact__actions">
-          <button type="submit" class="btn">Send</button>
-          <p class="small">Prefer email? <a href="mailto:hello@justinjindustries.com">hello@justinjindustries.com</a></p>
-        </div>
-      </form>
+      
+<form id="contact"   action="https://formspree.io/f/mgvlrzdq" method="POST">
+  <div class="grid grid--2">
+    <label> Name
+      <input type="text" name="name" autocomplete="name" required />
+    </label>
+    <label> Email
+      <input type="email" name="email" autocomplete="email" required />
+    </label>
+  </div>
+  <label> How can I help?
+    <textarea name="message" rows="5" required></textarea>
+  </label>
+
+  <!-- Honeypot (spam trap) -->
+  <label class="sr-only">Company
+    <input type="text" name="_company" tabindex="-1" autocomplete="off" />
+  </label>
+
+  <!-- Where replies should go -->
+  <input type="hidden" name="_replyto" value="info@justinjindustries.com" />
+  <input type="hidden" name="_subject" value="New website inquiry" />
+
+  <div class="contact__actions">
+    <button type="submit" class="btn">Send</button>
+    <p class="small" id="form-status" aria-live="polite"></p>
+  </div>
+</form>
+      
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer__inner">
       <p>&copy; <span id="year"></span> JustinJ Industries.</p>
+      <!--
       <ul class="social">
         <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
         <li><a href="#" aria-label="GitHub">GitHub</a></li>
         <li><a href="#" aria-label="X">X</a></li>
       </ul>
+      -->
     </div>
   </footer>
 
