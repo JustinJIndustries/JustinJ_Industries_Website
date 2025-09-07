@@ -69,12 +69,11 @@ img{max-width:100%;display:block}
 #menu-toggle.active .bar:nth-child(2){opacity:0}
 #menu-toggle.active .bar:nth-child(3){transform:rotate(-45deg) translate(-5px,5px)}
 
-/* Icon-only theme toggle */
-.icon-btn{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:10px;border:1px solid var(--border);background:var(--bg-elev);cursor:pointer}
-.icon{width:20px;height:20px;display:none}
-.icon-btn .icon-auto{display:block}
-.icon-btn:hover{box-shadow:0 0 0 .25rem var(--ring)}
-.sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+/* Segmented control */
+.segmented{display:inline-flex;border:1px solid var(--border);border-radius:12px;background:var(--bg-elev);padding:2px;gap:2px}
+.seg{border:0;background:transparent;padding:.35rem .6rem;border-radius:10px;cursor:pointer;font-weight:600;color:var(--muted)}
+.seg.is-active{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b0d10}
+.seg:focus-visible{outline:none;box-shadow:0 0 0 .2rem var(--ring)}
 
 /* Overlay menu */
 .overlay{position:fixed;inset:0;display:grid;place-items:center;visibility:hidden;opacity:0;background:rgba(0,0,0,.88);transition:.25s}
