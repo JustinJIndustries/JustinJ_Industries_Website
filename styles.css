@@ -40,6 +40,8 @@
   --border: #232a36;
   --ring: rgba(98,168,255,.35);
   --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --btn-ink: #0a1018;
+  
 }
 .theme-light{
   color-scheme: light;
@@ -53,6 +55,7 @@
   --border:#e5e7eb;
   --ring: rgba(37,99,235,.25);
   --shadow: 0 10px 30px rgba(0,0,0,.08);
+  --btn-ink: #0b0d10;
 }
 
 *{box-sizing:border-box}html,body{padding:0;margin:0}
@@ -95,9 +98,21 @@ img{max-width:100%;display:block}
 .nav-links a{padding:.4rem .6rem;border-radius:.6rem;text-decoration:none;color:var(--muted)}
 .nav-links a:hover{background:var(--bg-elev);color:var(--text)}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
   background:linear-gradient(135deg,var(--brand),var(--brand-2));
-  color:#0b0d10;border:0;border-radius:.8rem;padding:.8rem 1rem;font-weight:700;box-shadow:var(--shadow);text-decoration:none
+  color: var(--btn-ink);
+  border:0;
+  border-radius:.8rem;
+  padding:.8rem 1rem;
+  font-weight:700;
+  box-shadow:var(--shadow);
+  text-decoration:none;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 0 1px rgba(0,0,0,.08); 
 }
 .btn--ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
 .btn--small{padding:.5rem .75rem;font-weight:600}
@@ -150,6 +165,11 @@ img{max-width:100%;display:block}
 .card__body{padding:1rem}
 .card__body h3{margin:.25rem 0 .35rem;font-size:1.05rem}
 .card__body p{color:var(--muted)}
+
+/* Space after the services grid before the CTA row */
+.section .cta-row{
+  margin-top: clamp(14px, 2.2vw, 22px);
+}
 
 /* Services */
 .grid.services{grid-template-columns:repeat(auto-fill, minmax(260px, 1fr))}
