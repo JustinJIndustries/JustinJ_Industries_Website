@@ -6,3 +6,9 @@ capture/opportunity/*
 # Local dependency artifacts
 node_modules/
 npm-debug.log*
+.DS_Store
+*.xcuserstate
+*.xcuserdatad/
+JJI-Workspace-*/
+
+*.xcworkspace/

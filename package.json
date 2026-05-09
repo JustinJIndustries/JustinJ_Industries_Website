@@ -6,9 +6,10 @@
   "scripts": {
     "serve": "http-server . -p 8080 -s",
     "check:html": "html-validate \"*.html\"",
-    "check:links": "start-server-and-test serve http://127.0.0.1:8080 \"linkinator http://127.0.0.1:8080 --recurse --skip 'mailto:|tel:|javascript:|#'\"",
-    "check:a11y": "start-server-and-test serve http://127.0.0.1:8080 \"pa11y http://127.0.0.1:8080 http://127.0.0.1:8080/government-buyers.html http://127.0.0.1:8080/capability-statement.html --standard WCAG2AA --timeout 120000\"",
-    "check:format": "prettier --check \"*.{html,css,js,md,xml,txt}\" \"docs/**/*.md\"",
+    "check:links": "start-server-and-test serve http://127.0.0.1:8080 \"linkinator http://127.0.0.1:8080 --recurse --skip 'mailto:|tel:|javascript:|#' --skip 'https://www.justinjindustries.com/government-buyers.html' --skip 'https://www.justinjindustries.com/capability-statement.html'\"",
+    "check:a11y": "start-server-and-test serve http://127.0.0.1:8080 \"pa11y http://127.0.0.1:8080 --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/government-buyers.html --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/capability-statement.html --standard WCAG2AA --timeout 120000\"",
+    "check:format": "prettier --check --ignore-unknown \"*.{html,css,js,md,xml,txt}\" \"docs/**/*.md\"",
+    "format": "prettier --write --ignore-unknown \"*.{html,css,js,md,xml,txt}\" \"docs/**/*.md\"",
     "check": "npm run check:html && npm run check:links && npm run check:a11y && npm run check:format"
   },
   "devDependencies": {

@@ -5,6 +5,7 @@
 JustinJ Industries is a Boston-based web, analytics, and digital implementation studio. The website positions the business around accessible websites, reliable analytics/tagging systems, documented measurement workflows, privacy-aware implementation, and practical handoff support.
 
 Current priorities:
+
 - Web development
 - WordPress and Craft CMS support
 - GA4 and GTM implementation
@@ -26,6 +27,7 @@ Use professional, direct copy. Avoid exaggerated procurement language.
 ## Government-contract truthfulness rules
 
 Do not invent or imply:
+
 - Government clients
 - Government past performance
 - SAM registration
@@ -72,6 +74,7 @@ Measurement work should be documented, testable, and privacy-aware.
 Preserve static-site architecture unless explicitly instructed otherwise.
 
 Before finalizing changes, run available checks only when permitted:
+
 - npm run check:html
 - npm run check:links
 - npm run check:a11y

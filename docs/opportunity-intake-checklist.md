@@ -1,6 +1,7 @@
 # Opportunity Intake Checklist
 
 ## Required Intake Fields
+
 1. Opportunity title
 2. Agency/buyer
 3. Solicitation number

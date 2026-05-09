@@ -1,406 +1,747 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta name="googlebot" content="noai, noimageai"> <!-- Google AI use -->
-  <meta name="robots" content="noai, noimageai">    <!-- Generic AI flag -->
-  <meta name="bingbot" content="noai">              <!-- Bing/ChatGPT -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>JustinJ Industries — Web, Data & Growth</title>
-  <meta name="description" content="JustinJ Industries helps teams build accessible websites, reliable analytics implementations, documented tagging systems, and measurable digital experiences." />
-  <link rel="canonical" href="https://www.justinjindustries.com/" />
-  <meta property="og:title" content="JustinJ Industries — Web, Data & Growth" />
-  <meta property="og:description" content="JustinJ Industries helps teams build accessible websites, reliable analytics implementations, documented tagging systems, and measurable digital experiences." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&fit=crop" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="preload" href="styles.css" as="style" />
-  <link rel="stylesheet" href="styles.css" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
+  <head>
+    <meta name="googlebot" content="noai, noimageai" />
+    <!-- Google AI use -->
+    <meta name="robots" content="noai, noimageai" />
+    <!-- Generic AI flag -->
+    <meta name="bingbot" content="noai" />
+    <!-- Bing/ChatGPT -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JustinJ Industries — Web, Data &amp; Growth</title>
+    <meta
+      name="description"
+      content="JustinJ Industries helps teams build accessible websites, reliable analytics implementations, documented tagging systems, and measurable digital experiences."
+    />
+    <link rel="canonical" href="https://www.justinjindustries.com/" />
+    <meta
+      property="og:title"
+      content="JustinJ Industries — Web, Data &amp; Growth"
+    />
+    <meta
+      property="og:description"
+      content="JustinJ Industries helps teams build accessible websites, reliable analytics implementations, documented tagging systems, and measurable digital experiences."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&fit=crop"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="styles.css" as="style" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
       {
-        "@type": "Organization",
-        "name": "JustinJ Industries",
-        "url": "https://www.justinjindustries.com/",
-        "email": "info@justinjindustries.com",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Boston",
-          "addressRegion": "MA",
-          "addressCountry": "US"
-        }
-      },
-      {
-        "@type": "WebSite",
-        "name": "JustinJ Industries",
-        "url": "https://www.justinjindustries.com/"
-      },
-      {
-        "@type": "ProfessionalService",
-        "name": "JustinJ Industries",
-        "url": "https://www.justinjindustries.com/",
-        "description": "Boston-based web, analytics, and digital implementation services focused on accessible web delivery and reliable measurement implementation.",
-        "areaServed": "US",
-        "serviceType": [
-          "Web development",
-          "Analytics implementation",
-          "Tagging and measurement QA",
-          "Accessibility-focused digital implementation"
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "name": "JustinJ Industries",
+            "url": "https://www.justinjindustries.com/",
+            "email": "info@justinjindustries.com",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Boston",
+              "addressRegion": "MA",
+              "addressCountry": "US"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "name": "JustinJ Industries",
+            "url": "https://www.justinjindustries.com/"
+          },
+          {
+            "@type": "ProfessionalService",
+            "name": "JustinJ Industries",
+            "url": "https://www.justinjindustries.com/",
+            "description": "Boston-based web, analytics, and digital implementation services focused on accessible web delivery and reliable measurement implementation.",
+            "areaServed": "US",
+            "serviceType": [
+              "Web development",
+              "Analytics implementation",
+              "Tagging and measurement QA",
+              "Accessibility-focused digital implementation"
+            ]
+          }
         ]
       }
-    ]
-  }
-  </script>
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header" role="banner">
-    <nav class="nav container" aria-label="Primary">
-      <a href="#" class="brand" aria-label="JustinJ Industries home">
-        <img id="brand-logo" src="assets/logos/JJI-Logo-Only-grey.png" alt="JustinJ Industries logo" width="34" height="34" />
-        <span class="brand__text">JustinJ <strong>Industries</strong></span>
-      </a>
+    <header class="site-header">
+      <nav class="nav container" aria-label="Primary">
+        <a href="#" class="brand">
+          <img
+            id="brand-logo"
+            src="assets/logos/JJI-Logo-Only-grey.png"
+            alt="JustinJ Industries logo"
+            width="34"
+            height="34"
+          />
+          <span class="brand__text">JustinJ <strong>Industries</strong></span>
+        </a>
 
-      <ul class="nav-links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="government-buyers.html">Government Buyers</a></li>
-        <li><a href="#results">Results</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact" class="btn btn--small">Let's Talk</a></li>
-      </ul>
+        <ul class="nav-links">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="government-buyers.html">Government Buyers</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact" class="btn btn--small">Let's Talk</a></li>
+        </ul>
 
-      <div class="nav-buttons">
-        <button id="theme-toggle" class="chip" aria-label="Theme: Auto" title="Theme: Auto (click to change)" data-state="auto">
-          <!-- icon changes via CSS text -->
-          <span class="chip__dot"></span><span class="chip__text">Auto</span>
-        </button>
+        <div class="nav-buttons">
+          <button
+            id="theme-toggle"
+            class="chip"
+            type="button"
+            aria-label="Theme: Auto"
+            title="Theme: Auto (click to change)"
+            data-state="auto"
+          >
+            <!-- icon changes via CSS text -->
+            <span class="chip__dot"></span><span class="chip__text">Auto</span>
+          </button>
 
-        <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="overlay">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </button>
-      </div>
-    </nav>
-
-    <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-label="Mobile menu" aria-hidden="true">
-      <ul class="overlay-menu">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="government-buyers.html">Government Buyers</a></li>
-        <li><a href="#results">Results</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact" class="btn">Let's Talk</a></li>
-      </ul>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="hero container">
-      <div class="hero__content">
-        <p class="eyebrow">Web • Data • Growth</p>
-        <h1 class="hero__title">Pixel-perfect sites. <span class="underline">Bulletproof analytics</span>. Measurable growth.</h1>
-        <p class="hero__sub">I help teams ship fast, accessible websites with airtight tagging—so product, design, and marketing can move with confidence.</p>
-        <div class="hero__cta">
-          <a href="#work" class="btn">See recent work</a>
-          <a href="#contact" class="btn btn--ghost">Get a quote</a>
+          <button
+            id="menu-toggle"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="overlay"
+          >
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
         </div>
-        <ul class="hero__badges" aria-label="Highlights">
-          <li>GA4 • GTM • Marketo</li>
-          <li>WordPress • Craft CMS</li>
-          <li>Cloud • Automation</li>
+      </nav>
+
+      <div
+        id="overlay"
+        class="overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile menu"
+        hidden
+        inert
+      >
+        <ul class="overlay-menu">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="government-buyers.html">Government Buyers</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact" class="btn">Let's Talk</a></li>
         </ul>
       </div>
-      <picture class="hero__art" aria-hidden="true">
-        <source srcset="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&fit=crop" media="(min-width: 900px)">
-        <img loading="eager" decoding="async" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&fit=crop" alt="" />
-      </picture>
-    </section>
+    </header>
 
-    <section id="work" class="section container">
-      <div class="section__head">
-        <h2>Recent Work</h2>
-        <p>Hand-picked projects that showcase speed, clarity, and measurable impact.</p>
-      </div>
-      <div class="grid cards">
-        <article class="card reveal">
-          <img loading="lazy" src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=900&fit=crop" alt="Banking website dashboard concept" />
-          <div class="card__body">
-            <h3>Financial Services Site Refresh</h3>
-            <p><strong>Challenge:</strong> Product journeys and measurement were inconsistent after site updates.</p>
-            <p><strong>Solution:</strong> Rebuilt homepage and journeys, and implemented consent-mode tagging with GA4.</p>
-            <p><strong>Outcome:</strong> <strong>+28% CTR</strong> to key product paths.</p>
-            <p><strong>Relevant capabilities:</strong> regulated-environment delivery, accurate measurement, QA discipline, documentation-ready implementation.</p>
+    <main id="main">
+      <section class="hero container">
+        <div class="hero__content">
+          <p class="eyebrow">Web • Data • Growth</p>
+          <h1 class="hero__title">
+            Pixel-perfect sites.
+            <span class="underline">Bulletproof analytics</span>. Measurable
+            growth.
+          </h1>
+          <p class="hero__sub">
+            I help teams ship fast, accessible websites with airtight tagging—so
+            product, design, and marketing can move with confidence.
+          </p>
+          <div class="hero__cta">
+            <a href="#work" class="btn">See recent work</a>
+            <a href="#contact" class="btn btn--ghost">Get a quote</a>
           </div>
-        </article>
-        <article class="card reveal">
-          <img loading="lazy" src="https://images.unsplash.com/photo-1487611459768-bd414656ea10?q=80&w=900&fit=crop" alt="Analytics dashboard with charts" />
-          <div class="card__body">
-            <h3>Analytics Hardening</h3>
-            <p><strong>Challenge:</strong> Event tracking quality and reporting reliability were uneven across properties.</p>
-            <p><strong>Solution:</strong> Audited GTM containers, standardized event taxonomy, and supported server-side tracking rollout.</p>
-            <p><strong>Outcome:</strong> <strong>98.7% hit integrity</strong> in validated tracking checks.</p>
-            <p><strong>Relevant capabilities:</strong> measurement architecture, tagging QA, secure and maintainable implementation, handoff-ready specs.</p>
-          </div>
-        </article>
-        <article class="card reveal">
-          <img loading="lazy" src="https://images.unsplash.com/photo-1493723843671-1d655e66ac1c?q=80&w=900&fit=crop" alt="Marketing landing page" />
-          <div class="card__body">
-            <h3>Conversion Landing System</h3>
-            <p><strong>Challenge:</strong> Teams needed faster page delivery without losing consistency or measurement quality.</p>
-            <p><strong>Solution:</strong> Built an ACF-based component system with repeatable patterns and analytics-friendly implementation.</p>
-            <p><strong>Outcome:</strong> <strong>−32% build time</strong> and <strong>+19% lead rate</strong>.</p>
-            <p><strong>Relevant capabilities:</strong> accessibility-conscious builds, maintainable CMS architecture, measurable outcomes, disciplined QA.</p>
-          </div>
-        </article>
-      </div>
-      <p class="small case-disclaimer">Examples are anonymized commercial work and are not represented as government past performance. Reported metrics should be owner-verified before procurement submissions.</p>
-    </section>
-
-    <section id="services" class="section container">
-      <div class="section__head">
-        <h2>Services</h2>
-        <p>Modular engagements that meet you where you are.</p>
-      </div>
-      <div class="grid services">
-        <div class="service reveal">
-          <h3>Web Development</h3>
-          <ul>
-            <li>Custom WordPress & CraftCMS</li>
-            <li>ACF flexible blocks, theme hardening</li>
-            <li>Performance: Core Web Vitals, image strategy</li>
+          <ul class="hero__badges">
+            <li>GA4 • GTM • Marketo</li>
+            <li>WordPress • Craft CMS</li>
+            <li>Cloud • Automation</li>
           </ul>
         </div>
-        <div class="service reveal">
-          <h3>Digital Tagging & Analytics</h3>
-          <ul>
-            <li>GA4 & GTM specs, event design</li>
-            <li>Server-side tagging & consent mode</li>
-            <li>Looker Studio dashboards</li>
-          </ul>
-        </div>
-        <div class="service reveal">
-          <h3>Growth & Marketing Ops</h3>
-          <ul>
-            <li>Landing pages & CRO</li>
-            <li>Marketing automation & integrations</li>
-            <li>Technical SEO & schema</li>
-          </ul>
-        </div>
-      </div>
-      <div class="cta-row">
-        <a href="#contact" class="btn" data-analytics-event="cta_start_project">Start a project</a>
-        <a href="government-buyers.html" class="btn btn--ghost" data-analytics-event="cta_government_buyers">Government buyers</a>
-      </div>
-    </section>
+        <picture class="hero__art" aria-hidden="true">
+          <source
+            srcset="
+              https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&fit=crop
+            "
+            media="(min-width: 900px)"
+          />
+          <img
+            loading="eager"
+            decoding="async"
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&fit=crop"
+            alt=""
+          />
+        </picture>
+      </section>
 
-    <section id="government-buyers" class="section container">
-      <div class="section__head">
-        <h2>Government Buyers &amp; Prime Contractors</h2>
-        <p>JustinJ Industries helps public-sector and regulated teams build accessible websites, reliable analytics implementations, and documented digital systems.</p>
-        <p>Measurement work is designed to be documented, testable, and privacy-aware, with event taxonomy and QA practices that avoid sending sensitive form contents or unnecessary personal data into analytics platforms.</p>
-      </div>
-      <div class="gov-hero reveal">
-        <h3>Accessible web development and analytics support for public-sector teams.</h3>
-        <p>JustinJ Industries helps teams modernize websites, improve tagging accuracy, document measurement systems, and ship accessible digital experiences with clear QA and handoff practices.</p>
-        <p>Section 508 and accessibility requirements vary by project scope, platform, and content. JustinJ Industries supports accessibility-focused implementation and QA, with final conformance validated per project.</p>
-      </div>
-      <div class="grid gov-grid">
+      <section id="work" class="section container">
+        <div class="section__head">
+          <h2>Recent Work</h2>
+          <p>
+            Hand-picked projects that showcase speed, clarity, and measurable
+            impact.
+          </p>
+        </div>
+        <div class="grid cards">
+          <article class="card reveal">
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?q=80&w=900&fit=crop"
+              alt="Banking website dashboard concept"
+            />
+            <div class="card__body">
+              <h3>Financial Services Site Refresh</h3>
+              <p>
+                <strong>Challenge:</strong> Product journeys and measurement
+                were inconsistent after site updates.
+              </p>
+              <p>
+                <strong>Solution:</strong> Rebuilt homepage and journeys, and
+                implemented consent-mode tagging with GA4.
+              </p>
+              <p>
+                <strong>Outcome:</strong> <strong>+28% CTR</strong> to key
+                product paths.
+              </p>
+              <p>
+                <strong>Relevant capabilities:</strong> regulated-environment
+                delivery, accurate measurement, QA discipline,
+                documentation-ready implementation.
+              </p>
+            </div>
+          </article>
+          <article class="card reveal">
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1487611459768-bd414656ea10?q=80&w=900&fit=crop"
+              alt="Analytics dashboard with charts"
+            />
+            <div class="card__body">
+              <h3>Analytics Hardening</h3>
+              <p>
+                <strong>Challenge:</strong> Event tracking quality and reporting
+                reliability were uneven across properties.
+              </p>
+              <p>
+                <strong>Solution:</strong> Audited GTM containers, standardized
+                event taxonomy, and supported server-side tracking rollout.
+              </p>
+              <p>
+                <strong>Outcome:</strong>
+                <strong>98.7% hit integrity</strong> in validated tracking
+                checks.
+              </p>
+              <p>
+                <strong>Relevant capabilities:</strong> measurement
+                architecture, tagging QA, secure and maintainable
+                implementation, handoff-ready specs.
+              </p>
+            </div>
+          </article>
+          <article class="card reveal">
+            <img
+              loading="lazy"
+              src="https://images.unsplash.com/photo-1493723843671-1d655e66ac1c?q=80&w=900&fit=crop"
+              alt="Marketing landing page"
+            />
+            <div class="card__body">
+              <h3>Conversion Landing System</h3>
+              <p>
+                <strong>Challenge:</strong> Teams needed faster page delivery
+                without losing consistency or measurement quality.
+              </p>
+              <p>
+                <strong>Solution:</strong> Built an ACF-based component system
+                with repeatable patterns and analytics-friendly implementation.
+              </p>
+              <p>
+                <strong>Outcome:</strong> <strong>−32% build time</strong> and
+                <strong>+19% lead rate</strong>.
+              </p>
+              <p>
+                <strong>Relevant capabilities:</strong> accessibility-conscious
+                builds, maintainable CMS architecture, measurable outcomes,
+                disciplined QA.
+              </p>
+            </div>
+          </article>
+        </div>
+        <p class="small case-disclaimer">
+          Examples are anonymized commercial work and are not presented as
+          government past performance. Reported metrics require owner
+          verification before procurement use.
+        </p>
+      </section>
+
+      <section id="services" class="section container">
+        <div class="section__head">
+          <h2>Services</h2>
+          <p>Modular engagements that meet you where you are.</p>
+        </div>
+        <div class="grid services">
+          <div class="service reveal">
+            <h3>Web Development</h3>
+            <ul>
+              <li>Custom WordPress &amp; CraftCMS</li>
+              <li>ACF flexible blocks, theme hardening</li>
+              <li>Performance: Core Web Vitals, image strategy</li>
+            </ul>
+          </div>
+          <div class="service reveal">
+            <h3>Digital Tagging &amp; Analytics</h3>
+            <ul>
+              <li>GA4 &amp; GTM specs, event design</li>
+              <li>Server-side tagging &amp; consent mode</li>
+              <li>Looker Studio dashboards</li>
+            </ul>
+          </div>
+          <div class="service reveal">
+            <h3>Growth &amp; Marketing Ops</h3>
+            <ul>
+              <li>Landing pages &amp; CRO</li>
+              <li>Marketing automation &amp; integrations</li>
+              <li>Technical SEO &amp; schema</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cta-row">
+          <a
+            href="#contact"
+            class="btn"
+            data-analytics-event="cta_start_project"
+            >Start a project</a
+          >
+          <a
+            href="government-buyers.html"
+            class="btn btn--ghost"
+            data-analytics-event="cta_government_buyers"
+            >Government buyers</a
+          >
+        </div>
+      </section>
+
+      <section id="government-buyers" class="section container">
+        <div class="section__head">
+          <h2>Government Buyers &amp; Prime Contractors</h2>
+          <p>
+            JustinJ Industries helps public-sector and regulated teams build
+            accessible websites, reliable analytics implementations, and
+            documented digital systems.
+          </p>
+          <p>
+            Measurement work is designed to be documented, testable, and
+            privacy-aware, with event taxonomy and QA practices that avoid
+            sending sensitive form contents or unnecessary personal data into
+            analytics platforms.
+          </p>
+        </div>
+        <div class="gov-hero reveal">
+          <h3>
+            Accessible web development and analytics support for public-sector
+            teams.
+          </h3>
+          <p>
+            JustinJ Industries helps teams modernize websites, improve tagging
+            accuracy, document measurement systems, and ship accessible digital
+            experiences with clear QA and handoff practices.
+          </p>
+          <p>
+            Section 508 and accessibility requirements vary by project scope,
+            platform, and content. JustinJ Industries supports
+            accessibility-focused implementation and QA, with final conformance
+            validated per project.
+          </p>
+        </div>
+        <div class="grid gov-grid">
+          <article class="service reveal">
+            <h3>Core capabilities</h3>
+            <ul>
+              <li>Website modernization</li>
+              <li>Custom WordPress and Craft CMS development</li>
+              <li>GA4 and GTM implementation and QA</li>
+              <li>Consent-aware measurement</li>
+              <li>Server-side tagging support</li>
+              <li>Accessibility remediation</li>
+              <li>Technical SEO and schema</li>
+              <li>Dashboarding and reporting support</li>
+              <li>Documentation and handoff systems</li>
+            </ul>
+          </article>
+          <article class="service reveal">
+            <h3>Why JustinJ Industries</h3>
+            <ul>
+              <li>One vendor for web build and analytics implementation</li>
+              <li>
+                Accessibility-first development with keyboard and screen-reader
+                testing
+              </li>
+              <li>
+                Security-minded implementation: escaping, sanitization, and
+                least privilege
+              </li>
+              <li>
+                Practical documentation that supports long-term maintenance
+              </li>
+              <li>Small-business responsiveness from a Boston-based partner</li>
+              <li>
+                Experience in regulated and complex digital environments without
+                exposing confidential client details
+              </li>
+            </ul>
+          </article>
+        </div>
+        <article
+          class="gov-procurement reveal"
+          aria-labelledby="procurement-profile-heading"
+        >
+          <h3 id="procurement-profile-heading">Procurement profile</h3>
+          <p>
+            Legal business name: JustinJ Industries LLC. Public name: JustinJ
+            Industries. Boston-based.
+          </p>
+          <p>
+            Procurement profile available upon request. Contact
+            <a
+              href="mailto:info@justinjindustries.com?subject=Procurement%20Inquiry"
+              >info@justinjindustries.com</a
+            >
+            for current registration and contracting information.
+          </p>
+          <p>Capability statement available online.</p>
+        </article>
         <article class="service reveal">
-          <h3>Core capabilities</h3>
+          <h3>Relevant work</h3>
+          <p>
+            Selected commercial examples demonstrating delivery quality. These
+            examples are not represented as government contracts.
+          </p>
           <ul>
-            <li>Website modernization</li>
-            <li>Custom WordPress and Craft CMS development</li>
-            <li>GA4 and GTM implementation and QA</li>
-            <li>Consent-aware measurement</li>
-            <li>Server-side tagging support</li>
-            <li>Accessibility remediation</li>
-            <li>Technical SEO and schema</li>
-            <li>Dashboarding and reporting support</li>
-            <li>Documentation and handoff systems</li>
+            <li>Financial services site refresh</li>
+            <li>Analytics hardening</li>
+            <li>Conversion landing system</li>
           </ul>
         </article>
-        <article class="service reveal">
-          <h3>Why JustinJ Industries</h3>
-          <ul>
-            <li>One vendor for web build and analytics implementation</li>
-            <li>Accessibility-first development with keyboard and screen-reader testing</li>
-            <li>Security-minded implementation: escaping, sanitization, and least privilege</li>
-            <li>Practical documentation that supports long-term maintenance</li>
-            <li>Small-business responsiveness from a Boston-based partner</li>
-            <li>Experience in regulated and complex digital environments without exposing confidential client details</li>
+        <div class="gov-cta-row">
+          <a
+            href="government-buyers.html"
+            class="btn btn--ghost"
+            data-analytics-event="cta_view_government_buyers_page"
+            >View government buyers page</a
+          >
+          <a
+            href="#contact"
+            class="btn gov-inquiry-link"
+            data-inquiry-type="RFQ/RFP"
+            data-analytics-event="cta_discuss_solicitation"
+            >Discuss a solicitation</a
+          >
+          <a
+            href="capability-statement.html"
+            class="btn btn--ghost"
+            data-analytics-event="cta_view_capability_statement"
+            >View capability statement</a
+          >
+          <a
+            href="mailto:info@justinjindustries.com?subject=Request%20Capability%20Statement"
+            class="btn btn--ghost"
+            data-analytics-event="cta_request_capability_statement"
+            >Request capability statement</a
+          >
+          <a
+            href="#contact"
+            class="btn btn--ghost gov-inquiry-link"
+            data-inquiry-type="Subcontracting"
+            data-analytics-event="cta_subcontracting_contact"
+            >Contact for subcontracting</a
+          >
+        </div>
+      </section>
+
+      <section id="results" class="stripe">
+        <div class="container stripe__inner">
+          <div class="kpi reveal">
+            <span class="kpi__big">+28%</span><span>Product CTR</span>
+          </div>
+          <div class="kpi reveal">
+            <span class="kpi__big">−32%</span><span>Build time</span>
+          </div>
+          <div class="kpi reveal">
+            <span class="kpi__big">98.7%</span><span>Hit integrity</span>
+          </div>
+          <div class="kpi reveal">
+            <span class="kpi__big">+19%</span><span>Lead rate</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section container">
+        <div class="section__head">
+          <h2>About</h2>
+          <p>
+            Boston-based builder partnering with product &amp; engineering to
+            ship clean code and clean data.
+          </p>
+        </div>
+        <div class="about">
+          <p class="reveal">
+            I’m Justin — a digital tagging manager and full-stack web
+            generalist. I combine design sense with disciplined analytics so
+            decisions are grounded in truth.
+          </p>
+          <ul class="about__list reveal">
+            <li>Accessibility-first, keyboard &amp; screen-reader tested</li>
+            <li>
+              Security-minded: escaping, sanitization, and least-privilege by
+              default
+            </li>
+            <li>Docs &amp; handoffs that scale beyond a single contributor</li>
           </ul>
-        </article>
-      </div>
-      <article class="gov-procurement reveal" aria-labelledby="procurement-profile-heading">
-        <h3 id="procurement-profile-heading">Procurement profile</h3>
-        <p>Procurement profile details are available upon request. Contact <a href="mailto:info@justinjindustries.com?subject=Procurement%20Inquiry">info@justinjindustries.com</a> for current registration and contracting information.</p>
-        <p><strong>Location:</strong> Boston, Massachusetts</p>
-      </article>
-      <article class="service reveal">
-        <h3>Relevant work</h3>
-        <p>Selected commercial examples demonstrating delivery quality. These examples are not represented as government contracts.</p>
-        <ul>
-          <li>Financial services site refresh</li>
-          <li>Analytics hardening</li>
-          <li>Conversion landing system</li>
-        </ul>
-      </article>
-      <div class="gov-cta-row">
-        <a href="government-buyers.html" class="btn btn--ghost" data-analytics-event="cta_view_government_buyers_page">View government buyers page</a>
-        <a href="#contact" class="btn gov-inquiry-link" data-inquiry-type="RFQ/RFP" data-analytics-event="cta_discuss_solicitation">Discuss a solicitation</a>
-        <a href="capability-statement.html" class="btn btn--ghost" data-analytics-event="cta_view_capability_statement">View capability statement</a>
-        <a href="mailto:info@justinjindustries.com?subject=Request%20Capability%20Statement" class="btn btn--ghost" data-analytics-event="cta_request_capability_statement">Request capability statement</a>
-        <a href="#contact" class="btn btn--ghost gov-inquiry-link" data-inquiry-type="Subcontracting" data-analytics-event="cta_subcontracting_contact">Contact for subcontracting</a>
-      </div>
-    </section>
+        </div>
+      </section>
 
-    <section id="results" class="stripe">
-      <div class="container stripe__inner">
-        <div class="kpi reveal"><span class="kpi__big">+28%</span><span>Product CTR</span></div>
-        <div class="kpi reveal"><span class="kpi__big">−32%</span><span>Build time</span></div>
-        <div class="kpi reveal"><span class="kpi__big">98.7%</span><span>Hit integrity</span></div>
-        <div class="kpi reveal"><span class="kpi__big">+19%</span><span>Lead rate</span></div>
-      </div>
-    </section>
+      <section
+        id="accessibility"
+        class="section container"
+        aria-labelledby="accessibility-heading"
+      >
+        <div class="section__head">
+          <h2 id="accessibility-heading">Accessibility Statement</h2>
+          <p>
+            JustinJ Industries aims to build accessible, usable digital
+            experiences using semantic HTML, keyboard-friendly interactions,
+            readable content structure, and practical QA. Accessibility
+            conformance should be validated for each project’s scope, content,
+            and platform.
+          </p>
+        </div>
+      </section>
 
-    <section id="about" class="section container">
-      <div class="section__head">
-        <h2>About</h2>
-        <p>Boston-based builder partnering with product & engineering to ship clean code and clean data.</p>
-      </div>
-      <div class="about">
-        <p class="reveal">I’m Justin — a digital tagging manager and full-stack web generalist. I combine design sense with disciplined analytics so decisions are grounded in truth.</p>
-        <ul class="about__list reveal">
-          <li>Accessibility-first, keyboard & screen-reader tested</li>
-          <li>Security-minded: escaping, sanitization, and least-privilege by default</li>
-          <li>Docs & handoffs that scale beyond a single contributor</li>
-        </ul>
-      </div>
-    </section>
+      <section
+        id="privacy"
+        class="section container"
+        aria-labelledby="privacy-heading"
+      >
+        <div class="section__head">
+          <h2 id="privacy-heading">Privacy and Responsible Measurement</h2>
+          <p>
+            Measurement work is designed to be documented, testable, and
+            privacy-aware. JustinJ Industries can help teams define event
+            taxonomies, QA tagging behavior, and avoid sending sensitive form
+            contents or unnecessary personal data into analytics platforms.
+          </p>
+          <p>
+            When analytics is implemented, event collection should be scoped to
+            business outcomes and implementation QA. Contact-form message
+            content, names, and email addresses should remain in contact systems
+            and out of analytics event payloads.
+          </p>
+        </div>
+      </section>
 
-    <section id="accessibility" class="section container" aria-labelledby="accessibility-heading">
-      <div class="section__head">
-        <h2 id="accessibility-heading">Accessibility Statement</h2>
-        <p>JustinJ Industries aims to build accessible, usable digital experiences using semantic HTML, keyboard-friendly interactions, readable content structure, and practical QA. Accessibility conformance should be validated for each project’s scope, content, and platform.</p>
-      </div>
-    </section>
+      <section id="contact" class="section container">
+        <div class="section__head">
+          <h2>Let’s talk</h2>
+          <p>
+            Have a solicitation, sources-sought notice, or subcontracting need?
+            Share the basics and I’ll respond with a clear next step.
+          </p>
+          <p>
+            <a
+              href="capability-statement.html"
+              class="btn btn--small"
+              data-analytics-event="cta_contact_view_capability_statement"
+              >View capability statement</a
+            >
+          </p>
+        </div>
 
-    <section id="privacy" class="section container" aria-labelledby="privacy-heading">
-      <div class="section__head">
-        <h2 id="privacy-heading">Privacy and Responsible Measurement</h2>
-        <p>Measurement work is designed to be documented, testable, and privacy-aware. JustinJ Industries can help teams define event taxonomies, QA tagging behavior, and avoid sending sensitive form contents or unnecessary personal data into analytics platforms.</p>
-        <p>When analytics is implemented, event collection should be scoped to business outcomes and implementation QA. Contact-form message content, names, and email addresses should remain in contact systems and out of analytics event payloads.</p>
-      </div>
-    </section>
+        <form
+          id="contact-form"
+          class="contact"
+          action="https://formspree.io/f/mgvlrzdq"
+          method="POST"
+          novalidate
+        >
+          <div class="grid grid--2">
+            <label
+              >Name
+              <input
+                id="name"
+                type="text"
+                name="name"
+                autocomplete="name"
+                required
+              />
+            </label>
+            <label
+              >Email
+              <input
+                id="email"
+                type="email"
+                name="email"
+                autocomplete="email"
+                required
+              />
+            </label>
+          </div>
 
-    <section id="contact" class="section container">
-      <div class="section__head">
-        <h2>Let’s talk</h2>
-        <p>Have a solicitation, sources-sought notice, or subcontracting need? Share the basics and I’ll respond with a clear next step.</p>
-        <p><a href="capability-statement.html" class="btn btn--small" data-analytics-event="cta_contact_view_capability_statement">View capability statement</a></p>
-      </div>
+          <div class="grid grid--2">
+            <label
+              >Inquiry type
+              <select id="inquiry-type" name="inquiry_type" required>
+                <option value="">Select one</option>
+                <option>General inquiry</option>
+                <option>Government opportunity</option>
+                <option>Subcontracting</option>
+                <option>Sources sought / market research</option>
+                <option>RFQ/RFP</option>
+                <option>Website or analytics support</option>
+              </select>
+            </label>
+            <label
+              >Organization / agency / company
+              <input
+                id="organization"
+                type="text"
+                name="organization"
+                autocomplete="organization"
+                required
+              />
+            </label>
+          </div>
 
-<form id="contact-form" class="contact" action="https://formspree.io/f/mgvlrzdq" method="POST" novalidate>
-  <div class="grid grid--2">
-    <label for="name">Name
-      <input id="name" type="text" name="name" autocomplete="name" required />
-    </label>
-    <label for="email">Email
-      <input id="email" type="email" name="email" autocomplete="email" required />
-    </label>
-  </div>
+          <div class="grid grid--2">
+            <label
+              >Opportunity link (optional)
+              <input
+                id="opportunity-link"
+                type="url"
+                name="opportunity_link"
+                inputmode="url"
+                placeholder="https://"
+              />
+            </label>
+            <label
+              >Solicitation number (optional)
+              <input
+                id="solicitation-number"
+                type="text"
+                name="solicitation_number"
+              />
+            </label>
+          </div>
 
-  <div class="grid grid--2">
-    <label for="inquiry-type">Inquiry type
-      <select id="inquiry-type" name="inquiry_type" required>
-        <option value="">Select one</option>
-        <option>General inquiry</option>
-        <option>Government opportunity</option>
-        <option>Subcontracting</option>
-        <option>Sources sought / market research</option>
-        <option>RFQ/RFP</option>
-        <option>Website or analytics support</option>
-      </select>
-    </label>
-    <label for="organization">Organization / agency / company
-      <input id="organization" type="text" name="organization" autocomplete="organization" required />
-    </label>
-  </div>
+          <div class="grid grid--2">
+            <label
+              >Response deadline (optional)
+              <input
+                id="response-deadline"
+                type="date"
+                name="response_deadline"
+              />
+            </label>
+            <label
+              >Services needed
+              <input
+                id="services-needed"
+                type="text"
+                name="services_needed"
+                required
+              />
+            </label>
+          </div>
 
-  <div class="grid grid--2">
-    <label for="opportunity-link">Opportunity link (optional)
-      <input id="opportunity-link" type="url" name="opportunity_link" inputmode="url" placeholder="https://" />
-    </label>
-    <label for="solicitation-number">Solicitation number (optional)
-      <input id="solicitation-number" type="text" name="solicitation_number" />
-    </label>
-  </div>
+          <label
+            >Message
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </label>
 
-  <div class="grid grid--2">
-    <label for="response-deadline">Response deadline (optional)
-      <input id="response-deadline" type="date" name="response_deadline" />
-    </label>
-    <label for="services-needed">Services needed
-      <input id="services-needed" type="text" name="services_needed" required />
-    </label>
-  </div>
+          <label
+            >Company (optional)
+            <input
+              id="company"
+              type="text"
+              name="company"
+              autocomplete="organization"
+            />
+          </label>
 
-  <label for="message">Message
-    <textarea id="message" name="message" rows="5" required></textarea>
-  </label>
+          <p class="small contact-note">
+            Please do not submit sensitive personal, health, financial account,
+            or controlled procurement information in this form. See
+            <a href="#privacy">privacy and responsible measurement notes</a>.
+          </p>
 
-  <label for="company">Company (optional)
-    <input id="company" type="text" name="company" autocomplete="organization" />
-  </label>
+          <label class="consent-row">
+            <input
+              id="data-consent"
+              type="checkbox"
+              name="data_consent"
+              required
+            />
+            <span
+              >I consent to JustinJ Industries using this information to respond
+              to my inquiry. Form submissions are used for contact handling only
+              and are not sent to analytics.</span
+            >
+          </label>
 
-  <p class="small contact-note">Please do not submit sensitive personal, health, financial account, or controlled procurement information in this form. See <a href="#privacy">privacy and responsible measurement notes</a>.</p>
+          <!-- Honeypot (hidden to humans) -->
+          <p class="sr-only">
+            <label
+              >Website
+              <input
+                id="website-field"
+                type="text"
+                name="_website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </label>
+          </p>
 
-  <label for="data-consent" class="consent-row">
-    <input id="data-consent" type="checkbox" name="data_consent" required />
-    <span>I consent to JustinJ Industries using this information to respond to my inquiry. Form submissions are used for contact handling only and are not sent to analytics.</span>
-  </label>
+          <!-- Email subject -->
+          <input type="hidden" name="_subject" value="New website inquiry" />
+          <!-- Where replies should go -->
+          <input
+            type="hidden"
+            name="_replyto"
+            value="info@justinjindustries.com"
+          />
 
-  <!-- Honeypot (hidden to humans) -->
-  <p class="sr-only">
-    <label for="website-field">Website
-      <input id="website-field" type="text" name="_website" tabindex="-1" autocomplete="off" />
-    </label>
-  </p>
+          <div class="contact__actions">
+            <button type="submit" class="btn">Send inquiry</button>
+            <p
+              id="form-status"
+              class="small form-status"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </div>
+        </form>
+      </section>
+    </main>
 
-  <!-- Email subject -->
-  <input type="hidden" name="_subject" value="New website inquiry" />
-  <!-- Where replies should go -->
-  <input type="hidden" name="_replyto" value="info@justinjindustries.com" />
-
-  <div class="contact__actions">
-    <button type="submit" class="btn">Send inquiry</button>
-    <p id="form-status" class="small form-status" role="status" aria-live="polite"></p>
-  </div>
-</form>
-      
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer__inner">
-      <p>&copy; <span id="year"></span> JustinJ Industries.</p>
-      <a href="government-buyers.html">Government Buyers</a>
-      <a href="#privacy">Privacy</a>
-      <!--
+    <footer class="site-footer">
+      <div class="container footer__inner">
+        <p>&copy; <span id="year"></span> JustinJ Industries.</p>
+        <a href="government-buyers.html">Government Buyers</a>
+        <a href="#privacy">Privacy</a>
+        <!--
       <ul class="social">
         <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
         <li><a href="#" aria-label="GitHub">GitHub</a></li>
         <li><a href="#" aria-label="X">X</a></li>
       </ul>
-      -->
-    </div>
-  </footer>
+      --></div>
+    </footer>
 
-  <script src="script.js" defer></script>
-</body>
+    <script src="script.js" defer></script>
+  </body>
 </html>

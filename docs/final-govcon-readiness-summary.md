@@ -2,8 +2,49 @@
 
 Date: 2026-05-09
 
+## 0. Owner-data integration update (Projects canonical copy)
+
+- Owner-data integration applied to `/Users/macbookpro/Projects/JustinJ_Industries_Website`
+- QA output reviewed and issue list applied to public HTML and scripts
+- Public procurement copy standardized:
+  - Added legal/public naming where appropriate
+  - Standardized "Procurement profile available upon request."
+  - Added "Capability statement available online."
+  - Added "Reported metrics require owner verification before procurement use."
+- QA scripts updated in `package.json` (`check:links`, `check:a11y`, `check:format`, and added `format`)
+- Git hygiene updates added to `.gitignore` (`.DS_Store`, `*.xcuserstate`, `*.xcuserdatad/`, `JJI-Workspace-*/`)
+- Files changed in this pass:
+  - `index.html`
+  - `government-buyers.html`
+  - `capability-statement.html`
+  - `script.js`
+  - `package.json`
+  - `.gitignore`
+  - `docs/owner-data-needed.md`
+  - `docs/final-govcon-readiness-summary.md`
+- Remaining checks to run (not run in this session):
+  - `npm run check:html`
+  - `npm run check:links`
+  - `npm run check:a11y`
+  - `npm run check:format`
+  - `npm run check`
+
+## 0.1 QA follow-up on 2026-05-09
+- Fixed the remaining html-validate issue in `index.html` by removing an unnecessary `aria-label` from the hero badges list.
+- Ran `npm run format` and applied repository formatting updates.
+- Resolved validator/formatter rule conflict by aligning `.htmlvalidate.json` with Prettier output (`doctype-style` and `void-style` set to off).
+- Shortened Government Buyers page `<title>` to satisfy title-length validation.
+- Re-ran checks:
+  - `npm run check:html` ✅ pass
+  - `npm run check:format` ✅ pass
+- Remaining runtime limitations (environment-level, not content-level):
+  - `check:links` link crawl succeeds, but process exits with `spawn EPERM` during test-server shutdown.
+  - `check:a11y` fails to launch browser process for Pa11y in this environment and also reports `spawn EPERM` on shutdown.
+
 ## 1. What changed
+
 The site was expanded from a general one-page portfolio to a procurement-aware public presence with:
+
 - Government Buyers section and procurement-oriented CTAs
 - Capability statement page with print-friendly layout
 - Expanded contact flow for RFQ/RFP, sources-sought, and subcontracting inquiries
@@ -14,7 +55,9 @@ The site was expanded from a general one-page portfolio to a procurement-aware p
 - Launch-blocker fixes: indexability updates, `robots.txt`, `sitemap.xml`, structured data, and removal of public owner placeholders
 
 ## 2. Files changed
+
 Public-facing:
+
 - `index.html`
 - `styles.css`
 - `script.js`
@@ -27,6 +70,7 @@ Public-facing:
 - `.gitignore`
 
 Internal docs:
+
 - `docs/accessibility-notes.md`
 - `docs/contact-flow-backend-setup.md`
 - `docs/measurement-plan.md`
@@ -41,7 +85,9 @@ Internal docs:
 - `capture/opportunity/.gitkeep`
 
 ## 3. Tests/checks run
+
 Tooling checks:
+
 - Lightweight QA toolchain added for static site checks via `npm` scripts:
   - `check:html`
   - `check:links`
@@ -51,6 +97,7 @@ Tooling checks:
 - Attempted runtime execution was interrupted due local permission/runtime constraints in this environment, so tool output could not be captured in this session.
 
 Manual QA review performed:
+
 - Internal links and anchor navigation reviewed in `index.html`
 - Anchor targets verified: `#government-buyers`, `#contact`, `#privacy`, `#accessibility`
 - Government Buyer CTAs route to contact flow and capability statement
@@ -64,10 +111,12 @@ Manual QA review performed:
 - Script review for third-party tracking and PII handling completed
 
 Limitations:
+
 - No automated browser tests, linting, or runtime console capture available in repo
 - No automated accessibility scanner configured
 
 ## 4. Issues fixed
+
 - Added procurement-friendly nav/section/CTAs and contact flow fields.
 - Added accessible form status region and improved validation behavior.
 - Added privacy/data-use notice and privacy/measurement section.
@@ -90,7 +139,9 @@ Limitations:
 - Added safe opportunity-document intake structure under `capture/` with default-ignore protections and checklist documentation (`docs/opportunity-intake-checklist.md`).
 
 ## 5. Remaining issues
+
 Medium priority before outreach:
+
 1. Hero copy still includes "Bulletproof analytics"; this is high-marketing language and may be too aggressive for government audiences.
 2. Some public claims (for example specific percentage outcomes) require owner verification evidence before procurement use.
 3. Manual screen-reader, mobile-device, and print-preview checks still required per `docs/accessibility-notes.md`.
@@ -98,7 +149,9 @@ Medium priority before outreach:
 5. New npm-based QA checks are configured but still need to be run in a permitted local environment.
 
 ## 6. Owner-supplied data still needed
+
 From existing docs, key unresolved owner inputs include:
+
 - Legal business name
 - UEI
 - CAGE
@@ -115,7 +168,9 @@ From existing docs, key unresolved owner inputs include:
   - `+19% lead rate`
 
 ## 7. Recommended next step before outreach
+
 Execute a final owner review pass focused on:
+
 1. Supplying and approving procurement profile data and metric evidence.
 2. Approving tone adjustments for government-facing headline language.
 3. Confirming Formspree routing/retention and contact handling.
@@ -124,13 +179,17 @@ Execute a final owner review pass focused on:
 ---
 
 ## Pull Request Summary
+
 ### Problem
+
 The website needed to be made procurement-ready for government buyers and prime contractors while preserving truthfulness, accessibility, and confidentiality.
 
 ### Solution
+
 Added reusable public-sector positioning, procurement-friendly contact flow, capability statement output, privacy/measurement guardrails, and supporting documentation for owner-supplied procurement data and QA requirements.
 
 ### Key pages changed
+
 - `index.html`
 - `capability-statement.html`
 - `styles.css`
@@ -138,11 +197,13 @@ Added reusable public-sector positioning, procurement-friendly contact flow, cap
 - `docs/*` readiness documentation
 
 ### Verification
+
 - Static review of semantics, links, form behavior, accessibility patterns, metadata, and print CSS.
 - Repository checked for build/test toolchain; none found.
 - Truthfulness review completed for govcon-sensitive claims and placeholders.
 
 ### Follow-up tasks
+
 1. Provide owner-supplied procurement identifiers and approvals.
 2. Run manual screen-reader/mobile/print QA.
 3. Confirm Formspree backend routing and retention settings.
