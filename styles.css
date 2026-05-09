@@ -400,6 +400,9 @@ img {
   margin: 0.3rem 0 0.95rem;
   max-width: 70ch;
 }
+.section__head > :last-child {
+  margin-bottom: 0;
+}
 
 .grid {
   display: grid;
@@ -476,6 +479,7 @@ img {
 }
 .service li {
   margin: 0.25rem 0;
+  line-height: 1.5;
 }
 
 /* Government buyers */
@@ -549,6 +553,9 @@ img {
   gap: 0.8rem;
   flex-wrap: wrap;
   margin-top: 1rem;
+}
+.gov-cta-row .btn {
+  flex: 1 1 220px;
 }
 
 /* KPI stripe */
@@ -676,6 +683,81 @@ select[aria-invalid="true"] {
   border-top: 1px solid var(--border);
   margin-top: var(--space-md);
 }
+
+/* Enterprise polish: horizontal balance and grouping */
+@media (min-width: 1100px) {
+  .container {
+    width: min(1280px, calc(100% - 64px));
+  }
+  .hero {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: var(--space-md);
+  }
+  .hero__art {
+    justify-self: end;
+    width: min(560px, 100%);
+  }
+  .section__head {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.1fr);
+    align-items: end;
+    column-gap: 28px;
+    row-gap: 10px;
+    margin-bottom: 8px;
+  }
+  .section__head h2 {
+    margin: 0;
+  }
+  .section__head p {
+    margin: 0;
+  }
+  .page-home #work .grid.cards,
+  .page-home #services .grid.services {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .page-home #government-buyers .gov-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .page-home #government-buyers .gov-procurement {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 18px;
+    align-items: start;
+  }
+  .page-home #government-buyers .gov-procurement h3,
+  .page-home #government-buyers .gov-procurement h3 + p {
+    grid-column: 1 / -1;
+  }
+  .page-home #about .about {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+    gap: var(--space-md);
+  }
+  .page-gov .section > .section__head + .grid.services.services--dense {
+    margin-top: 8px;
+  }
+  .page-gov .services--dense ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+  .page-gov .services--dense .service {
+    padding: 1rem 1.05rem;
+  }
+  .page-gov .section .section__head {
+    margin-bottom: 10px;
+  }
+  .page-gov .section:has(> .section__head h2) {
+    position: relative;
+  }
+  .page-gov .section:has(> .section__head h2)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    border-top: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+    opacity: 0.45;
+  }
+}
 .footer__inner {
   display: flex;
   align-items: center;
@@ -719,6 +801,10 @@ select[aria-invalid="true"] {
   .about {
     grid-template-columns: 1fr;
   }
+  .section__head {
+    display: block;
+    margin-bottom: 0;
+  }
 }
 @media (max-width: 720px) {
   .container {
@@ -733,6 +819,9 @@ select[aria-invalid="true"] {
   .hero__sub {
     font-size: 1rem;
   }
+  .hero__cta .btn {
+    flex: 1 1 220px;
+  }
   .nav-links {
     display: none;
   }
@@ -744,6 +833,9 @@ select[aria-invalid="true"] {
   }
   .stripe__inner {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .gov-cta-row .btn {
+    flex-basis: 100%;
   }
   .services--dense ul {
     grid-template-columns: 1fr;
