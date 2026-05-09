@@ -43,3 +43,26 @@ npm run check:format
 ```
 
 Then execute accessibility smoke checks in a local machine with Chrome/Chromium installed.
+
+### Manual fallback used in this project
+
+When `npm run check:a11y` is blocked by local runtime/browser automation issues (`Failed to launch the browser process`, `spawn EPERM`), use:
+
+```bash
+npm run serve
+npx pa11y http://127.0.0.1:8080 --standard WCAG2AA --timeout 120000
+npx pa11y http://127.0.0.1:8080/government-buyers.html --standard WCAG2AA --timeout 120000
+npx pa11y http://127.0.0.1:8080/capability-statement.html --standard WCAG2AA --timeout 120000
+```
+
+Observed manual result in this repo:
+
+- `No issues found!` for:
+  - `http://127.0.0.1:8080`
+  - `http://127.0.0.1:8080/government-buyers.html`
+  - `http://127.0.0.1:8080/capability-statement.html`
+
+Important distinction:
+
+- Passing manual Pa11y checks indicate no issues were reported for the tested page URLs.
+- A failing `npm run check:a11y` in this context indicates a local runtime/process limitation (browser launch / `spawn EPERM`), not necessarily WCAG violations in site markup.

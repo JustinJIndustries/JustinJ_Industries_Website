@@ -41,6 +41,13 @@ Date: 2026-05-09
 - Remaining runtime limitations (environment-level, not content-level):
   - `check:links` link crawl succeeds, but process exits with `spawn EPERM` during test-server shutdown.
   - `check:a11y` fails to launch browser process for Pa11y in this environment and also reports `spawn EPERM` on shutdown.
+- Manual accessibility fallback executed in the same repo:
+  - Local server started successfully with `npm run serve`
+  - Manual Pa11y WCAG2AA checks executed successfully:
+    - `npx pa11y http://127.0.0.1:8080 --standard WCAG2AA --timeout 120000` → `No issues found!`
+    - `npx pa11y http://127.0.0.1:8080/government-buyers.html --standard WCAG2AA --timeout 120000` → `No issues found!`
+    - `npx pa11y http://127.0.0.1:8080/capability-statement.html --standard WCAG2AA --timeout 120000` → `No issues found!`
+- Conclusion: manual page-level Pa11y checks across all three local pages reported no WCAG2AA findings; the `npm run check:a11y` failure is currently a local runtime/browser automation limitation, not a detected accessibility issue from that script execution.
 
 ## 1. What changed
 
