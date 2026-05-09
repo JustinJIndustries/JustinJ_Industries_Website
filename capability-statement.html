@@ -96,12 +96,12 @@
         color: inherit;
       }
       .wrap {
-        width: min(1080px, 92%);
+        width: min(1180px, 94%);
         margin: 16px auto;
         background: var(--card);
         border: 1px solid var(--border);
         border-radius: 12px;
-        padding: 16px;
+        padding: 14px;
       }
 
       .top {
@@ -128,19 +128,25 @@
         text-align: right;
         color: var(--muted);
         font-size: 0.9rem;
+        display: grid;
+        gap: 2px;
       }
 
       .grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 10px;
+        gap: 12px;
+        align-items: stretch;
       }
 
       .section {
+        display: flex;
+        flex-direction: column;
         border: 1px solid var(--border);
         border-radius: 10px;
-        padding: 8px 10px;
+        padding: 9px 11px;
         background: rgba(255, 255, 255, 0.01);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
         break-inside: avoid;
       }
 

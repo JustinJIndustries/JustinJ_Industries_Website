@@ -30,6 +30,7 @@ Date: 2026-05-09
   - `npm run check`
 
 ## 0.1 QA follow-up on 2026-05-09
+
 - Fixed the remaining html-validate issue in `index.html` by removing an unnecessary `aria-label` from the hero badges list.
 - Ran `npm run format` and applied repository formatting updates.
 - Resolved validator/formatter rule conflict by aligning `.htmlvalidate.json` with Prettier output (`doctype-style` and `void-style` set to off).
