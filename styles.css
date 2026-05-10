@@ -866,10 +866,29 @@ select[aria-invalid="true"] {
   font-size: clamp(1.45rem, 2.8vw, 2rem);
 }
 .page-home .section__head p {
-  max-width: 64ch;
+  max-width: 62ch;
 }
 .page-home .grid {
   gap: clamp(12px, 2vw, 22px);
+}
+
+/* Keep homepage headers visually connected (avoid wide split-column drift). */
+.page-home .section__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 0.5rem;
+  max-width: 780px;
+  margin-bottom: 0.55rem;
+}
+.page-home .section__head h2 {
+  margin: 0;
+}
+.page-home .section__head p {
+  margin: 0;
+}
+
+.page-home .trust-cluster .trust-head {
+  max-width: 840px;
 }
 
 .page-home #work .grid.cards {
@@ -1080,6 +1099,12 @@ select[aria-invalid="true"] {
   }
   .page-home .trust-grid {
     grid-template-columns: 1.05fr 0.95fr 1fr;
+  }
+  .page-home .section__head {
+    max-width: 860px;
+  }
+  .page-home #government-buyers .section__head {
+    max-width: 900px;
   }
   .page-gov .container {
     width: min(1240px, calc(100% - 56px));
