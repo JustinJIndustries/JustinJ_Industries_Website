@@ -866,7 +866,7 @@ select[aria-invalid="true"] {
   font-size: clamp(1.45rem, 2.8vw, 2rem);
 }
 .page-home .section__head p {
-  max-width: 62ch;
+  max-width: min(860px, 100%);
 }
 .page-home .grid {
   gap: clamp(12px, 2vw, 22px);
@@ -877,7 +877,7 @@ select[aria-invalid="true"] {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   row-gap: 0.5rem;
-  max-width: 780px;
+  max-width: min(920px, 100%);
   margin-bottom: 0.55rem;
 }
 .page-home .section__head h2 {
@@ -888,7 +888,17 @@ select[aria-invalid="true"] {
 }
 
 .page-home .trust-cluster .trust-head {
-  max-width: 840px;
+  max-width: min(980px, 100%);
+}
+
+.page-home #government-buyers .section__head,
+.page-home #contact .section__head {
+  max-width: min(1020px, 100%);
+}
+
+.page-home #government-buyers .section__head p,
+.page-home #contact .section__head p {
+  max-width: min(960px, 100%);
 }
 
 .page-home #work .grid.cards {
@@ -1101,10 +1111,10 @@ select[aria-invalid="true"] {
     grid-template-columns: 1.05fr 0.95fr 1fr;
   }
   .page-home .section__head {
-    max-width: 860px;
+    max-width: min(960px, 100%);
   }
   .page-home #government-buyers .section__head {
-    max-width: 900px;
+    max-width: min(1040px, 100%);
   }
   .page-gov .container {
     width: min(1240px, calc(100% - 56px));
