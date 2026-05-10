@@ -74,6 +74,35 @@
   --btn-ink: #0b0d10;
 }
 
+/* Light-mode CTA contrast override (keep dark mode unchanged) */
+.theme-light .btn:not(.btn--ghost),
+.theme-light .nav-links a.btn {
+  color: #ffffff;
+  background: linear-gradient(135deg, #1d4ed8, #0e7490);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+}
+
+.theme-light .btn:not(.btn--ghost):hover,
+.theme-light .nav-links a.btn:hover {
+  color: #ffffff;
+  background: linear-gradient(135deg, #1e40af, #0f766e);
+}
+
+@media (prefers-color-scheme: light) {
+  body:not(.theme-dark) .btn:not(.btn--ghost),
+  body:not(.theme-dark) .nav-links a.btn {
+    color: #ffffff;
+    background: linear-gradient(135deg, #1d4ed8, #0e7490);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+  }
+
+  body:not(.theme-dark) .btn:not(.btn--ghost):hover,
+  body:not(.theme-dark) .nav-links a.btn:hover {
+    color: #ffffff;
+    background: linear-gradient(135deg, #1e40af, #0f766e);
+  }
+}
+
 * {
   box-sizing: border-box;
 }
