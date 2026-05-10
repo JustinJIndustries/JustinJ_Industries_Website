@@ -156,8 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusEl = document.getElementById("form-status");
   const errorEl = document.getElementById("form-error");
   const inquiryTypeField = document.getElementById("inquiry-type");
+  const loadedAtField = document.getElementById("form-loaded-at");
   if (!form || !statusEl) return;
 
+  const formLoadedAt = Date.now();
+  const MIN_SUBMIT_DELAY_MS = 3000;
   const touchedFields = new WeakSet();
   const resetFieldError = (field) => field.removeAttribute("aria-invalid");
   const markFieldError = (field) => field.setAttribute("aria-invalid", "true");
@@ -165,6 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Ensure neutral status and neutral field state on initial load.
   statusEl.textContent = "";
   if (errorEl) errorEl.textContent = "";
+  if (loadedAtField) loadedAtField.value = new Date(formLoadedAt).toISOString();
   form
     .querySelectorAll(
       "input[aria-invalid], select[aria-invalid], textarea[aria-invalid]",
@@ -209,6 +213,23 @@ document.addEventListener("DOMContentLoaded", () => {
       else resetFieldError(field);
     });
   });
+
+  // Lightweight anti-spam guard: block very fast submits.
+  form.addEventListener(
+    "submit",
+    (event) => {
+      const elapsed = Date.now() - formLoadedAt;
+      if (elapsed >= MIN_SUBMIT_DELAY_MS) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (errorEl) {
+        errorEl.textContent =
+          "Submission failed. Please email info@justinjindustries.com or try again later.";
+      }
+      statusEl.textContent = "";
+    },
+    true,
+  );
 
   // Do not override submit; Formspree AJAX handles submission.
   // Add diagnostics when Formspree writes to the form error area.

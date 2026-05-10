@@ -645,10 +645,10 @@ select:focus {
   border-color: transparent;
 }
 .contact__actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  gap: 0.55rem 0.8rem;
 }
 .small {
   font-size: 0.9rem;
@@ -669,13 +669,32 @@ select:focus {
 }
 .form-status {
   margin: 0;
-  min-height: 1.4em;
+  min-height: 1.2em;
+  font-size: 0.9rem;
+  line-height: 1.35;
 }
 .form-status.is-success {
   color: #7cffe1;
 }
 .form-status.is-error {
   color: #ffb4b4;
+}
+[data-fs-success] {
+  grid-column: 2;
+  align-self: center;
+  color: #8ce7bb;
+  font-weight: 500;
+}
+[data-fs-success]:empty {
+  display: none;
+}
+[data-fs-error] {
+  margin-top: 0.45rem;
+  color: #ffb4b4;
+  font-weight: 500;
+}
+[data-fs-error]:empty {
+  display: none;
 }
 input[aria-invalid="true"],
 textarea[aria-invalid="true"],
@@ -1114,6 +1133,14 @@ select[aria-invalid="true"] {
   }
   .stripe__inner {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .contact__actions {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: 0.55rem;
+  }
+  [data-fs-success] {
+    grid-column: 1;
   }
   .gov-cta-row .btn {
     flex-basis: 100%;

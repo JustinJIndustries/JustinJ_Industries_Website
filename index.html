@@ -734,6 +734,13 @@
             data-fs-field="_subject"
             value="New website inquiry"
           />
+          <input
+            type="hidden"
+            id="form-loaded-at"
+            name="form_loaded_at"
+            data-fs-field="form_loaded_at"
+            value=""
+          />
           <div class="contact__actions">
             <button type="submit" class="btn" data-fs-submit-btn>
               Send inquiry
@@ -778,9 +785,36 @@
           console.error("Formspree AJAX SDK failed to load.");
           return;
         }
+        const formEl = document.querySelector("#contact-form");
+        const successEl = document.querySelector("[data-fs-success]");
+        const errorEl = document.querySelector("[data-fs-error]");
+        const submitBtn = formEl?.querySelector("[data-fs-submit-btn]");
         window.formspree("initForm", {
           formElement: "#contact-form",
           formId: "mgvlrzdq",
+          renderSuccess: (_ctx, message) => {
+            if (successEl) {
+              successEl.textContent =
+                message ||
+                "Thanks. Your inquiry was received. JustinJ Industries will follow up with next steps.";
+            }
+            if (errorEl) errorEl.textContent = "";
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Send inquiry";
+            }
+          },
+          renderError: (_ctx, message) => {
+            if (errorEl) {
+              errorEl.textContent =
+                message ||
+                "Submission failed. Please email info@justinjindustries.com or try again later.";
+            }
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Send inquiry";
+            }
+          },
         });
       });
     </script>

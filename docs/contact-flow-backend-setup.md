@@ -10,6 +10,10 @@ This site currently posts contact submissions to Formspree:
 - Confirm form ID `mgvlrzdq` exists.
 - Confirm recipient email is verified in Formspree.
 - Confirm the form is active (not archived/disabled).
+- Enable domain restriction for `justinjindustries.com` (and any approved subdomains used for production form submits).
+- Enable Formspree spam filtering / Formshield protections.
+- Keep reCAPTCHA disabled unless a custom AJAX key is configured for the current integration path.
+- If spam volume increases, consider enabling Cloudflare Turnstile and ensure required token handling is configured.
 - If domain restrictions are enabled, confirm production domain is allowed.
 - Confirm spam settings (including Turnstile/captcha) are not requiring a missing token.
 - Confirm submission count/monthly limits are not exceeded.
