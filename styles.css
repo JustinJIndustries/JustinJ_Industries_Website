@@ -614,6 +614,46 @@ img {
   flex: 1 1 220px;
 }
 
+.gov-teaser {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: clamp(0.9rem, 1.8vw, 1.2rem);
+  box-shadow: var(--shadow);
+}
+
+.gov-teaser h3 {
+  margin: 0 0 0.6rem;
+  font-size: var(--font-size-md);
+}
+
+.gov-teaser__chips {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.55rem;
+}
+
+.gov-teaser__chips li {
+  margin: 0;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  background: var(--bg-elev);
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.gov-teaser__note {
+  margin: 0.7rem 0 0;
+}
+
+.gov-cta-row--teaser .btn {
+  flex: 1 1 260px;
+}
+
 /* KPI stripe */
 .stripe {
   background: linear-gradient(
@@ -1011,6 +1051,9 @@ select[aria-invalid="true"] {
 }
 .page-home #government-buyers .gov-cta-row .btn {
   flex: 1 1 200px;
+}
+.page-home #government-buyers .gov-teaser {
+  margin-top: 0.35rem;
 }
 
 .page-home #results.stripe {
