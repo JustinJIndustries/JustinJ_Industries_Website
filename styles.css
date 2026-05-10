@@ -17,6 +17,15 @@
   --space-lg: 48px;
   --space-xl: 72px;
   --space-2xl: 120px;
+  --font-size-xs: clamp(0.76rem, 0.12vw + 0.73rem, 0.83rem);
+  --font-size-sm: clamp(0.88rem, 0.2vw + 0.82rem, 0.96rem);
+  --font-size-base: clamp(1rem, 0.22vw + 0.95rem, 1.08rem);
+  --font-size-md: clamp(1.1rem, 0.32vw + 1.02rem, 1.24rem);
+  --font-size-lg: clamp(1.26rem, 0.7vw + 1.08rem, 1.56rem);
+  --font-size-xl: clamp(1.42rem, 1vw + 1.16rem, 1.96rem);
+  --font-size-2xl: clamp(1.7rem, 1.45vw + 1.34rem, 2.45rem);
+  --font-size-3xl: clamp(2.05rem, 2.1vw + 1.5rem, 3.1rem);
+  --font-size-4xl: clamp(2.4rem, 3vw + 1.65rem, 4rem);
 }
 @media (prefers-color-scheme: light) {
   :root {
@@ -96,9 +105,34 @@ body {
     ),
     var(--bg);
   color: var(--text);
-  line-height: 1.6;
+  font-size: var(--font-size-base);
+  line-height: 1.62;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0 0 0.75rem;
+  max-width: 72ch;
+}
+
+ul,
+ol {
+  margin: 0 0 0.8rem;
+  padding-left: 1.1rem;
+}
+
+li {
+  margin: 0.26rem 0;
+  line-height: 1.55;
 }
 
 a {
@@ -218,6 +252,8 @@ img {
   padding: 0.8rem 1rem;
   min-height: 44px;
   font-weight: 700;
+  font-size: var(--font-size-sm);
+  line-height: 1.2;
   box-shadow: var(--shadow);
   text-decoration: none;
   color: var(--btn-ink);
@@ -293,7 +329,7 @@ img {
   background: linear-gradient(135deg, var(--brand), var(--brand-2));
 }
 .chip__text {
-  font-size: 0.85rem;
+  font-size: var(--font-size-xs);
   color: var(--muted);
 }
 
@@ -327,7 +363,7 @@ img {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-size: 1.4rem;
+  font-size: var(--font-size-xl);
   margin: 0.6rem 0;
   text-decoration: none;
 }
@@ -344,10 +380,11 @@ img {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--font-size-xs);
+  line-height: 1.35;
 }
 .hero__title {
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-size: var(--font-size-3xl);
   line-height: 1.15;
   margin: 0.25rem 0 1rem;
 }
@@ -370,8 +407,8 @@ img {
 .hero__sub {
   color: var(--muted);
   max-width: 58ch;
-  font-size: 1.05rem;
-  line-height: 1.65;
+  font-size: var(--font-size-md);
+  line-height: 1.62;
 }
 .hero__cta {
   display: flex;
@@ -398,11 +435,15 @@ img {
   padding: clamp(56px, 7vw, 96px) 0;
 }
 .section__head h2 {
-  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-size: var(--font-size-2xl);
+  margin: 0;
+  line-height: 1.14;
 }
 .section__head p {
   color: var(--muted);
-  margin: 0.3rem 0 0.95rem;
+  font-size: var(--font-size-md);
+  line-height: 1.62;
+  margin: 0.3rem 0 0.9rem;
   max-width: 70ch;
 }
 .section__head > :last-child {
@@ -446,10 +487,13 @@ img {
 }
 .card__body h3 {
   margin: 0.25rem 0 0.35rem;
-  font-size: 1.05rem;
+  font-size: var(--font-size-md);
+  line-height: 1.2;
 }
 .card__body p {
   color: var(--muted);
+  font-size: var(--font-size-sm);
+  line-height: 1.58;
   margin: 0.25rem 0;
 }
 .case-disclaimer {
@@ -477,6 +521,8 @@ img {
 }
 .service h3 {
   margin: 0 0 0.5rem;
+  font-size: var(--font-size-md);
+  line-height: 1.2;
 }
 .service ul {
   margin: 0;
@@ -484,7 +530,8 @@ img {
 }
 .service li {
   margin: 0.25rem 0;
-  line-height: 1.5;
+  font-size: var(--font-size-sm);
+  line-height: 1.54;
 }
 
 /* Government buyers */
@@ -548,9 +595,13 @@ img {
 }
 .procurement-list dt {
   font-weight: 700;
+  font-size: var(--font-size-xs);
+  line-height: 1.35;
 }
 .procurement-list dd {
   margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.52;
   color: var(--muted);
 }
 .gov-cta-row {
@@ -592,7 +643,7 @@ img {
 }
 .kpi__big {
   font-weight: 800;
-  font-size: 1.6rem;
+  font-size: var(--font-size-xl);
   background: linear-gradient(135deg, var(--brand), var(--brand-2));
   -webkit-background-clip: text;
   background-clip: text;
@@ -625,11 +676,15 @@ label {
   display: grid;
   gap: 0.35rem;
   font-weight: 600;
+  font-size: var(--font-size-sm);
+  line-height: 1.35;
 }
 input,
 textarea,
 select {
-  font: inherit;
+  font-family: inherit;
+  font-size: max(16px, var(--font-size-base));
+  line-height: 1.35;
   color: inherit;
   background: var(--bg-elev);
   border: 1px solid var(--border);
@@ -651,7 +706,8 @@ select:focus {
   gap: 0.55rem 0.8rem;
 }
 .small {
-  font-size: 0.9rem;
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
   color: var(--muted);
 }
 .contact-note {
@@ -662,6 +718,7 @@ select:focus {
   align-items: flex-start;
   gap: 0.65rem;
   font-weight: 500;
+  font-size: var(--font-size-sm);
 }
 .consent-row input {
   margin-top: 0.2rem;
@@ -670,8 +727,8 @@ select:focus {
 .form-status {
   margin: 0;
   min-height: 1.2em;
-  font-size: 0.9rem;
-  line-height: 1.35;
+  font-size: var(--font-size-sm);
+  line-height: 1.45;
 }
 .form-status.is-success {
   color: #7cffe1;
@@ -823,7 +880,7 @@ select[aria-invalid="true"] {
   padding-block: clamp(24px, 4vw, 44px);
 }
 .page-home .hero__title {
-  font-size: clamp(1.95rem, 3.7vw, 3rem);
+  font-size: clamp(1.95rem, 3.3vw, 2.9rem);
   margin-bottom: 0.75rem;
 }
 .page-home .hero__sub {
@@ -863,7 +920,7 @@ select[aria-invalid="true"] {
   padding-top: clamp(28px, 3.2vw, 44px);
 }
 .page-home .section__head h2 {
-  font-size: clamp(1.45rem, 2.8vw, 2rem);
+  font-size: clamp(1.46rem, 2.1vw, 2.05rem);
 }
 .page-home .section__head p {
   max-width: min(860px, 100%);
@@ -911,7 +968,7 @@ select[aria-invalid="true"] {
   padding: 0.82rem;
 }
 .page-home #work .card__body h3 {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   margin-bottom: 0.28rem;
 }
 .page-home #work .card__body p {
@@ -998,7 +1055,7 @@ select[aria-invalid="true"] {
   padding-block: clamp(24px, 3.8vw, 42px);
 }
 .page-gov .hero__title {
-  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-size: clamp(1.85rem, 3vw, 2.75rem);
   margin-bottom: 0.75rem;
 }
 .page-gov .hero__sub {
@@ -1074,7 +1131,7 @@ select[aria-invalid="true"] {
   padding: 0.85rem;
 }
 .page-gov .gov-section--experience .card__body h3 {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
 }
 
 .page-gov .gov-cta-row {
