@@ -150,36 +150,25 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTheme();
 });
 
-// Form success/error logic
+// Form setup (Formspree AJAX + local accessibility helpers)
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
   const statusEl = document.getElementById("form-status");
+  const errorEl = document.getElementById("form-error");
   const inquiryTypeField = document.getElementById("inquiry-type");
-  const submitBtn = form?.querySelector('button[type="submit"]');
   if (!form || !statusEl) return;
 
   const touchedFields = new WeakSet();
-
   const resetFieldError = (field) => field.removeAttribute("aria-invalid");
   const markFieldError = (field) => field.setAttribute("aria-invalid", "true");
 
-  const setStatus = (message, type) => {
-    statusEl.textContent = message;
-    statusEl.classList.remove("is-success", "is-error");
-    if (type) statusEl.classList.add(type);
-  };
-
-  const setSubmittingState = (isSubmitting) => {
-    if (!submitBtn) return;
-    submitBtn.disabled = isSubmitting;
-    submitBtn.setAttribute("aria-disabled", String(isSubmitting));
-    submitBtn.textContent = isSubmitting ? "Sending..." : "Send inquiry";
-  };
-
   // Ensure neutral status and neutral field state on initial load.
-  setStatus("", "");
+  statusEl.textContent = "";
+  if (errorEl) errorEl.textContent = "";
   form
-    .querySelectorAll('input[aria-invalid], select[aria-invalid], textarea[aria-invalid]')
+    .querySelectorAll(
+      "input[aria-invalid], select[aria-invalid], textarea[aria-invalid]",
+    )
     .forEach((field) => resetFieldError(field));
 
   const setInquiryType = (value) => {
@@ -207,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const inquiryTypeParam = url.searchParams.get("inquiry_type");
   if (inquiryTypeParam) setInquiryType(inquiryTypeParam);
 
+  // Keep field-level accessible invalid state without overriding submit behavior.
   form.querySelectorAll("input, select, textarea").forEach((field) => {
     field.addEventListener("input", () => {
       touchedFields.add(field);
@@ -220,72 +210,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    setStatus("", "");
-
-    const invalidFields = Array.from(
-      form.querySelectorAll("input, select, textarea"),
-    ).filter((field) => !field.checkValidity());
-
-    invalidFields.forEach(markFieldError);
-    if (invalidFields.length) {
-      setStatus(
-        "Please complete the required fields and correct any invalid values.",
-        "is-error",
-      );
-      invalidFields[0].focus();
-      return;
-    }
-
-    // Honeypot: if filled, drop the submission silently.
-    if (form.querySelector('[name="_website"]').value) {
-      setStatus("Thanks. Your message was received.", "is-success");
-      form.reset();
-      form
-        .querySelectorAll("input, select, textarea")
-        .forEach((field) => resetFieldError(field));
-      return;
-    }
-
-    const data = new FormData(form);
-
-    setSubmittingState(true);
-
-    try {
-      const res = await fetch(form.action, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      });
-
-      if (res.ok) {
-        form.reset();
-        form
-          .querySelectorAll("input, select, textarea")
-          .forEach((field) => resetFieldError(field));
-        setStatus(
-          "Thanks. Your inquiry was received. JustinJ Industries will follow up with next steps.",
-          "is-success",
-        );
-      } else {
-        console.warn("Formspree submission failed", { status: res.status });
-        const json = await res.json().catch(() => ({}));
-        const msg =
-          json?.errors?.map((err) => err.message).join(" ") ||
-          "Submission failed.";
-        setStatus(
-          `${msg} You can also email info@justinjindustries.com.`,
-          "is-error",
-        );
+  // Do not override submit; Formspree AJAX handles submission.
+  // Add diagnostics when Formspree writes to the form error area.
+  if (errorEl) {
+    const observer = new MutationObserver(() => {
+      const message = errorEl.textContent?.trim();
+      if (!message) return;
+      console.warn("Formspree form error:", message);
+      if (!message.includes("Please email info@justinjindustries.com")) {
+        errorEl.textContent =
+          "Submission failed. Please email info@justinjindustries.com or try again later.";
       }
-    } catch {
-      setStatus(
-        "Network error. Please try again or email info@justinjindustries.com.",
-        "is-error",
-      );
-    } finally {
-      setSubmittingState(false);
-    }
-  });
+    });
+    observer.observe(errorEl, { childList: true, subtree: true });
+  }
 });

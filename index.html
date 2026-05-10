@@ -567,7 +567,6 @@
           class="contact"
           action="https://formspree.io/f/mgvlrzdq"
           method="POST"
-          novalidate
         >
           <div class="grid grid--2">
             <label
@@ -576,6 +575,7 @@
                 id="name"
                 type="text"
                 name="name"
+                data-fs-field="name"
                 autocomplete="name"
                 required
               />
@@ -586,6 +586,7 @@
                 id="email"
                 type="email"
                 name="email"
+                data-fs-field="email"
                 autocomplete="email"
                 required
               />
@@ -595,7 +596,12 @@
           <div class="grid grid--2">
             <label
               >Inquiry type
-              <select id="inquiry-type" name="inquiry_type" required>
+              <select
+                id="inquiry-type"
+                name="inquiry_type"
+                data-fs-field="inquiry_type"
+                required
+              >
                 <option value="">Select one</option>
                 <option>General inquiry</option>
                 <option>Government opportunity</option>
@@ -611,6 +617,7 @@
                 id="organization"
                 type="text"
                 name="organization"
+                data-fs-field="organization"
                 autocomplete="organization"
                 required
               />
@@ -624,6 +631,7 @@
                 id="opportunity-link"
                 type="url"
                 name="opportunity_link"
+                data-fs-field="opportunity_link"
                 inputmode="url"
                 placeholder="https://"
               />
@@ -634,6 +642,7 @@
                 id="solicitation-number"
                 type="text"
                 name="solicitation_number"
+                data-fs-field="solicitation_number"
               />
             </label>
           </div>
@@ -645,6 +654,7 @@
                 id="response-deadline"
                 type="date"
                 name="response_deadline"
+                data-fs-field="response_deadline"
               />
             </label>
             <label
@@ -653,6 +663,7 @@
                 id="services-needed"
                 type="text"
                 name="services_needed"
+                data-fs-field="services_needed"
                 required
               />
             </label>
@@ -660,7 +671,13 @@
 
           <label
             >Message
-            <textarea id="message" name="message" rows="5" required></textarea>
+            <textarea
+              id="message"
+              name="message"
+              data-fs-field="message"
+              rows="5"
+              required
+            ></textarea>
           </label>
 
           <label
@@ -669,6 +686,7 @@
               id="company"
               type="text"
               name="company"
+              data-fs-field="company"
               autocomplete="organization"
             />
           </label>
@@ -684,6 +702,7 @@
               id="data-consent"
               type="checkbox"
               name="data_consent"
+              data-fs-field="data_consent"
               required
             />
             <span
@@ -701,6 +720,7 @@
                 id="website-field"
                 type="text"
                 name="_website"
+                data-fs-field="_website"
                 tabindex="-1"
                 autocomplete="off"
               />
@@ -708,16 +728,31 @@
           </p>
 
           <!-- Email subject -->
-          <input type="hidden" name="_subject" value="New website inquiry" />
+          <input
+            type="hidden"
+            name="_subject"
+            data-fs-field="_subject"
+            value="New website inquiry"
+          />
           <div class="contact__actions">
-            <button type="submit" class="btn">Send inquiry</button>
+            <button type="submit" class="btn" data-fs-submit-btn>
+              Send inquiry
+            </button>
             <p
               id="form-status"
               class="small form-status"
               role="status"
               aria-live="polite"
+              data-fs-success
             ></p>
           </div>
+          <p
+            id="form-error"
+            class="small form-status"
+            role="alert"
+            aria-live="polite"
+            data-fs-error
+          ></p>
         </form>
       </section>
     </main>
@@ -736,6 +771,19 @@
       --></div>
     </footer>
 
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (!window.formspree) {
+          console.error("Formspree AJAX SDK failed to load.");
+          return;
+        }
+        window.formspree("initForm", {
+          formElement: "#contact-form",
+          formId: "mgvlrzdq",
+        });
+      });
+    </script>
     <script src="script.js" defer></script>
   </body>
 </html>

@@ -7,6 +7,14 @@ This site currently posts contact submissions to Formspree:
 
 ## Required checks in Formspree
 
+- Confirm form ID `mgvlrzdq` exists.
+- Confirm recipient email is verified in Formspree.
+- Confirm the form is active (not archived/disabled).
+- If domain restrictions are enabled, confirm production domain is allowed.
+- Confirm spam settings (including Turnstile/captcha) are not requiring a missing token.
+- Confirm submission count/monthly limits are not exceeded.
+- Confirm Formspree dashboard shows rejected submissions/errors when failures happen.
+- Confirm a minimal test form can submit to the same endpoint (`https://formspree.io/f/mgvlrzdq`).
 - Confirm all new fields are accepted and visible in submission payloads:
   - `inquiry_type`
   - `organization`
