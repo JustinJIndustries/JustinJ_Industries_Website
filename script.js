@@ -155,10 +155,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
   const statusEl = document.getElementById("form-status");
   const inquiryTypeField = document.getElementById("inquiry-type");
+  const submitBtn = form?.querySelector('button[type="submit"]');
   if (!form || !statusEl) return;
 
-  const resetFieldError = (field) =>
-    field.setAttribute("aria-invalid", "false");
+  const touchedFields = new WeakSet();
+
+  const resetFieldError = (field) => field.removeAttribute("aria-invalid");
   const markFieldError = (field) => field.setAttribute("aria-invalid", "true");
 
   const setStatus = (message, type) => {
@@ -166,6 +168,19 @@ document.addEventListener("DOMContentLoaded", () => {
     statusEl.classList.remove("is-success", "is-error");
     if (type) statusEl.classList.add(type);
   };
+
+  const setSubmittingState = (isSubmitting) => {
+    if (!submitBtn) return;
+    submitBtn.disabled = isSubmitting;
+    submitBtn.setAttribute("aria-disabled", String(isSubmitting));
+    submitBtn.textContent = isSubmitting ? "Sending..." : "Send inquiry";
+  };
+
+  // Ensure neutral status and neutral field state on initial load.
+  setStatus("", "");
+  form
+    .querySelectorAll('input[aria-invalid], select[aria-invalid], textarea[aria-invalid]')
+    .forEach((field) => resetFieldError(field));
 
   const setInquiryType = (value) => {
     if (!inquiryTypeField || !value) return;
@@ -194,10 +209,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.querySelectorAll("input, select, textarea").forEach((field) => {
     field.addEventListener("input", () => {
+      touchedFields.add(field);
       if (field.checkValidity()) resetFieldError(field);
+      else if (touchedFields.has(field)) markFieldError(field);
     });
     field.addEventListener("blur", () => {
+      touchedFields.add(field);
       if (!field.checkValidity()) markFieldError(field);
+      else resetFieldError(field);
     });
   });
 
@@ -223,10 +242,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (form.querySelector('[name="_website"]').value) {
       setStatus("Thanks. Your message was received.", "is-success");
       form.reset();
+      form
+        .querySelectorAll("input, select, textarea")
+        .forEach((field) => resetFieldError(field));
       return;
     }
 
     const data = new FormData(form);
+
+    setSubmittingState(true);
 
     try {
       const res = await fetch(form.action, {
@@ -237,11 +261,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (res.ok) {
         form.reset();
+        form
+          .querySelectorAll("input, select, textarea")
+          .forEach((field) => resetFieldError(field));
         setStatus(
           "Thanks. Your inquiry was received. JustinJ Industries will follow up with next steps.",
           "is-success",
         );
       } else {
+        console.warn("Formspree submission failed", { status: res.status });
         const json = await res.json().catch(() => ({}));
         const msg =
           json?.errors?.map((err) => err.message).join(" ") ||
@@ -256,6 +284,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Network error. Please try again or email info@justinjindustries.com.",
         "is-error",
       );
+    } finally {
+      setSubmittingState(false);
     }
   });
 });
