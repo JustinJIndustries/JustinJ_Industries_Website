@@ -74,7 +74,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("menu-open", active);
     menuButton.setAttribute("aria-expanded", String(active));
     menuButton.setAttribute("aria-label", active ? "Close menu" : "Open menu");
-    if (active) overlay.querySelector("a")?.focus();
+    if (active) {
+      const firstMenuLink = overlay.querySelector("a");
+      window.setTimeout(() => {
+        if (overlay.classList.contains("active")) {
+          firstMenuLink?.focus({ preventScroll: true });
+        }
+      }, 100);
+    }
   });
 
   overlay.addEventListener("click", (e) => {
@@ -195,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-  // Optional support for direct links like #contact?inquiry_type=RFQ/RFP
+  // Optional support for direct links like ?inquiry_type=RFQ/RFP#contact
   const url = new URL(window.location.href);
   const inquiryTypeParam = url.searchParams.get("inquiry_type");
   if (inquiryTypeParam) setInquiryType(inquiryTypeParam);

@@ -28,12 +28,15 @@ These fields are required before publishing complete procurement details.
 - Approved public-sector or subcontracting references that can be disclosed
 - Capability statement file (PDF) and last updated date
 
-## Metric verification for public-facing case studies
+## Metric verification before reintroducing public case-study numbers
 
-- Source and date range for `+28% CTR` result (Financial Services Site Refresh)
-- Validation method and sample basis for `98.7% hit integrity` (Analytics Hardening)
-- Source and date range for `−32% build time` and `+19% lead rate` (Conversion Landing System)
-- Approval on whether these metrics can appear in procurement-facing materials
+Numeric case-study claims were removed from the public pages in the 2026-06-28
+maintenance pass. If quantified outcomes are reintroduced later, collect:
+
+- Source, date range, and approval for any CTR or conversion-rate claim
+- Validation method and sample basis for any analytics hit-integrity claim
+- Source, date range, and approval for any build-time or efficiency claim
+- Approval on whether each metric can appear in procurement-facing materials
 
 ## Publishing rule
 

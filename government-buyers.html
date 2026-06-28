@@ -3,10 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="assets/logos/JJI-Logo-Only-grey.png"
+      type="image/png"
+    />
     <title>Government Buyers | JustinJ Industries</title>
     <meta
       name="description"
-      content="JustinJ Industries supports public-sector buyers and prime contractors with accessible web development, reliable analytics implementation, documentation, QA, and privacy-conscious measurement support."
+      content="JustinJ Industries supports public-sector buyers and prime contractors with accessible web development, Adobe Analytics, AEP, GA4/GTM tagging QA, documentation, and privacy-conscious measurement support."
     />
     <link
       rel="canonical"
@@ -18,7 +23,7 @@
     />
     <meta
       property="og:description"
-      content="Accessible web development and analytics support for public-sector teams, including measurement QA, documentation, and subcontracting support."
+      content="Accessible web development and analytics support for public-sector teams, including Adobe Analytics, AEP, GA4/GTM tagging QA, documentation, and subcontracting support."
     />
     <meta property="og:type" content="website" />
     <meta
@@ -57,6 +62,7 @@
             "areaServed": "US",
             "serviceType": [
               "Website modernization",
+              "Adobe Analytics and AEP implementation support",
               "Analytics implementation and QA",
               "Accessibility-focused implementation",
               "Documentation and handoff support"
@@ -86,7 +92,7 @@
           <li><a href="index.html#work">Work</a></li>
           <li><a href="index.html#services">Services</a></li>
           <li><a href="government-buyers.html">Government Buyers</a></li>
-          <li><a href="index.html#results">Results</a></li>
+          <li><a href="index.html#results">Approach</a></li>
           <li><a href="index.html#about">About</a></li>
           <li>
             <a href="index.html#contact" class="btn btn--small">Let's Talk</a>
@@ -118,26 +124,26 @@
           </button>
         </div>
       </nav>
-
-      <div
-        id="overlay"
-        class="overlay"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Mobile menu"
-        hidden
-        inert
-      >
-        <ul class="overlay-menu">
-          <li><a href="index.html#work">Work</a></li>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="government-buyers.html">Government Buyers</a></li>
-          <li><a href="index.html#results">Results</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#contact" class="btn">Let's Talk</a></li>
-        </ul>
-      </div>
     </header>
+
+    <div
+      id="overlay"
+      class="overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Mobile menu"
+      hidden
+      inert
+    >
+      <ul class="overlay-menu">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="government-buyers.html">Government Buyers</a></li>
+        <li><a href="index.html#results">Approach</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact" class="btn">Let's Talk</a></li>
+      </ul>
+    </div>
 
     <main id="main" class="gov-main">
       <section class="hero container">
@@ -154,13 +160,13 @@
           </p>
           <div class="hero__cta">
             <a
-              href="index.html#contact"
+              href="index.html?inquiry_type=RFQ%2FRFP#contact"
               class="btn gov-inquiry-link"
               data-inquiry-type="RFQ/RFP"
               >Contact about a solicitation</a
             >
             <a href="capability-statement.html" class="btn btn--ghost"
-              >Request capability statement</a
+              >View capability statement</a
             >
           </div>
         </div>
@@ -188,13 +194,18 @@
           <article class="service reveal">
             <ul>
               <li>Website modernization</li>
-              <li>WordPress/Craft CMS implementation</li>
+              <li>WordPress and Craft CMS implementation</li>
+              <li>Adobe Analytics and AEP implementation support</li>
+              <li>Adobe Tags/Launch rule support</li>
               <li>GA4/GTM implementation and QA</li>
+              <li>Adobe Web SDK and Edge Network event validation</li>
               <li>Consent-aware analytics</li>
               <li>Server-side tagging support</li>
+              <li>XDM and data layer review</li>
               <li>Looker Studio dashboarding</li>
               <li>Technical SEO and schema</li>
               <li>Accessibility remediation</li>
+              <li>AI-assisted workflow support</li>
               <li>Documentation and handoff support</li>
             </ul>
           </article>
@@ -211,6 +222,7 @@
               <li>Public-facing websites</li>
               <li>Program landing pages</li>
               <li>Analytics/tagging cleanup</li>
+              <li>Adobe Analytics and AEP tagging requirements</li>
               <li>Measurement plans</li>
               <li>Dashboard/reporting support</li>
               <li>Accessibility remediation</li>
@@ -267,63 +279,57 @@
 
       <section class="section container gov-section gov-section--experience">
         <div class="section__head">
-          <h2>Relevant experience</h2>
+          <h2>Relevant project patterns</h2>
         </div>
         <div class="grid cards">
           <article class="card reveal">
             <div class="card__body">
-              <h3>Financial Services Site Refresh</h3>
+              <h3>Website modernization support</h3>
               <p>
-                <strong>Challenge:</strong> Product journeys and measurement
-                were inconsistent after site updates.
+                <strong>Need:</strong> Public-facing pages need clearer
+                structure, more maintainable implementation, or better
+                accessibility posture.
               </p>
               <p>
-                <strong>Solution:</strong> Rebuilt homepage and journeys, and
-                implemented consent-mode tagging with GA4.
-              </p>
-              <p><strong>Outcome:</strong> +28% CTR to key product paths.</p>
-            </div>
-          </article>
-          <article class="card reveal">
-            <div class="card__body">
-              <h3>Analytics Hardening</h3>
-              <p>
-                <strong>Challenge:</strong> Event tracking quality and reporting
-                reliability were uneven across properties.
-              </p>
-              <p>
-                <strong>Solution:</strong> Audited GTM containers, standardized
-                event taxonomy, and supported server-side tracking rollout.
-              </p>
-              <p>
-                <strong>Outcome:</strong> 98.7% hit integrity in validated
-                tracking checks.
+                <strong>Support:</strong> Update page structure, CMS patterns,
+                metadata, technical SEO details, and QA notes.
               </p>
             </div>
           </article>
           <article class="card reveal">
             <div class="card__body">
-              <h3>Conversion Landing System</h3>
+              <h3>Analytics tagging review</h3>
               <p>
-                <strong>Challenge:</strong> Teams needed faster page delivery
-                without losing consistency or measurement quality.
+                <strong>Need:</strong> Measurement behavior needs validation
+                before launch, after platform changes, or during cleanup.
               </p>
               <p>
-                <strong>Solution:</strong> Built an ACF-based component system
-                with repeatable patterns and analytics-friendly implementation.
+                <strong>Support:</strong> Review GA4, GTM, Adobe-style tracking,
+                Adobe Analytics requirements, Adobe Experience Platform Web SDK
+                events, Adobe Tags/Launch rules, Edge Network validation,
+                XDM/data layer alignment, consent-aware conditions, event names,
+                and payload contents.
+              </p>
+            </div>
+          </article>
+          <article class="card reveal">
+            <div class="card__body">
+              <h3>Documentation and handoff support</h3>
+              <p>
+                <strong>Need:</strong> Teams need implementation details, QA
+                evidence, and repeatable workflows that survive handoff.
               </p>
               <p>
-                <strong>Outcome:</strong> −32% build time and +19% lead rate.
+                <strong>Support:</strong> Write measurement plans, change logs,
+                owner-facing instructions, and practical workflow notes.
               </p>
             </div>
           </article>
         </div>
         <p class="small case-disclaimer">
-          Examples are anonymized commercial work and are not presented as
-          government past performance.
-        </p>
-        <p class="small case-disclaimer">
-          Reported metrics require owner verification before procurement use.
+          Examples are representative, anonymized project patterns and are not
+          presented as client names, testimonials, guarantees, or government
+          past performance.
         </p>
       </section>
 
@@ -344,7 +350,7 @@
         </div>
         <div class="gov-cta-row">
           <a
-            href="index.html#contact"
+            href="index.html?inquiry_type=RFQ%2FRFP#contact"
             class="btn gov-inquiry-link"
             data-inquiry-type="RFQ/RFP"
             >Contact about a solicitation</a
@@ -355,7 +361,7 @@
             >Request capability statement</a
           >
           <a
-            href="index.html#contact"
+            href="index.html?inquiry_type=Subcontracting#contact"
             class="btn btn--ghost gov-inquiry-link"
             data-inquiry-type="Subcontracting"
             >Discuss subcontracting</a

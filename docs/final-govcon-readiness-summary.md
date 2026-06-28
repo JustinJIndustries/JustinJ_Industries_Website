@@ -49,6 +49,39 @@ Date: 2026-05-09
     - `npx pa11y http://127.0.0.1:8080/capability-statement.html --standard WCAG2AA --timeout 120000` → `No issues found!`
 - Conclusion: manual page-level Pa11y checks across all three local pages reported no WCAG2AA findings; the `npm run check:a11y` failure is currently a local runtime/browser automation limitation, not a detected accessibility issue from that script execution.
 
+## 0.2 Maintenance refresh on 2026-06-28
+
+- Refreshed homepage positioning around practical web development, WordPress
+  support, analytics tagging/QA, documentation, small-business support, and
+  modest AI-assisted workflow support.
+- Replaced high-marketing homepage language such as "Bulletproof analytics" and
+  broad growth positioning with more direct solo-operator copy.
+- Removed public numeric outcome claims from homepage, Government Buyers page,
+  and capability statement until owner-approved evidence is available.
+- Reframed "Recent Work" and procurement examples as representative,
+  anonymized project patterns rather than client results, testimonials, or
+  guarantees.
+- Updated contact copy to support general service inquiries while preserving
+  procurement inquiry paths and existing Formspree behavior.
+- Updated README project documentation to reflect the current static-site
+  architecture and QA commands.
+- Safe dependency refresh performed within existing semver ranges for
+  `html-validate` and `prettier`; major QA-tool upgrades were intentionally not
+  applied.
+
+## 0.3 Adobe analytics positioning update on 2026-06-28
+
+- Added Adobe Analytics and Adobe Experience Platform to homepage service
+  positioning without changing the hero headline.
+- Updated analytics/tagging service copy to mention Adobe Analytics, AEP, GA4,
+  GTM, data layer review, event QA, tracking cleanup, and implementation
+  documentation.
+- Added conservative public-sector/capability language for Adobe Web SDK, Adobe
+  Tags/Launch, Edge Network event validation, XDM/data layer alignment, and QA
+  documentation.
+- No Adobe certifications, enterprise ownership claims, client names, metrics,
+  or guaranteed outcomes were added.
+
 ## 1. What changed
 
 The site was expanded from a general one-page portfolio to a procurement-aware public presence with:
@@ -150,11 +183,9 @@ Limitations:
 
 Medium priority before outreach:
 
-1. Hero copy still includes "Bulletproof analytics"; this is high-marketing language and may be too aggressive for government audiences.
-2. Some public claims (for example specific percentage outcomes) require owner verification evidence before procurement use.
-3. Manual screen-reader, mobile-device, and print-preview checks still required per `docs/accessibility-notes.md`.
-4. Formspree backend configuration verification still required per `docs/contact-flow-backend-setup.md`.
-5. New npm-based QA checks are configured but still need to be run in a permitted local environment.
+1. Manual screen-reader, mobile-device, and print-preview checks still required per `docs/accessibility-notes.md`.
+2. Formspree backend configuration verification still required per `docs/contact-flow-backend-setup.md`.
+3. Owner-approved evidence is required before reintroducing any numeric case-study outcomes.
 
 ## 6. Owner-supplied data still needed
 
@@ -169,11 +200,7 @@ From existing docs, key unresolved owner inputs include:
 - Contract vehicles (if any)
 - Clearances status (if intended to publish)
 - Procurement contact email override (if different)
-- Verification evidence for published case-study metrics:
-  - `+28% CTR`
-  - `98.7% hit integrity`
-  - `−32% build time`
-  - `+19% lead rate`
+- Verification evidence for any future numeric case-study claims before they are reintroduced publicly
 
 ## 7. Recommended next step before outreach
 
