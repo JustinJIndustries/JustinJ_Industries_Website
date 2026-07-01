@@ -4,7 +4,7 @@ Date: 2026-05-09
 
 ## 0. Owner-data integration update (Projects canonical copy)
 
-- Owner-data integration applied to `/Users/macbookpro/Projects/JustinJ_Industries_Website`
+- Owner-data integration applied to the project repository
 - QA output reviewed and issue list applied to public HTML and scripts
 - Public procurement copy standardized:
   - Added legal/public naming where appropriate
