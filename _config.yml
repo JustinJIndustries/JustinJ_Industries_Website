@@ -1,0 +1,37 @@
+# GitHub Pages / Jekyll publish hygiene.
+# Keep internal documentation, capture files, dependency metadata, and local
+# development artifacts out of the generated public site.
+exclude:
+  - docs/
+  - capture/
+  - Build/
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - AGENTS.md
+  - .gitignore
+  - .gitattributes
+  - .github/
+  - .codex/
+  - .agents/
+  - .vscode/
+  - .idea/
+  - .htmlvalidate.json
+  - _site/
+  - vendor/
+  - tmp/
+  - coverage/
+  - test/
+  - tests/
+  - playwright-report/
+  - test-results/
+  - "*.log"
+  - npm-debug.log*
+  - .DS_Store
+  - "*.xcuserstate"
+  - "*.xcuserdatad/"
+  - "*.xcworkspace/"
+  - "JJI-Workspace-*/"

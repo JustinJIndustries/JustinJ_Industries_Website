@@ -271,6 +271,7 @@ img {
 }
 
 .btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -360,11 +361,6 @@ img {
 .chip__text {
   font-size: var(--font-size-xs);
   color: var(--muted);
-}
-
-#dark-mode-toggle svg {
-  width: 20px;
-  height: 20px;
 }
 
 /* Overlay menu */
@@ -770,10 +766,12 @@ select:focus {
   border-color: transparent;
 }
 .contact__actions {
+  position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 0.55rem 0.8rem;
+  margin-top: 0.75rem;
 }
 .small {
   font-size: var(--font-size-sm);
@@ -799,12 +797,6 @@ select:focus {
   min-height: 1.2em;
   font-size: var(--font-size-sm);
   line-height: 1.45;
-}
-.form-status.is-success {
-  color: #7cffe1;
-}
-.form-status.is-error {
-  color: #ffb4b4;
 }
 [data-fs-success] {
   grid-column: 2;
@@ -1446,22 +1438,6 @@ select[aria-invalid="true"] {
     animation: none !important;
     transition: none !important;
   }
-}
-
-/* Form */
-/* Keep form elements nicely separated */
-.contact {
-  display: grid;
-  gap: 1rem;
-}
-
-/* Extra breathing room above the button row (fixes “too close to Company”) */
-.contact__actions {
-  margin-top: 0.75rem;
-}
-.contact__actions,
-.btn {
-  position: relative;
 }
 
 /* Screen-reader-only utility (hide honeypot label) */

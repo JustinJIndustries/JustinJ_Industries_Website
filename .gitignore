@@ -5,6 +5,7 @@ capture/opportunity/*
 
 # Local dependency artifacts
 node_modules/
+Build/
 npm-debug.log*
 .DS_Store
 *.xcuserstate
