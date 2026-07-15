@@ -38,8 +38,8 @@ jobs:
           cache: npm
       - name: Install validation dependencies
         run: npm ci
-      - name: Locate Chrome sandbox
-        id: chrome_sandbox
+      - name: Verify sandboxed system Chrome
+        id: system_chrome
         shell: bash
         run: |
           set -euo pipefail
@@ -54,25 +54,80 @@ jobs:
           fi
 
           chrome="$(readlink -f "$chrome")"
-          sandbox="$(dirname "$chrome")/chrome-sandbox"
-
           test -f "$chrome"
           test -x "$chrome"
-          test -f "$sandbox"
-          test -x "$sandbox"
-          test -u "$sandbox"
-          test "$(stat -c '%U' "$sandbox")" = "root"
+
+          case "$chrome" in
+            *$'\n'* | *$'\r'*)
+              echo "::error::Chrome executable path contains a line break."
+              exit 1
+              ;;
+          esac
 
           printf 'Runner OS: %s\n' "${RUNNER_OS:-unknown}"
           printf 'Runner image: %s %s\n' "${ImageOS:-unknown}" "${ImageVersion:-unknown}"
           printf 'Chrome executable: %s\n' "$chrome"
           "$chrome" --version
-          stat -c 'Chrome sandbox: %n owner=%U:%G mode=%a' "$sandbox"
-          printf 'path=%s\n' "$sandbox" >> "$GITHUB_OUTPUT"
+
+          if [[ -e /etc/apparmor.d/chrome ]]; then
+            stat -c 'AppArmor Chrome profile: %n owner=%U:%G mode=%a' /etc/apparmor.d/chrome
+            if [[ -r /etc/apparmor.d/chrome ]] && grep -Fq '/opt/google/chrome/chrome' /etc/apparmor.d/chrome; then
+              echo "AppArmor system Chrome rule: present"
+            else
+              echo "AppArmor system Chrome rule: not detected"
+            fi
+          else
+            echo "AppArmor Chrome profile: absent"
+          fi
+
+          if [[ -r /proc/sys/kernel/apparmor_restrict_unprivileged_userns ]]; then
+            printf 'AppArmor restrict_unprivileged_userns: %s\n' "$(</proc/sys/kernel/apparmor_restrict_unprivileged_userns)"
+          else
+            echo "AppArmor restrict_unprivileged_userns: unavailable"
+          fi
+
+          smoke_output="${RUNNER_TEMP:?}/system-chrome-smoke.html"
+          smoke_profile="${RUNNER_TEMP:?}/system-chrome-smoke-profile"
+          timeout 30s "$chrome" \
+            --headless=new \
+            --disable-gpu \
+            --user-data-dir="$smoke_profile" \
+            --dump-dom \
+            about:blank > "$smoke_output"
+          test -s "$smoke_output"
+          echo "Sandboxed system Chrome smoke test: PASS"
+
+          printf 'path=%s\n' "$chrome" >> "$GITHUB_OUTPUT"
       - name: Validate source
         env:
-          CHROME_DEVEL_SANDBOX: ${{ steps.chrome_sandbox.outputs.path }}
-        run: npm run check
+          DEBUG: puppeteer:browsers:launcher
+          PUPPETEER_EXECUTABLE_PATH: ${{ steps.system_chrome.outputs.path }}
+        run: |
+          set -euo pipefail
+
+          node <<'NODE'
+          const {realpathSync} = require("node:fs");
+          const {createRequire} = require("node:module");
+
+          const pa11yEntry = require.resolve("pa11y");
+          const pa11yRequire = createRequire(pa11yEntry);
+          const puppeteer = pa11yRequire("puppeteer");
+          const expected = realpathSync(process.env.PUPPETEER_EXECUTABLE_PATH);
+          const resolved = realpathSync(puppeteer.executablePath());
+          const pa11yVersion = require("pa11y/package.json").version;
+          const puppeteerVersion = pa11yRequire("puppeteer/package.json").version;
+          const {PUPPETEER_REVISIONS} = pa11yRequire("puppeteer-core/internal/revisions.js");
+
+          console.log(`Pa11y version: ${pa11yVersion}`);
+          console.log(`Puppeteer version: ${puppeteerVersion}`);
+          console.log(`Puppeteer bundled Chrome: ${PUPPETEER_REVISIONS.chrome}`);
+          console.log(`Pa11y-resolved Chrome executable: ${resolved}`);
+
+          if (resolved !== expected) {
+            throw new Error(`Puppeteer resolved ${resolved}, expected ${expected}`);
+          }
+          NODE
+          npm run check
       - name: Build public artifact
         run: npm run build
       - name: Setup Pages
