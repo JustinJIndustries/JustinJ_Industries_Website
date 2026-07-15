@@ -243,3 +243,36 @@ Added reusable public-sector positioning, procurement-friendly contact flow, cap
 2. Run manual screen-reader/mobile/print QA.
 3. Confirm Formspree backend routing and retention settings.
 4. Finalize government-facing headline tone and claims evidence package for outreach.
+
+---
+
+## 2026-07-15 design polish update
+
+### Scope completed
+
+- Refined the shared header, navigation, buttons, cards, section surfaces, contact form grouping, and footer without changing the static-site architecture.
+- Corrected the 721–900px homepage hero cascade so both public landing-page heroes preserve the established eyebrow, headline, image, supporting-copy, and CTA order.
+- Moved the mobile-navigation transition to 900px to prevent the confirmed tablet-width overflow and added menu scroll locking plus resize cleanup.
+- Improved service-category differentiation, Government Buyers content grouping, procurement-card legibility, responsive CTA wrapping, and 320px footer/header behavior.
+- Brought the screen version of the capability statement closer to the shared visual system while preserving its standalone print layout.
+- Added a current-page navigation state, sticky-header anchor offsets, stronger light-theme form-status contrast, progressive reveal fallback, reduced-motion behavior, and a capability-statement skip link.
+
+### Constraints preserved
+
+- No services, clients, results, metrics, certifications, procurement identifiers, registrations, contract vehicles, or government past performance were added.
+- Existing routes, URLs, IDs, classes, analytics event values, inquiry values, form field names, Formspree configuration, structured-data values, and image paths were preserved.
+- Company-first positioning and the public procurement fallback “Procurement profile available upon request.” remain unchanged.
+- No analytics vendor, framework, dependency, or public personal information was added.
+
+### Verification completed
+
+- `npm run format` — passed.
+- `npm run check` — passed, including HTML validation, recursive link checking, Pa11y WCAG 2 AA checks for all three public pages, and formatting verification.
+- Final diff and protected-value checks — passed.
+
+### Visual QA completed
+
+- Completed rendered-browser review of all three public pages at 1440 × 900, 1024 × 768, 900 × 900, 834 × 1112, 768 × 1024, 390 × 844, and 320 × 568, including light and dark appearance on pages that support theme switching.
+- Confirmed responsive layout, mobile-menu scroll locking and resize cleanup, keyboard focus, reduced-motion behavior, no-JavaScript fallback visibility, and sticky-header anchor clearance.
+- Corrected the shared smooth-scroll handler so the public-page skip links preserve native keyboard bypass behavior.
+- Confirmed the capability-statement print output remains exactly two pages in color and grayscale with screen-only controls hidden and no clipped or overflowed content.

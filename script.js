@@ -1,3 +1,5 @@
+document.documentElement.classList.add("js");
+
 document.addEventListener("DOMContentLoaded", () => {
   const doc = document.documentElement; // use root for CSS var overrides
   const menuButton = document.getElementById("menu-toggle");
@@ -55,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const focusableSelector =
     'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-  const closeMenu = () => {
+  const closeMenu = (restoreFocus = true) => {
     overlay.classList.remove("active");
     overlay.hidden = true;
     overlay.inert = true;
@@ -63,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("menu-open");
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", "Open menu");
-    menuButton.focus();
+    if (restoreFocus) menuButton.focus();
   };
 
   menuButton.addEventListener("click", () => {
@@ -112,9 +114,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  const mobileMenuMedia = window.matchMedia("(max-width: 900px)");
+  mobileMenuMedia.addEventListener("change", (event) => {
+    if (!event.matches && overlay.classList.contains("active")) {
+      closeMenu(false);
+    }
+  });
+
   // Smooth scroll
   document.querySelectorAll('a[href^=\"#\"]').forEach((a) => {
     a.addEventListener("click", (e) => {
+      if (a.classList.contains("skip-link")) return;
       const id = a.getAttribute("href");
       if (!id || id === "#") return;
       const el = document.querySelector(id);
