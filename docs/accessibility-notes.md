@@ -56,7 +56,7 @@ Files reviewed and updated:
 ### Capability statement print accessibility
 
 - Replaced `javascript:` print link with a semantic button + unobtrusive JS listener.
-- Kept print stylesheet and print-friendly one-page structure.
+- Kept print stylesheet and print-friendly two-page structure.
 
 ## Remaining manual checks (required before compliance claims)
 
@@ -80,5 +80,7 @@ These checks require manual assistive-tech and browser testing:
 
 ## Notes and limitations
 
-- No automated accessibility test suite is configured in this repository.
-- No build/lint/typecheck/test toolchain is configured, so automated validation commands were not run.
+- The repository includes HTML validation, recursive link checking, Pa11y
+  WCAG 2 AA checks, and formatting checks through the `npm run check` script.
+- Automated checks do not replace manual keyboard, contrast, zoom/reflow,
+  screen-reader, responsive-layout, and print review.

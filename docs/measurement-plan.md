@@ -31,10 +31,8 @@ Examples in current HTML:
 
 - `cta_start_project`
 - `cta_government_buyers`
-- `cta_discuss_solicitation`
+- `cta_view_government_buyers_page`
 - `cta_view_capability_statement`
-- `cta_request_capability_statement`
-- `cta_subcontracting_contact`
 - `cta_contact_view_capability_statement`
 
 ## Event dictionary (proposed)

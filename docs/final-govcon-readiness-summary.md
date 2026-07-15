@@ -191,15 +191,17 @@ Medium priority before outreach:
 
 From existing docs, key unresolved owner inputs include:
 
-- Legal business name
 - UEI
 - CAGE
 - SAM registration status
 - NAICS codes (final approved list)
+- PSC codes
 - Certifications / socioeconomic designations (if any)
 - Contract vehicles (if any)
+- Insurance statement approved for public posting
 - Clearances status (if intended to publish)
-- Procurement contact email override (if different)
+- Government past performance approved for public use (if any)
+- Procurement contact email override (only if a different address is desired)
 - Verification evidence for any future numeric case-study claims before they are reintroduced publicly
 
 ## 7. Recommended next step before outreach
@@ -317,3 +319,68 @@ Added reusable public-sector positioning, procurement-friendly contact flow, cap
 - Playwright MCP rendered-browser QA passed for the Contact-active “Let's Talk” CTA at 1440 × 900, 1024 × 768, 900 × 900, 768 × 1024, 390 × 844, and 320 × 568 in light and dark appearances. The inset active outline remained visible without a detached underline, clipping, overflow, or layout shift through hover, pressed, and focus-visible states.
 - Direct-hash loading, browser back/forward, fast scrolling, desktop/mobile synchronization, reduced-motion behavior, skip-link keyboard behavior, hamburger Escape closing, scroll-lock cleanup, mobile-to-desktop resize cleanup, and console/page-error checks passed.
 - Representative captures are stored under `Build/visual-acceptance/2026-07-15/contact-active-outline/`; `Build/` remains ignored.
+
+## 2026-07-15 final production-readiness audit
+
+### Scope completed
+
+- Audited the public repository, the current GitHub Pages artifact, the production
+  origin, and the browser-delivered resource inventory as separate exposure
+  surfaces.
+- Confirmed that the production origin does not serve the repository's internal
+  documentation, package metadata, tooling, workspace files, Sites metadata, or
+  ignored QA evidence at the tested paths.
+- Confirmed that the current Pages artifact contains the nine required public
+  site files plus two non-required files: the repository license and an
+  unreferenced generated stylesheet.
+- Prepared, but did not implement, an exact allowlisted public-artifact model for
+  separate owner review. GitHub Pages settings, the custom domain, deployment
+  workflow behavior, and OpenAI Sites metadata remain unchanged.
+- Preserved the approved Boston-based, Massachusetts/United States, and
+  remote-service positioning, including locality-only structured data. No street
+  address, postal code, personal phone number, or more precise location was added.
+
+### Confirmed corrections
+
+- Strengthened light-appearance accent contrast, shared focus visibility, form
+  control boundaries, and the consent checkbox target without redesigning the
+  interface.
+- Marked duplicated brand imagery and generic stock-card imagery as decorative,
+  and removed the hidden spam-control field from the accessibility tree.
+- Added readable no-JavaScript footer-year fallbacks, hid controls that require
+  JavaScript when scripting is unavailable, and added reveal-content fallbacks
+  for unsupported observers and print.
+- Reconciled the documented analytics examples with the exact event values that
+  are present in the public HTML. Runtime analytics values and form behavior were
+  not changed.
+- Updated accessibility documentation to reflect the repository's actual
+  automated checks and the remaining need for manual assistive-technology review.
+
+### Verification completed
+
+- `npm run format`, `npm run check`, `node --check script.js`, and
+  `git diff --check` passed. No `build` script currently exists.
+- The aggregate check passed HTML validation, an 18-link recursive crawl,
+  Pa11y WCAG 2 AA checks on all three public pages, and formatting verification.
+- A 45-case rendered Chromium matrix passed across three pages and 15 viewport
+  sizes with no horizontal overflow, small controls, console errors, page errors,
+  failed requests, or non-successful local resource responses.
+- Keyboard, active-navigation, mobile-menu, no-JavaScript, reduced-motion,
+  125/150/200% zoom, 200% text sizing, and two-page print checks passed.
+- The axe runner produced contrast-only manual-review flags because the shared
+  page background uses layered gradients. After excluding that rule, axe found
+  no other issues; affected contrast tokens were measured independently and the
+  confirmed failures were corrected.
+
+### Readiness decision and owner actions
+
+- The reviewed local source has no known visual, interaction, content, or
+  automated-accessibility blocker within the tested Chromium scope.
+- The production URL is not yet ready for broad government-buyer distribution:
+  the local corrections are not deployed, and the current root-source Pages
+  artifact does not enforce the recommended exact public-file boundary.
+- Owner approval is required before adding the deterministic allowlisted build or
+  changing the Pages workflow. A later review should also decide whether tracked
+  internal documentation should remain visible in the public GitHub repository.
+- Manual screen-reader testing and WebKit/Firefox review remain documented
+  limitations because those environments were unavailable during this audit.
