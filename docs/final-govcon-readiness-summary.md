@@ -301,3 +301,19 @@ Added reusable public-sector positioning, procurement-friendly contact flow, cap
 - Verified visible keyboard focus on the skip link and native navigation to `#main` without interception by the smooth-scroll controller.
 - Verified no-JavaScript native section navigation at 900, 390, and 320 pixels and static Government Buyers current-page styling at mobile width.
 - Representative captures are stored under `Build/visual-acceptance/2026-07-15/navigation-active-state/`; `Build/` remains ignored.
+
+## 2026-07-15 Contact active-state refinement
+
+### Scope completed
+
+- Replaced the active underline on the desktop and mobile “Let's Talk” navigation CTA with a full-button, two-pixel inset outline using the existing `--brand` accent.
+- Preserved the CTA gradient, text color, rounded shape, dimensions, hover elevation, pressed state, and the separate external `:focus-visible` outline.
+- Left the standard navigation active treatment, Government Buyers current-page state, and active-section JavaScript unchanged.
+
+### Verification completed
+
+- `npm run format` and `npm run check` passed. The aggregate check included HTML validation, an 18-link recursive crawl, Pa11y WCAG 2 AA checks with no findings on all three public pages, and formatting verification.
+- Protected-file and value checks confirmed that public HTML, JavaScript, dependencies, routes, IDs, classes, href values, analytics values, forms, Formspree configuration, structured data, public content, and image paths remain unchanged.
+- Playwright MCP rendered-browser QA passed for the Contact-active “Let's Talk” CTA at 1440 × 900, 1024 × 768, 900 × 900, 768 × 1024, 390 × 844, and 320 × 568 in light and dark appearances. The inset active outline remained visible without a detached underline, clipping, overflow, or layout shift through hover, pressed, and focus-visible states.
+- Direct-hash loading, browser back/forward, fast scrolling, desktop/mobile synchronization, reduced-motion behavior, skip-link keyboard behavior, hamburger Escape closing, scroll-lock cleanup, mobile-to-desktop resize cleanup, and console/page-error checks passed.
+- Representative captures are stored under `Build/visual-acceptance/2026-07-15/contact-active-outline/`; `Build/` remains ignored.
