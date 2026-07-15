@@ -276,3 +276,28 @@ Added reusable public-sector positioning, procurement-friendly contact flow, cap
 - Confirmed responsive layout, mobile-menu scroll locking and resize cleanup, keyboard focus, reduced-motion behavior, no-JavaScript fallback visibility, and sticky-header anchor clearance.
 - Corrected the shared smooth-scroll handler so the public-page skip links preserve native keyboard bypass behavior.
 - Confirmed the capability-statement print output remains exactly two pages in color and grayscale with screen-only controls hidden and no clipped or overflowed content.
+
+## 2026-07-15 active-navigation update
+
+### Scope completed
+
+- Extended the existing Government Buyers current-page treatment to support both `aria-current="page"` and `aria-current="location"` in the shared desktop and mobile navigation.
+- Added one homepage section-state controller for the existing `#work`, `#services`, `#results`, `#about`, and `#contact` destinations. The unlinked homepage `#government-buyers` teaser remains distinct from the separate Government Buyers page.
+- Added direct-hash initialization, sticky-header-aware observer and animation-frame-throttled scroll tracking, final-section handling, synchronized desktop/mobile state, smooth-scroll flicker prevention, and browser back/forward support.
+- Preserved the static Government Buyers page state in both navigation variants. The standalone capability statement has no shared navigation, so no unrelated item is marked current there.
+- Added a compact no-JavaScript navigation fallback at mobile and tablet widths so the existing links remain usable when the hamburger controller is unavailable.
+
+### Constraints preserved
+
+- Public HTML, routes, IDs, classes, href values, analytics event values, inquiry values, form field names, Formspree configuration, structured data, public content, and image paths remain unchanged.
+- No dependency, framework, analytics vendor, inline JavaScript style, procurement claim, or public content was added.
+- Existing theme, focus, skip-link, mobile-menu, scroll-lock, Escape, focus-trap, and resize-cleanup behavior was preserved.
+
+### Verification completed
+
+- `npm run format` and `npm run check` passed. The aggregate check included HTML validation, an 18-link recursive crawl, Pa11y WCAG 2 AA checks with no findings on all three public pages, and formatting verification.
+- Rendered-browser functional QA passed at 1440 × 900, 1024 × 768, 900 × 900, 768 × 1024, 390 × 844, and 320 × 568 in light and dark appearances.
+- Verified all five tracked homepage sections, direct hashes, desktop and mobile link selection, browser back/forward, fast and long scrolling, the final Contact section, reduced motion, keyboard selection, focus trapping, Escape closing, mobile-to-desktop resize cleanup, and zero console or page errors.
+- Verified visible keyboard focus on the skip link and native navigation to `#main` without interception by the smooth-scroll controller.
+- Verified no-JavaScript native section navigation at 900, 390, and 320 pixels and static Government Buyers current-page styling at mobile width.
+- Representative captures are stored under `Build/visual-acceptance/2026-07-15/navigation-active-state/`; `Build/` remains ignored.

@@ -298,10 +298,19 @@ img {
   background: var(--bg-elev);
   color: var(--text);
 }
-.nav-links a[aria-current="page"]:not(.btn) {
+.nav-links a:is([aria-current="page"], [aria-current="location"]):not(.btn) {
   color: var(--text);
   background: var(--bg-elev);
   box-shadow: inset 0 -2px 0 var(--brand);
+}
+.nav-links a.btn:is([aria-current="page"], [aria-current="location"])::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0.75rem;
+  bottom: -0.2rem;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--brand);
 }
 /* CTA in the nav (keep CTA readable on the gradient) */
 .nav-links a.btn {
@@ -1481,9 +1490,19 @@ select[aria-invalid="true"] {
     font-size: var(--font-size-lg);
     line-height: 1.2;
   }
-  .overlay-menu a[aria-current="page"] {
+  .overlay-menu a:is([aria-current="page"], [aria-current="location"]) {
     border-color: var(--brand);
     box-shadow: inset 3px 0 0 var(--brand);
+  }
+  .overlay-menu
+    a.btn:is([aria-current="page"], [aria-current="location"])::after {
+    content: "";
+    position: absolute;
+    inset-inline: 1rem;
+    bottom: -0.35rem;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--brand);
   }
   .overlay-menu a.btn {
     background: linear-gradient(135deg, var(--brand), var(--brand-2));
@@ -1496,6 +1515,35 @@ select[aria-invalid="true"] {
   .section__head {
     display: block;
     margin-bottom: 0;
+  }
+}
+
+@media (scripting: none) and (max-width: 900px) {
+  .site-header {
+    position: relative;
+  }
+  .nav {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .nav-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    order: 1;
+    width: 100%;
+  }
+  .nav-links a {
+    justify-content: center;
+    text-align: center;
+  }
+  #menu-toggle {
+    display: none;
+  }
+}
+
+@media (scripting: none) and (min-width: 721px) and (max-width: 900px) {
+  .nav-links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
