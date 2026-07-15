@@ -55,7 +55,7 @@ Date: 2026-05-09
   support, analytics tagging/QA, documentation, small-business support, and
   modest AI-assisted workflow support.
 - Replaced high-marketing homepage language such as "Bulletproof analytics" and
-  broad growth positioning with more direct solo-operator copy.
+  broad growth positioning with more direct headcount-focused positioning.
 - Removed public numeric outcome claims from homepage, Government Buyers page,
   and capability statement until owner-approved evidence is available.
 - Reframed "Recent Work" and procurement examples as representative,
@@ -384,3 +384,69 @@ Added reusable public-sector positioning, procurement-friendly contact flow, cap
   internal documentation should remain visible in the public GitHub repository.
 - Manual screen-reader testing and WebKit/Firefox review remain documented
   limitations because those environments were unavailable during this audit.
+
+## 2026-07-15 neutral company-positioning update
+
+### Selected wording
+
+- Homepage hero: "JustinJ Industries provides web development, WordPress
+  support, analytics QA, documentation, and workflow support."
+- Homepage About: "JustinJ Industries provides front-end development, CMS
+  support, analytics tagging, QA, and documentation. Work emphasizes clear
+  evidence and continuity."
+- Homepage continuity bullet: "Clear documentation and handoffs"
+- Capability-statement differentiator: "Responsive project support"
+- The June 28 historical summary now describes the retired wording as
+  "headcount-focused positioning"; no unrelated history changed.
+
+### Approved responsive wraps
+
+- The owner accepted the 1024 x 768 hero wrap:
+  `JustinJ Industries provides web development, WordPress` /
+  `support, analytics QA, documentation, and workflow` / `support.`
+- The owner accepted the 900 x 900 continuity-bullet wrap:
+  `Clear documentation and` / `handoffs`.
+- Single-word final lines in normal paragraphs and list items are evaluated as
+  part of the overall composition. Headings, buttons, and short labels must
+  remain intact; punctuation-only lines, clipping, overlap, horizontal overflow,
+  severe readability defects, layout shifts, and material card imbalance remain
+  failures.
+
+### Local validation
+
+- `npx http-server dist -p 8085 -c-1` served only the generated artifact at
+  `http://127.0.0.1:8085/`.
+- Dedicated Playwright MCP reviewed the homepage at 1440 x 900, 1280 x 800,
+  1024 x 768, 900 x 900, 768 x 1024, 430 x 932, 390 x 844, 375 x 812, and
+  320 x 568, and the capability statement at 1440 x 900, 1024 x 768,
+  768 x 1024, 390 x 844, and 320 x 568. Additional 901, 861, and 860 px
+  boundary checks verified the navigation, hero, and trust-card transitions.
+- Light and dark modes, 200% reflow, JavaScript-disabled and reduced-motion
+  states, the mobile menu, active navigation, Contact CTA outline, keyboard
+  focus, theme switching, and skip navigation passed. Apart from the two
+  owner-approved body-copy wraps, no heading or CTA-label orphan, clipping,
+  overlap, horizontal overflow, excessive empty space, material card imbalance,
+  console or page error, or failed required request was observed.
+- The capability-statement PDF remained exactly two US Letter pages with no
+  clipped or awkwardly split content.
+- `npm ci`, `npm run format`, `npm run check`, two consecutive
+  `npm run build` runs, `node --check script.js`,
+  `node --check scripts/build-public.mjs`, and `git diff --check` completed
+  successfully. The build inventories matched, `dist/` contained exactly the
+  approved nine files, and every artifact matched its source.
+
+### Constraints preserved
+
+- No unverified organizational scale, subcontractor network, partner capacity,
+  or delivery-capacity claim is stated or implied.
+- Existing routes, IDs, classes, hrefs, analytics event values, form values,
+  Formspree configuration, structured data, approved procurement-profile and
+  locality wording, image paths, and public-artifact boundaries remain
+  unchanged.
+
+### Production verification
+
+- Production results are not claimed in this pre-deployment source record. The
+  deployed SHA, workflow result, live-page browser and PDF checks, and
+  nine-file/404 boundary verification are recorded in the post-deployment
+  handoff.
