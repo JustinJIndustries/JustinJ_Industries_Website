@@ -38,7 +38,40 @@ jobs:
           cache: npm
       - name: Install validation dependencies
         run: npm ci
+      - name: Locate Chrome sandbox
+        id: chrome_sandbox
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if chrome="$(command -v google-chrome)"; then
+            :
+          elif chrome="$(command -v google-chrome-stable)"; then
+            :
+          else
+            echo "::error::Google Chrome was not found on the runner."
+            exit 1
+          fi
+
+          chrome="$(readlink -f "$chrome")"
+          sandbox="$(dirname "$chrome")/chrome-sandbox"
+
+          test -f "$chrome"
+          test -x "$chrome"
+          test -f "$sandbox"
+          test -x "$sandbox"
+          test -u "$sandbox"
+          test "$(stat -c '%U' "$sandbox")" = "root"
+
+          printf 'Runner OS: %s\n' "${RUNNER_OS:-unknown}"
+          printf 'Runner image: %s %s\n' "${ImageOS:-unknown}" "${ImageVersion:-unknown}"
+          printf 'Chrome executable: %s\n' "$chrome"
+          "$chrome" --version
+          stat -c 'Chrome sandbox: %n owner=%U:%G mode=%a' "$sandbox"
+          printf 'path=%s\n' "$sandbox" >> "$GITHUB_OUTPUT"
       - name: Validate source
+        env:
+          CHROME_DEVEL_SANDBOX: ${{ steps.chrome_sandbox.outputs.path }}
         run: npm run check
       - name: Build public artifact
         run: npm run build
