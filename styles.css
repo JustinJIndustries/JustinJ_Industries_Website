@@ -1778,6 +1778,27 @@ select[aria-invalid="true"] {
   .container {
     width: min(1200px, calc(100% - 28px));
   }
+  .page-home #work .card img,
+  .page-work .work-detail__media img {
+    height: clamp(220px, 66vw, 284px);
+  }
+  .page-home #work .card img {
+    flex-shrink: 0;
+  }
+  .page-home #work .card:first-child img,
+  .page-work #uaid .work-detail__media img {
+    object-position: center top;
+  }
+  .page-home #work .card:nth-child(2) img,
+  .page-home #work .card:nth-child(3) img,
+  .page-work #northside .work-detail__media img {
+    object-fit: contain;
+    object-position: center;
+    background: #f5f4f0;
+  }
+  .page-home #work .card:nth-child(2) img {
+    background: #fff;
+  }
   .section {
     padding-block: 48px;
   }
