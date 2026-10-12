@@ -5,7 +5,7 @@ Static public website for justinjindustries.com.
 ## Project shape
 
 - Plain HTML, CSS, and JavaScript
-- Public pages: `index.html`, `government-buyers.html`, and
+- Public pages: `index.html`, `work.html`, `government-buyers.html`, and
   `capability-statement.html`
 - Shared styling in `styles.css`
 - Shared browser behavior in `script.js`

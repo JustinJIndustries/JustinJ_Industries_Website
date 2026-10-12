@@ -12,6 +12,7 @@ import { fileURLToPath } from "node:url";
 
 const publicFiles = Object.freeze([
   "index.html",
+  "work.html",
   "government-buyers.html",
   "capability-statement.html",
   "styles.css",
@@ -20,6 +21,9 @@ const publicFiles = Object.freeze([
   "sitemap.xml",
   "assets/logos/JJI-Logo-Only-grey.png",
   "assets/logos/JJI-Logo-Only-white.png",
+  "assets/work/uaid-usa-home.png",
+  "assets/work/metro-student-loans.png",
+  "assets/work/northside-dashboard-demo.png",
 ]);
 
 const repositoryRoot = await realpath(

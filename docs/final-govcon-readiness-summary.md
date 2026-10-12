@@ -2,6 +2,45 @@
 
 Date: 2026-05-09
 
+## 2026-10-12 portfolio refresh (local review branch)
+
+- Replaced generic stock photography on the homepage with reviewed screenshots
+  of UAid Direct and Metro Credit Union work, plus a first-page image from a
+  Northside Looker Studio portfolio demo. The Northside page visibly labels its
+  figures as synthetic sample data.
+- Added `work.html` with specific project scope and attribution. UAid Direct
+  is described as a regional USA/Ukraine WordPress multisite with custom
+  homepage/news templates, 11 reusable ACF layout choices, and
+  English/Ukrainian Help content only. Metro is described as in-house website
+  strategy, development, and support work in collaboration with agency partners.
+- Clarified full website builds, redesigns, ongoing support, GA4/GTM
+  implementation, Adobe Analytics QA, and Looker Studio reporting on the
+  homepage. No client performance claims or procurement credentials were added.
+- Replaced the Government Buyers stock image with a CSS delivery diagram so
+  named commercial work is not implied to be government past performance.
+- Added the new page and reviewed assets to the deterministic public build
+  allowlist, sitemap, and accessibility check list.
+- Final local QA: `npm run check` passed (HTML, links, Pa11y on all four
+  pages, and formatting); the copied public build produced exactly 13
+  allowlisted files. Browser review covered 1440px, 375px, and 320px layouts,
+  working images, mobile menu Escape/focus restoration, no-JavaScript
+  navigation, and reduced motion. The capability statement printed as two
+  unclipped Letter pages.
+- Review correction: replaced the Metro centennial carousel screenshot with
+  the public “Paying for College” homepage slide already used in the
+  portfolio. The project wording describes collaborative work with agency
+  partners without claiming authorship of that specific slide.
+- Owner copy correction: removed the agency name and personal-name attribution
+  from Selected Work, and expanded project contribution bullets. Metro bullets
+  describe Craft CMS, website support, GA4/GTM reporting, SEO, and location
+  work. The public copy identifies Metro as prior in-house employment experience
+  rather than a JustinJ Industries client engagement.
+- Image review correction: the Metro portfolio visual now pairs genuine
+  navigation and “Paying for College” slide captures. Both captures are public
+  site imagery, and the caption discloses that they are separate screenshots.
+  The final crop excludes the utility navigation and lower page section. Its
+  on-screen frame matches the other portfolio images without stretching.
+
 ## 0. Owner-data integration update (Projects canonical copy)
 
 - Owner-data integration applied to the project repository
