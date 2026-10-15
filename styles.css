@@ -2003,6 +2003,9 @@ select[aria-invalid="true"] {
 .design-scope {
   border-top: 1px solid var(--border);
 }
+.page-catalogue .catalogue-list .section__head {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
 .catalogue-grid,
 .scope-grid {
   display: grid;
