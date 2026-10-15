@@ -489,3 +489,267 @@ Added reusable public-sector positioning, procurement-friendly contact flow, cap
   deployed SHA, workflow result, live-page browser and PDF checks, and
   nine-file/404 boundary verification are recorded in the post-deployment
   handoff.
+
+## 2026-10-13 local website catalogue and enquiry preview
+
+- Added a static-site design catalogue and detail view for four explicitly
+  fictional concepts: Alder & Lane, Harbor Ledger, Still Form, and AER/FIELD. Each
+  detail view offers keyboard-accessible example-page tabs. Alder & Lane and Harbor
+  Ledger are tied to the owner-specified fixed starting scopes; Still Form and
+  AER/FIELD are custom-scope examples with quote-required language.
+- Added a four-step, nonbinding project-enquiry dialog with project, content,
+  timing/contact, and review steps. It supports Back, field errors, focus return,
+  Escape/discard confirmation, a mobile layout, and retry without data loss.
+  The form posts to the existing Formspree endpoint only after explicit review
+  and consent. No new tracking or storage of enquiry answers was added.
+- A host-permitted retrieval of the owner-supplied source archives made safe
+  public-facing assets available. The preview now embeds Alder & Lane's four
+  original static sample pages, shows a Harbor Ledger demonstration capture,
+  and uses a credited Still Form photograph plus two credited AER/FIELD poster
+  frames. Private runtime files, source archives, credentials, and AER/FIELD's
+  partial screenshots were not included in the public allowlist. Source and
+  license details are in `docs/catalogue-media-credits.md`.
+- Local validation: `node --check design.js`, HTML validation, formatting,
+  allowlisted build, Git diff whitespace check, a 21-link site crawl, and a
+  seven-link Alder & Lane sample crawl passed.
+  Safari verified catalogue navigation, example-page switching, field errors,
+  Back/review, discard confirmation, and the 390 × 844 responsive view. A
+  separate local mock returned HTTP 503 then HTTP 200; the dialog preserved
+  answers on failure and showed success only after the successful retry.
+- `npm run check:a11y` and aggregate `npm run check` were not run because their
+  Pa11y setup launches Chrome, while this task required Safari-only local UI
+  verification. Manual assistive-technology review remains open.
+- The Formspree endpoint is present in source, but recipient configuration and
+  actual delivery to `info@justinjindustries.com` remain unverified. No live
+  submission was sent. The owner should review the local preview and complete
+  inbox verification before a public deployment. No deployment was performed.
+
+### Multi-page WordPress concept preview follow-up
+
+- Inspected the owner-supplied WordPress source archives before rendering.
+  Harbor Ledger contains the five public Gutenberg page bodies, site-level CSS,
+  and generated workspace photos. Still Form and AER/FIELD contain public theme
+  templates, seed copy, CSS, and credited media. Built static, noindex Home,
+  Services, About/Studio, Work/Projects, and Contact studies from those sources;
+  Harbor Ledger also has FAQ. The detail-page tabs now embed these actual
+  multi-page static layouts rather than generic illustrated cards.
+- Static studies omit WordPress runtime, admin code, credentials, video
+  playback, project-detail routes, and form submission. Demo forms are visibly
+  inactive. Source media attribution is retained in the studies and
+  `docs/catalogue-media-credits.md`. Original source demos were not changed.
+- The 62-file public allowlist build, root and nested HTML validation,
+  formatting, JavaScript syntax, and Git whitespace checks passed. Local link
+  crawls found no broken routes across the main site and the three new sample
+  roots (20, 9, 11, and 13 checked links respectively). Safari verified the
+  multi-page layouts at 390 px and 1200 px widths, including AER/FIELD's mobile
+  menu and the project grids.
+- Safari showed Formspree Sign in when opening the existing form dashboard URL;
+  no logged-in read-only access was available. Recipient configuration and
+  inbox delivery remain unverified; no live enquiry was sent.
+
+### 2026-10-14 M1 Max local review
+
+- Confirmed the intended M1 Max checkout remains at deployed commit
+  `db01f668c428c95ede5303be6ec417c4a38ea902` with the catalogue work
+  uncommitted. No unrelated files were changed, and no commit, push, or
+  deployment was made.
+- Safari displayed the Harbor Ledger detail page and source-based Home preview.
+  At a 390 px window width, the detail page and enquiry dialog fit without
+  horizontal overflow. Keyboard Return opened the dialog, focus reached its
+  step heading, and leaving the required project goal empty produced a visible
+  error and focused the field. Escape closed the untouched dialog and restored
+  focus to its trigger.
+- Root and nested HTML validation, formatting, JavaScript syntax, the 62-file
+  public allowlist build, Git whitespace check, a local 21-link site crawl,
+  and all four sample-route crawls passed. Unsplash credit links returned
+  HTTP 401 to the automated crawler, so the Still Form local-route pass
+  excluded those external pages while keeping their attribution links.
+  The repository's link script could not bind its default port under
+  the sandbox, so the same crawler was run against the active local server.
+  Pa11y and the aggregate check were not run because Pa11y launches Chrome.
+- The Formspree dashboard URL again redirected Safari to Sign in. Recipient
+  configuration and inbox delivery remained unverified at this point; no live
+  enquiry was sent. The owner subsequently confirmed $1,999 as the direct-site
+  WordPress package price, which is reflected in the next update below.
+
+### 2026-10-14 owner-confirmed WordPress price
+
+- Updated the defined-scope WordPress package from $2,500 to the owner's
+  confirmed $1,999 throughout the catalogue, concept details, and enquiry
+  service choice. Page counts, content limits, revisions, timing, and custom
+  quote boundaries remain unchanged.
+- A subsequent signed-in, read-only Safari check of Formspree form `mgvlrzdq`
+  confirmed that the form, email notifications, submission archive, and
+  Formshield are enabled. Its Target Email setting is blank. The Formspree
+  account lists only `jfelix@justinjindustries.com` as a linked, verified
+  address; `info@justinjindustries.com` is not linked or selected. The owner
+  needs to add and verify the business inbox, select it as this form's Target
+  Email, save, and coordinate a minimal live receipt test before launch. No
+  Formspree settings were changed and no live submission was sent.
+
+### 2026-10-14 Harbor Ledger card sizing follow-up
+
+- The owner clarified that the Harbor Ledger catalogue preview looked
+  oversized. Its source capture is 920 × 2332 pixels; the card image had width
+  and aspect-ratio styling but retained a tall intrinsic height. The image now
+  sits in a dedicated 16:9 media frame with absolute sizing and `object-fit:
+cover`, matching the other three card previews without stretching the image.
+- The owner added and verified `info@justinjindustries.com` in Formspree. A
+  subsequent M1 Safari window capture shows it as a verified linked email.
+  Target Email remains blank. Automatic approval review rejected selecting the
+  recipient as a persistent account-routing change despite the owner approval
+  conveyed through the parent task. No workaround was attempted and no live
+  submission was sent. A directly accepted approval is needed before changing
+  the setting and testing delivery.
+- M1 Safari window captures confirmed that the revised Harbor Ledger card now
+  shares the same 16:9 media height as Alder & Lane at desktop width. A 390 px
+  Safari window capture showed the card fitting the narrow column without
+  horizontal overflow.
+
+### 2026-10-14 catalogue pricing and wordmark follow-up
+
+- Each catalogue card now states its pricing position beside the concept name:
+  $950 for the defined static package, $1,999 for the simple WordPress package,
+  and Custom quote for Still Form and AER/FIELD. Their advanced portfolio and
+  media behavior is outside the fixed package scope, so no unsupported numeric
+  price is promised.
+- Removed bold styling from the JustinJ Industries wordmark in the shared
+  navigation across the main site and catalogue pages.
+
+### 2026-10-15 M1 Max catalogue and form verification
+
+- Confirmed host `M1-Max-MacBook-Pro`, origin
+  `JustinJIndustries/JustinJ_Industries_Website`, and local HEAD `db01f66`.
+  The catalogue work remains uncommitted; no push or deployment occurred.
+- Safari rendered the local catalogue and Alder & Lane detail preview, including
+  a 430 px mobile-width detail view with readable navigation, CTA, page tabs,
+  and embedded sample opening. Interactive journey checks from this pass were
+  blocked because Safari remote automation was disabled. Automatic approval
+  review rejected enabling that persistent Safari setting; no workaround was
+  used. Earlier Safari interaction checks remain recorded above.
+- HTML validation, formatting, JavaScript syntax, the root 21-link crawl, and
+  Git whitespace checks passed. Pa11y and the aggregate check were not run
+  because they launch a non-Safari browser. The public build was not rerun
+  because its script replaces the existing ignored `dist` directory.
+- Read-only Safari inspection found the Formspree form and email notifications
+  enabled, with `info@justinjindustries.com` selected as Target Email. The
+  dashboard showed zero submissions in the last 30 days before testing. One
+  approved synthetic test sent at 18:39 UTC returned HTTP 200 with `ok: true`,
+  and the 30-day dashboard count increased to one. The test was sent directly
+  to the endpoint, not through the browser journey. The owner later reported
+  that no notification reached the `info@` mailbox; the follow-up below traces
+  the test to Formspree's Spam tab.
+
+### 2026-10-15 example-page label and Safari interaction follow-up
+
+- At the owner's request, changed the four catalogue detail-page type labels
+  from `fictional demonstration` to `DEMO` and the 15 Harbor Ledger, Still Form,
+  and AER/FIELD preview banners from `FICTIONAL DEMONSTRATION` to `DEMO`.
+  Alder & Lane's existing `SAMPLE SITE` banner and all explanatory disclosures
+  remain unchanged.
+- Safari confirmed the revised Alder detail label and the Harbor Ledger, Still
+  Form, and AER/FIELD banners render clearly. The AER/FIELD banner also fits at
+  430 px mobile width.
+- Permitted Safari screen and keyboard input verified that the enquiry opens
+  with focus on its step heading, a missing goal shows a visible error and
+  focuses the field, a synthetic goal advances to step 2, Back retains the
+  answer, Escape and the close button offer a discard confirmation for a dirty
+  draft, Cancel preserves it, and confirmed discard closes and returns focus to
+  the trigger. Reopening starts with an empty goal. Example-page tabs switched
+  by click and Arrow Right. Step 2 selections for copy, hosting, and domain
+  readiness were made through Safari's native menus. Step 3 showed a date field
+  only after selecting a desired date; choosing Flexible hid it. Continuing
+  without email or phone showed a visible contact error and focused email.
+  The macOS UI connection stopped accepting input at that point, so the final
+  review step was checked in the later pass below. No enquiry was
+  submitted in this follow-up, and Safari's remote automation setting was not
+  changed.
+
+### 2026-10-15 Formspree nondelivery investigation
+
+- The owner reported that the synthetic test did not reach the mailbox.
+  Read-only Safari inspection found the record with subject “TEST ONLY — JJI
+  catalogue enquiry delivery verification” under Formspree form `mgvlrzdq`'s
+  Spam tab, dated October 15, 2026, at 14:39 America/New_York (18:39 UTC).
+  The overview showed one spam submission and zero inbox submissions in the
+  last 30 days. Safari accessibility identified submission `163104750`.
+- The form, submission archive, and email notifications are enabled. The
+  selected Target Email is `info@justinjindustries.com`, which appears as
+  verified in the account's linked-email list. Formshield is enabled; CAPTCHA
+  is disabled. The Rules tab shows an upgrade page, with no custom rule visible.
+  Scrolling the stored record exposed `_status` with an unauthorized-domain
+  error: the origin did not match `www.justinjindustries.com`. The test was sent
+  directly to the endpoint, outside the authorized website origin. Its
+  `qa-catalogue@example.com` address and repeated `TEST ONLY` wording are
+  synthetic signals, but Formspree did not identify them as the classifier
+  reason. The `_website` column was blank; no filled honeypot value was visible.
+  No outbound delivery log was shown. The direct HTTP 200 response confirms
+  intake, not notification delivery.
+- No second test was sent, no spam classification was changed, and no routing or
+  spam setting was altered. Before public deployment, coordinate a
+  representative submission through the existing public site's browser form
+  at `https://www.justinjindustries.com/`, inspect its Formspree classification,
+  and confirm inbox receipt. Keep the direct email fallback available while
+  delivery remains unverified.
+
+### 2026-10-15 final review-step local QA
+
+- Safari reached step 4 with a synthetic Alder & Lane draft. The review showed
+  the selected design and service, pages, entered goal, copy/images and
+  hosting/domain readiness, requested feature, timing, and contact. Consent
+  was unchecked by default. Back returned to the contact step with the email
+  retained; editing it and continuing refreshed the review contact value.
+- Close on the review step opened the discard confirmation. Cancel preserved
+  the review; confirming discard closed the dialog and returned focus to its
+  trigger. No Send action was activated and no enquiry was submitted.
+- Source inspection found that the Send button was disabled synchronously while
+  sending, but the submit handler lacked an explicit repeat-event guard. Added
+  an early return when `sending` or `sent` is true. The guard was verified by
+  source inspection and syntax/format checks; no live submission was used to
+  test it.
+
+### 2026-10-15 public-site delivery test access blocker
+
+- The owner approved one synthetic test through the existing public contact
+  form. Safari reached `https://www.justinjindustries.com/#contact` at about
+  15:56 America/New_York but Cloudflare displayed a “Verify you are human”
+  challenge before the form loaded (Ray ID `a4b160e198c0012e`). No challenge
+  response was attempted, no form field was entered, and no submission was
+  sent. The approved test remains unused pending the owner's normal browser
+  verification or an already verified Safari session.
+
+### 2026-10-15 owner-confirmed public contact delivery
+
+- The owner completed the normal Safari browser verification, submitted the
+  existing public contact form, and reported receiving the notification in the
+  `info@justinjindustries.com` inbox. This is owner-confirmed public-origin
+  email delivery; the agent did not independently inspect the mailbox or
+  establish the Formspree submission ID. The agent's prepared test was stopped
+  without submission, and no repeat was sent.
+- Safari UI input was slow to prepare because clicks on the message textarea
+  did not reliably transfer keyboard focus; one draft field entry landed in the
+  adjacent Services field. The page was still unsubmitted when the owner's
+  stop instruction arrived. No Formspree settings or public deployment were
+  changed. The local catalogue and guided enquiry remain available for review
+  at `http://127.0.0.1:8080/catalogue.html`; the catalogue AJAX flow has only
+  been tested with a mocked endpoint.
+
+### 2026-10-15 local contact feedback and spacing fix
+
+- After the owner reported that the current public contact form cleared without
+  a thank-you message, replaced its Formspree SDK success callback with a
+  controlled JSON submission in `script.js`. A response must have both an HTTP
+  success and `ok: true` before a dedicated confirmation replaces the form and
+  receives keyboard focus. Errors keep the entered values, show a focused
+  message, and permit retry. A sending/sent guard prevents duplicate requests.
+- The owner's screenshot identified the capability-statement button directly
+  above the contact form. Increased the spacing below the contact heading;
+  Safari desktop and narrow-window views show a clear gap without changing the
+  button or form layout. The screenshot was inspected from the owner-provided
+  Library PNG.
+- The catalogue enquiry now checks the JSON `ok` value as well as HTTP status
+  before showing its existing focused success message. Safari local mock checks
+  passed for success, rejection with preserved values, HTTP `200` plus
+  `ok: false`, and repeated submit events for both flows. Temporary mock pages
+  were removed; no live submission, account change, push, or deployment was
+  made in this fix.

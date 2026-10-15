@@ -1,0 +1,7 @@
+/* Public static study: source theme styling with an explicit preview boundary. */
+.preview-banner { padding: 10px var(--gutter); background: #dddfd2; font-size: 12px; font-weight: 700; letter-spacing: .025em; }
+.project-caption p a { text-decoration: underline; }
+.work-filters > span { font-size: 12px; color: var(--muted); }
+.preview-form :disabled { opacity: .65; cursor: not-allowed; }
+.preview-form .form-row label { display: block; }
+.preview-form .form-row input, .preview-form .form-row select, .preview-form .form-row textarea { border-bottom: 1px solid #8c8c84; }

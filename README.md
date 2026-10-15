@@ -5,10 +5,15 @@ Static public website for justinjindustries.com.
 ## Project shape
 
 - Plain HTML, CSS, and JavaScript
-- Public pages: `index.html`, `work.html`, `government-buyers.html`, and
-  `capability-statement.html`
+- Public pages: `index.html`, `work.html`, `catalogue.html`, `design.html`,
+  `government-buyers.html`, and `capability-statement.html`
 - Shared styling in `styles.css`
 - Shared browser behavior in `script.js`
+- Catalogue detail previews and guided enquiry behavior in `design.js`
+- Fictional, noindex sample pages in `previews/`; WordPress concept previews
+  are static studies from public-facing source layouts and media. Their forms
+  and video are inactive. Provenance and credits are in
+  `docs/catalogue-media-credits.md`.
 - GitHub Pages deployment through `.github/workflows/jekyll-gh-pages.yml`
 
 ## QA commands

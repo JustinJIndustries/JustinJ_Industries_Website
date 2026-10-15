@@ -425,18 +425,22 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTheme();
 });
 
-// Form setup (Formspree AJAX + local accessibility helpers)
+// Contact form: native fallback plus a controlled, accessible AJAX response.
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
   const statusEl = document.getElementById("form-status");
   const errorEl = document.getElementById("form-error");
+  const confirmation = document.getElementById("contact-confirmation");
+  const submitButton = form?.querySelector('[type="submit"]');
   const inquiryTypeField = document.getElementById("inquiry-type");
   const loadedAtField = document.getElementById("form-loaded-at");
-  if (!form || !statusEl) return;
+  if (!form || !statusEl || !errorEl || !confirmation || !submitButton) return;
 
   const formLoadedAt = Date.now();
   const MIN_SUBMIT_DELAY_MS = 3000;
   const touchedFields = new WeakSet();
+  let sending = false;
+  let sent = false;
   const resetFieldError = (field) => field.removeAttribute("aria-invalid");
   const markFieldError = (field) => field.setAttribute("aria-invalid", "true");
 
@@ -497,27 +501,47 @@ document.addEventListener("DOMContentLoaded", () => {
       if (elapsed >= MIN_SUBMIT_DELAY_MS) return;
       event.preventDefault();
       event.stopImmediatePropagation();
-      if (errorEl) {
-        errorEl.textContent =
-          "Submission failed. Please email info@justinjindustries.com or try again later.";
-      }
+      errorEl.textContent =
+        "Please take a moment to review your inquiry, then try again.";
       statusEl.textContent = "";
+      errorEl.focus();
     },
     true,
   );
 
-  // Do not override submit; Formspree AJAX handles submission.
-  // Add diagnostics when Formspree writes to the form error area.
-  if (errorEl) {
-    const observer = new MutationObserver(() => {
-      const message = errorEl.textContent?.trim();
-      if (!message) return;
-      console.warn("Formspree form error:", message);
-      if (!message.includes("Please email info@justinjindustries.com")) {
-        errorEl.textContent =
-          "Submission failed. Please email info@justinjindustries.com or try again later.";
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (sending || sent) return;
+    sending = true;
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending…";
+    statusEl.textContent = "Sending your inquiry…";
+    errorEl.textContent = "";
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+      const result = await response.json();
+      if (!response.ok || result.ok !== true) {
+        throw new Error("Submission was not accepted.");
       }
-    });
-    observer.observe(errorEl, { childList: true, subtree: true });
-  }
+      sent = true;
+      form.reset();
+      form.hidden = true;
+      confirmation.hidden = false;
+      confirmation.focus();
+    } catch {
+      statusEl.textContent = "";
+      errorEl.textContent =
+        "Your inquiry could not be sent. Your answers are still here. Please retry or email info@justinjindustries.com.";
+      errorEl.focus();
+    } finally {
+      sending = false;
+      submitButton.disabled = false;
+      submitButton.textContent = "Send inquiry";
+    }
+  });
 });

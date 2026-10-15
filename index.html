@@ -347,6 +347,9 @@
           </div>
         </div>
         <div class="cta-row">
+          <a href="catalogue.html" class="btn btn--ghost"
+            >Explore website designs</a
+          >
           <a
             href="#contact"
             class="btn"
@@ -508,6 +511,20 @@
               data-analytics-event="cta_contact_view_capability_statement"
               >View capability statement</a
             >
+          </p>
+        </div>
+
+        <div
+          id="contact-confirmation"
+          class="contact-confirmation"
+          role="status"
+          tabindex="-1"
+          hidden
+        >
+          <h3>Thank you for reaching out.</h3>
+          <p>
+            Your inquiry was received. JustinJ Industries will review it and
+            follow up with next steps.
           </p>
         </div>
 
@@ -714,6 +731,7 @@
             class="small form-status"
             role="alert"
             aria-live="polite"
+            tabindex="-1"
             data-fs-error
           ></p>
         </form>
@@ -734,46 +752,6 @@
       --></div>
     </footer>
 
-    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
-    <script defer>
-      document.addEventListener("DOMContentLoaded", () => {
-        if (!window.formspree) {
-          console.error("Formspree AJAX SDK failed to load.");
-          return;
-        }
-        const formEl = document.querySelector("#contact-form");
-        const successEl = document.querySelector("[data-fs-success]");
-        const errorEl = document.querySelector("[data-fs-error]");
-        const submitBtn = formEl?.querySelector("[data-fs-submit-btn]");
-        window.formspree("initForm", {
-          formElement: "#contact-form",
-          formId: "mgvlrzdq",
-          renderSuccess: (_ctx, message) => {
-            if (successEl) {
-              successEl.textContent =
-                message ||
-                "Thanks. Your inquiry was received. JustinJ Industries will follow up with next steps.";
-            }
-            if (errorEl) errorEl.textContent = "";
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = "Send inquiry";
-            }
-          },
-          renderError: (_ctx, message) => {
-            if (errorEl) {
-              errorEl.textContent =
-                message ||
-                "Submission failed. Please email info@justinjindustries.com or try again later.";
-            }
-            if (submitBtn) {
-              submitBtn.disabled = false;
-              submitBtn.textContent = "Send inquiry";
-            }
-          },
-        });
-      });
-    </script>
     <script src="script.js" defer></script>
   </body>
 </html>
