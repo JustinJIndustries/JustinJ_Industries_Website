@@ -1,5 +1,21 @@
 document.documentElement.classList.add("js");
 
+// Homepage section links shared before these sections moved to dedicated pages.
+if (location.pathname === "/" || location.pathname === "/index.html") {
+  const movedSections = {
+    "#about": "/about/",
+    "#accessibility": "/about/#accessibility",
+    "#privacy": "/about/#privacy",
+    "#government-buyers": "/government-buyers/",
+  };
+  const target = movedSections[location.hash];
+  if (target) {
+    const destination = new URL(target, location.origin);
+    destination.search = location.search;
+    location.replace(destination.href);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const doc = document.documentElement; // use root for CSS var overrides
   const menuButton = document.getElementById("menu-toggle");
@@ -36,8 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Decide effective theme for logo (override wins, else system)
     const effectiveDark = pref === "dark" || (pref === "auto" && media.matches);
     brandLogo.src = effectiveDark
-      ? "assets/logos/JJI-Logo-Only-white.png"
-      : "assets/logos/JJI-Logo-Only-grey.png";
+      ? "/assets/logos/JJI-Logo-Only-white.png"
+      : "/assets/logos/JJI-Logo-Only-grey.png";
   }
 
   // Cycle Auto -> Dark -> Light -> Auto
@@ -115,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const mobileMenuMedia = window.matchMedia("(max-width: 900px)");
+  const mobileMenuMedia = window.matchMedia("(max-width: 1180px)");
   mobileMenuMedia.addEventListener("change", (event) => {
     if (!event.matches && overlay.classList.contains("active")) {
       closeMenu(false);
@@ -126,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const homepageNavLinks = document.body.classList.contains("page-home")
     ? Array.from(
         document.querySelectorAll(
-          '.nav-links a[href^="#"], .overlay-menu a[href^="#"]',
+          '.nav-links a[href^="#"], .overlay-menu a[href^="#"], .nav-links a[href="/"], .overlay-menu a[href="/"]',
         ),
       )
     : [];
@@ -134,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   homepageNavLinks.forEach((link) => {
     const hash = link.getAttribute("href");
-    if (!hash || hash === "#") return;
+    if (!hash?.startsWith("#") || hash === "#") return;
     const section = document.getElementById(hash.slice(1));
     if (
       section &&
@@ -144,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  let activeSectionHash = "";
+  let activeSectionHash = null;
   let activeSectionObserver;
   let activeHeaderObserver;
   let activeSectionFrame = 0;
@@ -155,22 +171,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const setActiveSection = (hash) => {
     if (
+      hash &&
       !homepageDestinations.some((destination) => destination.hash === hash)
     ) {
       return;
     }
+    const activeHref = hash === "" ? "/" : hash;
+    const activeValue = hash === "" ? "page" : "location";
     const stateIsCurrent =
       activeSectionHash === hash &&
       homepageNavLinks.every((link) =>
-        link.getAttribute("href") === hash
-          ? link.getAttribute("aria-current") === "location"
+        link.getAttribute("href") === activeHref
+          ? link.getAttribute("aria-current") === activeValue
           : !link.hasAttribute("aria-current"),
       );
     if (stateIsCurrent) return;
 
     homepageNavLinks.forEach((link) => {
-      if (link.getAttribute("href") === hash) {
-        link.setAttribute("aria-current", "location");
+      if (link.getAttribute("href") === activeHref) {
+        link.setAttribute("aria-current", activeValue);
       } else {
         link.removeAttribute("aria-current");
       }
@@ -190,30 +209,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const readingLine = getReadingLine();
-    const positionedDestinations = homepageDestinations
-      .map((destination) => ({
-        ...destination,
-        top: destination.section.getBoundingClientRect().top,
-      }))
-      .sort((a, b) => a.top - b.top);
+    const visibleDestination = homepageDestinations.find(({ section }) => {
+      const bounds = section.getBoundingClientRect();
+      return bounds.top <= readingLine + 1 && bounds.bottom > readingLine;
+    });
     const pageBottom =
       Math.ceil(window.scrollY + window.innerHeight) >=
       document.documentElement.scrollHeight - 1;
-    let activeDestination = positionedDestinations[0];
-
-    if (pageBottom) {
-      activeDestination = positionedDestinations.at(-1);
-    } else {
-      positionedDestinations.forEach((destination) => {
-        if (destination.top <= readingLine + 1) {
-          activeDestination = destination;
-        }
-      });
-    }
-
-    if (activeDestination.hash !== activeSectionHash) {
-      setActiveSection(activeDestination.hash);
-    }
+    const heroVisible =
+      document.querySelector(".page-home .hero")?.getBoundingClientRect()
+        .bottom > readingLine;
+    const activeHash =
+      visibleDestination?.hash ||
+      (pageBottom ? homepageDestinations.at(-1).hash : heroVisible ? "" : null);
+    setActiveSection(activeHash);
   };
 
   const requestActiveSectionSync = () => {

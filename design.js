@@ -101,11 +101,11 @@ const designConcepts = {
     type: "Custom-scope design-studio concept · DEMO",
     description:
       "An editorial design-studio direction with a prominent project gallery and deliberate typography.",
-    service: "Custom scope",
+    service: "Still Form website setup",
     scope:
-      "Still Form is a visual concept. Portfolio behavior, animation, content management, and any special interactions need a custom quote; the $1,999 WordPress package does not include them.",
+      "Still Form website setup starts at $1,695 for core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
     terms:
-      "We will define pages, features, content responsibilities, price, and timeline in writing after reviewing your enquiry. The page studies incorporate a licensed image from the supplied source, without exposing its private WordPress runtime.",
+      "Portfolio interactions, animation, CMS features, integrations, extra pages, hosting, paid tools, and stock assets are scoped and quoted separately. The fictional preview does not include its source WordPress runtime.",
     pages: [
       {
         name: "Home",
@@ -115,7 +115,7 @@ const designConcepts = {
         blocks: ["Selected work", "What we make", "Start a project"],
       },
       {
-        name: "Projects",
+        name: "Work",
         eyebrow: "SELECTED WORK",
         title: "Considered work, made visible.",
         body: "A sample project index. No real client identities or outcomes are implied.",
@@ -149,11 +149,11 @@ const designConcepts = {
     type: "Custom-scope aerial-film concept · DEMO",
     description:
       "A cinematic direction for an aerial-film business. Video, gallery, and motion behavior require custom scoping.",
-    service: "Custom scope",
+    service: "AER/FIELD website setup",
     scope:
-      "AER/FIELD is a visual concept, not a package promise. Video delivery, galleries, film detail pages, and motion need a custom quote; they are not included in the $1,999 WordPress package.",
+      "AER/FIELD website setup starts at $1,995 for core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
     terms:
-      "We will define media rights, pages, features, hosting needs, price, and timeline in writing. These page studies use credited poster frames from the supplied source; they do not expose partial screenshots, private runtime files, or interactive video functionality.",
+      "Filming, editing, video delivery, interactive galleries, film detail features, custom motion, extra pages, hosting, paid tools, and stock assets are scoped and quoted separately. Preview footage is licensed for this fictional study; demo forms are inactive.",
     pages: [
       {
         name: "Home",
@@ -163,8 +163,8 @@ const designConcepts = {
         blocks: ["Featured film", "What we capture", "Discuss a project"],
       },
       {
-        name: "Projects",
-        eyebrow: "FILMS",
+        name: "Film",
+        eyebrow: "FILM",
         title: "Places with a story to tell.",
         body: "A proposed film index. Footage and claims require approved sources and rights.",
         blocks: ["Landscape study", "Built environment", "Property study"],
@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const concept = designConcepts[key];
   if (!concept) {
     document.getElementById("design-description").innerHTML =
-      'Choose a concept from the <a href="catalogue.html">design catalogue</a>.';
+      'Choose a concept from the <a href="/catalogue/">design catalogue</a>.';
     return;
   }
 
@@ -221,7 +221,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("design-preview-note").textContent =
     key === "alder"
       ? "Browse the original fictional four-page static sample. Its contact details are placeholders."
-      : "Browse static renders of the source WordPress page layouts, seed copy, and approved media. Demo forms and video are inactive.";
+      : key === "aer"
+        ? "Browse the fictional AER/FIELD study with playable licensed footage. Its contact form is inactive."
+        : "Browse the fictional source page layouts and approved media. Demo forms are inactive.";
 
   const showPage = (index, focusTab = false) => {
     const page = concept.pages[index];
@@ -236,21 +238,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const routeNames = {
       alder: { base: "alder-lane", Projects: "work", About: "about" },
       harbor: { base: "harbor-ledger" },
-      still: { base: "still-form", Projects: "work" },
-      aer: { base: "aer-field", Projects: "work", About: "studio" },
+      still: { base: "still-form", Work: "work" },
+      aer: { base: "aer-field", Film: "work", About: "studio" },
     };
     const route = routeNames[key];
     const filename =
       page.name === "Home"
         ? "index"
         : route[page.name] || page.name.toLowerCase();
-    const path = `previews/${route.base}/${filename}.html`;
+    const path = `/previews/${route.base}/${filename === "index" ? "" : `${filename}/`}`;
     const frame = document.createElement("iframe");
     frame.className = "sample-iframe";
     frame.title = `${concept.name} ${page.name} fictional sample`;
     frame.src = path;
     frame.loading = "lazy";
     frame.setAttribute("sandbox", "allow-scripts");
+    frame.setAttribute("allow", "autoplay");
     const openLink = document.createElement("a");
     openLink.className = "sample-open-link";
     openLink.href = path;

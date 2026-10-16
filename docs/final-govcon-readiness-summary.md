@@ -753,3 +753,47 @@ cover`, matching the other three card previews without stretching the image.
   `ok: false`, and repeated submit events for both flows. Temporary mock pages
   were removed; no live submission, account change, push, or deployment was
   made in this fix.
+
+### 2026-10-16 clean URL preparation (local only)
+
+- Prepared trailing-slash directory-index routes for all six public pages and
+  nineteen fictional preview pages. The build retains `.html` copies until
+  Cloudflare 301 redirects can be deployed and verified.
+- Updated internal navigation, canonical URLs, structured-data URLs, sitemap,
+  preview iframe routes, and asset paths. Existing contact and guided-enquiry
+  forms were only checked as UI; no test lead was submitted.
+- The signed-in Cloudflare zone showed Free plan and 0 of 10 Single Redirects
+  used. No Cloudflare rule or production deployment was changed. The route map,
+  redirect proposal, and post-release checks are in
+  `docs/clean-url-migration.md`.
+
+### 2026-10-16 public portfolio removal (local only)
+
+- Removed the Metro Credit Union card, project detail, screenshot, image
+  descriptions, related metadata, and asset from the deterministic public
+  artifact. The screenshot remains only as an unpublished source file.
+- The homepage now displays two selected-work cards, and the Work page has two
+  project details. No public PDF or other downloadable portfolio material was
+  found in the allowlist. Historical internal notes remain under `/docs`, which
+  the build excludes.
+- This change is prepared locally with the clean URL work. No production
+  deployment, redirect, or form submission was performed.
+
+### 2026-10-16 website setup prices and AER/FIELD navigation (local only)
+
+- The owner approved Still Form website setup from $1,695 and AER/FIELD website setup from $1,995. Catalogue cards, design detail scopes, and enquiry choices show these starting prices. Core page setup and styling use client-supplied copy and licensed imagery; pages, platform, timeline, and handoff are confirmed in writing. Portfolio features, filming/video delivery, motion, integrations, and other extras require separate quotes. No price was inserted into the fictional demo frames.
+- The AER/FIELD outer controls and inner menus now read Home, Film, Services, About, Contact; existing `/work/` and `/studio/` routes remain as the Film and About destinations. Film detail pages and previous video functionality remain available. Still Form keeps its own Home, Work, Services, About, Contact labels.
+- These updates are local only. No commit, push, production deployment, Cloudflare change, or form submission was made.
+
+### 2026-10-16 Designs intro alignment (local only)
+
+- Aligned the Designs catalogue headline and description with the main Work intro's narrower, centered text column, typography, and spacing. Mobile keeps the shared full-width column within the page gutter. The fictional concept cards, prices, and demo navigation remain below the intro.
+- No commit, push, deployment, Cloudflare change, or form submission was made.
+
+## 2026-10-16 local preview: About page and homepage cleanup
+
+Moved the existing About, Accessibility Statement, and Privacy and Responsible Measurement copy to `/about/`. Removed the duplicate Government Buyers and About sections from Home while retaining the dedicated Government Buyers page, homepage service CTA, capability statement contact CTA, and contact form. Updated shared navigation, privacy links, sitemap, and static build. Old homepage section fragments use a client-side fallback. Production publication is owner-approved; `.html` 301 redirects remain a separate Cloudflare step requiring post-deployment verification.
+
+Refined `/about/` into a dedicated introduction with selected real work imagery, supported capabilities, a scoped collaboration sequence, the existing accessibility/privacy statements, and direct enquiry/work CTAs. No new client claims or form submissions.
+
+The About collaboration panel adapts the owner-provided blue gradient, three-step reference screenshot. The page also shows the existing Northside reporting concept with an explicit fictional/synthetic label, distinct from the UAid Direct website screenshot.

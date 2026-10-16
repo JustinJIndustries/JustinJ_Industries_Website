@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="googlebot" content="noai, noimageai" />
+    <!-- Google AI use -->
+    <meta name="robots" content="noai, noimageai" />
+    <!-- Generic AI flag -->
+    <meta name="bingbot" content="noai" />
+    <!-- Bing/ChatGPT -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="/assets/logos/JJI-Logo-Only-grey.png"
+      type="image/png"
+    />
+    <title>About | JustinJ Industries</title>
+    <meta
+      name="description"
+      content="Website development, analytics implementation, QA, and practical documentation for small teams and implementation leads."
+    />
+    <link rel="canonical" href="https://www.justinjindustries.com/about/" />
+    <meta property="og:title" content="About | JustinJ Industries" />
+    <meta
+      property="og:description"
+      content="Website development, analytics implementation, QA, and practical documentation for small teams and implementation leads."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:image"
+      content="https://www.justinjindustries.com/assets/work/uaid-usa-home.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="/styles.css?v=d4dc44954f" />
+  </head>
+  <body class="page-about">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="nav container" aria-label="Primary">
+        <a href="/" class="brand">
+          <img
+            id="brand-logo"
+            src="/assets/logos/JJI-Logo-Only-grey.png"
+            alt=""
+            width="34"
+            height="34"
+          />
+          <span class="brand__text">JustinJ Industries</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/work/">Work</a></li>
+          <li><a href="/catalogue/">Designs</a></li>
+          <li><a href="/about/" aria-current="page">About</a></li>
+          <li><a href="/government-buyers/">Government Buyers</a></li>
+          <li><a href="/#contact" class="btn btn--small">Let's Talk</a></li>
+        </ul>
+
+        <div class="nav-buttons">
+          <button
+            id="theme-toggle"
+            class="chip"
+            type="button"
+            aria-label="Theme: Auto"
+            title="Theme: Auto (click to change)"
+            data-state="auto"
+          >
+            <!-- icon changes via CSS text -->
+            <span class="chip__dot"></span><span class="chip__text">Auto</span>
+          </button>
+
+          <button
+            id="menu-toggle"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="overlay"
+          >
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <div
+      id="overlay"
+      class="overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Mobile menu"
+      hidden
+      inert
+    >
+      <ul class="overlay-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/work/">Work</a></li>
+        <li><a href="/catalogue/">Designs</a></li>
+        <li><a href="/about/" aria-current="page">About</a></li>
+        <li><a href="/government-buyers/">Government Buyers</a></li>
+        <li><a href="/#contact" class="btn">Let's Talk</a></li>
+      </ul>
+    </div>
+
+    <main id="main">
+      <section
+        id="about"
+        class="about-hero container"
+        aria-labelledby="about-title"
+      >
+        <div class="about-hero__copy">
+          <p class="eyebrow">About JustinJ Industries</p>
+          <h1 id="about-title">Websites that work. Measurement you can use.</h1>
+          <p class="about-hero__lead">
+            JustinJ Industries helps small teams, business owners, and
+            implementation leads build clearer digital experiences and
+            understand how those experiences perform.
+          </p>
+          <p class="about-hero__support">
+            From a new website or a focused redesign to tagging QA and
+            reporting, the work is grounded in usable pages, testable
+            measurement, and documentation people can carry forward.
+          </p>
+          <div class="about-actions">
+            <a class="btn" href="/#contact">Discuss your project</a>
+            <a class="btn btn--ghost" href="/work/">View our work</a>
+          </div>
+        </div>
+        <figure class="about-hero__media">
+          <img
+            src="/assets/work/uaid-usa-home.png"
+            alt="UAid Direct USA homepage with regional navigation and a photo-led introduction"
+            width="1920"
+            height="1670"
+          />
+          <figcaption>
+            Selected work: UAid Direct regional WordPress website
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="about-focus" aria-labelledby="about-focus-title">
+        <div class="container about-focus__inner">
+          <div class="about-section-head">
+            <p class="eyebrow">Where we can help</p>
+            <h2 id="about-focus-title">
+              Practical support across the site and its signals.
+            </h2>
+            <p>
+              Bring a project that needs building, a site that needs
+              improvement, or measurement that needs to be checked and
+              explained.
+            </p>
+          </div>
+          <div class="about-capabilities">
+            <article class="about-capability">
+              <span class="about-capability__number" aria-hidden="true"
+                >01</span
+              >
+              <div>
+                <h3>Build and improve</h3>
+                <p>
+                  Website builds, redesigns, front-end development, and CMS
+                  support that make content easier to use and maintain.
+                </p>
+              </div>
+            </article>
+            <article class="about-capability">
+              <span class="about-capability__number" aria-hidden="true"
+                >02</span
+              >
+              <div class="about-capability__content">
+                <div>
+                  <h3>Measure with care</h3>
+                  <p>
+                    GA4 and GTM implementation, Adobe Analytics QA, and Looker
+                    Studio reporting with tagging behavior that can be tested.
+                  </p>
+                </div>
+                <figure class="about-capability__media">
+                  <img
+                    src="/assets/work/northside-dashboard-demo.png"
+                    alt="Northside synthetic Looker Studio overview with sample lead and session charts"
+                    loading="lazy"
+                    width="1080"
+                    height="780"
+                  />
+                  <figcaption>
+                    Northside reporting concept · fictional business and
+                    synthetic sample data
+                  </figcaption>
+                </figure>
+              </div>
+            </article>
+            <article class="about-capability">
+              <span class="about-capability__number" aria-hidden="true"
+                >03</span
+              >
+              <div>
+                <h3>Keep work usable</h3>
+                <p>
+                  Accessibility-aware HTML, keyboard checks, QA notes, and clear
+                  documentation to support the next update or handoff.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="about-process container"
+        aria-labelledby="about-process-title"
+      >
+        <div class="about-process__panel">
+          <div class="about-section-head">
+            <p class="eyebrow">Working together</p>
+            <h2 id="about-process-title">
+              A clear path from question to handoff.
+            </h2>
+            <p>
+              Good delivery starts with a defined scope and ends with work your
+              team can understand.
+            </p>
+          </div>
+          <ol class="about-process__steps">
+            <li>
+              <h3>Define the need</h3>
+              <p>
+                Start with the page, workflow, or measurement question that
+                matters. Agree on the work and what a useful result should show.
+              </p>
+            </li>
+            <li>
+              <h3>Build and verify</h3>
+              <p>
+                Implement the agreed changes, then check the experience, data
+                behavior, and relevant edge cases against that scope.
+              </p>
+            </li>
+            <li>
+              <h3>Document the next step</h3>
+              <p>
+                Leave clear notes on what changed, what was checked, and what
+                the team may need to maintain or decide next.
+              </p>
+            </li>
+          </ol>
+          <p class="about-process__footer">Web · Analytics · QA</p>
+        </div>
+      </section>
+
+      <section
+        class="about-principles"
+        aria-labelledby="about-principles-title"
+      >
+        <div class="container about-principles__inner">
+          <div class="about-section-head">
+            <p class="eyebrow">Delivery principles</p>
+            <h2 id="about-principles-title">
+              Usability and responsibility are part of the work.
+            </h2>
+          </div>
+          <div class="about-principles__rows">
+            <section id="accessibility" aria-labelledby="accessibility-heading">
+              <h3 id="accessibility-heading">Accessibility Statement</h3>
+              <p>
+                JustinJ Industries aims to build accessible, usable digital
+                experiences using semantic HTML, keyboard-friendly interactions,
+                readable content structure, and practical QA. Accessibility
+                conformance should be validated for each project’s scope,
+                content, and platform.
+              </p>
+            </section>
+            <section id="privacy" aria-labelledby="privacy-heading">
+              <h3 id="privacy-heading">Privacy and Responsible Measurement</h3>
+              <div>
+                <p>
+                  Measurement work is designed to be documented, testable, and
+                  privacy-aware. JustinJ Industries can help teams define event
+                  taxonomies, QA tagging behavior, and avoid sending sensitive
+                  form contents or unnecessary personal data into analytics
+                  platforms.
+                </p>
+                <p>
+                  When analytics is implemented, event collection should be
+                  scoped to business outcomes and implementation QA.
+                  Contact-form message content, names, and email addresses
+                  should remain in contact systems and out of analytics event
+                  payloads.
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="about-close container"
+        aria-labelledby="about-close-title"
+      >
+        <div>
+          <p class="eyebrow">Have a project in mind?</p>
+          <h2 id="about-close-title">Let's make the next step clear.</h2>
+          <p>
+            Tell us what needs building, improving, or measuring. We can start
+            with the scope and the questions you need answered.
+          </p>
+        </div>
+        <div class="about-actions">
+          <a class="btn" href="/#contact">Discuss your project</a>
+          <a class="btn btn--ghost" href="/work/">View our work</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer__inner">
+        <p>&copy; <span id="year">2026</span> JustinJ Industries.</p>
+        <a href="/government-buyers/">Government Buyers</a>
+        <a href="/about/#privacy">Privacy</a>
+        <!--
+      <ul class="social">
+        <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
+        <li><a href="#" aria-label="GitHub">GitHub</a></li>
+        <li><a href="#" aria-label="X">X</a></li>
+      </ul>
+      --></div>
+    </footer>
+
+    <script src="/script.js?v=d2666b9223" defer></script>
+  </body>
+</html>

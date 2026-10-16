@@ -12,6 +12,7 @@ import { fileURLToPath } from "node:url";
 
 const publicFiles = Object.freeze([
   "index.html",
+  "about.html",
   "work.html",
   "catalogue.html",
   "design.html",
@@ -62,6 +63,9 @@ const publicFiles = Object.freeze([
   "previews/aer-field/services.html",
   "previews/aer-field/studio.html",
   "previews/aer-field/contact.html",
+  "previews/aer-field/films/golf.html",
+  "previews/aer-field/films/real-estate.html",
+  "previews/aer-field/films/business.html",
   "previews/aer-field/source.css",
   "previews/aer-field/preview.css",
   "previews/aer-field/site.js",
@@ -70,8 +74,18 @@ const publicFiles = Object.freeze([
   "previews/aer-field/assets/golf-poster.jpg",
   "previews/aer-field/assets/house-pool-poster.jpg",
   "previews/aer-field/assets/construction-poster.jpg",
+  "previews/aer-field/assets/takeoff-greenery.mp4",
+  "previews/aer-field/assets/takeoff-grass-portrait.mp4",
+  "previews/aer-field/assets/golf.mp4",
+  "previews/aer-field/assets/house-pool.mp4",
+  "previews/aer-field/assets/construction.mp4",
+  "previews/aer-field/assets/golf-gallery-1.jpg",
+  "previews/aer-field/assets/golf-gallery-2.jpg",
+  "previews/aer-field/assets/house-gallery-1.jpg",
+  "previews/aer-field/assets/house-gallery-2.jpg",
+  "previews/aer-field/assets/business-gallery-1.jpg",
+  "previews/aer-field/assets/business-gallery-2.jpg",
   "assets/work/uaid-usa-home.png",
-  "assets/work/metro-student-loans.png",
   "assets/work/northside-dashboard-demo.png",
 ]);
 
@@ -79,6 +93,20 @@ const repositoryRoot = await realpath(
   path.resolve(fileURLToPath(new URL("..", import.meta.url))),
 );
 const artifactRoot = path.resolve(repositoryRoot, "dist");
+// Keep the original .html pages reachable while publishing directory-index
+// copies for the visitor-facing, extensionless routes.
+const cleanRouteCopies = new Map(
+  publicFiles
+    .filter(
+      (relativePath) =>
+        relativePath.endsWith(".html") && !relativePath.endsWith("index.html"),
+    )
+    .map((relativePath) => [
+      relativePath,
+      relativePath.replace(/\.html$/, "/index.html"),
+    ]),
+);
+const outputFiles = [...publicFiles, ...cleanRouteCopies.values()];
 
 function resolveContainedPath(root, relativePath) {
   if (
@@ -152,7 +180,7 @@ async function validateSourceFile(relativePath) {
 function getExpectedDirectories() {
   const directories = new Set();
 
-  for (const relativePath of publicFiles) {
+  for (const relativePath of outputFiles) {
     const segments = relativePath.split("/");
 
     for (let index = 1; index < segments.length; index += 1) {
@@ -252,11 +280,11 @@ async function walkArtifact(
   return artifactFiles;
 }
 
-if (new Set(publicFiles).size !== publicFiles.length) {
+if (new Set(outputFiles).size !== outputFiles.length) {
   throw new Error("The public file allowlist contains a duplicate path.");
 }
 
-const expectedFiles = new Set(publicFiles);
+const expectedFiles = new Set(outputFiles);
 const expectedDirectories = getExpectedDirectories();
 const sourcePaths = new Map();
 
@@ -269,10 +297,16 @@ await prepareArtifactRoot();
 
 for (const relativePath of publicFiles) {
   await copyPublicFile(relativePath, sourcePaths.get(relativePath));
+  if (cleanRouteCopies.has(relativePath)) {
+    await copyPublicFile(
+      cleanRouteCopies.get(relativePath),
+      sourcePaths.get(relativePath),
+    );
+  }
 }
 
 const artifactFiles = (await walkArtifact(artifactRoot)).sort();
-const sortedExpectedFiles = [...publicFiles].sort();
+const sortedExpectedFiles = [...outputFiles].sort();
 
 if (
   artifactFiles.length !== sortedExpectedFiles.length ||

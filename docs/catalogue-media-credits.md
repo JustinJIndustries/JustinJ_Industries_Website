@@ -19,9 +19,10 @@ private admin environment. Demo forms are visibly inactive.
 
 The AER/FIELD source `MEDIA-SOURCES.md` records the [Pexels License](https://www.pexels.com/license/)
 and confirms both poster JPEGs are extracts from its credited video sources.
-The catalogue uses those still frames only. It does not offer the videos as part
-of a fixed-price package or claim that AER/FIELD filmed them. The partial
-AER/FIELD browser screenshots were not used.
+The catalogue cards use those still frames. The AER/FIELD preview plays licensed
+web-size footage from the same source bundle, credited in the preview. Video
+delivery remains a custom-scope service; no page claims AER/FIELD filmed the
+stock footage. The partial AER/FIELD browser screenshots were not used.
 
 ## Multi-page static studies
 
@@ -39,17 +40,18 @@ AER/FIELD browser screenshots were not used.
   records each source and license. Credits appear beside the relevant project
   cards in the public study: Luke Thornton, Missy Meyer, Giorgio Trovato,
   Hannah Busing, Florencia Simonini, and Scott Taylor, each via Unsplash.
-- `previews/aer-field/` contains Home, Work, Services, Studio, and Contact.
+- `previews/aer-field/` contains Home, Film, Services, About, Contact, and
+  three fictional film detail pages.
   Layout classes, styling, and the mobile menu script come from
   `aer-field-theme/` in `aer-field-source.zip`; copy and film/service names
-  follow the source defaults and demo seed. The five published poster frames
+  follow the source defaults and demo seed. The five poster frames, five web-size MP4 files, and six gallery frames
   came from `aer-field-companion/assets/media/web/`. Source credits recorded
   in `MEDIA-SOURCES.md` are Honye Sanges (desktop Home), Petkevich Evgeniy
   (mobile Home), Curtis Adams (Golf), just a hobby (Real Estate), and TR Studio
-  (Business), via Pexels. Home and Work credits appear beside their media. The
-  public study contains still frames only; no video or admin code was published.
+  (Business), via Pexels. Footage credits appear beside the media and on each detail page. The public
+  study contains working video playback and still omits admin code.
 
 The static studies preserve the page hierarchy, text, image choices, and CSS
-from their source demos while omitting WordPress-only editing, filters, film
-playback, project detail routes, and form submission. Those behaviors are not
-represented as working features or as part of a fixed-price package.
+from their source demos while omitting WordPress-only editing, live filters,
+and form submission. AER/FIELD includes fictional film detail routes and
+playable footage; those advanced media features are scoped separately from the website setup starting price.

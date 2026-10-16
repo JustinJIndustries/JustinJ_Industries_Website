@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="icon"
-      href="assets/logos/JJI-Logo-Only-grey.png"
+      href="/assets/logos/JJI-Logo-Only-grey.png"
       type="image/png"
     />
     <title>Explore a Website Design | JustinJ Industries</title>
@@ -13,34 +13,30 @@
       name="description"
       content="Explore fictional website design pages and send a nonbinding project enquiry to JustinJ Industries."
     />
-    <link
-      rel="canonical"
-      href="https://www.justinjindustries.com/design.html"
-    />
-    <link rel="stylesheet" href="styles.css?v=f26f8fd73b" />
+    <link rel="canonical" href="https://www.justinjindustries.com/design/" />
+    <link rel="stylesheet" href="/styles.css?v=d4dc44954f" />
   </head>
   <body class="page-design">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <nav class="nav container" aria-label="Primary">
-        <a href="index.html" class="brand"
+        <a href="/" class="brand"
           ><img
             id="brand-logo"
-            src="assets/logos/JJI-Logo-Only-grey.png"
+            src="/assets/logos/JJI-Logo-Only-grey.png"
             alt=""
             width="34"
             height="34"
           /><span class="brand__text">JustinJ Industries</span></a
         >
         <ul class="nav-links">
-          <li><a href="work.html">Work</a></li>
-          <li><a href="catalogue.html" aria-current="page">Designs</a></li>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="government-buyers.html">Government Buyers</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li>
-            <a href="index.html#contact" class="btn btn--small">Let's Talk</a>
-          </li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/work/">Work</a></li>
+          <li><a href="/catalogue/" aria-current="page">Designs</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/government-buyers/">Government Buyers</a></li>
+          <li><a href="/#contact" class="btn btn--small">Let's Talk</a></li>
         </ul>
         <div class="nav-buttons">
           <button
@@ -76,17 +72,18 @@
       inert
     >
       <ul class="overlay-menu">
-        <li><a href="work.html">Work</a></li>
-        <li><a href="catalogue.html" aria-current="page">Designs</a></li>
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="government-buyers.html">Government Buyers</a></li>
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#contact" class="btn">Let's Talk</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#services">Services</a></li>
+        <li><a href="/work/">Work</a></li>
+        <li><a href="/catalogue/" aria-current="page">Designs</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/government-buyers/">Government Buyers</a></li>
+        <li><a href="/#contact" class="btn">Let's Talk</a></li>
       </ul>
     </div>
     <main id="main">
       <section class="section container design-intro">
-        <a class="text-link" href="catalogue.html"
+        <a class="text-link" href="/catalogue/"
           ><span aria-hidden="true">←</span> All designs</a
         >
         <p class="work-label" id="design-type">Website concept</p>
@@ -117,7 +114,7 @@
         <noscript
           ><p>
             Example-page previews need JavaScript. You can still review the
-            <a href="catalogue.html">catalogue</a> or
+            <a href="/catalogue/">catalogue</a> or
             <a href="mailto:info@justinjindustries.com">email an enquiry</a>.
           </p></noscript
         >
@@ -144,35 +141,40 @@
         class="section container design-scope"
         aria-labelledby="design-scope-title"
       >
-        <div class="section__head">
-          <h2 id="design-scope-title">What this starting point includes</h2>
-          <p id="design-scope-copy">
-            Review the package or request a custom quote before work begins.
-          </p>
+        <div class="design-scope__layout">
+          <div class="section__head">
+            <h2 id="design-scope-title">What this starting point includes</h2>
+            <p id="design-scope-copy">
+              Review the package or request a custom quote before work begins.
+            </p>
+          </div>
+          <div class="design-scope__panel">
+            <div id="design-scope-details" class="design-scope-details"></div>
+            <div class="design-scope__action">
+              <button
+                type="button"
+                class="btn js-only"
+                id="enquiry-open-bottom"
+                hidden
+              >
+                Request a site like this
+              </button>
+              <p class="small">
+                A request is nonbinding. We confirm scope, price, and timeline
+                before work or payment. You can also
+                <a href="mailto:info@justinjindustries.com"
+                  >email info@justinjindustries.com</a
+                >.
+              </p>
+            </div>
+          </div>
         </div>
-        <div id="design-scope-details" class="design-scope-details"></div>
-        <button
-          type="button"
-          class="btn js-only"
-          id="enquiry-open-bottom"
-          hidden
-        >
-          Request a site like this
-        </button>
-        <p class="small">
-          A request is nonbinding. We confirm scope, price, and timeline before
-          work or payment. You can also
-          <a href="mailto:info@justinjindustries.com"
-            >email info@justinjindustries.com</a
-          >.
-        </p>
       </section>
     </main>
     <footer class="site-footer">
       <div class="container footer__inner">
         <p>&copy; <span id="year">2026</span> JustinJ Industries.</p>
-        <a href="index.html#privacy">Privacy</a
-        ><a href="index.html#contact">Contact</a>
+        <a href="/about/#privacy">Privacy</a><a href="/#contact">Contact</a>
       </div>
     </footer>
 
@@ -256,6 +258,18 @@
                 /><span
                   >Simple WordPress site — $1,999 defined scope</span
                 ></label
+              ><label class="choice"
+                ><input
+                  type="radio"
+                  name="service_kit"
+                  value="Still Form website setup"
+                /><span>Still Form website setup — from $1,695</span></label
+              ><label class="choice"
+                ><input
+                  type="radio"
+                  name="service_kit"
+                  value="AER/FIELD website setup"
+                /><span>AER/FIELD website setup — from $1,995</span></label
               ><label class="choice"
                 ><input
                   type="radio"
@@ -524,7 +538,7 @@
         </form>
       </div>
     </dialog>
-    <script src="script.js?v=bf12e3d9f0" defer></script>
-    <script src="design.js?v=85fff1fbd4" defer></script>
+    <script src="/script.js?v=d2666b9223" defer></script>
+    <script src="/design.js?v=25b4fd2159" defer></script>
   </body>
 </html>
