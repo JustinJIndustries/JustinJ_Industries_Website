@@ -797,3 +797,5 @@ Moved the existing About, Accessibility Statement, and Privacy and Responsible M
 Refined `/about/` into a dedicated introduction with selected real work imagery, supported capabilities, a scoped collaboration sequence, the existing accessibility/privacy statements, and direct enquiry/work CTAs. No new client claims or form submissions.
 
 The About collaboration panel adapts the owner-provided blue gradient, three-step reference screenshot. The page also shows the existing Northside reporting concept with an explicit fictional/synthetic label, distinct from the UAid Direct website screenshot.
+
+The catalogue now gives Alder & Lane and Harbor Ledger separate “From $950” and “From $1,999” labels, matching the other two cards. Descriptions emphasize the approved four-page static and five-page WordPress scope without putting prices in the prose.
