@@ -199,23 +199,23 @@ const designConcepts = {
       "A WordPress-ready block theme concept with editable content, native navigation, service pages, and a non-sending inquiry path.",
     service: "Custom scope",
     scope:
-      "A WordPress-ready demo package with Home, Services, About, and Contact routes. The content is synthetic and the form is a non-sending demonstration.",
+      "A WordPress-ready demo package with Home, Services, Boiler Care, About, and Contact routes. The content is synthetic and the form is a non-sending demonstration.",
     terms:
       "Portfolio concept only. Final content, hosting, integrations, form delivery, and production redirects require separate scope and approval.",
     pages: [
       {
         name: "Home",
         eyebrow: "NORTHSIDE HEATING & BOILER CARE",
-        title: "Comfort, made clearer.",
-        body: "A calm WordPress homepage concept for practical heating guidance.",
-        blocks: ["Boiler care", "Heating systems", "Discuss a service need"],
+        title: "A warmer home. A clearer next step.",
+        body: "A clear service journey with the approved boiler-room photograph.",
+        blocks: ["Boiler care", "Heating repairs", "Replacement planning"],
       },
       {
         name: "Services",
         eyebrow: "PRACTICAL HELP",
-        title: "A clearer next step for your heating questions.",
+        title: "The right help for your home’s heating.",
         body: "A service overview with editable native content.",
-        blocks: ["Boiler care", "Heating systems", "Guidance"],
+        blocks: ["Boiler care", "Heating repairs", "Replacement planning"],
       },
       {
         name: "Boiler Care",
@@ -231,14 +231,14 @@ const designConcepts = {
       {
         name: "About",
         eyebrow: "ABOUT NORTHSIDE",
-        title: "Dependable guidance for everyday comfort.",
-        body: "A placeholder for verified business details and approach.",
+        title: "Good service starts with being understood.",
+        body: "A practical introduction to the service approach and what to expect.",
         blocks: ["Our approach", "What to expect", "Contact"],
       },
       {
         name: "Contact",
         eyebrow: "START A CONVERSATION",
-        title: "Tell us what you need.",
+        title: "Let’s talk about your heating.",
         body: "A non-sending inquiry demonstration for the WordPress concept.",
         blocks: ["Your service need", "A little more detail", "Send inquiry"],
       },

@@ -1,51 +1,126 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta name="robots" content="noindex, nofollow" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
     <title>Contact · Northside Demo</title>
-    <link rel="stylesheet" href="../preview.css" />
+    <link
+      rel="stylesheet"
+      href="/previews/northside/preview.css?v=66c546ff69"
+    />
+    <script src="/previews/northside/site.js?v=3004a574fd" defer></script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header>
-      <strong>Northside Heating &amp; Boiler Care</strong>
-      <nav aria-label="Main">
-        <a href="../">Home</a><a href="../services/">Services</a
-        ><a href="../about/">About</a><a href="../contact/">Contact</a>
-      </nav>
+      <div class="wp-block-group ns-header">
+        <p class="ns-demo">Demo</p>
+        <div class="wp-block-group ns-header-inner">
+          <p class="ns-brand">
+            <a href="/previews/northside/"
+              >NORTHSIDE<br /><span>Heating &amp; Boiler Care</span></a
+            >
+          </p>
+          <nav class="ns-nav" aria-label="Main">
+            <a href="/previews/northside/">Home</a
+            ><a href="/previews/northside/services/">Services</a
+            ><a href="/previews/northside/services/boiler-care/">Boiler care</a
+            ><a href="/previews/northside/about/">About</a
+            ><a href="/previews/northside/contact/">Contact</a>
+          </nav>
+        </div>
+      </div>
     </header>
-    <main id="main" tabindex="-1">
-      <p class="eyebrow">Start a conversation</p>
-      <h1>Tell us what you need.</h1>
-      <form
-        class="card"
-        onsubmit="
-          event.preventDefault();
-          this.querySelector('[role=status]').textContent =
-            'Demo only: no message was sent.';
-        "
-      >
-        <label>What do you need help with?<br /><input required /></label>
-        <p>
-          <label
-            >A little more detail<br /><textarea rows="5"></textarea>
-          </label>
+    <main id="main" tabindex="-1" class="wp-block-group ns-main">
+      <div class="wp-block-group ns-intro">
+        <h1 class="wp-block-heading">Let’s talk about your heating.</h1>
+        <p class="ns-lead">
+          Tell us what you have noticed and what you would like help with. You
+          do not need to know the technical answer before starting.
         </p>
-        <button class="button" type="submit">Send inquiry</button>
-        <p role="status" aria-live="polite"></p>
-      </form>
+      </div>
+      <div class="wp-block-group ns-section ns-split ns-contact">
+        <div class="wp-block-group">
+          <h2 class="wp-block-heading">A useful first message.</h2>
+          <p>
+            Choose a service, describe the issue and share any equipment details
+            you already know. There is no need to investigate the boiler
+            yourself.
+          </p>
+          <h3 class="wp-block-heading">Before work is agreed</h3>
+          <p>
+            The next conversation should clarify the visit, the proposed scope
+            and the information needed for a quote.
+          </p>
+          <p class="ns-small">
+            This portfolio demonstration cannot arrange service visits or urgent
+            assistance.
+          </p>
+        </div>
+        <form class="ns-enquiry" data-northside-form>
+          <p class="ns-form-note" id="form-note">
+            Demo only. This form does not send or store a message. Use sample
+            details.
+          </p>
+          <div class="ns-form-grid">
+            <label for="ns-name"
+              >Name<input
+                id="ns-name"
+                autocomplete="off"
+                required
+                maxlength="100" /></label
+            ><label for="ns-email"
+              >Email<input
+                id="ns-email"
+                type="email"
+                autocomplete="off"
+                required
+                maxlength="160"
+            /></label>
+          </div>
+          <label for="ns-service"
+            >What do you need help with?<select id="ns-service" required>
+              <option value="">Choose a service</option>
+              <option>Boiler care</option>
+              <option>Heating repairs</option>
+              <option>Replacement planning</option>
+              <option>Not sure yet</option>
+            </select></label
+          ><label for="ns-message"
+            >Tell us a little more<textarea
+              id="ns-message"
+              rows="5"
+              maxlength="2000"
+              placeholder="What has changed? What would you like to understand?"
+            ></textarea></label
+          ><button class="ns-button" type="submit">Send demo inquiry</button>
+          <p class="ns-form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
     </main>
     <footer>
-      <p>Synthetic, non-sending form demonstration.</p>
-      <nav aria-label="Footer">
-        <a href="/previews/northside/">Home</a
-        ><a href="/previews/northside/services/">Services</a
-        ><a href="/previews/northside/about/">About</a
-        ><a href="/previews/northside/contact/">Contact</a>
-      </nav>
+      <div class="wp-block-group ns-footer">
+        <p class="ns-disclosure">
+          Synthetic portfolio concept. Content and imagery are illustrative; no
+          service bookings or messages are sent.
+        </p>
+        <div class="wp-block-group ns-footer-inner">
+          <p class="ns-brand">
+            <a href="/previews/northside/"
+              >NORTHSIDE<br /><span>Heating &amp; Boiler Care</span></a
+            >
+          </p>
+          <nav class="ns-nav" aria-label="Footer">
+            <a href="/previews/northside/">Home</a
+            ><a href="/previews/northside/services/">Services</a
+            ><a href="/previews/northside/services/boiler-care/">Boiler care</a
+            ><a href="/previews/northside/about/">About</a
+            ><a href="/previews/northside/contact/">Contact</a>
+          </nav>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

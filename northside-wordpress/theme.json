@@ -1,1 +1,43 @@
-{"$schema":"https://schemas.wp.org/trunk/theme.json","version":3,"settings":{"appearanceTools":true,"color":{"palette":[{"slug":"navy","color":"#163542","name":"Navy"},{"slug":"paper","color":"#f6f5f0","name":"Paper"},{"slug":"teal","color":"#138b8e","name":"Teal"}]},"layout":{"contentSize":"1180px"}},"styles":{"color":{"background":"#f6f5f0","text":"#173346"},"spacing":{"blockGap":"1.5rem"},"typography":{"fontFamily":"system-ui,sans-serif"}}}
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "color": {
+      "palette": [
+        {
+          "slug": "navy",
+          "color": "#163542",
+          "name": "Navy"
+        },
+        {
+          "slug": "paper",
+          "color": "#f6f5f0",
+          "name": "Paper"
+        },
+        {
+          "slug": "teal",
+          "color": "#176f72",
+          "name": "Teal"
+        }
+      ]
+    },
+    "layout": {
+      "contentSize": "1376px",
+      "wideSize": "1376px"
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "#f6f5f0",
+      "text": "#173346"
+    },
+    "spacing": {
+      "blockGap": "0"
+    },
+    "typography": {
+      "fontFamily": "system-ui,sans-serif",
+      "fontSize": "17px"
+    }
+  }
+}

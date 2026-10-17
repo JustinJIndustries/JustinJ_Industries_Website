@@ -34,7 +34,7 @@
       content="https://www.justinjindustries.com/assets/work/uaid-usa-home.png"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="/styles.css?v=1909ba6ad1" />
+    <link rel="stylesheet" href="/styles.css?v=268aa75c17" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -211,13 +211,22 @@
           >
             <div class="home-story__stage home-story__stage--site">
               <span class="home-story__number">01</span>
-              <img
-                src="/assets/work/northside-home-cover.png"
-                alt="Synthetic Northside Heating and Boiler Care homepage concept"
-                width="2048"
-                height="1152"
-                loading="lazy"
-              />
+              <picture
+                ><source
+                  type="image/webp"
+                  srcset="
+                    /assets/work/northside-home-cover-640.webp   640w,
+                    /assets/work/northside-home-cover-1280.webp 1280w,
+                    /assets/work/northside-home-cover-2200.webp 2200w
+                  "
+                  sizes="(max-width: 820px) calc(100vw - 62px), 400px" />
+                <img
+                  src="/assets/work/northside-home-cover.png?v=b9b53099bc"
+                  alt="Enhanced Northside homepage with navigation, A warmer home headline, service inquiry action and the approved boiler-room photograph"
+                  width="2200"
+                  height="1206"
+                  loading="lazy"
+              /></picture>
               <h3>Make the next step clear</h3>
               <p>
                 Structure, content, and interaction give visitors somewhere

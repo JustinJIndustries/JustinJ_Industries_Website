@@ -1231,6 +1231,13 @@ body.menu-open {
 .home-story__stage--report img {
   object-position: left top;
 }
+.home-story__stage--site picture {
+  display: block;
+  min-width: 0;
+}
+.home-story__stage--site img {
+  background: #f6f5f0;
+}
 .home-story__number {
   color: #9bd8ff;
   font-size: 0.75rem;
@@ -1326,6 +1333,9 @@ body.menu-open {
   }
   .home-story__stage img {
     height: 180px;
+  }
+  .home-story__stage--site img {
+    height: auto;
   }
 }
 
@@ -2544,6 +2554,13 @@ select[aria-invalid="true"] {
   height: 100%;
   object-fit: cover;
   object-position: top center;
+}
+.catalogue-card__media--northside {
+  background: #f6f5f0;
+}
+.catalogue-card__media--northside .catalogue-card__preview {
+  object-fit: contain;
+  object-position: center;
 }
 .catalogue-card__copy h3 {
   display: flex;

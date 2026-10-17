@@ -106,9 +106,13 @@ const publicFiles = Object.freeze([
   "previews/northside/about/index.html",
   "previews/northside/contact/index.html",
   "previews/northside/preview.css",
+  "previews/northside/site.js",
   "assets/work/uaid-usa-home.png",
   "assets/work/northside-cover.svg",
   "assets/work/northside-home-cover.png",
+  "assets/work/northside-home-cover-640.webp",
+  "assets/work/northside-home-cover-1280.webp",
+  "assets/work/northside-home-cover-2200.webp",
   "assets/work/northside-boiler-room.png",
   "assets/work/northside-dashboard-demo.png",
 ]);

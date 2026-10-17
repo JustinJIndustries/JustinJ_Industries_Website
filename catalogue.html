@@ -14,7 +14,7 @@
       content="Explore demo website design concepts and clear starting scopes for static and WordPress sites from JustinJ Industries."
     />
     <link rel="canonical" href="https://www.justinjindustries.com/catalogue/" />
-    <link rel="stylesheet" href="/styles.css?v=1909ba6ad1" />
+    <link rel="stylesheet" href="/styles.css?v=268aa75c17" />
   </head>
   <body class="page-catalogue">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -277,15 +277,24 @@
             </div>
           </article>
           <article class="catalogue-card" id="northside-card">
-            <div class="catalogue-card__media">
-              <img
-                class="catalogue-card__preview"
-                src="/assets/work/northside-home-cover.png"
-                alt="Northside Heating and Boiler Care WordPress homepage concept"
-                loading="lazy"
-                width="2048"
-                height="1152"
-              />
+            <div class="catalogue-card__media catalogue-card__media--northside">
+              <picture
+                ><source
+                  type="image/webp"
+                  srcset="
+                    /assets/work/northside-home-cover-640.webp   640w,
+                    /assets/work/northside-home-cover-1280.webp 1280w,
+                    /assets/work/northside-home-cover-2200.webp 2200w
+                  "
+                  sizes="(max-width: 760px) calc(100vw - 30px), 640px" />
+                <img
+                  class="catalogue-card__preview"
+                  src="/assets/work/northside-home-cover.png?v=b9b53099bc"
+                  alt="Enhanced Northside homepage with navigation, A warmer home headline, service inquiry action and the approved boiler-room photograph"
+                  loading="lazy"
+                  width="2200"
+                  height="1206"
+              /></picture>
             </div>
             <div class="catalogue-card__copy">
               <p class="work-label">WordPress block theme sample · DEMO</p>
