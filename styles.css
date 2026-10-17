@@ -3651,3 +3651,17 @@ select[aria-invalid="true"] {
 .design-scope[hidden] {
   display: none;
 }
+
+/* Preserve access to the entire inquiry at high zoom and on short screens. */
+@media (max-height: 650px), (max-width: 760px) {
+  .enquiry-dialog {
+    overflow-y: auto;
+  }
+  .enquiry-shell {
+    max-height: none;
+  }
+  #enquiry-form {
+    flex-shrink: 0;
+    overflow-y: visible;
+  }
+}

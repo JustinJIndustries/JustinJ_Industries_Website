@@ -9,7 +9,7 @@ a { color: inherit; }
 button { font: inherit; }
 img { display: block; max-width: 100%; }
 ::selection { background: var(--accent); color: var(--ink); }
-:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 4px; }
+:focus-visible { outline: 3px solid #ffffff; outline-offset: 3px; box-shadow: 0 0 0 6px var(--accent-dark); }
 .wrap { width: min(100% - 64px, 1200px); margin-inline: auto; }
 .skip-link { position: fixed; z-index: 30; top: 8px; left: 8px; padding: 10px 16px; background: var(--ink); color: var(--paper); transform: translateY(-150%); }
 .skip-link:focus { transform: none; }

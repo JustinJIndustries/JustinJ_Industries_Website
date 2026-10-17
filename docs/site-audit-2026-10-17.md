@@ -47,6 +47,8 @@ The clean URL route map and edge proposal remain in `docs/clean-url-migration.md
 
 ## Practical limits
 
+**Follow-up:** `accessibility-followup-2026-10-17.md` supersedes the unresolved imagery contrast and audio-characterization items below. It records manual keyboard/zoom checks, measured overlay fixes, silent-video alternatives, reel pause controls and final Northside package/image replacement tests. Screen-reader, physical-device and native 400% zoom limits remain explicit.
+
 This is a broad engineering audit, not an accessibility conformance certification. A complete screen-reader audit, physical phone testing and formal Section 508 evaluation were not performed. Axe leaves contrast checks over imagery/video and caption applicability for human review. Two stock MP4 files contain audio tracks; their speech/caption requirements were not independently characterized, so no caption-conformance claim is made. Motion controls, reduced motion, posters and nearby descriptive text were checked. Google report availability and browser autoplay policies remain external dependencies.
 
 Before release, command-line requests to the public Cloudflare host returned a 403 managed challenge, including known existing pages. That response is not evidence of a site-route failure; use the normal browser and deployment workflow/origin evidence for live verification, and explicitly report any verification that remains blocked.

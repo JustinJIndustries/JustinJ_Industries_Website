@@ -106,3 +106,50 @@ body.home .site-header {
 .under-link.arrow-text-link {
   --arrow-link-gap: 25px;
 }
+
+/* Keep text readable even when a bright drone or sky crosses behind it. */
+.hero-shade,
+.services-lead-shade {
+  background-color: rgba(8, 15, 14, 0.64);
+}
+body.home .site-header {
+  background-color: rgba(8, 15, 14, 0.64);
+}
+.sector-panel::after {
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.82),
+    rgba(0, 0, 0, 0.68) 48%,
+    transparent
+  );
+}
+
+.film-description {
+  margin: 22px var(--gutter);
+  max-width: 78ch;
+  line-height: 1.6;
+}
+.film-description summary {
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.reel-motion-toggle {
+  min-height: 44px;
+  margin-bottom: 24px;
+  padding: 10px 16px;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--white);
+  font-weight: 700;
+}
+.reel-motion-toggle[hidden] {
+  display: none;
+}
+:focus-visible {
+  outline: 3px solid #fbfaf6;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px #2557a7;
+}

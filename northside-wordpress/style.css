@@ -2,7 +2,7 @@
 Theme Name: Northside Heating & Boiler Care
 Theme URI: https://www.justinjindustries.com/
 Description: Synthetic, editable block theme demo for Northside Heating & Boiler Care.
-Version: 1.0.0
+Version: 1.0.1
 */
 :root{--navy:#163542;--ink:#173346;--paper:#f6f5f0;--slate:#60768d;--teal:#138b8e;--line:#c8d5d6}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 system-ui,sans-serif}a{color:inherit}header,main,footer{max-width:1180px;margin:auto;padding:24px}header{display:flex;justify-content:space-between;align-items:center;gap:24px;border-bottom:1px solid var(--line)}.site-title{font-weight:800;letter-spacing:.02em}.wp-block-navigation__container{display:flex;gap:20px;list-style:none;padding:0;margin:0;flex-wrap:wrap}.hero{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding-block:72px}.hero h1{font-size:clamp(2.8rem,6vw,5.8rem);line-height:1;max-width:8ch;margin:.2em 0}.hero p{max-width:46ch;color:var(--slate)}.hero img{width:100%;border-radius:16px}.button{display:inline-block;border:1px solid var(--ink);padding:12px 18px;border-radius:6px;text-decoration:none;font-weight:700}.section{padding-block:64px;border-top:1px solid var(--line)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.card{padding:24px;border:1px solid var(--line);border-radius:12px;background:#fff}.disclosure{font-size:.85rem;color:var(--slate)}footer{border-top:1px solid var(--line);margin-top:48px}@media(max-width:760px){header{align-items:flex-start;flex-direction:column}.hero{grid-template-columns:1fr;padding-block:40px}.grid{grid-template-columns:1fr}}
 

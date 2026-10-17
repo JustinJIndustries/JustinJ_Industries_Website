@@ -188,33 +188,67 @@
       }
     });
   const reels = document.querySelectorAll(".film-video[data-src]");
-  if (
-    reels.length &&
-    !motion.matches &&
-    !data.matches &&
-    !navigator.connection?.saveData &&
-    "IntersectionObserver" in window
-  ) {
+  const reelToggle = document.querySelector("[data-reel-motion]");
+  if (reels.length && "IntersectionObserver" in window) {
+    const visibleReels = new Set();
+    let reelsPaused = false;
+    const motionAllowed = () =>
+      !motion.matches && !data.matches && !navigator.connection?.saveData;
+    async function syncReel(video) {
+      if (
+        reelsPaused ||
+        !motionAllowed() ||
+        !visibleReels.has(video) ||
+        document.hidden
+      ) {
+        video.pause();
+        video.classList.remove("is-playing");
+        return;
+      }
+      if (!video.src) video.src = video.dataset.src;
+      try {
+        await video.play();
+        if (
+          reelsPaused ||
+          !motionAllowed() ||
+          !visibleReels.has(video) ||
+          document.hidden
+        ) {
+          video.pause();
+          video.classList.remove("is-playing");
+        } else video.classList.add("is-playing");
+      } catch {
+        video.pause();
+        video.classList.remove("is-playing");
+      }
+    }
+    const syncReels = () => {
+      if (reelToggle) {
+        reelToggle.hidden = !motionAllowed();
+        reelToggle.textContent = reelsPaused
+          ? "Play film previews"
+          : "Pause film previews";
+      }
+      reels.forEach(syncReel);
+    };
     const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach(async (entry) => {
-          const video = entry.target;
-          if (entry.isIntersecting) {
-            if (!video.src) video.src = video.dataset.src;
-            try {
-              await video.play();
-              video.classList.add("is-playing");
-            } catch (e) {
-              video.pause();
-              video.classList.remove("is-playing");
-            }
-          } else {
-            video.pause();
-            video.classList.remove("is-playing");
-          }
-        }),
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visibleReels.add(entry.target);
+          else visibleReels.delete(entry.target);
+          syncReel(entry.target);
+        });
+      },
       { rootMargin: "0px", threshold: 0.5 },
     );
-    reels.forEach((v) => observer.observe(v));
+    reels.forEach((video) => observer.observe(video));
+    reelToggle?.addEventListener("click", () => {
+      reelsPaused = !reelsPaused;
+      syncReels();
+    });
+    motion.addEventListener("change", syncReels);
+    data.addEventListener("change", syncReels);
+    document.addEventListener("visibilitychange", syncReels);
+    syncReels();
   }
 })();
