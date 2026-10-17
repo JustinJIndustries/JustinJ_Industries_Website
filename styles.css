@@ -1112,6 +1112,39 @@ body.menu-open {
   flex: 1 1 260px;
 }
 
+/* Reusable number, decorative separator, and semantic heading row. */
+.numbered-step__head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+.numbered-step__number {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--brand);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+  white-space: nowrap;
+}
+.numbered-step__number::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 1.15em;
+  background: currentColor;
+  opacity: 0.45;
+}
+.numbered-step__head h3 {
+  min-width: 0;
+  margin: 0;
+}
+.home-story__stage .numbered-step__number {
+  color: #9bd8ff;
+}
+
 /* Compact delivery principles after homepage services. */
 .home-method {
   background: linear-gradient(
@@ -1143,21 +1176,16 @@ body.menu-open {
   margin: 0;
   padding: 0;
   list-style: none;
-  counter-reset: method;
 }
 .home-method__steps li {
-  counter-increment: method;
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
   border-top: 2px solid var(--brand);
   padding-top: 12px;
 }
-.home-method__steps li::before {
-  content: "0" counter(method);
-  color: var(--brand);
-  font-size: var(--font-size-xs);
-  font-weight: 800;
-}
 .home-method__steps h3 {
-  margin: 0.45rem 0;
+  margin: 0;
   font-size: var(--font-size-md);
 }
 .home-method__steps p {
@@ -1229,7 +1257,8 @@ body.menu-open {
   border-radius: 6px;
 }
 .home-story__stage--report img {
-  object-position: left top;
+  object-position: center;
+  background: #f5f4f0;
 }
 .home-story__stage--site picture {
   display: block;
@@ -1237,12 +1266,6 @@ body.menu-open {
 }
 .home-story__stage--site img {
   background: #f6f5f0;
-}
-.home-story__number {
-  color: #9bd8ff;
-  font-size: 0.75rem;
-  font-weight: 750;
-  letter-spacing: 0.12em;
 }
 .home-story__stage h3 {
   margin: 0;
@@ -1957,21 +1980,16 @@ select[aria-invalid="true"] {
   margin: 0;
   padding: 0;
   list-style: none;
-  counter-reset: gov-step;
 }
 .page-gov .gov-process li {
-  counter-increment: gov-step;
+  display: grid;
+  align-content: start;
+  gap: 0.65rem;
   padding-top: 18px;
   border-top: 2px solid var(--brand);
 }
-.page-gov .gov-process li::before {
-  content: "0" counter(gov-step);
-  color: var(--brand);
-  font-size: var(--font-size-xs);
-  font-weight: 750;
-}
 .page-gov .gov-process h3 {
-  margin: 0.65rem 0 0.55rem;
+  margin: 0;
   font-size: var(--font-size-lg);
 }
 .page-gov .gov-process p {

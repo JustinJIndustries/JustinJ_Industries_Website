@@ -31,7 +31,7 @@
       content="https://www.justinjindustries.com/assets/logos/JJI-Logo-Only-grey.png"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="/styles.css?v=268aa75c17" />
+    <link rel="stylesheet" href="/styles.css?v=c4a5f91452" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -180,9 +180,18 @@
         <div class="hero__art gov-hero-diagram" aria-hidden="true">
           <div class="gov-hero-diagram__top">A practical delivery path</div>
           <div class="gov-hero-diagram__steps">
-            <span><strong>01</strong> Define the need</span>
-            <span><strong>02</strong> Build and verify</span>
-            <span><strong>03</strong> Document the handoff</span>
+            <span
+              ><strong class="numbered-step__number">01</strong> Define the
+              need</span
+            >
+            <span
+              ><strong class="numbered-step__number">02</strong> Build and
+              verify</span
+            >
+            <span
+              ><strong class="numbered-step__number">03</strong> Document the
+              handoff</span
+            >
           </div>
           <div class="gov-hero-diagram__foot">Web · Analytics · QA</div>
         </div>
@@ -354,36 +363,42 @@
         </div>
         <ol class="gov-process">
           <li>
-            <h3>
-              <svg
-                class="gov-line-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <rect x="5" y="3" width="14" height="18" rx="2" />
-                <path d="M9 8h6M9 12h6M9 16h4" />
-              </svg>
-              Define the need
-            </h3>
+            <div class="numbered-step__head">
+              <span class="numbered-step__number" aria-hidden="true">01</span>
+              <h3>
+                <svg
+                  class="gov-line-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <rect x="5" y="3" width="14" height="18" rx="2" />
+                  <path d="M9 8h6M9 12h6M9 16h4" />
+                </svg>
+                Define the need
+              </h3>
+            </div>
             <p>
               Identify the page, workflow, or measurement question. Agree on the
               work, outputs, and useful checks before implementation.
             </p>
           </li>
           <li>
-            <h3>
-              <svg
-                class="gov-line-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <rect x="3" y="4" width="18" height="16" rx="2" />
-                <path d="M3 9h18m-13 6 3 3 5-6" />
-              </svg>
-              Build and verify
-            </h3>
+            <div class="numbered-step__head">
+              <span class="numbered-step__number" aria-hidden="true">02</span>
+              <h3>
+                <svg
+                  class="gov-line-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <rect x="3" y="4" width="18" height="16" rx="2" />
+                  <path d="M3 9h18m-13 6 3 3 5-6" />
+                </svg>
+                Build and verify
+              </h3>
+            </div>
             <p>
               Implement the agreed changes, then review usability, tagging
               behavior, consent conditions, and relevant edge cases against the
@@ -391,19 +406,22 @@
             </p>
           </li>
           <li>
-            <h3>
-              <svg
-                class="gov-line-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path
-                  d="M6 2h9l4 4v16H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm9 0v5h4M8 12h8M8 16h6"
-                />
-              </svg>
-              Document the handoff
-            </h3>
+            <div class="numbered-step__head">
+              <span class="numbered-step__number" aria-hidden="true">03</span>
+              <h3>
+                <svg
+                  class="gov-line-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    d="M6 2h9l4 4v16H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm9 0v5h4M8 12h8M8 16h6"
+                  />
+                </svg>
+                Document the handoff
+              </h3>
+            </div>
             <p>
               Leave QA notes, change details, and practical guidance on what the
               team may need to maintain or decide next.
