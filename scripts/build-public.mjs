@@ -1,3 +1,4 @@
+import "./sync-footer.mjs";
 import {
   copyFile,
   lstat,
@@ -20,6 +21,7 @@ const publicFiles = Object.freeze([
   "government-buyers.html",
   "capability-statement.html",
   "styles.css",
+  "assets/site-footer.css",
   "script.js",
   "design.js",
   "robots.txt",
@@ -27,6 +29,8 @@ const publicFiles = Object.freeze([
   "favicon.svg",
   "assets/logos/JJI-Logo-Only-grey.png",
   "assets/logos/JJI-Logo-Only-white.png",
+  "assets/logos/wordpress-wmark-gray.png",
+  "assets/logos/wordpress-wmark-white.png",
   "assets/catalogue/harbor-home.png",
   "assets/catalogue/alder-home.webp",
   "assets/catalogue/still-arches.jpg",

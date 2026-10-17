@@ -1,0 +1,220 @@
+/* Shared JJI footer. Independent of page layouts, including the print statement. */
+.jji-footer {
+  box-sizing: border-box;
+  margin: 0;
+  border-top: 1px solid #2a3d52;
+  background: #111821;
+  color: #e7e9ee;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: left;
+}
+.jji-footer *,
+.jji-footer *::before,
+.jji-footer *::after {
+  box-sizing: border-box;
+}
+.jji-footer__container {
+  width: min(1280px, calc(100% - 64px));
+  margin-inline: auto;
+}
+.jji-footer__main {
+  display: grid;
+  grid-template-columns:
+    minmax(230px, 1.4fr) minmax(130px, 0.8fr) minmax(170px, 1fr)
+    minmax(250px, 1.2fr);
+  gap: 40px;
+  padding-block: 64px 48px;
+}
+.jji-footer__main > * {
+  min-width: 0;
+}
+.jji-footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 100%;
+  min-height: 44px;
+  color: #e7e9ee;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-decoration: none;
+}
+.jji-footer__brand img {
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+.jji-footer__identity p {
+  max-width: 26ch;
+  margin: 16px 0 0 58px;
+  color: #b7c8d8;
+  font-size: 1rem;
+}
+.jji-footer h2 {
+  margin: 6px 0 14px;
+  color: #e7e9ee;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: normal;
+}
+.jji-footer a {
+  border-bottom: 0;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+.jji-footer__nav ul {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.jji-footer__nav li {
+  margin: 0;
+  padding: 0;
+}
+.jji-footer__nav a,
+.jji-footer__contact address a,
+.jji-footer__policies a {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
+  padding-block: 6px;
+  color: #9bd8ff;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+.jji-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.jji-footer a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.jji-footer__contact address {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  font-style: normal;
+}
+.jji-footer .jji-footer__cta {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  max-width: 100%;
+  width: fit-content;
+  margin-top: 18px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #62a8ff, #7cffe1);
+  color: #0a1018;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.jji-footer .jji-footer__cta:hover {
+  color: #0a1018;
+  text-decoration: none;
+}
+.jji-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  padding-block: 20px 24px;
+  border-top: 1px solid #2a3d52;
+  font-size: 0.875rem;
+}
+.jji-footer__bottom p {
+  margin: 0;
+  color: #b7c8d8;
+}
+.jji-footer__policies {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+}
+@media (max-width: 1050px) {
+  .jji-footer__main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 48px;
+  }
+}
+@media (max-width: 600px) {
+  .jji-footer__container {
+    width: calc(100% - 48px);
+  }
+  .jji-footer__main {
+    gap: 30px 24px;
+    padding-block: 40px 32px;
+  }
+  .jji-footer__identity,
+  .jji-footer__contact {
+    grid-column: 1 / -1;
+  }
+  .jji-footer__identity p {
+    max-width: 30ch;
+    margin-left: 0;
+  }
+  .jji-footer__brand {
+    font-size: 1.2rem;
+  }
+  .jji-footer__bottom,
+  .jji-footer__policies {
+    align-items: flex-start;
+  }
+  .jji-footer__bottom {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+/* Keep the existing JJI light-theme button treatment on the standalone statement too. */
+.theme-light .jji-footer .jji-footer__cta {
+  color: #fff;
+  background: linear-gradient(135deg, #1d4ed8, #0e7490);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+}
+.theme-light .jji-footer .jji-footer__cta:hover {
+  color: #fff;
+  background: linear-gradient(135deg, #1e40af, #0f766e);
+}
+@media (prefers-color-scheme: light) {
+  :root:not(.theme-dark) .jji-footer .jji-footer__cta {
+    color: #fff;
+    background: linear-gradient(135deg, #1d4ed8, #0e7490);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+  }
+  :root:not(.theme-dark) .jji-footer .jji-footer__cta:hover {
+    color: #fff;
+    background: linear-gradient(135deg, #1e40af, #0f766e);
+  }
+}
+@media (forced-colors: active) {
+  .jji-footer a:focus-visible {
+    outline-color: Highlight;
+  }
+}
+@media print {
+  .jji-footer {
+    display: none;
+  }
+}

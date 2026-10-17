@@ -34,7 +34,7 @@
       content="https://www.justinjindustries.com/assets/work/uaid-usa-home.png"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="/styles.css?v=c4a5f91452" />
+    <link rel="stylesheet" href="/styles.css?v=da55a64793" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -74,6 +74,7 @@
         ]
       }
     </script>
+    <link rel="stylesheet" href="/assets/site-footer.css?v=276ee35247" />
   </head>
   <body class="page-home">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -182,7 +183,16 @@
             width="1920"
             height="1670"
           />
-          <figcaption>Selected work · UAid Direct regional website</figcaption>
+          <figcaption>
+            Selected work · UAid Direct regional website<sup
+              class="work-note-ref"
+              ><a
+                href="#home-work-note-1"
+                aria-label="Note 1: UAid Direct context"
+                >1</a
+              ></sup
+            >
+          </figcaption>
         </figure>
       </section>
 
@@ -198,7 +208,13 @@
             <p>
               A useful site gives people a clear next step. A useful measurement
               system helps the team understand what happened next. The two
-              belong in the same conversation.
+              belong in the same conversation.<sup class="work-note-ref"
+                ><a
+                  href="#home-work-note-2"
+                  aria-label="Note 2: Northside synthetic portfolio context"
+                  >2</a
+                ></sup
+              >
             </p>
             <a class="btn btn--ghost" href="#contact"
               >Talk through your next step</a
@@ -315,15 +331,29 @@
           </div>
           <div class="service reveal">
             <h3>
-              <svg
-                class="home-service-icon"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-                focusable="false"
+              <span class="wordpress-service-mark" aria-hidden="true"
+                ><img
+                  class="wordpress-mark--gray"
+                  src="/assets/logos/wordpress-wmark-gray.png"
+                  alt=""
+                  width="1000"
+                  height="1000"
+                  loading="lazy" /><img
+                  class="wordpress-mark--white"
+                  src="/assets/logos/wordpress-wmark-white.png"
+                  alt=""
+                  width="1000"
+                  height="1000"
+                  loading="lazy" /></span
+              ><span
+                >WordPress Support<sup class="work-note-ref"
+                  ><a
+                    href="#home-wordpress-note-3"
+                    aria-label="Note 3: WordPress trademark attribution"
+                    >3</a
+                  ></sup
+                ></span
               >
-                <path d="M4 5h16v14H4zM8 9h8M8 13h5"></path>
-                <path d="M7 3v4M17 3v4"></path></svg
-              >WordPress Support
             </h3>
             <ul>
               <li>
@@ -383,10 +413,10 @@
                 aria-hidden="true"
                 focusable="false"
               >
-                <circle cx="12" cy="12" r="4"></circle>
-                <path
-                  d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"
-                ></path></svg
+                <rect x="3" y="3" width="6" height="5" rx="1"></rect>
+                <rect x="15" y="3" width="6" height="5" rx="1"></rect>
+                <rect x="9" y="16" width="6" height="5" rx="1"></rect>
+                <path d="M6 8v3h12V8M12 11v5"></path></svg
               >AI Workflow Support
             </h3>
             <ul>
@@ -403,8 +433,10 @@
                 aria-hidden="true"
                 focusable="false"
               >
-                <path d="M4 13a8 8 0 0 1 16 0v5H4z"></path>
-                <path d="M4 14H2v4h4M20 14h2v4h-4M9 21h6"></path></svg
+                <rect x="2" y="3" width="20" height="18" rx="2"></rect>
+                <path
+                  d="M2 8h20M16.5 12.5a4 4 0 1 0 .2 5.4M16.5 10.5v3h-3"
+                ></path></svg
               >Ongoing Website Support
             </h3>
             <ul>
@@ -732,7 +764,10 @@
           ></p>
         </form>
       </section>
-      <aside class="container site-disclosure" aria-label="Selected work notes">
+      <aside
+        class="container site-disclosure"
+        aria-label="Site and portfolio notes"
+      >
         <p id="home-work-note-1" tabindex="-1">
           <sup>1</sup> UAid Direct is not presented as government past
           performance.
@@ -743,37 +778,74 @@
           not a real client implementation, integrated tracking setup, or
           result.
         </p>
+        <p id="home-wordpress-note-3" tabindex="-1">
+          <sup>3</sup> WordPress and the WordPress logo are trademarks of the
+          WordPress Foundation. JustinJ Industries LLC is not affiliated with or
+          endorsed by the WordPress Foundation.
+        </p>
       </aside>
     </main>
 
-    <footer class="site-footer">
-      <div class="container footer__inner">
-        <div class="footer__identity">
-          <a
-            class="footer__brand"
-            href="/"
-            aria-label="JustinJ Industries home"
-          >
-            <img
-              src="/assets/logos/JJI-Logo-Only-white.png"
-              alt=""
-              width="28"
-              height="28"
-              loading="lazy"
-            />
-            <span>JustinJ Industries</span>
-          </a>
-          <p>&copy; <span id="year">2026</span> JustinJ Industries.</p>
+    <!-- shared:footer:start -->
+    <footer class="site-footer jji-footer">
+      <div class="jji-footer__container">
+        <div class="jji-footer__main">
+          <div class="jji-footer__identity">
+            <a
+              class="jji-footer__brand"
+              href="/"
+              aria-label="JustinJ Industries home"
+            >
+              <img
+                src="/assets/logos/JJI-Logo-Only-white.png"
+                alt=""
+                width="44"
+                height="44"
+                loading="lazy"
+              />
+              <span>JustinJ Industries</span>
+            </a>
+            <p>Websites, measurement &amp; ongoing support.</p>
+          </div>
+          <nav class="jji-footer__nav" aria-label="Footer explore">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/#services">Services</a></li>
+              <li><a href="/work/">Selected work</a></li>
+              <li><a href="/catalogue/">Website designs</a></li>
+              <li><a href="/about/">About</a></li>
+            </ul>
+          </nav>
+          <nav class="jji-footer__nav" aria-label="Footer for buyers">
+            <h2>For buyers</h2>
+            <ul>
+              <li><a href="/government-buyers/">Government Buyers</a></li>
+              <li><a href="/capability-statement/">Capability statement</a></li>
+            </ul>
+          </nav>
+          <div class="jji-footer__contact">
+            <h2>Let’s talk</h2>
+            <address>
+              <a href="mailto:info@justinjindustries.com"
+                >info@justinjindustries.com</a
+              >
+              <a href="tel:+16178009291">617&#8209;800&#8209;9291</a>
+            </address>
+            <a class="btn btn--small jji-footer__cta" href="/#contact"
+              >Discuss a project</a
+            >
+          </div>
         </div>
-        <nav class="footer__links" aria-label="Footer">
-          <a href="/#contact">Contact</a>
-          <a href="mailto:info@justinjindustries.com">Email us</a>
-          <a href="tel:+16178009291">617&#8209;800&#8209;9291</a>
-          <a href="/government-buyers/">Government Buyers</a>
-          <a href="/policies/#privacy">Privacy</a>
-        </nav>
+        <div class="jji-footer__bottom">
+          <p>&copy; <span id="year">2026</span> JustinJ Industries.</p>
+          <nav class="jji-footer__policies" aria-label="Footer policies">
+            <a href="/policies/#privacy">Privacy &amp; measurement</a>
+            <a href="/policies/#accessibility">Accessibility</a>
+          </nav>
+        </div>
       </div>
     </footer>
+    <!-- shared:footer:end -->
 
     <script src="/script.js?v=762eaa75d4" defer></script>
   </body>
