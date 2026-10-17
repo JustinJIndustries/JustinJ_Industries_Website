@@ -17,7 +17,13 @@ Disclosures retain their full-width position immediately above the footer.
 
 ## Design and accessibility decisions
 
-- Preserve the original JJI monogram and verified email/phone details. No new
+- Render the original JJI monogram once as a faint CSS background centered behind
+  the tagline in the identity column (220 px desktop/tablet, 112 px phone). The 4.5% opacity decoration has no accessible image,
+  focus target or pointer events, stays inside its box, and is hidden in forced
+  colors. The redundant foreground logo/name pair is removed; the approved
+  uppercase tagline and legal copyright naming remain. Header brand text uses
+  weight 700. Independent demo brands are unchanged.
+- Preserve verified email/phone details. No new
   address, social account, legal claim or credential is introduced.
 - Use a navy footer in both site themes, with grouped Explore and For buyers
   navigation, a contact area, and a separate policy row. Contact buttons retain
@@ -25,8 +31,9 @@ Disclosures retain their full-width position immediately above the footer.
 - Use the native body-level footer landmark and three distinctly labeled
   navigation landmarks. Group headings remain real headings.
 - Provide at least 44 px of link height and a visible white focus ring. Footer
-  text/link palette pairs have contrast ratios from 10.43:1 to 14.70:1 against
-  the navy background; the white focus ring has 17.85:1 contrast. Gradient CTA
+  text/link palette pairs retain at least 9.31:1 contrast even against the
+  brightest possible white watermark pixel (4.5% opacity over navy); the white
+  focus ring retains at least 15.94:1 contrast. Gradient CTA
   states retain the existing site treatment and require visual interpretation
   alongside automated contrast checks.
 - Desktop uses four open columns, tablet uses two columns, and phone layouts
@@ -54,3 +61,9 @@ confirmed the layout and visible keyboard focus. Tests verify one identical
 footer across all eight pages, link target size, no horizontal overflow,
 unchanged disclosure placement and hidden print footer. Physical-device and
 full screen-reader output are outside this review.
+
+## Copyright name
+
+The shared copyright line uses the approved legal name, JustinJ Industries LLC.
+Its final period is sentence punctuation, not part of the legal-name suffix.
+The shorter header brand and independent demo identities remain unchanged.

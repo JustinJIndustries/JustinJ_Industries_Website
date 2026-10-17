@@ -9,14 +9,45 @@
       rel="stylesheet"
       href="/previews/northside/preview.css?v=66c546ff69"
     />
-    <script src="/previews/northside/site.js?v=3004a574fd" defer></script>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  </head>
+    <script src="/previews/northside/site.js?v=cc38bb2b9a" defer></script>
+    <link
+      rel="stylesheet"
+      href="/previews/northside/inquiry.css?v=37cb7e80db"
+    />
+
+    <link rel="stylesheet" href="/assets/demo-return.css?v=53fedc5b5a" />
+    <script src="/assets/demo-return.js?v=670b57aa8d"></script>
+    <link
+      rel="stylesheet"
+      href="/previews/northside/navigation.css?v=6b777f3494"
+    />
+    <script src="/previews/northside/navigation.js?v=475e340982" defer></script>
+  <link rel="icon" href="/previews/northside/favicon-32.png?v=230fd8ca47" type="image/png" sizes="32x32" />
+<link rel="icon" href="/previews/northside/favicon.svg?v=2054523e14" type="image/svg+xml" sizes="any" />
+</head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <header>
       <div class="wp-block-group ns-header">
-        <p class="ns-demo">Demo</p>
+        <nav class="ns-demo jji-demo-bar" aria-label="Demo return">
+          <a class="jji-demo-bar__back" href="/design/?design=northside"
+            ><svg
+              class="jji-demo-bar__arrow"
+              viewBox="0 0 24 24"
+              width="16"
+              height="16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M20 12H4m7-7-7 7 7 7"></path></svg
+            ><span>Back to JJI</span></a
+          ><span class="jji-demo-bar__label">Demo</span>
+        </nav>
         <div class="wp-block-group ns-header-inner">
           <p class="ns-brand">
             <a href="/previews/northside/"
@@ -59,44 +90,279 @@
             assistance.
           </p>
         </div>
-        <form class="ns-enquiry" data-northside-form>
-          <p class="ns-form-note" id="form-note">
-            Demo only. This form does not send or store a message. Use sample
-            details.
+        <form
+          class="ns-enquiry"
+          data-northside-form
+          novalidate
+          aria-labelledby="ns-form-title"
+          aria-describedby="ns-form-note"
+          data-ns-required-error="Complete this field."
+          data-ns-choice-error="Choose an option, including Not sure if needed."
+          data-ns-email-error="Enter an email address in the format name@example.com."
+          data-ns-phone-error="Enter a phone number with at least 7 digits, or choose Email instead."
+          data-ns-either-error="Add an email address or phone number for your preferred contact route."
+          data-ns-issue-error="Add at least 10 characters describing the heating issue or service you are considering."
+          data-ns-area-error="Add a town/city or ZIP code. A street address is not needed."
+          data-ns-success="Demo complete: your heating inquiry was checked on this page. Nothing was sent or stored, and no service visit was requested."
+          data-ns-cleared="Sample details cleared. Nothing was sent or stored."
+          data-ns-required-label="required"
+          data-ns-optional-label="optional"
+        >
+          <h2 class="wp-block-heading" id="ns-form-title">
+            Heating service inquiry
+          </h2>
+          <p class="ns-form-note" id="ns-form-note">
+            Demo only. Use sample details. This form checks your entries on this
+            page; nothing is sent or stored and no visit is booked.
           </p>
-          <div class="ns-form-grid">
-            <label for="ns-name"
-              >Name<input
-                id="ns-name"
-                autocomplete="off"
-                required
-                maxlength="100" /></label
-            ><label for="ns-email"
-              >Email<input
-                id="ns-email"
-                type="email"
-                autocomplete="off"
-                required
-                maxlength="160"
-            /></label>
+          <div
+            class="ns-form-errors"
+            data-ns-errors
+            tabindex="-1"
+            hidden
+            aria-labelledby="ns-error-title"
+          >
+            <h3 id="ns-error-title">Check these heating inquiry details</h3>
+            <ul></ul>
           </div>
-          <label for="ns-service"
-            >What do you need help with?<select id="ns-service" required>
-              <option value="">Choose a service</option>
-              <option>Boiler care</option>
-              <option>Heating repairs</option>
-              <option>Replacement planning</option>
-              <option>Not sure yet</option>
-            </select></label
-          ><label for="ns-message"
-            >Tell us a little more<textarea
-              id="ns-message"
-              rows="5"
-              maxlength="2000"
-              placeholder="What has changed? What would you like to understand?"
-            ></textarea></label
-          ><button class="ns-button" type="submit">Send demo inquiry</button>
-          <p class="ns-form-status" role="status" aria-live="polite"></p>
+          <fieldset>
+            <legend>Service and heating system</legend>
+            <div class="ns-form-grid">
+              <div class="ns-form-field">
+                <label for="ns-service"
+                  >Service needed
+                  <span data-ns-requirement="service">(required)</span></label
+                ><select
+                  id="ns-service"
+                  data-ns-field="service"
+                  aria-describedby="ns-service-error"
+                  autocomplete="off"
+                  required
+                >
+                  <option value="">Choose a service</option>
+                  <option value="Boiler care">Boiler care</option>
+                  <option value="Heating repairs">Heating repairs</option>
+                  <option value="Replacement planning">
+                    Replacement planning
+                  </option>
+                  <option value="Not sure yet">Not sure yet</option>
+                </select>
+                <p class="ns-field-error" id="ns-service-error" hidden></p>
+              </div>
+              <div class="ns-form-field">
+                <label for="ns-system"
+                  >Current heating system
+                  <span data-ns-requirement="system">(required)</span></label
+                ><select
+                  id="ns-system"
+                  data-ns-field="system"
+                  aria-describedby="ns-system-error"
+                  autocomplete="off"
+                  required
+                >
+                  <option value="">Choose a system</option>
+                  <option value="Boiler with radiators or baseboards">
+                    Boiler with radiators or baseboards
+                  </option>
+                  <option value="Steam boiler">Steam boiler</option>
+                  <option value="Furnace / warm air">Furnace / warm air</option>
+                  <option value="Heat pump">Heat pump</option>
+                  <option value="Other">Other</option>
+                  <option value="Not sure">Not sure</option>
+                </select>
+                <p class="ns-field-error" id="ns-system-error" hidden></p>
+              </div>
+            </div>
+            <div class="ns-form-grid">
+              <div class="ns-form-field">
+                <label for="ns-area"
+                  >Town or ZIP code
+                  <span data-ns-requirement="area">(required)</span></label
+                ><input
+                  id="ns-area"
+                  data-ns-field="area"
+                  aria-describedby="ns-area-help ns-area-error"
+                  autocomplete="off"
+                  required
+                  type="text"
+                  maxlength="100"
+                />
+                <p class="ns-field-help" id="ns-area-help">
+                  Town/city or ZIP only. A street address is not needed for this
+                  demo.
+                </p>
+                <p class="ns-field-error" id="ns-area-error" hidden></p>
+              </div>
+              <div class="ns-form-field">
+                <label for="ns-timing"
+                  >Preferred timing
+                  <span data-ns-requirement="timing">(required)</span></label
+                ><select
+                  id="ns-timing"
+                  data-ns-field="timing"
+                  aria-describedby="ns-timing-help ns-timing-error"
+                  autocomplete="off"
+                  required
+                >
+                  <option value="">Choose a preference</option>
+                  <option value="As soon as practical">
+                    As soon as practical
+                  </option>
+                  <option value="Within the next few weeks">
+                    Within the next few weeks
+                  </option>
+                  <option value="Planning ahead">Planning ahead</option>
+                  <option value="Flexible / not sure">
+                    Flexible / not sure
+                  </option>
+                </select>
+                <p class="ns-field-help" id="ns-timing-help">
+                  A preference only, not confirmed availability. This demo
+                  cannot arrange urgent assistance.
+                </p>
+                <p class="ns-field-error" id="ns-timing-error" hidden></p>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>What you have noticed</legend>
+            <div class="ns-form-field">
+              <label for="ns-message"
+                >What would you like help with?
+                <span data-ns-requirement="message">(required)</span></label
+              ><textarea
+                id="ns-message"
+                data-ns-field="message"
+                aria-describedby="ns-message-help ns-message-error"
+                autocomplete="off"
+                required
+                rows="5"
+                minlength="10"
+                maxlength="1500"
+                placeholder="Example: The radiators are staying cool even when the heating is on."
+              ></textarea>
+              <p class="ns-field-help" id="ns-message-help">
+                Describe the symptoms, when they started and any fault code
+                already visible. Include only details you already know.
+              </p>
+              <p class="ns-field-error" id="ns-message-error" hidden></p>
+            </div>
+            <div class="ns-form-field">
+              <label for="ns-equipment"
+                >Make or model, if known
+                <span data-ns-requirement="equipment">(optional)</span></label
+              ><input
+                id="ns-equipment"
+                data-ns-field="equipment"
+                aria-describedby="ns-equipment-help ns-equipment-error"
+                autocomplete="off"
+                type="text"
+                maxlength="100"
+              />
+              <p class="ns-field-help" id="ns-equipment-help">
+                Optional. You can leave this blank if you are not sure.
+              </p>
+              <p class="ns-field-error" id="ns-equipment-error" hidden></p>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>How to reach you</legend>
+            <div class="ns-form-grid">
+              <div class="ns-form-field">
+                <label for="ns-name"
+                  >Your name
+                  <span data-ns-requirement="name">(required)</span></label
+                ><input
+                  id="ns-name"
+                  data-ns-field="name"
+                  aria-describedby="ns-name-error"
+                  autocomplete="off"
+                  required
+                  type="text"
+                  maxlength="100"
+                />
+                <p class="ns-field-error" id="ns-name-error" hidden></p>
+              </div>
+              <div class="ns-form-field">
+                <label for="ns-preference"
+                  >Preferred contact method
+                  <span data-ns-requirement="preference"
+                    >(required)</span
+                  ></label
+                ><select
+                  id="ns-preference"
+                  data-ns-field="preference"
+                  aria-describedby="ns-preference-help ns-preference-error"
+                  autocomplete="off"
+                  required
+                >
+                  <option value="">Choose a contact method</option>
+                  <option value="email">Email</option>
+                  <option value="phone">Phone</option>
+                  <option value="either">Either email or phone</option>
+                </select>
+                <p class="ns-field-help" id="ns-preference-help">
+                  Choose Email or Phone and provide that detail. For Either,
+                  provide at least one contact detail. Use sample details only.
+                </p>
+                <p class="ns-field-error" id="ns-preference-error" hidden></p>
+              </div>
+            </div>
+            <div class="ns-form-grid">
+              <div class="ns-form-field">
+                <label for="ns-email"
+                  >Email address
+                  <span data-ns-requirement="email">(optional)</span></label
+                ><input
+                  id="ns-email"
+                  data-ns-field="email"
+                  aria-describedby="ns-email-error"
+                  autocomplete="off"
+                  type="email"
+                  maxlength="160"
+                />
+                <p class="ns-field-error" id="ns-email-error" hidden></p>
+              </div>
+              <div class="ns-form-field">
+                <label for="ns-phone"
+                  >Phone number
+                  <span data-ns-requirement="phone">(optional)</span></label
+                ><input
+                  id="ns-phone"
+                  data-ns-field="phone"
+                  aria-describedby="ns-phone-error"
+                  autocomplete="off"
+                  type="tel"
+                  maxlength="40"
+                />
+                <p class="ns-field-error" id="ns-phone-error" hidden></p>
+              </div>
+            </div>
+          </fieldset>
+          <div class="ns-form-actions">
+            <button
+              class="ns-button"
+              type="button"
+              data-northside-submit
+              disabled
+            >
+              Preview heating inquiry</button
+            ><button class="ns-form-reset" type="reset">
+              Clear sample details
+            </button>
+          </div>
+          <noscript
+            ><p class="ns-small">
+              JavaScript enables this local demo check. Nothing can be sent from
+              this form.
+            </p></noscript
+          >
+          <p
+            class="ns-form-status"
+            role="status"
+            aria-live="polite"
+            tabindex="-1"
+          ></p>
         </form>
       </div>
     </main>

@@ -1,6 +1,11 @@
 const designConcepts = {
   alder: {
+    calloutIntro:
+      "A clear, compact starting point for independent consultants and small service businesses.",
+    calloutCopy:
+      "Introduce what you do, explain your services, and give visitors an easy way to get in touch. We can shape this four-page direction around your business, with your wording, branding, and images. Tell us what you have in mind.",
     name: "Alder & Lane",
+    startingPrice: "$950",
     type: "Static four-page starter · DEMO",
     description:
       "A demo business-operations sample from the four-page static starter, with real navigable example pages.",
@@ -41,7 +46,12 @@ const designConcepts = {
     ],
   },
   harbor: {
+    calloutIntro:
+      "A calm, organized direction for bookkeepers, advisers, and other professional service teams.",
+    calloutCopy:
+      "Give your services, approach, and common questions a clear place to live. We can adapt this five-page WordPress starting point to your firm’s content and identity. Share the pages you need and how you’d like people to inquire.",
     name: "Harbor Ledger",
+    startingPrice: "$1,999",
     type: "Simple WordPress theme sample · DEMO",
     description:
       "A calm professional-services concept based on a simpler stock-theme WordPress approach.",
@@ -97,7 +107,12 @@ const designConcepts = {
     ],
   },
   still: {
+    calloutIntro:
+      "An editorial portfolio direction for designers, creative studios, and independent makers.",
+    calloutCopy:
+      "Put your projects, process, and point of view at the center. We can tailor the visual direction around your work, imagery, and story, then discuss the project pages and portfolio features that fit your practice. Start with a few examples of what you’d like to show.",
     name: "Still Form",
+    startingPrice: "$1,695",
     type: "Custom-scope design-studio concept · DEMO",
     description:
       "An editorial design-studio direction with a prominent project gallery and deliberate typography.",
@@ -145,7 +160,12 @@ const designConcepts = {
     ],
   },
   aer: {
+    calloutIntro:
+      "A cinematic direction for drone operators, filmmakers, and visual production studios.",
+    calloutCopy:
+      "Give your films, photography, and services room to lead. We can shape the presentation around your own reel and project imagery, with a clear path from viewing the work to discussing a brief. Tell us what you want to showcase and how you want people to inquire.",
     name: "AER / FIELD",
+    startingPrice: "$1,995",
     type: "Custom-scope aerial-film concept · DEMO",
     description:
       "A cinematic direction for an aerial-film business. Video, gallery, and motion behavior require custom scoping.",
@@ -193,6 +213,10 @@ const designConcepts = {
     ],
   },
   northside: {
+    calloutIntro:
+      "A straightforward service-site direction for heating specialists and local trade businesses.",
+    calloutCopy:
+      "Help visitors explore your services, understand the work you take on, and find the right contact route. We can tailor this direction around your service areas, photos, and business details. Share how you handle inquiries so we can plan a suitable contact setup.",
     name: "Northside Heating & Boiler Care",
     type: "WordPress block theme sample · DEMO",
     description:
@@ -277,8 +301,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const previewSlug = previewSlugs[key];
   const mobileImage = document.getElementById("design-mobile-image");
-  mobileImage.dataset.src = `/assets/previews/${previewSlug}-mobile.png`;
-  mobileImage.dataset.srcset = `${mobileImage.dataset.src} 1x, /assets/previews/${previewSlug}-mobile@3x.webp 3x`;
+  const mobilePreviewVersion = "b5b373813f";
+  mobileImage.dataset.src = `/assets/previews/${previewSlug}-mobile.png?v=${mobilePreviewVersion}`;
+  mobileImage.dataset.srcset = `${mobileImage.dataset.src} 1x, /assets/previews/${previewSlug}-mobile@3x.webp?v=${mobilePreviewVersion} 3x`;
   mobileImage.alt = `${concept.name} responsive sample homepage preview`;
   mobileImage.width = 390;
   mobileImage.height = 620;
@@ -331,11 +356,26 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("sample-pages-title").firstChild.textContent =
     `Explore ${concept.name} pages`;
   document.title = `${concept.name} Website Concept | JustinJ Industries`;
-  document.getElementById("design-type").textContent = concept.type;
+  const metadata = document.getElementById("design-type");
+  metadata.textContent = concept.type;
+  if (concept.startingPrice) {
+    const separator = document.createElement("span");
+    separator.setAttribute("aria-hidden", "true");
+    separator.textContent = " • ";
+    const price = document.createElement("span");
+    price.className = "design-starting-price";
+    price.textContent = `From ${concept.startingPrice}`;
+    metadata.append(separator, price);
+  }
   document.getElementById("design-description").textContent =
     concept.description;
-  document.getElementById("design-scope-copy").textContent = concept.scope;
-  document.getElementById("design-scope-details").textContent = concept.terms;
+  document.getElementById("design-scope-copy").textContent =
+    concept.calloutIntro;
+  document.getElementById("design-scope-details").textContent =
+    concept.calloutCopy;
+  document.getElementById("design-package-scope").textContent = concept.scope;
+  document.getElementById("design-package-terms").textContent = concept.terms;
+  document.getElementById("design-package-disclosure").hidden = false;
   document.getElementById("selected-design-name").textContent = concept.name;
   document.getElementById("enquiry-design").value = concept.name;
   document.querySelector(

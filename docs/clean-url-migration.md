@@ -39,8 +39,25 @@ legacy `.html` files. The clean URLs below use trailing slashes.
 | `/previews/aer-field/films/real-estate.html` | `/previews/aer-field/films/real-estate/` |
 | `/previews/aer-field/films/business.html`    | `/previews/aer-field/films/business/`    |
 
-The four fictional preview sites remain `noindex`. The design-detail route
-keeps `?design=alder|harbor|still|aer`, and the government inquiry links keep
+The Northside routes already use directory-index source files:
+
+| Directory-index URL                                   | Clean path                                  |
+| ----------------------------------------------------- | ------------------------------------------- |
+| `/previews/northside/index.html`                      | `/previews/northside/`                      |
+| `/previews/northside/services/index.html`             | `/previews/northside/services/`             |
+| `/previews/northside/services/boiler-care/index.html` | `/previews/northside/services/boiler-care/` |
+| `/previews/northside/about/index.html`                | `/previews/northside/about/`                |
+| `/previews/northside/contact/index.html`              | `/previews/northside/contact/`              |
+
+The six newly added Still Form project routes are `/previews/still-form/project/arc/`,
+`/previews/still-form/project/noon/`, `/previews/still-form/project/form/`,
+`/previews/still-form/project/kindred/`, `/previews/still-form/project/ground/`
+and `/previews/still-form/project/elsewhere/`. Their explicit `index.html`
+forms remain available. No earlier flat `.html` project URLs existed in this
+checkout; do not invent redirect sources for them.
+
+The five fictional preview sites remain `noindex`. The design-detail route
+keeps `?design=alder|harbor|still|aer|northside`, and the government inquiry links keep
 their `inquiry_type` query values and `#contact` fragment. Resource URLs and
 external links are not redirect targets.
 
@@ -89,3 +106,29 @@ HTTP 200 responses. Local `npm run preview` tests the Pages artifact, not
 Cloudflare's 301 behavior.
 
 After deployment, also verify old homepage fragments `/#about`, `/#accessibility`, `/#privacy`, and `/#government-buyers` reach the corresponding dedicated page, and old `/about/#accessibility` and `/about/#privacy` bookmarks reach `/policies/`. These fragment transitions use client-side JavaScript because fragments are not sent to Cloudflare.
+
+## Current local checkpoint (2026-10-17)
+
+The inventory now covers eight JJI routes and 27 maintained demo routes,
+including Northside's five directory-index pages. Northside did not have flat
+`services.html` files; its existing nested `index.html` aliases appear above.
+The Pages workflow builds an explicit public artifact from this repository;
+Cloudflare remains the public edge. Production release 8636b53 succeeded.
+Later local demo-return, cover, typography and branding refinements are not
+part of that release. Legacy aliases are retained by the build; their eventual
+301 status and query/fragment behavior still require public-edge verification.
+Do not mark the URL migration complete based on a successful Pages deployment.
+
+Local verification of this checkpoint checked all 35 clean routes and all 35
+listed legacy/index aliases: each pair returned HTTP 200 with byte-identical
+HTML. Evidence: `/tmp/jji-local-route-aliases.json`. This is a compatibility
+check of the built artifact, not verification of public 301 redirects.
+
+## Still Form project routes — local 1.4.0 preview
+
+Added six new directory-index routes, with no pre-existing flat `.html` URL:
+`/previews/still-form/project/arc/`, `/noon/`, `/form/`, `/kindred/`, `/ground/`
+and `/elsewhere/` under the same project prefix. The complete local inventory is
+now 41 routes (eight JJI and 33 demo routes). Existing legacy compatibility and
+the outstanding public Cloudflare 301 verification remain unchanged. Preview
+routes remain noindex and are not added to the public marketing sitemap.

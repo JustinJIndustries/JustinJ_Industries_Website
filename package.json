@@ -14,7 +14,9 @@
     "check": "npm run check:footer && npm run check:html && npm run check:links && npm run check:a11y && npm run check:format",
     "preview": "npm run build && npm run serve",
     "sync:footer": "node scripts/sync-footer.mjs --write",
-    "check:footer": "node scripts/sync-footer.mjs && prettier --check assets/site-footer.css partials/site-footer.html scripts/sync-footer.mjs"
+    "check:footer": "node scripts/sync-footer.mjs && prettier --check assets/site-footer.css partials/site-footer.html scripts/sync-footer.mjs",
+    "build:capability": "node scripts/build-capability-pdf.mjs",
+    "check:capability": "node scripts/check-capability-pdf.mjs"
   },
   "devDependencies": {
     "html-validate": "^10.0.0",

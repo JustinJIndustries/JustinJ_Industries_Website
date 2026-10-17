@@ -25,6 +25,8 @@
   margin-inline: auto;
 }
 .jji-footer__main {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns:
     minmax(230px, 1.4fr) minmax(130px, 0.8fr) minmax(170px, 1fr)
@@ -32,32 +34,40 @@
   gap: 40px;
   padding-block: 64px 48px;
 }
+.jji-footer__identity {
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-height: 220px;
+}
+/* CSS decoration has no focus target or accessible image announcement. */
+.jji-footer__identity::before {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: min(100%, 220px);
+  height: 220px;
+  transform: translate(-50%, -50%);
+  background: url("/assets/logos/JJI-Logo-Only-white.png") center / contain
+    no-repeat;
+  opacity: 0.045;
+  pointer-events: none;
+  content: "";
+}
 .jji-footer__main > * {
+  position: relative;
+  z-index: 1;
   min-width: 0;
 }
-.jji-footer__brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  max-width: 100%;
-  min-height: 44px;
-  color: #e7e9ee;
-  font-size: 1.35rem;
-  font-weight: 700;
-  line-height: 1.25;
-  text-decoration: none;
-}
-.jji-footer__brand img {
-  flex: 0 0 44px;
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-}
 .jji-footer__identity p {
+  position: relative;
+  z-index: 1;
   max-width: 26ch;
-  margin: 16px 0 0 58px;
+  margin: 6px auto 0;
   color: #b7c8d8;
   font-size: 1rem;
+  text-align: center;
 }
 .jji-footer h2 {
   margin: 6px 0 14px;
@@ -171,12 +181,15 @@
   .jji-footer__contact {
     grid-column: 1 / -1;
   }
+  .jji-footer__identity {
+    min-height: 112px;
+  }
+  .jji-footer__identity::before {
+    width: 112px;
+    height: 112px;
+  }
   .jji-footer__identity p {
     max-width: 30ch;
-    margin-left: 0;
-  }
-  .jji-footer__brand {
-    font-size: 1.2rem;
   }
   .jji-footer__bottom,
   .jji-footer__policies {
@@ -209,6 +222,9 @@
   }
 }
 @media (forced-colors: active) {
+  .jji-footer__identity::before {
+    display: none;
+  }
   .jji-footer a:focus-visible {
     outline-color: Highlight;
   }
