@@ -2788,6 +2788,9 @@ select[aria-invalid="true"] {
   text-decoration: underline;
   text-underline-offset: 0.12em;
 }
+.home-story .work-note-ref a {
+  color: #9bd8ff;
+}
 .site-disclosure {
   padding-top: clamp(18px, 2.5vw, 28px);
   margin-bottom: clamp(52px, 7vw, 90px);
