@@ -94,3 +94,7 @@ Use docs/owner-data-needed.md to track missing owner-supplied procurement data.
 ## Opportunity documents
 
 Opportunity documents may live under capture/opportunity/ for local analysis. Do not publish confidential solicitation details. Public site changes should be reusable, truthful, and not overly tailored to a single opportunity.
+
+## Demo icon direction
+
+Use restrained SVG or CSS vector icons for all current and future demos. Do not use emoji or font-dependent Unicode symbols as icons. Decorative icons must be hidden from assistive technology; keep visible link labels, accessible control names and destinations intact. Keep maintained static and CMS/theme variants consistent.

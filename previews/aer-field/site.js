@@ -1,4 +1,6 @@
 (function () {
+  const playIcon = `<svg class="demo-icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m8 5 11 7-11 7Z"></path></svg>`;
+  const pauseIcon = `<svg class="demo-icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 5v14M16 5v14"></path></svg>`;
   const menuButton = document.querySelector(".menu-toggle"),
     menu = document.querySelector(".primary-nav");
   if (menuButton && menu) {
@@ -44,7 +46,7 @@
       "aria-label",
       paused ? toggle.dataset.playLabel : toggle.dataset.pauseLabel,
     );
-    toggle.querySelector("span").textContent = paused ? "▶" : "Ⅱ";
+    toggle.querySelector("span").innerHTML = paused ? playIcon : pauseIcon;
   }
   function heroSource() {
     return mobile.matches
@@ -120,7 +122,9 @@
         ? servicesToggle.dataset.playLabel
         : servicesToggle.dataset.pauseLabel,
     );
-    servicesToggle.querySelector("span").textContent = paused ? "▶" : "Ⅱ";
+    servicesToggle.querySelector("span").innerHTML = paused
+      ? playIcon
+      : pauseIcon;
   }
   function stopServices() {
     if (!servicesVideo) return;
