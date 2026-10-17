@@ -55,7 +55,10 @@
     if (!hero || (!manual && motion.matches) || !heroSource()) return;
     if (
       !manual &&
-      (userPaused || data.matches || mobile.matches || document.hidden)
+      (userPaused ||
+        data.matches ||
+        navigator.connection?.saveData ||
+        document.hidden)
     )
       return;
     if (hero.src !== new URL(heroSource(), location.href).href)
@@ -64,6 +67,7 @@
       await hero.play();
       hero.classList.add("is-playing");
     } catch (e) {
+      hero.pause();
       hero.classList.remove("is-playing");
     }
     syncButton();
@@ -90,13 +94,12 @@
       stopHero();
       hero.removeAttribute("src");
       hero.load();
-      userPaused = false;
       playHero();
     });
   }
   if (toggle && hero)
     toggle.addEventListener("click", () => {
-      if (!hero.paused) {
+      if (!hero.paused && hero.classList.contains("is-playing")) {
         userPaused = true;
         stopHero();
       } else {
@@ -134,7 +137,10 @@
       return;
     if (
       !manual &&
-      (servicesPaused || data.matches || mobile.matches || document.hidden)
+      (servicesPaused ||
+        data.matches ||
+        navigator.connection?.saveData ||
+        document.hidden)
     )
       return;
     if (!servicesVideo.src) servicesVideo.src = servicesVideo.dataset.src;
@@ -142,6 +148,7 @@
       await servicesVideo.play();
       servicesVideo.classList.add("is-playing");
     } catch (e) {
+      servicesVideo.pause();
       servicesVideo.classList.remove("is-playing");
     }
     syncServices();
@@ -164,13 +171,15 @@
         servicesVideo.removeAttribute("src");
         servicesVideo.load();
       }
-      servicesPaused = false;
       playServices();
     });
   }
   if (servicesToggle && servicesVideo)
     servicesToggle.addEventListener("click", () => {
-      if (!servicesVideo.paused) {
+      if (
+        !servicesVideo.paused &&
+        servicesVideo.classList.contains("is-playing")
+      ) {
         servicesPaused = true;
         stopServices();
       } else {
@@ -183,7 +192,7 @@
     reels.length &&
     !motion.matches &&
     !data.matches &&
-    !mobile.matches &&
+    !navigator.connection?.saveData &&
     "IntersectionObserver" in window
   ) {
     const observer = new IntersectionObserver(
@@ -196,6 +205,7 @@
               await video.play();
               video.classList.add("is-playing");
             } catch (e) {
+              video.pause();
               video.classList.remove("is-playing");
             }
           } else {
@@ -203,7 +213,7 @@
             video.classList.remove("is-playing");
           }
         }),
-      { rootMargin: "100px 0px" },
+      { rootMargin: "0px", threshold: 0.5 },
     );
     reels.forEach((v) => observer.observe(v));
   }

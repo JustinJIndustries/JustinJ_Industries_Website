@@ -1,13 +1,22 @@
 document.documentElement.classList.add("js");
 
 // Homepage section links shared before these sections moved to dedicated pages.
-if (location.pathname === "/" || location.pathname === "/index.html") {
-  const movedSections = {
-    "#about": "/about/",
-    "#accessibility": "/about/#accessibility",
-    "#privacy": "/about/#privacy",
-    "#government-buyers": "/government-buyers/",
-  };
+const isHomepage =
+  location.pathname === "/" || location.pathname === "/index.html";
+const isAboutPage =
+  location.pathname === "/about/" || location.pathname === "/about.html";
+if (isHomepage || isAboutPage) {
+  const movedSections = isHomepage
+    ? {
+        "#about": "/about/",
+        "#accessibility": "/policies/#accessibility",
+        "#privacy": "/policies/#privacy",
+        "#government-buyers": "/government-buyers/",
+      }
+    : {
+        "#accessibility": "/policies/#accessibility",
+        "#privacy": "/policies/#privacy",
+      };
   const target = movedSections[location.hash];
   if (target) {
     const destination = new URL(target, location.origin);
@@ -432,6 +441,53 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial
   if (!localStorage.getItem(LS_KEY)) setStoredTheme("auto");
   applyTheme();
+});
+
+// Load the public Northside report only after an explicit desktop activation.
+document.addEventListener("DOMContentLoaded", () => {
+  const toggle = document.getElementById("northside-report-toggle");
+  const panel = document.getElementById("northside-report-panel");
+  const viewport = panel?.querySelector(".work-report__viewport");
+  const frameTemplate = viewport?.querySelector("iframe")?.cloneNode(true);
+  if (!toggle || !panel || !viewport || !frameTemplate) return;
+
+  const phoneLayout = window.matchMedia("(max-width: 760px)");
+  let expanded = false;
+
+  // Keep Looker's 900 × 675 canvas intact, then scale it to fill wider sections.
+  const sizeReport = () => {
+    const scale = Math.max(1, viewport.clientWidth / 900);
+    viewport.style.setProperty("--northside-report-scale", String(scale));
+    viewport.style.height = `${Math.ceil(675 * scale) + 2}px`;
+  };
+  const syncReport = () => {
+    if (phoneLayout.matches) expanded = false;
+    const showFrame = !phoneLayout.matches && expanded;
+    viewport.replaceChildren();
+    if (showFrame) {
+      const frame = frameTemplate.cloneNode(true);
+      frame.src = frame.dataset.src;
+      viewport.append(frame);
+      sizeReport();
+    }
+    panel.hidden = !showFrame;
+    toggle.hidden = phoneLayout.matches;
+    toggle.textContent = expanded
+      ? "Hide interactive dashboard"
+      : "Load interactive dashboard";
+    toggle.setAttribute("aria-expanded", String(showFrame));
+  };
+  if (typeof ResizeObserver === "function") {
+    new ResizeObserver(sizeReport).observe(viewport);
+  } else {
+    window.addEventListener("resize", sizeReport);
+  }
+  toggle.addEventListener("click", () => {
+    expanded = !expanded;
+    syncReport();
+  });
+  phoneLayout.addEventListener("change", syncReport);
+  syncReport();
 });
 
 // Contact form: native fallback plus a controlled, accessible AJAX response.

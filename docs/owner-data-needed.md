@@ -17,7 +17,7 @@
   form and reported receiving its notification in the `info@` inbox on
   2026-10-15. This confirms public-origin delivery by owner report; the agent
   did not inspect the recipient mailbox or independently verify a submission
-  ID. The new catalogue's AJAX enquiry was checked locally with mock accepted,
+  ID. The new catalogue's AJAX inquiry was checked locally with mock accepted,
   rejected, and repeated responses; it has not received a live submission.
 - The owner approved the selected public-facing sample assets for publication:
   Alder & Lane static pages and the static Harbor Ledger, Still Form, and

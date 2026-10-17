@@ -8,7 +8,7 @@
     "build": "node scripts/build-public.mjs",
     "check:html": "html-validate \"*.html\"",
     "check:links": "npm run build && node scripts/check-public-links.mjs",
-    "check:a11y": "npm run build && start-server-and-test serve http://127.0.0.1:8080 \"pa11y http://127.0.0.1:8080 --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/about/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/work/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/government-buyers/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/capability-statement/ --standard WCAG2AA --timeout 120000\"",
+    "check:a11y": "npm run build && start-server-and-test serve http://127.0.0.1:8080 \"pa11y http://127.0.0.1:8080 --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/about/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/policies/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/work/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/government-buyers/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/capability-statement/ --standard WCAG2AA --timeout 120000\"",
     "check:format": "prettier --check --ignore-unknown \"*.{html,css,js,md,xml,txt}\" \"docs/**/*.md\"",
     "format": "prettier --write --ignore-unknown \"*.{html,css,js,md,xml,txt}\" \"docs/**/*.md\"",
     "check": "npm run check:html && npm run check:links && npm run check:a11y && npm run check:format",

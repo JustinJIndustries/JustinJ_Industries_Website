@@ -3,25 +3,25 @@ const designConcepts = {
     name: "Alder & Lane",
     type: "Static four-page starter · DEMO",
     description:
-      "A fictional business-operations sample from the four-page static starter, with real navigable example pages.",
+      "A demo business-operations sample from the four-page static starter, with real navigable example pages.",
     service: "Static four-page site",
     scope:
       "The $950 static package covers Home, Services, About, and Contact with email and phone links. It does not include a CMS, backend, contact form, commerce, or blog.",
     terms:
-      "Two revisions, up to five sections per page, 2,000 client words and 12 licensed client images (logo excluded). Fourteen calendar days begin after mandatory inputs arrive. One initial deployment to a compatible client-ready static host and seven days of defect fixes are included. Domain/DNS migration and server repair are excluded. Optional updates: $70/hour, $70 minimum per request, agreed beforehand.",
+      "Two revisions, up to five sections per page, 2,000 client words and 12 licensed client images (logo excluded). Clients must have rights to supplied content. Fourteen calendar days begin after mandatory inputs arrive. One initial deployment to a compatible client-ready static host and seven days of defect fixes are included. Domain/DNS migration and server repair are excluded. Optional updates: $70/hour, $70 minimum per request, agreed beforehand.",
     pages: [
       {
         name: "Home",
         eyebrow: "ALDER & LANE",
         title: "Make room for better ways of working.",
-        body: "A fictional studio introduction with service and contact paths.",
+        body: "A demo studio introduction with service and contact paths.",
         blocks: ["What we do", "Why work with us", "Get in touch"],
       },
       {
         name: "Services",
         eyebrow: "OUR SERVICES",
         title: "Practical help, clearly explained.",
-        body: "A concise overview of services and the best way to enquire.",
+        body: "A concise overview of services and the best way to inquire.",
         blocks: ["Service one", "Service two", "How we work"],
       },
       {
@@ -55,7 +55,7 @@ const designConcepts = {
         name: "Home",
         eyebrow: "HARBOR LEDGER",
         title: "Clarity for the numbers ahead.",
-        body: "A steady introduction to a fictional bookkeeping practice.",
+        body: "A steady introduction to a demo bookkeeping practice.",
         blocks: [
           "Services at a glance",
           "A practical process",
@@ -105,7 +105,7 @@ const designConcepts = {
     scope:
       "Still Form website setup starts at $1,695 for core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
     terms:
-      "Portfolio interactions, animation, CMS features, integrations, extra pages, hosting, paid tools, and stock assets are scoped and quoted separately. The fictional preview does not include its source WordPress runtime.",
+      "Portfolio interactions, animation, CMS features, integrations, extra pages, hosting, paid tools, and stock assets are scoped and quoted separately. The website demo does not include its source WordPress runtime.",
     pages: [
       {
         name: "Home",
@@ -139,25 +139,25 @@ const designConcepts = {
         name: "Contact",
         eyebrow: "LET'S TALK",
         title: "Start with a conversation.",
-        body: "An enquiry path adapted to the real project scope.",
+        body: "An inquiry path adapted to the real project scope.",
         blocks: ["Project outline", "Timeline", "Get in touch"],
       },
     ],
   },
   aer: {
-    name: "AER/FIELD",
+    name: "AER / FIELD",
     type: "Custom-scope aerial-film concept · DEMO",
     description:
       "A cinematic direction for an aerial-film business. Video, gallery, and motion behavior require custom scoping.",
-    service: "AER/FIELD website setup",
+    service: "AER / FIELD website setup",
     scope:
-      "AER/FIELD website setup starts at $1,995 for core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
+      "AER / FIELD website setup starts at $1,995 for core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
     terms:
-      "Filming, editing, video delivery, interactive galleries, film detail features, custom motion, extra pages, hosting, paid tools, and stock assets are scoped and quoted separately. Preview footage is licensed for this fictional study; demo forms are inactive.",
+      "Filming, editing, video delivery, interactive galleries, film detail features, custom motion, extra pages, hosting, paid tools, and stock assets are scoped and quoted separately. Preview footage is licensed for this demo study; demo forms are inactive.",
     pages: [
       {
         name: "Home",
-        eyebrow: "AER/FIELD",
+        eyebrow: "AER / FIELD",
         title: "The view changes everything.",
         body: "An aerial-film introduction built around motion and place.",
         blocks: ["Featured film", "What we capture", "Discuss a project"],
@@ -187,8 +187,60 @@ const designConcepts = {
         name: "Contact",
         eyebrow: "CONTACT",
         title: "Tell us what you want to show.",
-        body: "A scoped enquiry for the real project and its media needs.",
+        body: "A scoped inquiry for the real project and its media needs.",
         blocks: ["The brief", "Timing", "Get in touch"],
+      },
+    ],
+  },
+  northside: {
+    name: "Northside Heating & Boiler Care",
+    type: "WordPress block theme sample · DEMO",
+    description:
+      "A WordPress-ready block theme concept with editable content, native navigation, service pages, and a non-sending inquiry path.",
+    service: "Custom scope",
+    scope:
+      "A WordPress-ready demo package with Home, Services, About, and Contact routes. The content is synthetic and the form is a non-sending demonstration.",
+    terms:
+      "Portfolio concept only. Final content, hosting, integrations, form delivery, and production redirects require separate scope and approval.",
+    pages: [
+      {
+        name: "Home",
+        eyebrow: "NORTHSIDE HEATING & BOILER CARE",
+        title: "Comfort, made clearer.",
+        body: "A calm WordPress homepage concept for practical heating guidance.",
+        blocks: ["Boiler care", "Heating systems", "Discuss a service need"],
+      },
+      {
+        name: "Services",
+        eyebrow: "PRACTICAL HELP",
+        title: "A clearer next step for your heating questions.",
+        body: "A service overview with editable native content.",
+        blocks: ["Boiler care", "Heating systems", "Guidance"],
+      },
+      {
+        name: "Boiler Care",
+        eyebrow: "NORTHSIDE SERVICES",
+        title: "Boiler care",
+        body: "A practical service detail with context, options, and next steps.",
+        blocks: [
+          "Start with context",
+          "Review the options",
+          "Plan the next step",
+        ],
+      },
+      {
+        name: "About",
+        eyebrow: "ABOUT NORTHSIDE",
+        title: "Dependable guidance for everyday comfort.",
+        body: "A placeholder for verified business details and approach.",
+        blocks: ["Our approach", "What to expect", "Contact"],
+      },
+      {
+        name: "Contact",
+        eyebrow: "START A CONVERSATION",
+        title: "Tell us what you need.",
+        body: "A non-sending inquiry demonstration for the WordPress concept.",
+        blocks: ["Your service need", "A little more detail", "Send inquiry"],
       },
     ],
   },
@@ -200,13 +252,84 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!concept) {
     document.getElementById("design-description").innerHTML =
       'Choose a concept from the <a href="/catalogue/">design catalogue</a>.';
+    document
+      .querySelectorAll(".design-explore, .design-scope")
+      .forEach((section) => (section.hidden = true));
     return;
   }
 
   const title = document.getElementById("design-title");
   const tabs = document.getElementById("design-tabs");
   const panel = document.getElementById("design-panel");
+  const loadButton = document.getElementById("preview-load");
+  const controls = document.getElementById("preview-controls");
+  const desktopButton = document.getElementById("preview-desktop");
+  const mobileButton = document.getElementById("preview-mobile");
+  const viewportStatus = document.getElementById("preview-viewport-status");
+  const mobilePreview = document.getElementById("design-mobile-preview");
+  const phoneLayout = window.matchMedia("(max-width: 760px)");
+  const previewSlugs = {
+    alder: "alder-lane",
+    harbor: "harbor-ledger",
+    still: "still-form",
+    aer: "aer-field",
+    northside: "northside",
+  };
+  const previewSlug = previewSlugs[key];
+  const mobileImage = document.getElementById("design-mobile-image");
+  mobileImage.dataset.src = `/assets/previews/${previewSlug}-mobile.png`;
+  mobileImage.dataset.srcset = `${mobileImage.dataset.src} 1x, /assets/previews/${previewSlug}-mobile@3x.webp 3x`;
+  mobileImage.alt = `${concept.name} responsive sample homepage preview`;
+  mobileImage.width = 390;
+  mobileImage.height = 620;
+  document.getElementById("design-mobile-link").href =
+    `/previews/${previewSlug}/`;
+  document
+    .getElementById("design-mobile-link")
+    .setAttribute("aria-label", `Explore ${concept.name} demo in a new tab`);
+  let activeViewport = "desktop";
+  let desktopAvailable = false;
+  let activePage = 0;
+  let previewLoaded = true;
+
+  // The iframe is resized in place, so switching widths retains its page and state.
+  function setViewport(mode) {
+    if (mode === "desktop" && !desktopAvailable) return;
+    activeViewport = mode;
+    panel.dataset.viewport = mode;
+    desktopButton.setAttribute("aria-pressed", String(mode === "desktop"));
+    mobileButton.setAttribute("aria-pressed", String(mode === "mobile"));
+    const message =
+      mode === "desktop"
+        ? "Desktop-width live preview. Use the page tabs to explore the sample."
+        : desktopAvailable
+          ? "Phone-width live preview. Switch back to Desktop at any time."
+          : "Phone-width live preview. Widen this window to enable Desktop.";
+    if (viewportStatus.textContent !== message)
+      viewportStatus.textContent = message;
+  }
+
+  function syncViewportAvailability() {
+    const stage = panel.querySelector(".preview-stage");
+    if (!stage) return;
+    const stageStyle = window.getComputedStyle(stage);
+    const usableWidth =
+      stage.clientWidth -
+      parseFloat(stageStyle.paddingLeft) -
+      parseFloat(stageStyle.paddingRight);
+    desktopAvailable = usableWidth >= 960;
+    desktopButton.disabled = !desktopAvailable;
+    desktopButton.title = desktopAvailable
+      ? "Preview the live page at desktop width"
+      : "Desktop preview needs a wider browser window";
+    setViewport(desktopAvailable ? activeViewport : "mobile");
+  }
+
+  desktopButton.addEventListener("click", () => setViewport("desktop"));
+  mobileButton.addEventListener("click", () => setViewport("mobile"));
   title.textContent = concept.name;
+  document.getElementById("sample-pages-title").firstChild.textContent =
+    `Explore ${concept.name} pages`;
   document.title = `${concept.name} Website Concept | JustinJ Industries`;
   document.getElementById("design-type").textContent = concept.type;
   document.getElementById("design-description").textContent =
@@ -218,14 +341,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(
     `input[name="service_kit"][value="${concept.service}"]`,
   ).checked = true;
-  document.getElementById("design-preview-note").textContent =
-    key === "alder"
-      ? "Browse the original fictional four-page static sample. Its contact details are placeholders."
-      : key === "aer"
-        ? "Browse the fictional AER/FIELD study with playable licensed footage. Its contact form is inactive."
-        : "Browse the fictional source page layouts and approved media. Demo forms are inactive.";
-
   const showPage = (index, focusTab = false) => {
+    activePage = index;
     const page = concept.pages[index];
     tabs.querySelectorAll('[role="tab"]').forEach((tab, tabIndex) => {
       const active = tabIndex === index;
@@ -235,11 +352,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     panel.className = `design-panel design-panel--${key}`;
     panel.setAttribute("aria-labelledby", `design-tab-${index}`);
+    if (!previewLoaded || phoneLayout.matches) return;
     const routeNames = {
       alder: { base: "alder-lane", Projects: "work", About: "about" },
       harbor: { base: "harbor-ledger" },
       still: { base: "still-form", Work: "work" },
       aer: { base: "aer-field", Film: "work", About: "studio" },
+      northside: { base: "northside", "Boiler Care": "services/boiler-care" },
     };
     const route = routeNames[key];
     const filename =
@@ -249,9 +368,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const path = `/previews/${route.base}/${filename === "index" ? "" : `${filename}/`}`;
     const frame = document.createElement("iframe");
     frame.className = "sample-iframe";
-    frame.title = `${concept.name} ${page.name} fictional sample`;
+    frame.title = `${concept.name} ${page.name} sample`;
     frame.src = path;
-    frame.loading = "lazy";
     frame.setAttribute("sandbox", "allow-scripts");
     frame.setAttribute("allow", "autoplay");
     const openLink = document.createElement("a");
@@ -260,7 +378,11 @@ document.addEventListener("DOMContentLoaded", () => {
     openLink.target = "_blank";
     openLink.rel = "noopener";
     openLink.textContent = `Open full ${page.name} sample page`;
-    panel.replaceChildren(frame, openLink);
+    const stage = document.createElement("div");
+    stage.className = "preview-stage";
+    stage.append(frame);
+    panel.replaceChildren(stage, openLink);
+    syncViewportAvailability();
   };
 
   concept.pages.forEach((page, index) => {
@@ -288,7 +410,56 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     tabs.append(button);
   });
-  showPage(0);
+  const showUnloadedState = () => {
+    panel.removeAttribute("data-viewport");
+    panel.replaceChildren();
+    panel.hidden = true;
+    controls.hidden = true;
+    viewportStatus.hidden = true;
+  };
+  const syncPresentation = () => {
+    const phone = phoneLayout.matches;
+    if (phone && mobileImage.getAttribute("src") !== mobileImage.dataset.src) {
+      mobileImage.srcset = mobileImage.dataset.srcset;
+      mobileImage.src = mobileImage.dataset.src;
+    }
+    mobilePreview.hidden = !phone;
+    loadButton.hidden = phone;
+    if (phone) {
+      // Remove video and scripts from the live sample when only its image is shown.
+      showUnloadedState();
+    } else if (previewLoaded) {
+      panel.hidden = false;
+      controls.hidden = false;
+      viewportStatus.hidden = false;
+      showPage(activePage);
+      setViewport(activeViewport);
+    }
+  };
+  phoneLayout.addEventListener("change", syncPresentation);
+  loadButton.addEventListener("click", () => {
+    previewLoaded = !previewLoaded;
+    loadButton.setAttribute("aria-expanded", String(previewLoaded));
+    loadButton.textContent = previewLoaded
+      ? "Hide Interactive Preview"
+      : "Load Interactive Preview";
+    if (previewLoaded) {
+      panel.hidden = false;
+      controls.hidden = false;
+      viewportStatus.hidden = false;
+      showPage(activePage);
+      setViewport(activeViewport);
+    } else {
+      // Remove the iframe so hidden videos, audio, and scripts stop running.
+      showUnloadedState();
+    }
+  });
+  syncPresentation();
+  if (typeof ResizeObserver === "function") {
+    new ResizeObserver(syncViewportAvailability).observe(panel);
+  } else {
+    window.addEventListener("resize", syncViewportAvailability);
+  }
 
   const dialog = document.getElementById("enquiry-dialog");
   const form = document.getElementById("enquiry-form");
@@ -453,7 +624,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (
       dirty &&
       !sent &&
-      !window.confirm("Discard this enquiry? Your answers will be lost.")
+      !window.confirm("Discard this inquiry? Your answers will be lost.")
     )
       return;
     dialog.close();
@@ -529,17 +700,17 @@ document.addEventListener("DOMContentLoaded", () => {
       message.tabIndex = -1;
       message.setAttribute("role", "status");
       message.textContent =
-        "Your enquiry was submitted. JustinJ Industries will review it and follow up with next steps.";
+        "Your inquiry was submitted. JustinJ Industries will review it and follow up with next steps.";
       dialog.querySelector(".enquiry-shell").append(message);
       message.focus();
     } catch {
       showError(
-        "Your enquiry could not be sent. Your answers are still here. Please retry or email info@justinjindustries.com.",
+        "Your inquiry could not be sent. Your answers are still here. Please retry or email info@justinjindustries.com.",
       );
     } finally {
       sending = false;
       submit.disabled = false;
-      submit.textContent = "Send enquiry";
+      submit.textContent = "Send inquiry";
     }
   });
 });

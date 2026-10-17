@@ -1,3 +1,5 @@
+@import url("/assets/arrow-links.css");
+
 /* Original starter styles. Brand colors are injected by build.py from config JSON. */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -13,7 +15,7 @@ img { display: block; max-width: 100%; }
 .skip-link:focus { transform: none; }
 .sample-banner { background: var(--accent); color: var(--ink); font-size: .75rem; line-height: 1.4; letter-spacing: .01em; }
 .sample-banner .wrap { display: flex; gap: 12px; align-items: center; padding-block: 8px; }
-.sample-banner strong { text-transform: uppercase; letter-spacing: .12em; white-space: nowrap; }
+.sample-banner strong { letter-spacing: .12em; white-space: nowrap; }
 .site-header { position: relative; z-index: 10; border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); background: var(--paper); }
 .header-inner { display: flex; align-items: center; min-height: 88px; gap: 34px; }
 .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; flex: 1 1 auto; min-width: 0; }
@@ -172,3 +174,21 @@ p { max-width: 62ch; }
   .closing, .feature-band { padding: 25px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Demo context and source credits stay directly above the branded footer. */
+.demo-disclosures {
+  box-sizing: border-box;
+  width: min(1200px, calc(100% - 40px));
+  max-width: none;
+  margin: clamp(42px, 6vw, 78px) auto;
+  padding-top: 22px;
+  border-top: 1px solid rgba(128, 128, 128, 0.5);
+}
+.demo-disclosures p {
+  max-width: none;
+  margin: 0 0 0.7rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.demo-disclosures p:last-child { margin-bottom: 0; }
+.demo-disclosures p:target { outline: 2px solid currentColor; outline-offset: 6px; }

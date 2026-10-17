@@ -34,7 +34,7 @@
       content="https://www.justinjindustries.com/assets/work/uaid-usa-home.png"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="/styles.css?v=d4dc44954f" />
+    <link rel="stylesheet" href="/styles.css?v=568ad6dc1b" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -149,7 +149,7 @@
       </ul>
     </div>
 
-    <main id="main">
+    <main id="main" tabindex="-1">
       <section class="hero container">
         <div class="hero__content">
           <p class="eyebrow">Websites • Measurement • Ongoing Support</p>
@@ -186,72 +186,81 @@
         </figure>
       </section>
 
-      <section id="work" class="section container">
-        <div class="section__head">
-          <h2>Selected work</h2>
-          <p>
-            A few examples of the web and measurement experience behind the
-            services. Each project note explains the scope and the work
-            delivered.
-          </p>
-        </div>
-        <div class="grid cards work-cards">
-          <article class="card reveal">
-            <img
-              loading="lazy"
-              src="/assets/work/uaid-usa-home.png"
-              alt="UAid Direct USA homepage with regional navigation and a photo-led introduction"
-              width="1920"
-              height="1670"
-            />
-            <div class="card__body">
-              <p class="work-label">WordPress multisite · Nonprofit</p>
-              <h3>UAid Direct</h3>
+      <section
+        id="next-step"
+        class="home-story"
+        aria-labelledby="home-story-title"
+      >
+        <div class="container home-story__inner">
+          <div class="home-story__intro">
+            <p class="eyebrow">A connected digital foundation</p>
+            <h2 id="home-story-title">A website is only the beginning.</h2>
+            <p>
+              A useful site gives people a clear next step. A useful measurement
+              system helps the team understand what happened next. The two
+              belong in the same conversation.
+            </p>
+            <a class="btn btn--ghost" href="#contact"
+              >Talk through your next step</a
+            >
+          </div>
+          <div
+            class="home-story__visual"
+            role="img"
+            aria-label="Illustration of a website leading to an inquiry and then to a measurement report"
+          >
+            <div class="home-story__stage home-story__stage--site">
+              <span class="home-story__number">01</span>
+              <img
+                src="/assets/work/northside-home-cover.png"
+                alt="Synthetic Northside Heating and Boiler Care homepage concept"
+                width="2048"
+                height="1152"
+                loading="lazy"
+              />
+              <h3>Make the next step clear</h3>
               <p>
-                A regional USA and Ukraine WordPress multisite with custom
-                homepage and news templates, reusable ACF layouts, and
-                English/Ukrainian Help content.
+                Structure, content, and interaction give visitors somewhere
+                useful to go.
               </p>
-              <ul class="work-card-points">
-                <li>Custom homepage and news templates</li>
-                <li>11 reusable ACF layout choices</li>
-              </ul>
-              <a class="text-link" href="/work/#uaid"
-                >Explore the project <span aria-hidden="true">→</span></a
-              >
             </div>
-          </article>
-          <article class="card reveal">
-            <img
-              loading="lazy"
-              src="/assets/work/northside-dashboard-demo.png"
-              class="report-screenshot"
-              alt="Synthetic Northside dashboard example with lead, session, and trend charts"
-              width="1080"
-              height="780"
-            />
-            <div class="card__body">
-              <p class="work-label">Looker Studio · Portfolio demo</p>
-              <h3>Northside dashboard</h3>
+            <div class="home-story__connector" aria-hidden="true">→</div>
+            <div class="home-story__stage home-story__stage--enquiry">
+              <span class="home-story__number">02</span>
+              <div class="home-story__form" aria-hidden="true">
+                <span class="home-story__form-label"
+                  >What do you need help with?</span
+                >
+                <span class="home-story__form-input"
+                  >Website or analytics support</span
+                >
+                <span class="home-story__form-label">A little more detail</span>
+                <span class="home-story__form-line"></span>
+                <span class="home-story__form-button">Send inquiry</span>
+              </div>
+              <h3>Make the inquiry usable</h3>
               <p>
-                An eight-page reporting concept that brings acquisition,
-                inquiries, search behavior, and service-area views into one
-                reviewable format. All figures are synthetic sample data.
+                Capture the question with enough context for a thoughtful
+                response.
               </p>
-              <ul class="work-card-points">
-                <li>Clear traffic and inquiry views</li>
-                <li>Visible synthetic-data disclosure</li>
-              </ul>
-              <a class="text-link" href="/work/#northside"
-                >Explore the demo <span aria-hidden="true">→</span></a
-              >
             </div>
-          </article>
+            <div class="home-story__connector" aria-hidden="true">→</div>
+            <div class="home-story__stage home-story__stage--report">
+              <span class="home-story__number">03</span>
+              <img
+                src="/assets/work/northside-dashboard-demo.png"
+                alt="Synthetic dashboard demo with lead, session, and trend charts"
+                width="1080"
+                height="780"
+                loading="lazy"
+              />
+              <h3>See what to do next</h3>
+              <p>
+                Measurement and QA turn activity into a clearer next decision.
+              </p>
+            </div>
+          </div>
         </div>
-        <p class="small case-disclaimer">
-          Northside is a portfolio demo with synthetic data. UAid Direct is not
-          presented as government past performance.
-        </p>
       </section>
 
       <section id="services" class="section container">
@@ -264,7 +273,17 @@
         </div>
         <div class="grid services">
           <div class="service reveal">
-            <h3>Full Website Builds &amp; Redesigns</h3>
+            <h3>
+              <svg
+                class="home-service-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <rect x="3" y="4" width="18" height="14" rx="2"></rect>
+                <path d="M3 8h18M8 21h8M10 18v3M14 18v3"></path></svg
+              >Full Website Builds &amp; Redesigns
+            </h3>
             <ul>
               <li>
                 Site planning, page structure, design implementation, and launch
@@ -277,7 +296,17 @@
             </ul>
           </div>
           <div class="service reveal">
-            <h3>WordPress Support</h3>
+            <h3>
+              <svg
+                class="home-service-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M4 5h16v14H4zM8 9h8M8 13h5"></path>
+                <path d="M7 3v4M17 3v4"></path></svg
+              >WordPress Support
+            </h3>
             <ul>
               <li>
                 Theme updates, block patterns, and reusable ACF content models
@@ -287,7 +316,21 @@
             </ul>
           </div>
           <div class="service reveal">
-            <h3>Analytics Implementation &amp; QA</h3>
+            <h3>
+              <svg
+                class="home-service-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M4 19V5M4 19h17"></path>
+                <path d="m7 15 3-4 3 2 5-6"></path>
+                <circle cx="7" cy="15" r="1"></circle>
+                <circle cx="10" cy="11" r="1"></circle>
+                <circle cx="13" cy="13" r="1"></circle>
+                <circle cx="18" cy="7" r="1"></circle></svg
+              >Analytics Implementation &amp; QA
+            </h3>
             <ul>
               <li>GA4 and GTM implementation and troubleshooting</li>
               <li>Adobe Analytics and AEP implementation QA</li>
@@ -297,7 +340,17 @@
             </ul>
           </div>
           <div class="service reveal">
-            <h3>Technical Documentation</h3>
+            <h3>
+              <svg
+                class="home-service-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M6 3h9l4 4v14H6z"></path>
+                <path d="M15 3v5h4M9 12h6M9 16h6"></path></svg
+              >Technical Documentation
+            </h3>
             <ul>
               <li>QA logs, implementation notes, and release checklists</li>
               <li>Tagging specs and handoff-ready measurement documentation</li>
@@ -305,7 +358,19 @@
             </ul>
           </div>
           <div class="service reveal">
-            <h3>AI Workflow Support</h3>
+            <h3>
+              <svg
+                class="home-service-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <circle cx="12" cy="12" r="4"></circle>
+                <path
+                  d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"
+                ></path></svg
+              >AI Workflow Support
+            </h3>
             <ul>
               <li>Practical AI-assisted build and documentation workflows</li>
               <li>Prompted QA checklists and repeatable review steps</li>
@@ -313,7 +378,17 @@
             </ul>
           </div>
           <div class="service reveal">
-            <h3>Ongoing Website Support</h3>
+            <h3>
+              <svg
+                class="home-service-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M4 13a8 8 0 0 1 16 0v5H4z"></path>
+                <path d="M4 14H2v4h4M20 14h2v4h-4M9 21h6"></path></svg
+              >Ongoing Website Support
+            </h3>
             <ul>
               <li>Content updates, new pages, and technical cleanup</li>
               <li>
@@ -342,24 +417,45 @@
         </div>
       </section>
 
-      <section id="results" class="stripe" aria-label="Delivery approach">
-        <div class="container stripe__inner">
-          <div class="kpi reveal">
-            <span class="kpi__big">Build</span
-            ><span>Practical website updates</span>
+      <section
+        id="results"
+        class="home-method"
+        aria-labelledby="home-method-title"
+      >
+        <div class="container home-method__inner">
+          <div class="home-method__head">
+            <p class="eyebrow">How we work</p>
+            <h2 id="home-method-title">
+              Clear scope. Careful review. Usable handoff.
+            </h2>
+            <p>
+              Practical checks and clear notes keep the work useful after
+              launch.
+            </p>
           </div>
-          <div class="kpi reveal">
-            <span class="kpi__big">Measure</span
-            ><span>Tagging and QA evidence</span>
-          </div>
-          <div class="kpi reveal">
-            <span class="kpi__big">Document</span
-            ><span>Clear handoff notes</span>
-          </div>
-          <div class="kpi reveal">
-            <span class="kpi__big">Maintain</span
-            ><span>Focused cleanup cycles</span>
-          </div>
+          <ol class="home-method__steps">
+            <li>
+              <h3>Scope the work</h3>
+              <p>
+                Agree on the pages, workflows, or measurement questions and what
+                the result should show.
+              </p>
+            </li>
+            <li>
+              <h3>Build and review</h3>
+              <p>
+                Implement the agreed work, then check usability, accessibility,
+                tagging behavior, and privacy where the scope calls for them.
+              </p>
+            </li>
+            <li>
+              <h3>Hand over clearly</h3>
+              <p>
+                Document what changed, what was checked, and what the team needs
+                to maintain.
+              </p>
+            </li>
+          </ol>
         </div>
       </section>
 
@@ -538,7 +634,7 @@
           <p class="small contact-note">
             Please do not submit sensitive personal, health, financial account,
             or controlled procurement information in this form. See
-            <a href="/about/#privacy"
+            <a href="/policies/#privacy"
               >privacy and responsible measurement notes</a
             >.
           </p>
@@ -609,22 +705,49 @@
           ></p>
         </form>
       </section>
+      <aside class="container site-disclosure" aria-label="Selected work notes">
+        <p id="home-work-note-1" tabindex="-1">
+          <sup>1</sup> UAid Direct is not presented as government past
+          performance.
+        </p>
+        <p id="home-work-note-2" tabindex="-1">
+          <sup>2</sup> Northside is a synthetic portfolio concept. The homepage
+          cover, inquiry illustration, and dashboard show a conceptual journey,
+          not a real client implementation, integrated tracking setup, or
+          result.
+        </p>
+      </aside>
     </main>
 
     <footer class="site-footer">
       <div class="container footer__inner">
-        <p>&copy; <span id="year">2026</span> JustinJ Industries.</p>
-        <a href="/government-buyers/">Government Buyers</a>
-        <a href="/about/#privacy">Privacy</a>
-        <!--
-      <ul class="social">
-        <li><a href="#" aria-label="LinkedIn">LinkedIn</a></li>
-        <li><a href="#" aria-label="GitHub">GitHub</a></li>
-        <li><a href="#" aria-label="X">X</a></li>
-      </ul>
-      --></div>
+        <div class="footer__identity">
+          <a
+            class="footer__brand"
+            href="/"
+            aria-label="JustinJ Industries home"
+          >
+            <img
+              src="/assets/logos/JJI-Logo-Only-white.png"
+              alt=""
+              width="28"
+              height="28"
+              loading="lazy"
+            />
+            <span>JustinJ Industries</span>
+          </a>
+          <p>&copy; <span id="year">2026</span> JustinJ Industries.</p>
+        </div>
+        <nav class="footer__links" aria-label="Footer">
+          <a href="/#contact">Contact</a>
+          <a href="mailto:info@justinjindustries.com">Email us</a>
+          <a href="tel:+16178009291">617&#8209;800&#8209;9291</a>
+          <a href="/government-buyers/">Government Buyers</a>
+          <a href="/policies/#privacy">Privacy</a>
+        </nav>
+      </div>
     </footer>
 
-    <script src="/script.js?v=d2666b9223" defer></script>
+    <script src="/script.js?v=762eaa75d4" defer></script>
   </body>
 </html>

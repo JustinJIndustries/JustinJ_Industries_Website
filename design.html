@@ -11,10 +11,10 @@
     <title>Explore a Website Design | JustinJ Industries</title>
     <meta
       name="description"
-      content="Explore fictional website design pages and send a nonbinding project enquiry to JustinJ Industries."
+      content="Explore demo website design pages and send a nonbinding project inquiry to JustinJ Industries."
     />
     <link rel="canonical" href="https://www.justinjindustries.com/design/" />
-    <link rel="stylesheet" href="/styles.css?v=d4dc44954f" />
+    <link rel="stylesheet" href="/styles.css?v=568ad6dc1b" />
   </head>
   <body class="page-design">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -81,20 +81,17 @@
         <li><a href="/#contact" class="btn">Let's Talk</a></li>
       </ul>
     </div>
-    <main id="main">
+    <main id="main" tabindex="-1">
       <section class="section container design-intro">
-        <a class="text-link" href="/catalogue/"
-          ><span aria-hidden="true">←</span> All designs</a
+        <a class="text-link arrow-text-link" href="/catalogue/"
+          ><span class="arrow-text-link__icon" aria-hidden="true">←</span
+          ><span class="arrow-text-link__label">All designs</span></a
         >
         <p class="work-label" id="design-type">Website concept</p>
         <h1 id="design-title">Explore a design</h1>
         <p id="design-description">
           Select a design from the catalogue to see sample pages and request a
           similar site.
-        </p>
-        <p class="small">
-          Fictional demonstration brand. These are visual page studies, not live
-          client sites or evidence of client results.
         </p>
         <button type="button" class="btn js-only" id="enquiry-open" hidden>
           Request a site like this
@@ -104,38 +101,143 @@
         class="section container design-explore"
         aria-labelledby="sample-pages-title"
       >
-        <div class="section__head">
-          <h2 id="sample-pages-title">Explore example pages</h2>
-          <p id="design-preview-note">
-            Choose a page to inspect the concept's content and layout.
-            Functionality is scoped separately.
-          </p>
+        <div class="preview-workbench">
+          <div class="preview-toolbar">
+            <div class="preview-toolbar__heading">
+              <p class="eyebrow">Live concept preview</p>
+              <h2 id="sample-pages-title">Explore example pages</h2>
+            </div>
+            <div class="preview-toolbar__guide">
+              <p>
+                Choose a page, switch between desktop and mobile views, and
+                interact with the responsive sample below.<sup
+                  class="work-note-ref"
+                  ><a
+                    href="#design-note-1"
+                    aria-label="Note 1: demonstration site context"
+                    >1</a
+                  ></sup
+                >
+              </p>
+              <button
+                type="button"
+                id="preview-load"
+                class="btn js-only"
+                aria-expanded="true"
+                aria-controls="design-panel"
+                hidden
+              >
+                Hide Interactive Preview
+              </button>
+            </div>
+          </div>
+          <noscript
+            ><p class="preview-noscript">
+              Example-page previews need JavaScript. You can still review the
+              <a href="/catalogue/">catalogue</a> or
+              <a href="mailto:info@justinjindustries.com">email an inquiry</a>.
+            </p></noscript
+          >
+          <div id="preview-controls" class="preview-controls js-only" hidden>
+            <div class="preview-controls__pages">
+              <p class="preview-controls__label" id="preview-pages-label">
+                Page
+              </p>
+              <div
+                id="design-tabs"
+                class="design-tabs"
+                role="tablist"
+                aria-label="Example pages"
+              ></div>
+            </div>
+            <fieldset
+              class="preview-viewport"
+              aria-describedby="preview-viewport-status"
+            >
+              <legend class="preview-controls__label">Preview width</legend>
+              <div class="preview-viewport__options">
+                <button
+                  type="button"
+                  id="preview-desktop"
+                  aria-pressed="true"
+                  aria-label="Desktop preview"
+                  aria-controls="design-panel"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <rect x="2.5" y="3.5" width="19" height="13" rx="1.5" />
+                    <path d="M8 20.5h8M12 16.5v4" />
+                  </svg>
+                  <span>Desktop</span>
+                </button>
+                <button
+                  type="button"
+                  id="preview-mobile"
+                  aria-pressed="false"
+                  aria-label="Mobile preview"
+                  aria-controls="design-panel"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    focusable="false"
+                  >
+                    <rect x="6.5" y="2" width="11" height="20" rx="2" />
+                    <path d="M11 18.5h2" />
+                  </svg>
+                  <span>Mobile</span>
+                </button>
+              </div>
+            </fieldset>
+          </div>
+          <p
+            id="preview-viewport-status"
+            class="preview-viewport-status small js-only"
+            role="status"
+            aria-live="polite"
+            hidden
+          ></p>
+          <div
+            id="design-panel"
+            class="design-panel"
+            role="tabpanel"
+            tabindex="0"
+            aria-label="Selected example page"
+          ></div>
+          <div id="design-mobile-preview" class="design-mobile-preview" hidden>
+            <img
+              id="design-mobile-image"
+              src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs"
+              alt=""
+              loading="lazy"
+            />
+            <div class="design-mobile-preview__copy">
+              <p class="preview-controls__label">Responsive demo</p>
+              <p>Explore the full sample site in a separate tab.</p>
+              <a
+                id="design-mobile-link"
+                class="btn"
+                href="/previews/alder-lane/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Explore demo</a
+              >
+            </div>
+          </div>
         </div>
-        <noscript
-          ><p>
-            Example-page previews need JavaScript. You can still review the
-            <a href="/catalogue/">catalogue</a> or
-            <a href="mailto:info@justinjindustries.com">email an enquiry</a>.
-          </p></noscript
-        >
-        <div
-          id="design-tabs"
-          class="design-tabs"
-          role="tablist"
-          aria-label="Example pages"
-        ></div>
-        <div
-          id="design-panel"
-          class="design-panel"
-          role="tabpanel"
-          tabindex="0"
-          aria-label="Selected example page"
-        ></div>
-        <p class="small design-caveat">
-          Concept preview only. The final design, content, and functionality
-          depend on the agreed project scope. Source project files and admin
-          tools are not included in this public preview.
-        </p>
       </section>
       <section
         class="section container design-scope"
@@ -143,14 +245,20 @@
       >
         <div class="design-scope__layout">
           <div class="section__head">
-            <h2 id="design-scope-title">What this starting point includes</h2>
+            <h2 id="design-scope-title">
+              What this starting point includes<sup class="work-note-ref"
+                ><a href="#design-note-2" aria-label="Note 2: preview scope"
+                  >2</a
+                ></sup
+              >
+            </h2>
             <p id="design-scope-copy">
               Review the package or request a custom quote before work begins.
             </p>
           </div>
           <div class="design-scope__panel">
             <div id="design-scope-details" class="design-scope-details"></div>
-            <div class="design-scope__action">
+            <div class="design-scope__cta">
               <button
                 type="button"
                 class="btn js-only"
@@ -159,22 +267,56 @@
               >
                 Request a site like this
               </button>
-              <p class="small">
-                A request is nonbinding. We confirm scope, price, and timeline
-                before work or payment. You can also
-                <a href="mailto:info@justinjindustries.com"
-                  >email info@justinjindustries.com</a
-                >.
-              </p>
             </div>
           </div>
         </div>
       </section>
+      <aside class="container site-disclosure" aria-label="Design demo notes">
+        <p>
+          <strong>Inquiry process:</strong> A request is nonbinding. We confirm
+          scope, price, and timeline before work or payment. You can also
+          <a href="mailto:info@justinjindustries.com"
+            >email info@justinjindustries.com</a
+          >.
+        </p>
+        <p id="design-note-1" tabindex="-1">
+          <sup>1</sup> Demonstration brand. These are visual page studies, not
+          live client sites or evidence of client results. These demo pages are
+          for exploration, and their forms are inactive.
+        </p>
+        <p id="design-note-2" tabindex="-1">
+          <sup>2</sup> Concept preview only. The final design, content, and
+          functionality depend on the agreed project scope. Source project files
+          and admin tools are not included in this public preview.
+        </p>
+      </aside>
     </main>
     <footer class="site-footer">
       <div class="container footer__inner">
-        <p>&copy; <span id="year">2026</span> JustinJ Industries.</p>
-        <a href="/about/#privacy">Privacy</a><a href="/#contact">Contact</a>
+        <div class="footer__identity">
+          <a
+            class="footer__brand"
+            href="/"
+            aria-label="JustinJ Industries home"
+          >
+            <img
+              src="/assets/logos/JJI-Logo-Only-white.png"
+              alt=""
+              width="28"
+              height="28"
+              loading="lazy"
+            />
+            <span>JustinJ Industries</span>
+          </a>
+          <p>&copy; <span id="year">2026</span> JustinJ Industries.</p>
+        </div>
+        <nav class="footer__links" aria-label="Footer">
+          <a href="/#contact">Contact</a>
+          <a href="mailto:info@justinjindustries.com">Email us</a>
+          <a href="tel:+16178009291">617&#8209;800&#8209;9291</a>
+          <a href="/government-buyers/">Government Buyers</a>
+          <a href="/policies/#privacy">Privacy</a>
+        </nav>
       </div>
     </footer>
 
@@ -187,7 +329,7 @@
       <div class="enquiry-shell">
         <div class="enquiry-head">
           <div>
-            <p class="work-label">Project enquiry</p>
+            <p class="work-label">Project inquiry</p>
             <h2 id="enquiry-title">Request a site like this</h2>
             <p id="enquiry-intro" class="small">
               Tell us what you need. This request does not book work or create a
@@ -198,7 +340,7 @@
             type="button"
             class="enquiry-close"
             id="enquiry-close"
-            aria-label="Close and discard enquiry"
+            aria-label="Close and discard inquiry"
           >
             &times;
           </button>
@@ -268,8 +410,8 @@
                 ><input
                   type="radio"
                   name="service_kit"
-                  value="AER/FIELD website setup"
-                /><span>AER/FIELD website setup — from $1,995</span></label
+                  value="AER / FIELD website setup"
+                /><span>AER / FIELD website setup — from $1,995</span></label
               ><label class="choice"
                 ><input
                   type="radio"
@@ -494,7 +636,7 @@
             aria-labelledby="step-review-title"
             hidden
           >
-            <h3 id="step-review-title">Review your enquiry</h3>
+            <h3 id="step-review-title">Review your inquiry</h3>
             <dl id="enquiry-review" class="enquiry-review"></dl>
             <p class="small">
               We will review your request and discuss scope, price, and timeline
@@ -509,7 +651,7 @@
             <label class="consent-row"
               ><input name="data_consent" type="checkbox" required /><span
                 >I consent to JustinJ Industries using these details to respond
-                to my enquiry.</span
+                to my inquiry.</span
               ></label
             >
           </section>
@@ -532,13 +674,13 @@
             ><button type="button" id="enquiry-next" class="btn">
               Continue</button
             ><button type="submit" id="enquiry-submit" class="btn" hidden>
-              Send enquiry
+              Send inquiry
             </button>
           </div>
         </form>
       </div>
     </dialog>
-    <script src="/script.js?v=d2666b9223" defer></script>
-    <script src="/design.js?v=25b4fd2159" defer></script>
+    <script src="/script.js?v=762eaa75d4" defer></script>
+    <script src="/design.js?v=fe9943e4b1" defer></script>
   </body>
 </html>

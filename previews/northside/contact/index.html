@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Contact · Northside Demo</title>
+    <link rel="stylesheet" href="../preview.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <strong>Northside Heating &amp; Boiler Care</strong>
+      <nav aria-label="Main">
+        <a href="../">Home</a><a href="../services/">Services</a
+        ><a href="../about/">About</a><a href="../contact/">Contact</a>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1">
+      <p class="eyebrow">Start a conversation</p>
+      <h1>Tell us what you need.</h1>
+      <form
+        class="card"
+        onsubmit="
+          event.preventDefault();
+          this.querySelector('[role=status]').textContent =
+            'Demo only: no message was sent.';
+        "
+      >
+        <label>What do you need help with?<br /><input required /></label>
+        <p>
+          <label
+            >A little more detail<br /><textarea rows="5"></textarea>
+          </label>
+        </p>
+        <button class="button" type="submit">Send inquiry</button>
+        <p role="status" aria-live="polite"></p>
+      </form>
+    </main>
+    <footer>
+      <p>Synthetic, non-sending form demonstration.</p>
+      <nav aria-label="Footer">
+        <a href="/previews/northside/">Home</a
+        ><a href="/previews/northside/services/">Services</a
+        ><a href="/previews/northside/about/">About</a
+        ><a href="/previews/northside/contact/">Contact</a>
+      </nav>
+    </footer>
+  </body>
+</html>

@@ -21,6 +21,7 @@ async function visit(path, width = 1440) {
     width,
     height: width < 700 ? 844 : 900,
     isMobile: width < 700,
+    deviceScaleFactor: width < 700 ? 3 : 1,
   });
   const response = await page.goto(`${origin}${path}`, {
     waitUntil: "domcontentloaded",
@@ -28,12 +29,18 @@ async function visit(path, width = 1440) {
   assert.equal(response.status(), 200, path);
 }
 async function checkVideo(context, selector, button) {
+  await context.waitForFunction(
+    (sel) => document.readyState === "complete" && document.querySelector(sel),
+    { timeout: 20000 },
+    selector,
+  );
   if (button) {
     const v = await context.$eval(selector, (element) => ({
       paused: element.paused,
       currentTime: element.currentTime,
     }));
     if (v.paused) await context.click(button);
+    else await context.$eval(selector, (video) => video.play());
   } else {
     await context.$eval(selector, (video) => video.play());
   }
@@ -56,32 +63,38 @@ async function checkVideo(context, selector, button) {
     source: video.currentSrc.split("/").pop(),
   }));
 }
+async function checkAutoplay(context, selector) {
+  await context.waitForFunction(
+    (sel) => {
+      const video = document.querySelector(sel);
+      return (
+        video &&
+        !video.paused &&
+        video.currentTime > 0.35 &&
+        video.videoWidth > 0
+      );
+    },
+    { timeout: 20000 },
+    selector,
+  );
+  return context.$eval(selector, (video) => ({
+    time: Number(video.currentTime.toFixed(2)),
+    width: video.videoWidth,
+    source: video.currentSrc.split("/").pop(),
+    muted: video.muted,
+    inline: video.playsInline,
+  }));
+}
 const results = {};
 await visit("/previews/aer-field/");
-results.homeDesktop = await checkVideo(
-  page,
-  ".hero-video",
-  "[data-video-toggle]",
-);
+results.homeDesktop = await checkAutoplay(page, ".hero-video");
 await visit("/previews/aer-field/", 390);
-results.homeMobile = await checkVideo(
-  page,
-  ".hero-video",
-  "[data-video-toggle]",
-);
+results.homeMobile = await checkAutoplay(page, ".hero-video");
 assert.equal(results.homeMobile.source, "takeoff-grass-portrait.mp4");
 await visit("/previews/aer-field/services/");
-results.servicesDesktop = await checkVideo(
-  page,
-  ".services-video",
-  "[data-services-video-toggle]",
-);
+results.servicesDesktop = await checkAutoplay(page, ".services-video");
 await visit("/previews/aer-field/services/", 390);
-results.servicesMobile = await checkVideo(
-  page,
-  ".services-video",
-  "[data-services-video-toggle]",
-);
+results.servicesMobile = await checkAutoplay(page, ".services-video");
 for (const film of ["golf", "real-estate", "business"]) {
   await visit(`/previews/aer-field/films/${film}/`);
   results[film] = await checkVideo(page, ".detail-media video");
@@ -110,33 +123,60 @@ for (const [index, film] of ["golf", "real-estate", "business"].entries()) {
     source: video.currentSrc.split("/").pop(),
   }));
 }
+await visit("/previews/aer-field/work/", 390);
+await page.$eval(".film-card:first-child .film-video", (video) =>
+  video.scrollIntoView({ block: "center" }),
+);
+results.golfReelMobile = await checkAutoplay(
+  page,
+  ".film-card:first-child .film-video",
+);
 await visit("/design/?design=aer");
+await page.$eval(".preview-stage", (el) =>
+  el.scrollIntoView({ block: "center" }),
+);
 let frame = await page.waitForFrame((f) =>
   f.url().endsWith("/previews/aer-field/"),
 );
 assert.ok(frame, "AER iframe");
-results.embeddedHome = await checkVideo(
-  frame,
-  ".hero-video",
-  "[data-video-toggle]",
-);
+results.embeddedHome = await checkAutoplay(frame, ".hero-video");
 await visit("/design/?design=aer", 390);
-frame = await page.waitForFrame((f) =>
-  f.url().endsWith("/previews/aer-field/"),
+await page.$eval("#design-mobile-image", (image) => image.scrollIntoView());
+await page.waitForFunction(
+  () => document.querySelector("#design-mobile-image")?.complete,
 );
-results.embeddedHomeMobile = await checkVideo(
-  frame,
+assert.equal(
+  await page.$$("#design-panel iframe").then((items) => items.length),
+  0,
+);
+results.mobileCard = await page.$eval("#design-mobile-image", (image) => ({
+  source: image.currentSrc.split("/").pop(),
+  width: image.getBoundingClientRect().width,
+}));
+assert.equal(results.mobileCard.source, "aer-field-mobile@3x.webp");
+assert.equal(
+  await page.$eval("#design-mobile-link", (link) => link.getAttribute("href")),
+  "/previews/aer-field/",
+);
+await page.emulateMediaFeatures([
+  { name: "prefers-reduced-motion", value: "reduce" },
+]);
+await visit("/previews/aer-field/", 390);
+assert.deepEqual(
+  await page.$eval(".hero-video", (video) => ({
+    paused: video.paused,
+    source: video.currentSrc,
+  })),
+  { paused: true, source: "" },
+);
+results.reducedMotionManual = await checkVideo(
+  page,
   ".hero-video",
   "[data-video-toggle]",
 );
-assert.equal(results.embeddedHomeMobile.source, "takeoff-grass-portrait.mp4");
-await page.click('[role="tab"]:nth-child(2)');
-await page.waitForSelector('iframe[src="/previews/aer-field/work/"]');
-frame = await page.waitForFrame((f) =>
-  f.url().endsWith("/previews/aer-field/work/"),
-);
-assert.ok(frame, "AER Work iframe");
-assert.ok(await frame.$('a[href="/previews/aer-field/films/golf/"]'));
+await page.emulateMediaFeatures([
+  { name: "prefers-reduced-motion", value: "no-preference" },
+]);
 await visit("/design/?design=still");
 await page.click('[role="tab"]:nth-child(2)');
 await page.waitForSelector('iframe[src="/previews/still-form/work/"]');

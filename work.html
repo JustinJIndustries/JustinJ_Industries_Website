@@ -25,7 +25,7 @@
       content="https://www.justinjindustries.com/assets/work/uaid-usa-home.png"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="/styles.css?v=d4dc44954f" />
+    <link rel="stylesheet" href="/styles.css?v=568ad6dc1b" />
   </head>
   <body class="page-work">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -94,14 +94,14 @@
       </ul>
     </div>
 
-    <main id="main">
+    <main id="main" tabindex="-1">
       <section class="section container work-intro">
         <p class="eyebrow">Selected Work</p>
         <h1>Useful websites. Clearer decisions.</h1>
         <p>
           Explore a regional nonprofit website and a synthetic reporting
-          concept. Each note explains the scope and contributions. For fictional
-          website concepts you can enquire about,
+          concept. Each note explains the scope and contributions. For
+          demonstration website concepts you can inquire about,
           <a href="/catalogue/">browse the design catalogue</a>.
         </p>
       </section>
@@ -120,9 +120,14 @@
             content layouts with 11 editor choices, and region-aware navigation.
           </p>
           <p>
-            The Help content is available in English and Ukrainian. That is a
-            scoped multilingual feature, not a claim that the entire site was
-            translated.
+            The Help content is available in English and Ukrainian.<sup
+              class="work-note-ref"
+              ><a
+                href="#work-note-1"
+                aria-label="Work note 1: UAid Direct Help-language scope"
+                >1</a
+              ></sup
+            >
           </p>
           <ul class="work-points">
             <li>
@@ -145,28 +150,36 @@
             height="1670"
           />
           <figcaption>
-            UAid Direct USA homepage · published site screenshot
+            UAid Direct USA homepage · published site screenshot ·
+            <a
+              href="https://uaiddirect.org/usa/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Visit the actual site <span aria-hidden="true">↗</span></a
+            >
           </figcaption>
         </figure>
       </section>
 
       <section
         id="northside"
-        class="section container work-detail"
+        class="section container work-detail work-detail--final work-detail--northside"
         aria-labelledby="northside-title"
       >
         <div class="work-detail__copy">
           <p class="work-label">Looker Studio · Synthetic portfolio demo</p>
           <h2 id="northside-title">Northside dashboard</h2>
           <p>
-            An eight-page Looker Studio reporting concept for a fictional
-            heating and boiler-care business. The dashboard explores
-            acquisition, lead quality, site search, service areas, and
-            operational follow-up.
-          </p>
-          <p>
-            Every figure shown is synthetic sample data. Northside is not a real
-            client, and the modeled trends are not business results.
+            An eight-page Looker Studio reporting concept for a sample heating
+            and boiler-care business. The dashboard explores acquisition, lead
+            quality, site search, service areas, and operational follow-up.<sup
+              class="work-note-ref"
+              ><a
+                href="#work-note-2"
+                aria-label="Work note 2: Northside dashboard context"
+                >2</a
+              ></sup
+            >
           </p>
           <ul class="work-points">
             <li>
@@ -177,41 +190,130 @@
             <li>Added labels, definitions, and chart context for review</li>
             <li>Marked every view as synthetic sample data</li>
           </ul>
+          <button
+            type="button"
+            class="btn btn--small work-report__toggle js-only"
+            id="northside-report-toggle"
+            aria-expanded="false"
+            aria-controls="northside-report-panel"
+            hidden
+          >
+            Load interactive dashboard
+          </button>
         </div>
         <figure class="work-detail__media">
           <img
-            src="/assets/work/northside-dashboard-demo.png"
-            class="report-screenshot"
-            alt="Synthetic Northside reporting demo overview, labeled portfolio demo and synthetic sample data"
+            src="/assets/work/northside-cover.svg"
+            alt="Northside Heating &amp; Boiler Care synthetic dashboard demo cover with a boiler illustration and abstract reporting signal"
             loading="lazy"
-            width="1080"
-            height="780"
+            width="1200"
+            height="750"
           />
-          <figcaption>Portfolio demo · synthetic sample data</figcaption>
+          <figcaption>
+            Northside concept cover · synthetic portfolio demo
+          </figcaption>
         </figure>
+        <div class="work-report">
+          <div id="northside-report-panel" class="work-report__panel" hidden>
+            <section
+              class="work-report__viewport"
+              tabindex="0"
+              aria-label="Scrollable interactive Northside dashboard"
+            >
+              <iframe
+                width="900"
+                height="675"
+                data-src="https://datastudio.google.com/embed/reporting/2b636b06-94b1-4d82-baa7-0b1c47cfe8a6/page/xaxAG"
+                title="Interactive Northside Heating &amp; Boiler Care synthetic dashboard"
+                allowfullscreen
+                sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+              ></iframe>
+            </section>
+            <p class="work-report__caption">
+              Interactive portfolio demo · synthetic sample data ·
+              <a
+                href="https://datastudio.google.com/reporting/2b636b06-94b1-4d82-baa7-0b1c47cfe8a6/page/xaxAG"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Open report in a new tab</a
+              >
+            </p>
+          </div>
+          <div class="work-report__mobile-preview">
+            <img
+              src="/assets/work/northside-dashboard-demo.png"
+              alt="Northside synthetic dashboard preview with sample charts and metrics"
+              width="1080"
+              height="780"
+              loading="lazy"
+            />
+            <p>Synthetic sample data · Eight interactive report pages</p>
+            <a
+              class="btn"
+              href="https://datastudio.google.com/reporting/2b636b06-94b1-4d82-baa7-0b1c47cfe8a6/page/xaxAG"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Open interactive dashboard</a
+            >
+          </div>
+        </div>
       </section>
 
       <section class="section container work-next">
-        <div class="work-next__inner">
-          <h2>Have a website or measurement question?</h2>
-          <p>
-            We can discuss a full build, a focused redesign, a reporting need,
-            or ongoing support.
-          </p>
+        <div class="work-next__inner closing-callout">
+          <div class="closing-callout__copy">
+            <p class="eyebrow">Start with a conversation</p>
+            <h2>Have a website or measurement question?</h2>
+            <p>
+              We can discuss a full build, a focused redesign, a reporting need,
+              or ongoing support.
+            </p>
+          </div>
           <a class="btn" href="/#contact">Discuss a project</a>
         </div>
       </section>
+      <aside class="container site-disclosure" aria-label="Work notes">
+        <p id="work-note-1" tabindex="-1">
+          <sup>1</sup> English and Ukrainian Help content is a scoped
+          multilingual feature, not a claim that the entire UAid Direct site was
+          translated.
+        </p>
+        <p id="work-note-2" tabindex="-1">
+          <sup>2</sup> Northside is a portfolio demo, not a real client. Its
+          modeled trends are not business results. The embedded report is for
+          exploration and its figures are synthetic sample data.
+        </p>
+      </aside>
     </main>
 
     <footer class="site-footer">
       <div class="container footer__inner">
-        <p>&copy; <span id="year">2026</span> JustinJ Industries.</p>
-        <a href="mailto:info@justinjindustries.com">Email us</a>
-        <a href="tel:+16178009291">617&#8209;800&#8209;9291</a>
-        <a href="/government-buyers/">Government Buyers</a>
-        <a href="/about/#privacy">Privacy</a>
+        <div class="footer__identity">
+          <a
+            class="footer__brand"
+            href="/"
+            aria-label="JustinJ Industries home"
+          >
+            <img
+              src="/assets/logos/JJI-Logo-Only-white.png"
+              alt=""
+              width="28"
+              height="28"
+              loading="lazy"
+            />
+            <span>JustinJ Industries</span>
+          </a>
+          <p>&copy; <span id="year">2026</span> JustinJ Industries.</p>
+        </div>
+        <nav class="footer__links" aria-label="Footer">
+          <a href="/#contact">Contact</a>
+          <a href="mailto:info@justinjindustries.com">Email us</a>
+          <a href="tel:+16178009291">617&#8209;800&#8209;9291</a>
+          <a href="/government-buyers/">Government Buyers</a>
+          <a href="/policies/#privacy">Privacy</a>
+        </nav>
       </div>
     </footer>
-    <script src="/script.js?v=d2666b9223" defer></script>
+    <script src="/script.js?v=762eaa75d4" defer></script>
   </body>
 </html>

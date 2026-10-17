@@ -5,3 +5,24 @@
 .preview-form :disabled { opacity: .65; cursor: not-allowed; }
 .preview-form .form-row label { display: block; }
 .preview-form .form-row input, .preview-form .form-row select, .preview-form .form-row textarea { border-bottom: 1px solid #8c8c84; }
+
+/* Demo context and source credits stay directly above the branded footer. */
+.demo-disclosures {
+  box-sizing: border-box;
+  width: min(1200px, calc(100% - 40px));
+  max-width: none;
+  margin: clamp(42px, 6vw, 78px) auto;
+  padding-top: 22px;
+  border-top: 1px solid rgba(128, 128, 128, 0.5);
+}
+.demo-disclosures p {
+  max-width: none;
+  margin: 0 0 0.7rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.demo-disclosures p:last-child { margin-bottom: 0; }
+.demo-disclosures p:target { outline: 2px solid currentColor; outline-offset: 6px; }
+
+/* Preserve the concept's spacious text-link rhythm with shared arrow styling. */
+.text-link.arrow-text-link { --arrow-link-gap: 30px; }

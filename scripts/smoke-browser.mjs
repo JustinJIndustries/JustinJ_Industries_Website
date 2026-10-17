@@ -37,19 +37,43 @@ assert.ok(await page.$('a[href="/capability-statement/"]'));
 assert.ok(await page.$('#contact form[action^="https://formspree.io/"]'));
 await visit("/about/");
 assert.match(await page.title(), /About \| JustinJ Industries/);
-for (const id of ["about", "accessibility", "privacy"]) assert.ok(await page.$(`#${id}`));
-for (const destination of ["/#contact", "/work/"]) {
-  assert.ok(await page.$(`.about-hero__copy a[href="${destination}"]`));
-}
-assert.equal(await page.$eval('link[rel="canonical"]', el => el.href), "https://www.justinjindustries.com/about/");
+assert.ok(await page.$("#about"));
+assert.equal(await page.$(".about-principles"), null);
+assert.ok(await page.$('.about-approach a[href="/#contact"]'));
+assert.ok(await page.$('.about-approach a[href="/work/"]'));
+assert.equal(
+  await page.$eval('link[rel="canonical"]', (el) => el.href),
+  "https://www.justinjindustries.com/about/",
+);
 await page.screenshot({ path: "/tmp/jji-about-desktop.png", fullPage: false });
 await visit("/#privacy");
-assert.equal(new URL(page.url()).pathname + new URL(page.url()).hash, "/about/#privacy");
+assert.equal(
+  new URL(page.url()).pathname + new URL(page.url()).hash,
+  "/policies/#privacy",
+);
+await visit("/about/#accessibility");
+assert.equal(
+  new URL(page.url()).pathname + new URL(page.url()).hash,
+  "/policies/#accessibility",
+);
+await visit("/about/?ref=old#privacy");
+assert.equal(
+  new URL(page.url()).pathname +
+    new URL(page.url()).search +
+    new URL(page.url()).hash,
+  "/policies/?ref=old#privacy",
+);
+for (const id of ["accessibility", "privacy"])
+  assert.ok(await page.$(`#${id}`));
 await visit("/?ref=legacy#about");
-assert.equal(new URL(page.url()).pathname + new URL(page.url()).search, "/about/?ref=legacy");
+assert.equal(
+  new URL(page.url()).pathname + new URL(page.url()).search,
+  "/about/?ref=legacy",
+);
 await page.click('a[href="/work/"]');
 assert.equal(new URL(page.url()).pathname, "/work/");
 await visit("/catalogue/");
+assert.ok(await page.$('.catalogue-close a[href="/#contact"]'));
 await page.click('a[href="/design/?design=aer"]');
 assert.equal(new URL(page.url()).search, "?design=aer");
 await page.waitForSelector('iframe[src="/previews/aer-field/"]');
@@ -62,7 +86,7 @@ await page.evaluate(() =>
 );
 assert.ok(
   await page.$(
-    'input[name="service_kit"][value="AER/FIELD website setup"]:checked',
+    'input[name="service_kit"][value="AER / FIELD website setup"]:checked',
   ),
 );
 assert.ok(await page.$('form[action^="https://formspree.io/"]'));
@@ -88,7 +112,10 @@ assert.equal(
   await page.$eval("#menu-toggle", (el) => el.getAttribute("aria-expanded")),
   "true",
 );
-await page.click('.overlay-menu a[href="/government-buyers/"]');
+await Promise.all([
+  page.waitForNavigation({ waitUntil: "networkidle0" }),
+  page.click('.overlay-menu a[href="/government-buyers/"]'),
+]);
 assert.equal(new URL(page.url()).pathname, "/government-buyers/");
 await visit("/?inquiry_type=RFQ%2FRFP#contact");
 const inquiry = await page.$eval(

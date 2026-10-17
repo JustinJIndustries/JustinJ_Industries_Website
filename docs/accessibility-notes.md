@@ -29,6 +29,7 @@ Files reviewed and updated:
 - Added global `:focus-visible` styling for links, buttons, inputs, textareas, and selects.
 - Preserved visible focus indicators (no outline suppression).
 - Kept skip link behavior and improved overall discoverability via consistent focus ring.
+- For text links with a decorative arrow, use one anchor with the `arrow-text-link` class, an `arrow-text-link__label` span for the underlined words, and an `arrow-text-link__icon` span with `aria-hidden="true"` for the arrow. The shared `assets/arrow-links.css` keeps the arrow outside the underline and beside the label. Buttons and full-card links keep their own visual treatment.
 
 ### Mobile menu accessibility
 
@@ -84,3 +85,9 @@ These checks require manual assistive-tech and browser testing:
   WCAG 2 AA checks, and formatting checks through the `npm run check` script.
 - Automated checks do not replace manual keyboard, contrast, zoom/reflow,
   screen-reader, responsive-layout, and print review.
+
+# Copy convention
+
+Public JustinJ Industries copy uses US English: write “inquiry” and
+“inquiries.” Preserve functional identifiers such as existing `enquiry-*` IDs,
+classes, and integration keys when changing visible wording.

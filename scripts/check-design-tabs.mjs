@@ -6,7 +6,12 @@ const browser = await puppeteer.launch({ headless: true });
 const page = await browser.newPage();
 let checked = 0;
 for (const width of [1440, 390]) {
-  await page.setViewport({ width, height: 900, isMobile: width === 390 });
+  await page.setViewport({
+    width,
+    height: 900,
+    isMobile: width === 390,
+    deviceScaleFactor: width === 390 ? 3 : 1,
+  });
   for (const [key, base, labels, navSelector] of [
     [
       "still",
@@ -25,7 +30,7 @@ for (const width of [1440, 390]) {
       waitUntil: "domcontentloaded",
     });
     const price = key === "still" ? "$1,695" : "$1,995";
-    const service = `${key === "still" ? "Still Form" : "AER/FIELD"} website setup`;
+    const service = `${key === "still" ? "Still Form" : "AER / FIELD"} website setup`;
     assert.ok(
       (await page.$eval("#design-scope-copy", (el) => el.textContent)).includes(
         price,
@@ -38,6 +43,42 @@ for (const width of [1440, 390]) {
       elements.map((e) => e.textContent.trim()),
     );
     assert.deepEqual(tabs, labels, `${key} outer tab labels`);
+    if (width === 390) {
+      assert.equal(
+        await page.$$("#design-panel iframe").then((items) => items.length),
+        0,
+      );
+      assert.equal(
+        await page.$eval("#design-mobile-link", (link) =>
+          link.getAttribute("href"),
+        ),
+        `/previews/${base}/`,
+      );
+      await page.$eval("#design-mobile-image", (image) =>
+        image.scrollIntoView(),
+      );
+      await page.waitForFunction(
+        () => document.querySelector("#design-mobile-image")?.complete,
+      );
+      assert.ok(
+        (
+          await page.$eval("#design-mobile-image", (image) => image.currentSrc)
+        ).endsWith(`${base}-mobile@3x.webp`),
+      );
+      const direct = await page.goto(`${origin}/previews/${base}/`);
+      assert.equal(direct.status(), 200);
+      if (key === "aer") {
+        await page.click(".menu-toggle");
+        assert.equal(
+          await page.$eval(".menu-toggle", (el) =>
+            el.getAttribute("aria-expanded"),
+          ),
+          "true",
+        );
+      }
+      checked += 1;
+      continue;
+    }
     for (const [index, label] of labels.entries()) {
       await page.click(`[role="tab"]:nth-child(${index + 1})`);
       const slug =
@@ -65,18 +106,6 @@ for (const width of [1440, 390]) {
         `${key} ${label} inner nav`,
       );
       checked += 1;
-    }
-    if (key === "aer" && width === 390) {
-      const frame = await page.waitForFrame(
-        (f) => f.url() === `${origin}/previews/aer-field/contact/`,
-      );
-      await frame.click(".menu-toggle");
-      assert.equal(
-        await frame.$eval(".menu-toggle", (el) =>
-          el.getAttribute("aria-expanded"),
-        ),
-        "true",
-      );
     }
   }
 }

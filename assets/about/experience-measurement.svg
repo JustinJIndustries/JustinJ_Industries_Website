@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 430" role="img" aria-labelledby="title desc">
+  <title id="title">Website experience connected to measurement</title>
+  <desc id="desc">A schematic website page connects to an abstract reporting view through a verified event path.</desc>
+  <defs>
+    <linearGradient id="page" x2="1" y2="1">
+      <stop stop-color="#1a4168" />
+      <stop offset="1" stop-color="#102c45" />
+    </linearGradient>
+    <linearGradient id="signal" x2="1">
+      <stop stop-color="#67b7ff" />
+      <stop offset="1" stop-color="#75f0db" />
+    </linearGradient>
+  </defs>
+  <rect x="14" y="25" width="316" height="300" rx="19" fill="#111b29" stroke="#4e6884" stroke-width="2" />
+  <path d="M14 66h316" stroke="#4e6884" stroke-width="2" />
+  <circle cx="38" cy="46" r="5" fill="#75f0db" />
+  <circle cx="57" cy="46" r="5" fill="#5682ab" />
+  <circle cx="76" cy="46" r="5" fill="#5682ab" />
+  <text x="38" y="98" fill="#c9d9e9" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2">WEBSITE EXPERIENCE</text>
+  <rect x="37" y="115" width="270" height="161" rx="10" fill="url(#page)" />
+  <path d="M57 139h86m-86 28h176m-176 15h135" stroke="#b9d7ee" stroke-width="8" stroke-linecap="round" opacity=".9" />
+  <rect x="57" y="205" width="100" height="33" rx="7" fill="#75f0db" />
+  <path d="M69 222h74" stroke="#12364a" stroke-width="5" stroke-linecap="round" />
+  <path d="M38 299h77m20 0h67" stroke="#829bb6" stroke-width="7" stroke-linecap="round" />
+  <path d="M331 215h48" stroke="url(#signal)" stroke-width="3" stroke-dasharray="6 6" />
+  <circle cx="354" cy="215" r="10" fill="#0d263b" stroke="#75f0db" stroke-width="3" />
+  <path d="m373 208 8 7-8 7" fill="none" stroke="#75f0db" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="382" y="78" width="244" height="247" rx="19" fill="#14253a" stroke="#6083a6" stroke-width="2" />
+  <text x="405" y="110" fill="#c9d9e9" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2">MEASUREMENT</text>
+  <path d="M405 132h198" stroke="#4e6884" />
+  <path d="M410 253h187" stroke="#537392" />
+  <path d="M425 253v-52m37 52v-78m37 78v-101m37 101v-68m37 68v-119" stroke="#66c5ef" stroke-width="17" stroke-linecap="round" opacity=".75" />
+  <path d="m419 212 40-22 39-22 37 15 39-48" fill="none" stroke="#75f0db" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="574" cy="135" r="5" fill="#75f0db" />
+  <path d="M406 284h101m13 0h80" stroke="#829bb6" stroke-width="7" stroke-linecap="round" />
+  <path d="M65 371h510" stroke="#40617d" stroke-width="2" />
+  <circle cx="65" cy="371" r="5" fill="#67b7ff" />
+  <circle cx="575" cy="371" r="5" fill="#75f0db" />
+  <text x="65" y="399" fill="#bad0e4" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2">BUILD FOR PEOPLE</text>
+  <text x="575" y="399" fill="#bad0e4" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2" text-anchor="end">CHECK THE SIGNAL</text>
+</svg>

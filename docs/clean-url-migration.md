@@ -10,6 +10,7 @@ legacy `.html` files. The clean URLs below use trailing slashes.
 | -------------------------------------------- | ---------------------------------------- |
 | `/index.html`                                | `/`                                      |
 | `/about.html`                                | `/about/`                                |
+| `/policies.html`                             | `/policies/`                             |
 | `/work.html`                                 | `/work/`                                 |
 | `/catalogue.html`                            | `/catalogue/`                            |
 | `/design.html`                               | `/design/`                               |
@@ -87,4 +88,4 @@ Until the edge rules are deployed, legacy `.html` URLs remain functional with
 HTTP 200 responses. Local `npm run preview` tests the Pages artifact, not
 Cloudflare's 301 behavior.
 
-After deployment, also verify old homepage fragments `/#about`, `/#accessibility`, `/#privacy`, and `/#government-buyers` reach the corresponding dedicated page. These fragment transitions use client-side JavaScript because fragments are not sent to Cloudflare.
+After deployment, also verify old homepage fragments `/#about`, `/#accessibility`, `/#privacy`, and `/#government-buyers` reach the corresponding dedicated page, and old `/about/#accessibility` and `/about/#privacy` bookmarks reach `/policies/`. These fragment transitions use client-side JavaScript because fragments are not sent to Cloudflare.

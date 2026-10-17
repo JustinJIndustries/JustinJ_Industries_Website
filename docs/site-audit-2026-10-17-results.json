@@ -1,0 +1,203 @@
+{
+  "date": "2026-10-17",
+  "environment": "M1 Max macOS, local dist served on 127.0.0.1:8080; Chromium emulation and native Safari WordPress Playground",
+  "renderCases": 236,
+  "distinctRouteCount": 35,
+  "routes": [
+    "/about/",
+    "/capability-statement/",
+    "/catalogue/",
+    "/design/",
+    "/government-buyers/",
+    "/",
+    "/policies/",
+    "/previews/aer-field/contact/",
+    "/previews/aer-field/films/business/",
+    "/previews/aer-field/films/golf/",
+    "/previews/aer-field/films/real-estate/",
+    "/previews/aer-field/",
+    "/previews/aer-field/services/",
+    "/previews/aer-field/studio/",
+    "/previews/aer-field/work/",
+    "/previews/alder-lane/about/",
+    "/previews/alder-lane/contact/",
+    "/previews/alder-lane/",
+    "/previews/alder-lane/services/",
+    "/previews/harbor-ledger/about/",
+    "/previews/harbor-ledger/contact/",
+    "/previews/harbor-ledger/faq/",
+    "/previews/harbor-ledger/",
+    "/previews/harbor-ledger/services/",
+    "/previews/northside/about/",
+    "/previews/northside/contact/",
+    "/previews/northside/",
+    "/previews/northside/services/boiler-care/",
+    "/previews/northside/services/",
+    "/previews/still-form/about/",
+    "/previews/still-form/contact/",
+    "/previews/still-form/",
+    "/previews/still-form/services/",
+    "/previews/still-form/work/",
+    "/work/"
+  ],
+  "viewports": [320, 390, 768, 1024, 1440],
+  "axeCases": 104,
+  "axeViolations": [],
+  "axeIncompleteRules": ["color-contrast", "video-caption"],
+  "interactionResults": [
+    {
+      "name": "core keyboard/menu/reflow 320",
+      "pass": true
+    },
+    {
+      "name": "core keyboard/menu/reflow 390",
+      "pass": true
+    },
+    {
+      "name": "core keyboard/menu/reflow 768",
+      "pass": true
+    },
+    {
+      "name": "core keyboard/menu/reflow 1024",
+      "pass": true
+    },
+    {
+      "name": "core keyboard/menu/reflow 1440",
+      "pass": true
+    },
+    {
+      "name": "design alder 390",
+      "pass": true
+    },
+    {
+      "name": "design alder 1440",
+      "pass": true
+    },
+    {
+      "name": "design harbor 390",
+      "pass": true
+    },
+    {
+      "name": "design harbor 1440",
+      "pass": true
+    },
+    {
+      "name": "design still 390",
+      "pass": true
+    },
+    {
+      "name": "design still 1440",
+      "pass": true
+    },
+    {
+      "name": "design aer 390",
+      "pass": true
+    },
+    {
+      "name": "design aer 1440",
+      "pass": true
+    },
+    {
+      "name": "design northside 390",
+      "pass": true
+    },
+    {
+      "name": "design northside 1440",
+      "pass": true
+    },
+    {
+      "name": "homepage contact validation/error/retry/success mock",
+      "pass": true
+    },
+    {
+      "name": "guided inquiry error/retry/success mock",
+      "pass": true
+    },
+    {
+      "name": "dashboard collapsed/load/hide/mobile direct link",
+      "pass": true
+    },
+    {
+      "name": "Northside non-sending confirmation",
+      "pass": true
+    },
+    {
+      "name": "AER reduced motion/manual play/pause",
+      "pass": true
+    },
+    {
+      "name": "text spacing / 320",
+      "pass": true
+    },
+    {
+      "name": "text spacing / 1440",
+      "pass": true
+    },
+    {
+      "name": "text spacing /about/ 320",
+      "pass": true
+    },
+    {
+      "name": "text spacing /about/ 1440",
+      "pass": true
+    },
+    {
+      "name": "text spacing /work/ 320",
+      "pass": true
+    },
+    {
+      "name": "text spacing /work/ 1440",
+      "pass": true
+    },
+    {
+      "name": "text spacing /catalogue/ 320",
+      "pass": true
+    },
+    {
+      "name": "text spacing /catalogue/ 1440",
+      "pass": true
+    },
+    {
+      "name": "text spacing /government-buyers/ 320",
+      "pass": true
+    },
+    {
+      "name": "text spacing /government-buyers/ 1440",
+      "pass": true
+    },
+    {
+      "name": "text spacing /policies/ 320",
+      "pass": true
+    },
+    {
+      "name": "text spacing /policies/ 1440",
+      "pass": true
+    },
+    {
+      "name": "text spacing /design/?design=northside 320",
+      "pass": true
+    },
+    {
+      "name": "text spacing /design/?design=northside 1440",
+      "pass": true
+    },
+    {
+      "name": "alder-lane keyboard menu/Escape",
+      "pass": true
+    },
+    {
+      "name": "aer-field keyboard menu/Escape",
+      "pass": true
+    }
+  ],
+  "pageErrors": [],
+  "mockedFormResponses": 4,
+  "externalFormSubmissions": 0,
+  "evidenceDirectory": "output/playwright/audit/",
+  "limitations": [
+    "No physical phone or full screen reader audit.",
+    "Axe incomplete color-contrast checks require human judgment; this is not an accessibility conformance certification.",
+    "Google report backend and browser-specific autoplay policies are external dependencies.",
+    "Cloudflare redirects require separate live verification; current automated HTTP requests are challenged."
+  ]
+}

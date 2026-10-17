@@ -27,3 +27,21 @@ img { max-width: 100%; }
   .hl-header nav { width: 100%; }
   .hl-contact-wrap { gap: 32px; }
 }
+
+/* Demo context and source credits stay directly above the branded footer. */
+.demo-disclosures {
+  box-sizing: border-box;
+  width: min(1200px, calc(100% - 40px));
+  max-width: none;
+  margin: clamp(42px, 6vw, 78px) auto;
+  padding-top: 22px;
+  border-top: 1px solid rgba(128, 128, 128, 0.5);
+}
+.demo-disclosures p {
+  max-width: none;
+  margin: 0 0 0.7rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.demo-disclosures p:last-child { margin-bottom: 0; }
+.demo-disclosures p:target { outline: 2px solid currentColor; outline-offset: 6px; }
