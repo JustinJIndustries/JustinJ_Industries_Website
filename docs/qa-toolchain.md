@@ -1,68 +1,51 @@
-# QA Toolchain
+# QA setup
 
-This repository uses a lightweight Node-based QA setup for static HTML/CSS/JS checks.
+Use Node.js 24 and npm, matching the GitHub Pages workflow. Run `npm ci` at the
+repository root to install the lockfile versions. There is no application
+bundler; `npm run build` produces an explicit static artifact in `dist/`.
 
-## Install
+## Project gate
 
-From repository root:
+`npm run check` runs shared-footer validation, root HTML validation, local
+artifact-link checks, Pa11y and Prettier, in that order. Individual commands are
+listed in the root README. `check:html` covers root HTML files; it is not a
+recursive audit of every demo page. `check:links` builds and checks local
+references without starting a browser or contacting external links.
 
-```bash
-npm install
+The accessibility check starts its own server on `127.0.0.1:8080` and checks
+Home, About, Policies, Work, Government Buyers and Capability Statement. Stop a
+preview already using that port before running it. These automated checks do
+not establish full WCAG, Section 508 or PDF/UA conformance.
+
+## Browser requirements
+
+Pa11y uses Puppeteer and a compatible Chrome/Chromium executable. If browser
+download or launch is unavailable, record that limitation and run the checks
+that are available; do not describe a partial run as a full passing gate.
+Where required, `PUPPETEER_EXECUTABLE_PATH` can point to an installed compatible
+browser. CI verifies and uses its sandboxed system Chrome.
+
+## Optional browser probes
+
+With `npm run preview` running in a separate terminal, these existing scripts
+exercise additional routes and interactions:
+
+```sh
+node scripts/audit-nav.mjs
+node scripts/smoke-browser.mjs
+node scripts/check-design-tabs.mjs
+node scripts/check-aer-video.mjs
+node scripts/check-accessibility-followup.mjs
 ```
 
-## Commands
+They import Puppeteer through the installed toolchain and may create local
+evidence. Read the script before running it in a constrained environment. Use
+only local/demo data and avoid live form submissions. Review keyboard behavior,
+responsive layouts, motion and assistive-technology behavior separately.
 
-- `npm run check:html` — validates HTML files with `html-validate`
-- `npm run check:links` — starts a local static server and checks internal/public links
-- `npm run check:a11y` — runs a basic Pa11y smoke test against public pages
-- `npm run check:format` — checks formatting with Prettier
-- `npm run check` — runs all checks in sequence
+## Capability PDF
 
-## Notes
-
-- The toolchain does **not** add a bundler or build step.
-- Deployment behavior remains static-file based.
-- `check:a11y` uses Pa11y and may require a local Chromium/Chrome runtime in some environments.
-- Mailto/tel/anchor links are excluded from broken-link failures for link checking.
-
-## Typical local workflow
-
-```bash
-npm install
-npm run check
-```
-
-## If accessibility check fails to launch browser
-
-If `pa11y` cannot find or launch a browser in your environment, run:
-
-```bash
-npm run check:html
-npm run check:links
-npm run check:format
-```
-
-Then execute accessibility smoke checks in a local machine with Chrome/Chromium installed.
-
-### Manual fallback used in this project
-
-When `npm run check:a11y` is blocked by local runtime/browser automation issues (`Failed to launch the browser process`, `spawn EPERM`), use:
-
-```bash
-npm run serve
-npx pa11y http://127.0.0.1:8080 --standard WCAG2AA --timeout 120000
-npx pa11y http://127.0.0.1:8080/government-buyers.html --standard WCAG2AA --timeout 120000
-npx pa11y http://127.0.0.1:8080/capability-statement.html --standard WCAG2AA --timeout 120000
-```
-
-Observed manual result in this repo:
-
-- `No issues found!` for:
-  - `http://127.0.0.1:8080`
-  - `http://127.0.0.1:8080/government-buyers.html`
-  - `http://127.0.0.1:8080/capability-statement.html`
-
-Important distinction:
-
-- Passing manual Pa11y checks indicate no issues were reported for the tested page URLs.
-- A failing `npm run check:a11y` in this context indicates a local runtime/process limitation (browser launch / `spawn EPERM`), not necessarily WCAG violations in site markup.
+`npm run check:capability` checks the committed PDF and source hashes against
+`docs/capability-statement-pdf-build.json`. Keep this manifest: the public build
+imports the check and will fail if it is missing or stale. Regenerate only when
+the corresponding HTML or hashed assets change, following the maintenance doc.

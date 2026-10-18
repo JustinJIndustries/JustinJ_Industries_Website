@@ -12,9 +12,10 @@ The Northside screenshot includes the visible label “Portfolio demo · synthet
 sample data.” Website copy repeats that disclosure beside the image.
 
 At the owner's request on 2026-10-16, the Metro screenshot and case copy were
-removed from visitor-facing pages. The original source asset remains in the
-repository for provenance, but `scripts/build-public.mjs` excludes it from the
-published artifact. Historical notes in internal docs are not public content.
+removed from visitor-facing pages. The original source asset and historical notes are preserved in owner-only
+local documentation. The obsolete screenshot is omitted from the current
+repository tree and remains excluded by the public build allowlist. Earlier
+commits may still contain it; this cleanup does not rewrite history.
 
 Do not replace public images with other client screenshots without reviewing
 the pixels, verifying the source and permissions, and checking for private
