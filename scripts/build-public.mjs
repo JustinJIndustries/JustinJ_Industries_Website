@@ -69,6 +69,7 @@ const publicFiles = Object.freeze([
   "previews/harbor-ledger/contact.html",
   "previews/harbor-ledger/source.css",
   "previews/harbor-ledger/preview.css",
+  "previews/harbor-ledger/site.js",
   "previews/harbor-ledger/assets/ledger-workspace.jpg",
   "previews/harbor-ledger/assets/quiet-workspace.jpg",
   "previews/still-form/index.html",

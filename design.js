@@ -47,14 +47,14 @@ const designConcepts = {
   },
   harbor: {
     calloutIntro:
-      "A calm, organized direction for bookkeepers, advisers, and other professional service teams.",
+      "For accounting and advisory teams ready for a more confident first impression.",
     calloutCopy:
-      "Give your services, approach, and common questions a clear place to live. We can adapt this five-page WordPress starting point to your firm’s content and identity. Share the pages you need and how you’d like people to inquire.",
+      "Make complex services easy to understand, connect your expertise to the industries you support, and give visitors a clear way to begin. We can shape this five-page WordPress direction around your firm’s services, voice and consultation process.",
     name: "Harbor Ledger",
     startingPrice: "$1,999",
-    type: "Simple WordPress theme sample · DEMO",
+    type: "Accounting & advisory WordPress direction · DEMO",
     description:
-      "A calm professional-services concept based on a simpler stock-theme WordPress approach.",
+      "An editorial accounting and advisory direction with structured services, industry context and a clear consultation journey.",
     service: "Simple WordPress site",
     scope:
       "The $1,999 WordPress package covers Home, Services, About, FAQ, and Contact, with a standard contact form, basic antispam, and simple metadata. This is a straightforward theme-based scope.",
@@ -64,45 +64,53 @@ const designConcepts = {
       {
         name: "Home",
         eyebrow: "HARBOR LEDGER",
-        title: "Clarity for the numbers ahead.",
-        body: "A steady introduction to a demo bookkeeping practice.",
+        title: "Clear thinking. Confident decisions.",
+        body: "Accounting, tax support and business advisory that connect the detail to the decision.",
         blocks: [
-          "Services at a glance",
-          "A practical process",
-          "Start a conversation",
+          "Connected expertise",
+          "Industry context",
+          "A clear working approach",
         ],
       },
       {
         name: "Services",
-        eyebrow: "WHAT WE DO",
-        title: "Organized support for everyday decisions.",
-        body: "Client-supplied service descriptions arranged for easy scanning.",
-        blocks: ["Monthly books", "Reporting", "Getting started"],
+        eyebrow: "SERVICES",
+        title: "The detail matters. So does the bigger picture.",
+        body: "Connected accounting, tax support and advisory services, shaped around what your business needs to understand next.",
+        blocks: [
+          "Accounting & reporting",
+          "Tax planning support",
+          "Business advisory",
+        ],
       },
       {
         name: "About",
         eyebrow: "OUR APPROACH",
-        title: "Good information makes room to move.",
-        body: "An introduction for the real business story and team details.",
-        blocks: ["Who we are", "How we work", "Next steps"],
+        title: "Independent thinking. Connected delivery.",
+        body: "Understand the business behind the numbers and make the work useful to the people who rely on it.",
+        blocks: [
+          "Perspective before prescription",
+          "A considered process",
+          "Practical handover",
+        ],
       },
       {
         name: "FAQ",
-        eyebrow: "COMMON QUESTIONS",
-        title: "A few answers before we talk.",
-        body: "A sample FAQ layout; the package includes up to ten client-supplied questions and answers.",
+        eyebrow: "QUESTIONS & ANSWERS",
+        title: "Good questions come first.",
+        body: "Practical answers to help you prepare for a useful conversation.",
         blocks: [
-          "What information is needed?",
-          "How does onboarding work?",
-          "When should we connect?",
+          "Preparing to talk",
+          "Agreeing the scope",
+          "Working with existing advisers",
         ],
       },
       {
         name: "Contact",
-        eyebrow: "GET IN TOUCH",
-        title: "Tell us what you need.",
-        body: "A standard contact form is in the defined WordPress package, subject to the agreed setup.",
-        blocks: ["Contact details", "Your question", "Response expectations"],
+        eyebrow: "START A CONVERSATION",
+        title: "Start with the decision in front of you.",
+        body: "Tell us what needs attention. We’ll help frame the conversation.",
+        blocks: ["Business context", "Area of support", "Review your inquiry"],
       },
     ],
   },
@@ -301,7 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const previewSlug = previewSlugs[key];
   const mobileImage = document.getElementById("design-mobile-image");
-  const mobilePreviewVersion = "b5b373813f";
+  const mobilePreviewVersion = key === "harbor" ? "abf6e597d2" : "b5b373813f";
   mobileImage.dataset.src = `/assets/previews/${previewSlug}-mobile.png?v=${mobilePreviewVersion}`;
   mobileImage.dataset.srcset = `${mobileImage.dataset.src} 1x, /assets/previews/${previewSlug}-mobile@3x.webp?v=${mobilePreviewVersion} 3x`;
   mobileImage.alt = `${concept.name} responsive sample homepage preview`;
