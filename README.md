@@ -60,10 +60,9 @@ npm run build
 
 Build verifies the shared footer and the checked-in capability PDF before
 copying approved files. It excludes documentation, working notes, theme PHP,
-dependency metadata and unapproved assets. The `.openai/hosting.json` integration,
-GitHub Pages workflow, `_config.yml` exclusions and ignore rules have separate
-purposes; retain them unless their integration or deployment is deliberately
-changed.
+dependency metadata and unapproved assets. The GitHub Pages workflow,
+`_config.yml` exclusions and ignore rules have separate purposes; retain them
+unless their integration or deployment is deliberately changed.
 
 ## Checks
 
