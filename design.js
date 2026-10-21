@@ -226,12 +226,13 @@ const designConcepts = {
     calloutCopy:
       "Make boiler care, heating repairs and replacement planning easy to navigate. Service guidance, practical FAQs and a grouped inquiry help visitors explain the work they need without starting from a blank message.",
     name: "Northside",
+    startingPrice: "$1,695 USD",
     type: "Heating & home services • Demo",
     description:
       "A practical heating-services experience with clear service choices, boiler-care guidance and a grouped inquiry journey.",
-    service: "Custom scope",
+    service: "Northside WordPress build",
     scope:
-      "A WordPress-ready demo package with Home, Services, Boiler Care, About, and Contact routes. The content is synthetic and the form is a non-sending demonstration.",
+      "The Northside WordPress build starts at $1,695 USD. This concept demonstrates Home, Services, Boiler Care, About, and Contact. Final pages, content, hosting, integrations, form delivery, and handoff are confirmed in writing.",
     terms:
       "Portfolio concept only. Final content, hosting, integrations, form delivery, and production redirects require separate scope and approval.",
     pages: [
