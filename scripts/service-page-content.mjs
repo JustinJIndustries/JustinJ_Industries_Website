@@ -27,7 +27,7 @@ const directions = {
     name: "Analytics & tagging",
     heading: "Turn tracking questions into a testable plan.",
     intro:
-      "Define what matters, configure the agreed events and document what actually happened in validation.",
+      "Connect business questions to GA4/GTM implementation or Adobe Analytics and Tags (Adobe Launch) specification review and QA, with documented validation.",
     action: "Discuss measurement",
     outputs: [
       "Measurement specification",

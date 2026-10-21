@@ -2451,6 +2451,12 @@ select[aria-invalid="true"] {
     max-width: none;
     margin-bottom: 0;
   }
+  .page-home .hero__title {
+    position: relative;
+  }
+  .page-home .hero__title .underline {
+    position: static;
+  }
   .page-home .hero__art,
   .page-gov .hero__art {
     order: 3;

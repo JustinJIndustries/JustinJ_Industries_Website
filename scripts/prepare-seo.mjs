@@ -166,7 +166,7 @@ const entries = [
     route: "/",
     title: "JustinJ Industries | Websites, Analytics & Support",
     description:
-      "Website builds and redesigns, WordPress and Craft CMS support, GA4 and GTM implementation, analytics QA, and practical handoffs from JustinJ Industries.",
+      "Website builds, CMS support, GA4/GTM implementation, Adobe Analytics and Tags QA, and practical measurement handoffs from JustinJ Industries.",
   },
   {
     file: "about.html",

@@ -466,7 +466,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const phoneLayout = window.matchMedia("(max-width: 760px)");
   let expanded = false;
 
-  // Keep Looker's 900 × 675 canvas intact, then scale it to fill wider sections.
+  // Keep the report’s 900 × 675 canvas intact, then scale it to fill wider sections.
   const sizeReport = () => {
     const scale = Math.max(1, viewport.clientWidth / 900);
     viewport.style.setProperty("--northside-report-scale", String(scale));

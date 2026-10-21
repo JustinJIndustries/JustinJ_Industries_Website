@@ -23,15 +23,15 @@
   {
     "slug": "analytics-tagging",
     "title": "Analytics & Tagging Implementation",
-    "description": "GA4 and GTM implementation, tagging QA, consent-aware measurement planning, and Looker Studio reporting with documented validation from JustinJ Industries.",
+    "description": "GA4/GTM implementation, Adobe Analytics and Tags (Adobe Launch) specifications and QA, plus reporting in Analysis Workspace or Data Studio from JustinJ Industries.",
     "intro": "Make measurement understandable and testable. JustinJ Industries helps connect website interactions to an agreed measurement plan, with clear event definitions and a record of what was validated.",
     "inquiry": "Analytics tagging / QA",
     "fit": "For teams preparing an implementation, troubleshooting inconsistent events, or reviewing whether existing reporting reflects the actions they actually need to understand.",
     "deliverables": [
-      "A measurement plan with agreed events, parameters, and acceptance criteria.",
-      "GA4 and GTM configuration or a review of an existing implementation, according to scope.",
+      "A measurement plan with agreed events, data-layer specifications, parameters, and acceptance criteria.",
+      "GA4/GTM configuration, or Adobe Analytics and Adobe Experience Platform Tags (Adobe Launch) specification, rule and payload review, according to scope.",
       "Consent and data-handling considerations documented alongside the tagging design.",
-      "QA evidence, known limitations, and implementation or reporting handoff notes."
+      "QA evidence and handoff notes, with Adobe Analytics Analysis Workspace reporting or Data Studio dashboards where agreed."
     ],
     "process": [
       "Review business questions, the site, existing tags, consent behavior, and access requirements.",
@@ -39,7 +39,7 @@
       "Validate agreed journeys, compare expected and observed behavior, and document the result."
     ],
     "prepare": "Share the site URL, the questions reporting should answer, and the tools already in use. Access should be granted through the relevant platform; do not send account passwords or customer records.",
-    "boundary": "Server-side tagging, Adobe Analytics or AEP support, Looker Studio dashboards, and complex integrations are scoped separately. A button click does not by itself establish a qualified lead, completed sale, or connected phone call."
+    "boundary": "Server-side tagging, reporting deliverables and complex integrations require an agreed scope. Adobe mobile SDK support is limited to specification review, debugging and validation. A button click does not by itself establish a qualified lead, completed sale, or connected phone call."
   },
   {
     "slug": "cms-support",

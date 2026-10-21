@@ -44,15 +44,17 @@
       <ul>
         <li>
           Specify consent states, event schemas and authorized domain handoffs
-          before configuration.
+          before configuration, for the Google or Adobe tools in scope.
         </li>
         <li>
           Keep names, email addresses and contact-form messages in contact
           systems and out of analytics event payloads.
         </li>
         <li>
-          Link tagging checks, network evidence and known limitations to the
-          release build.
+          Review Adobe Analytics variable mapping and Experience Platform Tags
+          (Adobe Launch) rule sequencing against data-layer specifications. Link
+          payload checks, network evidence and known limitations to the release
+          build.
         </li>
       </ul>
     </section>
@@ -325,7 +327,7 @@
       separately in <a href="/work/">our work</a>.
     </p>
     <p>
-      Advanced consent mode can load tags with denied consent and send
+      Google’s advanced consent mode can load tags with denied consent and send
       cookieless pings. A denied state alone does not establish zero traffic;
       the selected mode changes the expected evidence.
     </p>

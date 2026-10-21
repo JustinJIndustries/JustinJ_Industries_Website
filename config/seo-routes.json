@@ -3,7 +3,7 @@
     "file": "index.html",
     "route": "/",
     "title": "JustinJ Industries | Websites, Analytics & Support",
-    "description": "Website builds and redesigns, WordPress and Craft CMS support, GA4 and GTM implementation, analytics QA, and practical handoffs from JustinJ Industries."
+    "description": "Website builds, CMS support, GA4/GTM implementation, Adobe Analytics and Tags QA, and practical measurement handoffs from JustinJ Industries."
   },
   {
     "file": "about.html",
@@ -79,7 +79,7 @@
     "file": "services/analytics-tagging/index.html",
     "route": "/services/analytics-tagging/",
     "title": "Analytics & Tagging Implementation",
-    "description": "GA4 and GTM implementation, tagging QA, consent-aware measurement planning, and Looker Studio reporting with documented validation from JustinJ Industries.",
+    "description": "GA4/GTM implementation, Adobe Analytics and Tags (Adobe Launch) specifications and QA, plus reporting in Analysis Workspace or Data Studio from JustinJ Industries.",
     "service": true,
     "parent": {
       "name": "Services",

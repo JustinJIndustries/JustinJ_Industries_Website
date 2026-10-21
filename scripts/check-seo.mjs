@@ -114,6 +114,29 @@ for (const data of [
 ])
   assert.throws(() => campaignUrl(data));
 await access(path.join(root, "404.html"));
+// Owner-selected process labels are shared across Home and Services.
+const processLabels = [
+  "Define the need",
+  "Build and Validate",
+  "Document and Handoff",
+];
+for (const [file, selector] of [
+  ["index.html", /<ol class="home-method__steps">([\s\S]*?)<\/ol>/],
+  [
+    "partials/services-hub-content.html",
+    /id="service-process-title"[\s\S]*?<ol>([\s\S]*?)<\/ol>/,
+  ],
+  ["services.html", /id="service-process-title"[\s\S]*?<ol>([\s\S]*?)<\/ol>/],
+]) {
+  const source = await readFile(path.join(root, file), "utf8");
+  const section = source.match(selector);
+  assert(section, `${file}: shared process section missing`);
+  assert.deepEqual(
+    [...section[1].matchAll(/<h3>(.*?)<\/h3>/g)].map((match) => match[1]),
+    processLabels,
+    `${file}: preserve owner-selected process labels`,
+  );
+}
 await checkReleaseHolds(root);
 console.log(
   `Verified metadata/schema for ${routes.length} routes, sitemap exclusions, social card size, inactive measurement plan and campaign URL validation.`,
