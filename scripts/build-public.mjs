@@ -23,8 +23,6 @@ const publicFiles = Object.freeze([
   "capability-statement.html",
   "assets/justinj-industries-capability-statement.pdf",
   "styles.css",
-  "assets/home-journeys.css",
-  "assets/home-journeys.js",
   "assets/site-footer.css",
   "script.js",
   "design.js",
