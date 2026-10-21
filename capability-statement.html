@@ -197,10 +197,17 @@
         display: grid;
         gap: 5px;
       }
-      .capability-accessibility {
-        margin: 10px 0 0;
+      .capability-disclosure {
+        width: min(1000px, calc(100% - 48px));
+        margin: 28px auto 40px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
         color: var(--muted);
         font-size: 0.88rem;
+      }
+      .capability-disclosure p {
+        max-width: none;
+        margin: 0;
       }
       .capability-examples {
         display: grid;
@@ -330,6 +337,9 @@
           width: calc(100% - 24px);
           margin: 16px auto 24px;
         }
+        .capability-disclosure {
+          width: calc(100% - 24px);
+        }
         .capability-header {
           padding: 22px 18px;
         }
@@ -452,10 +462,12 @@
         .capability-example p {
           margin-bottom: 6px;
         }
-        .capability-accessibility,
-        .capability-example-note {
+        .capability-disclosure {
+          width: 100%;
           font-size: 9.2pt;
-          margin-top: 7px;
+          margin: 7px 0 0;
+          padding-top: 7px;
+          break-inside: avoid;
         }
         .capability-examples {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -714,11 +726,6 @@
                 handoffs.
               </li>
             </ul>
-            <p class="capability-accessibility">
-              Accessibility conformance should be validated for each project’s
-              scope, content and platform. Sensitive form contents are not sent
-              to analytics.
-            </p>
           </section>
           <section
             class="capability-section"
@@ -770,9 +777,6 @@
                 </div>
               </section>
             </div>
-            <p class="capability-example-note">
-              These examples are not presented as government past performance.
-            </p>
           </section>
           <section
             class="capability-section capability-procurement"
@@ -804,7 +808,7 @@
       <nav class="screen-actions" aria-label="Capability statement actions">
         <a
           class="btn"
-          href="/assets/justinj-industries-capability-statement.pdf?v=20261017"
+          href="/assets/justinj-industries-capability-statement.pdf?v=20261021"
           download="JustinJ-Industries-Capability-Statement.pdf"
           >Download capability statement (PDF, 1 page)</a
         >
@@ -815,6 +819,17 @@
           >Government Buyers</a
         >
       </nav>
+      <aside
+        class="capability-disclosure"
+        aria-label="Capability statement notes"
+      >
+        <p>
+          These examples are not presented as government past performance.
+          Accessibility conformance should be validated for each project’s
+          scope, content and platform. Sensitive form contents are not sent to
+          analytics.
+        </p>
+      </aside>
     </main>
     <!-- shared:footer:start -->
     <footer class="site-footer jji-footer">

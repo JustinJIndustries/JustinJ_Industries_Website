@@ -10,7 +10,7 @@
     />
     <link rel="stylesheet" href="/styles.css?v=c4fa2ff273" />
     <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
-    <link rel="stylesheet" href="/assets/service-journeys.css?v=db664dedf9" />
+    <link rel="stylesheet" href="/assets/service-journeys.css?v=87541d67d8" />
     <title>Website Development &amp; Redesign | JustinJ Industries</title>
     <meta
       name="description"
@@ -211,14 +211,11 @@
 
     <main id="main" tabindex="-1">
       <div class="container service-detail">
-        <nav class="service-breadcrumb" aria-label="Breadcrumb">
-          <a href="/services/">Services</a><span aria-hidden="true">/</span
-          ><span>Website development</span>
-        </nav>
         <section class="service-detail-hero" aria-labelledby="service-title">
           <div>
+            <p class="eyebrow">Website development</p>
             <h1 id="service-title">
-              A website built around what people need to do.
+              A better website, built around your business.
             </h1>
             <p class="service-detail-lead">
               Plan the pages, visitor journeys and practical details of a new
@@ -230,16 +227,28 @@
               >Discuss your website</a
             >
           </div>
-          <figure class="service-detail-media">
-            <a href="/design/northside/"
-              ><img
-                src="/assets/work/northside-home-cover-1280.webp"
-                width="1280"
-                height="667"
-                fetchpriority="high"
-                alt="Northside heating-services website concept with service navigation and an inquiry starting point"
-            /></a>
-            <figcaption>Northside · Fictional website concept</figcaption>
+          <figure class="service-device-showcase">
+            <a
+              href="/design/aer-field/"
+              aria-label="Explore the AER / FIELD desktop and mobile website demo"
+              ><div class="service-device-showcase__desktop">
+                <img
+                  src="/assets/service-previews/aer-field-desktop.jpg"
+                  width="1280"
+                  height="900"
+                  alt="Actual AER / FIELD desktop demo with its aerial-film introduction and film navigation"
+                  fetchpriority="high"
+                />
+              </div>
+              <div class="service-device-showcase__mobile">
+                <img
+                  src="/assets/service-previews/aer-field-mobile.jpg"
+                  width="780"
+                  height="1688"
+                  alt="Actual AER / FIELD mobile demo with its responsive menu and stacked introduction"
+                /></div
+            ></a>
+            <figcaption>AER / FIELD · Desktop and mobile demo</figcaption>
           </figure>
         </section>
         <section class="service-starts" aria-label="Common starting points">
@@ -347,7 +356,7 @@
           </div>
         </section>
         <section class="service-detail-next" aria-labelledby="next-title">
-          <h2 id="next-title">Tell me what needs to change.</h2>
+          <h2 id="next-title">Tell us what needs to change.</h2>
           <div>
             <a
               class="btn"
@@ -358,6 +367,12 @@
             >
           </div>
         </section>
+        <aside class="service-page-disclosure" aria-label="Service demo notes">
+          <p>
+            AER / FIELD is a demonstration brand; the desktop and mobile views
+            are demo screenshots.
+          </p>
+        </aside>
       </div>
     </main>
 

@@ -9,7 +9,7 @@
 /* Demo context and source credits stay directly above the branded footer. */
 .demo-disclosures {
   box-sizing: border-box;
-  width: min(1200px, calc(100% - 40px));
+  width: calc(100% - var(--gutter) * 2);
   max-width: none;
   margin: clamp(42px, 6vw, 78px) auto;
   padding-top: 22px;

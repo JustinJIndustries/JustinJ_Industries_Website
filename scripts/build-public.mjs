@@ -28,6 +28,8 @@ const publicFiles = Object.freeze([
   "design/aer-field/index.html",
   "design/northside/index.html",
   "assets/service-journeys.css",
+  "assets/service-previews/aer-field-desktop.jpg",
+  "assets/service-previews/aer-field-mobile.jpg",
   "assets/jji-social.png",
 
   "index.html",

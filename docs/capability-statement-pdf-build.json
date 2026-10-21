@@ -1,10 +1,10 @@
 {
   "revision": "2026-10-17",
   "output": "assets/justinj-industries-capability-statement.pdf",
-  "sha256": "dd05977fe934fdd4a1b0f3f93f45bf9792774fe78542b8e9e4320fb7e58e4858",
+  "sha256": "0dbaf544059d226521f535b0bea8afacf0a9413ad014ddee824f52a0fd686b39",
   "pages": 1,
   "sources": {
-    "capability-statement.html": "b4aa8e87389572138224a098dc1d63439477ce9ae9db7d86579484759784073f",
+    "capability-statement.html": "d538e5aa3381e9612fd8d11d3b92a83be15282ac178fbe0ca8e6001e2946eb5e",
     "assets/logos/JJI-Logo-Only-white.png": "384f051a7cbb4d1d36626408c597fe920974e58c8378b434d6044dfe1e276b24",
     "assets/site-footer.css": "61efc97f2465ec92c5ba9d29ca053d07c0468b353fd3f9b7008116b97fa242c3"
   },

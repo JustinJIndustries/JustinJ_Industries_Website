@@ -360,9 +360,15 @@ h3 {
   background: #d7e4e5;
 }
 .ns-disclosure {
-  padding-block: 36px 0;
+  border-top: 1px solid var(--ns-line);
+  padding-block: 28px;
+  color: var(--ns-muted);
   font-size: 13px;
   max-width: 1376px;
+}
+.ns-disclosure > p {
+  max-width: none;
+  margin: 0;
 }
 .ns-footer-inner {
   padding-block: 28px 40px;

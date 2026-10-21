@@ -10,7 +10,7 @@
     />
     <link rel="stylesheet" href="/styles.css?v=c4fa2ff273" />
     <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
-    <link rel="stylesheet" href="/assets/service-journeys.css?v=db664dedf9" />
+    <link rel="stylesheet" href="/assets/service-journeys.css?v=87541d67d8" />
     <title>Responsible Implementation | JustinJ Industries</title>
     <meta
       name="description"
@@ -200,20 +200,18 @@
 
     <main id="main" tabindex="-1">
       <div class="container service-detail service-approach">
-        <nav class="service-breadcrumb" aria-label="Breadcrumb">
-          <a href="/services/">Services</a><span aria-hidden="true">/</span
-          ><span>Implementation approach</span>
-        </nav>
         <section
           class="service-approach-intro"
           aria-labelledby="implementation-title"
         >
+          <p class="eyebrow">Implementation approach</p>
           <h1 id="implementation-title">
-            Agree what good looks like. Then test the work.
+            Built to work. Thoughtfully designed.
           </h1>
           <p class="service-detail-lead">
-            Accessibility, measurement and handoff requirements belong in the
-            project scope and review record.
+            Review consent behavior, trace authorized cross-domain journeys and
+            validate releases against explicit test cases. These examples show
+            the implementation choices and evidence we agree before handoff.
           </p>
         </section>
         <div class="service-approach-areas">
@@ -222,19 +220,20 @@
             aria-labelledby="implementation-accessibility-title"
           >
             <h2 id="implementation-accessibility-title">
-              Accessible visitor journeys
+              Visitor journeys and acceptance criteria
             </h2>
             <ul>
               <li>
-                Build with semantic HTML, readable content structure, keyboard
-                access and visible focus.
+                Define keyboard paths, focus transitions and form error states
+                for the agreed pages.
               </li>
               <li>
-                Agree acceptance criteria, manual testing and third-party
-                component review for the individual project.
+                Check semantic structure and content hierarchy with automated
+                checks and scoped manual testing.
               </li>
               <li>
-                Document review findings and ongoing content responsibilities.
+                Record third-party limits, findings and ongoing content
+                responsibilities.
               </li>
             </ul>
           </section>
@@ -243,45 +242,290 @@
             aria-labelledby="implementation-measurement-title"
           >
             <h2 id="implementation-measurement-title">
-              Measurement with clear boundaries
+              Measurement rules and data boundaries
             </h2>
             <ul>
               <li>
-                Define event taxonomies around agreed business questions and
-                implementation QA.
+                Specify consent states, event schemas and authorized domain
+                handoffs before configuration.
               </li>
               <li>
                 Keep names, email addresses and contact-form messages in contact
                 systems and out of analytics event payloads.
               </li>
               <li>
-                Document tagging behavior, validation evidence and known
-                limitations.
+                Link tagging checks, network evidence and known limitations to
+                the release build.
               </li>
             </ul>
           </section>
         </div>
-        <p class="service-approach-note">
-          Accessibility conformance should be validated for each project’s
-          scope, content, and platform.
-        </p>
+        <section
+          class="implementation-examples"
+          aria-labelledby="technical-examples-title"
+        >
+          <div class="implementation-examples__intro">
+            <h2 id="technical-examples-title">Three implementation reviews.</h2>
+            <p>
+              Consent gating, an authorized booking handoff and build-specific
+              QA each pair implementation choices with evidence.
+            </p>
+          </div>
+          <article
+            class="implementation-example"
+            aria-labelledby="consent-example-title"
+          >
+            <div class="implementation-example__heading">
+              <p class="eyebrow">Consent execution example</p>
+              <h3 id="consent-example-title">
+                Make the selected consent mode observable.
+              </h3>
+              <p>
+                A service business wants optional analytics to start only after
+                the required visitor choice.
+              </p>
+            </div>
+            <div class="implementation-example__body">
+              <div class="implementation-policy">
+                <strong>Policy choice for this example</strong>
+                <p>
+                  Basic consent mode: withhold optional Google tags until the
+                  required consent is granted. The project owner approves the
+                  mode, categories and withdrawal behavior before
+                  implementation.
+                </p>
+              </div>
+              <h4>Implementation</h4>
+              <p>
+                Gate loading and firing by the approved categories. In a GTM
+                consent template, use <code>setDefaultConsentState</code> before
+                tag execution and <code>updateConsentState</code> for the CMP
+                choice. Review custom tags alongside built-in consent checks.
+              </p>
+              <dl class="implementation-evidence">
+                <div>
+                  <dt>Before choice or after decline</dt>
+                  <dd>
+                    Pass: the network log shows no optional Google-tag resource
+                    or collection request under this basic-mode gate. Fail: a
+                    request appears before the required grant. Check the agreed
+                    endpoint inventory, including first-party collection routes.
+                  </dd>
+                </div>
+                <div>
+                  <dt>After grant</dt>
+                  <dd>
+                    Pass: Tag Assistant shows the consent update before the
+                    permitted tag event, with only approved categories firing.
+                    Fail: an event precedes the update or an unapproved tag
+                    fires.
+                  </dd>
+                </div>
+                <div>
+                  <dt>After withdrawal</dt>
+                  <dd>
+                    Retest future tag firing and the agreed storage cleanup.
+                    Fail: a newly disallowed tag fires after the acknowledged
+                    change. Record in-flight requests separately.
+                  </dd>
+                </div>
+              </dl>
+              <p class="implementation-reference">
+                Technical references:
+                <a
+                  href="https://developers.google.com/tag-platform/security/concepts/consent-mode"
+                  >Google consent modes</a
+                >
+                and
+                <a
+                  href="https://developers.google.com/tag-platform/security/guides/consent"
+                  >consent implementation</a
+                >.
+              </p>
+            </div>
+          </article>
+          <article
+            class="implementation-example"
+            aria-labelledby="cross-domain-example-title"
+          >
+            <div class="implementation-example__heading">
+              <p class="eyebrow">Cross-domain example</p>
+              <h3 id="cross-domain-example-title">
+                Validate the handoff from site to booking.
+              </h3>
+              <p>
+                A business authorizes measurement across its marketing site and
+                a separate booking domain. Run the continuity test with matching
+                permitted consent within the same test session.
+              </p>
+            </div>
+            <div class="implementation-example__body">
+              <ol class="implementation-journey">
+                <li>
+                  <strong>Business site</strong><code>www.example.com</code>
+                </li>
+                <li><strong>Linker handoff</strong><code>_gl</code></li>
+                <li>
+                  <strong>Booking site</strong><code>booking.example.net</code>
+                </li>
+              </ol>
+              <h4>Implementation</h4>
+              <p>
+                Use the same Google tag ID from one GA4 web stream on both
+                authorized domains and configure the intended cross-domain
+                matches. Check that links, forms and redirects preserve the
+                linker parameter through arrival.
+              </p>
+              <dl class="implementation-evidence">
+                <div>
+                  <dt>Linker and session</dt>
+                  <dd>
+                    Pass: a redacted network trace shows the linker arriving,
+                    with the expected <code>client_id</code> and
+                    <code>session_id</code> continuity. Fail: a redirect strips
+                    <code>_gl</code> or an unexpected new user/session appears.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Referral and attribution</dt>
+                  <dd>
+                    Compare <code>page_location</code>,
+                    <code>page_referrer</code> and the expected source across
+                    the handoff. Fail: a self-referral or booking/payment domain
+                    incorrectly takes attribution.
+                  </dd>
+                </div>
+                <div>
+                  <dt>Unwanted referrals</dt>
+                  <dd>
+                    Review legitimate payment or workflow intermediaries
+                    separately. A referral exclusion changes attribution; it
+                    does not repair a broken linker or session handoff.
+                  </dd>
+                </div>
+              </dl>
+              <p class="implementation-reference">
+                Technical references:
+                <a
+                  href="https://support.google.com/analytics/answer/10071811?hl=en"
+                  >GA4 cross-domain measurement</a
+                >
+                and
+                <a
+                  href="https://support.google.com/analytics/answer/10327750?hl=en"
+                  >unwanted referrals</a
+                >.
+              </p>
+            </div>
+          </article>
+          <article
+            class="implementation-example implementation-example--qa"
+            aria-labelledby="release-example-title"
+          >
+            <div class="implementation-example__heading">
+              <p class="eyebrow">Release QA example</p>
+              <h3 id="release-example-title">
+                Tie every check to the release build.
+              </h3>
+              <p>
+                An application changes routes and submits inquiries without a
+                full reload. Define expected events and test cases against one
+                identified build.
+              </p>
+            </div>
+            <div class="implementation-example__body">
+              <ol class="implementation-test-cases">
+                <li>
+                  <h4>SPA page views</h4>
+                  <div>
+                    <strong>Technical check</strong>
+                    <p>
+                      Exercise first load, client-side navigation and
+                      back/forward. Choose one page-view mechanism: GA4
+                      automatic history measurement or a deliberate
+                      GTM/application route trigger.
+                    </p>
+                  </div>
+                  <div>
+                    <strong>Pass/fail evidence</strong>
+                    <p>
+                      DebugView and request traces show one intended
+                      <code>page_view</code> per tested navigation, with updated
+                      location/referrer. Duplicate, missing or stale-route
+                      events fail the case.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <h4>Payload schema and timing</h4>
+                  <div>
+                    <strong>Technical check</strong>
+                    <p>
+                      Check event names, value types and the field allowlist.
+                      Exercise rejection, validation error, confirmed success
+                      and retry paths.
+                    </p>
+                  </div>
+                  <div>
+                    <strong>Pass/fail evidence</strong>
+                    <p>
+                      An accepted inquiry produces the expected event once. A
+                      failed attempt produces no completion event. Wrong types,
+                      early firing, duplicate completions or personal/free-text
+                      fields fail.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <h4>Regression record</h4>
+                  <div>
+                    <strong>Technical check</strong>
+                    <p>
+                      Repeat affected routes, keyboard journeys, responsive
+                      layouts and consent cases. Record the commit/build,
+                      browser, viewport and reproducible steps.
+                    </p>
+                  </div>
+                  <div>
+                    <strong>Pass/fail evidence</strong>
+                    <p>
+                      Case results, screenshots and traces correspond to the
+                      release build, with limitations recorded. Missing retests
+                      or evidence from an older build leave the release
+                      unverified.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+              <p class="implementation-reference">
+                Technical reference:
+                <a
+                  href="https://developers.google.com/analytics/devguides/collection/ga4/single-page-applications"
+                  >Google SPA measurement and validation</a
+                >.
+              </p>
+            </div>
+          </article>
+        </section>
+
         <section
           class="service-scope"
           aria-label="Agreeing review responsibilities"
         >
           <div>
-            <h2>Decide the review scope</h2>
+            <h2>Agree the test contract</h2>
             <p>
-              Agree the platform, content, visitor journeys, review methods and
-              handoff needs before implementation. Each project needs its own
-              acceptance criteria.
+              Record the selected consent mode, authorized domains, event
+              schemas and critical visitor journeys. Agree acceptance criteria,
+              required access, test data and review responsibilities.
             </p>
           </div>
           <div>
-            <h2>Keep the record useful</h2>
+            <h2>Keep evidence tied to the build</h2>
             <p>
-              Record what was tested, what remains outside scope and who
-              maintains content and configuration after handoff.
+              Link test cases, redacted request traces, screenshots and known
+              limitations to the release commit or build. Retest affected cases
+              when code or configuration changes.
             </p>
           </div>
         </section>
@@ -292,13 +536,28 @@
           <h2 id="implementation-next-title">Define the work together.</h2>
           <div>
             <a class="btn" href="/#contact">Discuss scope</a>
-            <p>
-              For information about this website, read its
-              <a href="/policies/#privacy">privacy statement</a> and
-              <a href="/policies/#accessibility">accessibility statement</a>.
-            </p>
           </div>
         </section>
+        <aside
+          class="service-page-disclosure"
+          aria-label="Implementation notes"
+        >
+          <p>
+            Illustrative review patterns; selected client contributions are
+            documented separately in <a href="/work/">our work</a>.
+          </p>
+          <p>
+            Advanced consent mode can load tags with denied consent and send
+            cookieless pings. A denied state alone does not establish zero
+            traffic; the selected mode changes the expected evidence.
+          </p>
+          <p>
+            Accessibility conformance should be validated for each project’s
+            scope, content, and platform. Read this website’s
+            <a href="/policies/#privacy">privacy statement</a> and
+            <a href="/policies/#accessibility">accessibility statement</a>.
+          </p>
+        </aside>
       </div>
     </main>
 
