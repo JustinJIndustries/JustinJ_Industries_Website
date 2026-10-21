@@ -10,7 +10,7 @@
     />
     <link rel="stylesheet" href="/styles.css?v=c4fa2ff273" />
     <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
-
+    <link rel="stylesheet" href="/assets/service-journeys.css?v=db664dedf9" />
     <title>WordPress &amp; Craft CMS Support | JustinJ Industries</title>
     <meta
       name="description"
@@ -135,7 +135,7 @@
       }
     </script>
   </head>
-  <body class="page-services">
+  <body class="page-services page-service-detail">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -153,7 +153,7 @@
 
         <ul class="nav-links">
           <li><a href="/">Home</a></li>
-          <li><a href="/services/">Services</a></li>
+          <li><a href="/services/" aria-current="page">Services</a></li>
           <li><a href="/work/">Work</a></li>
           <li><a href="/catalogue/">Designs</a></li>
           <li><a href="/about/">About</a></li>
@@ -200,7 +200,7 @@
     >
       <ul class="overlay-menu">
         <li><a href="/">Home</a></li>
-        <li><a href="/services/">Services</a></li>
+        <li><a href="/services/" aria-current="page">Services</a></li>
         <li><a href="/work/">Work</a></li>
         <li><a href="/catalogue/">Designs</a></li>
         <li><a href="/about/">About</a></li>
@@ -210,80 +210,164 @@
     </div>
 
     <main id="main" tabindex="-1">
-      <section class="section container">
-        <a href="/services/">All services</a>
-        <p class="eyebrow">JustinJ Industries services</p>
-        <h1>WordPress &amp; Craft CMS Support</h1>
-        <p class="lead">
-          Keep the publishing workflow practical for the people who use it.
-          JustinJ Industries supports WordPress and Craft CMS work with
-          attention to templates, content structure, testing, and clear handoff
-          notes.
-        </p>
-        <a class="btn" href="/?inquiry_type=WordPress%20support#contact"
-          >Discuss wordpress &amp; craft cms support</a
+      <div class="container service-detail">
+        <nav class="service-breadcrumb" aria-label="Breadcrumb">
+          <a href="/services/">Services</a><span aria-hidden="true">/</span
+          ><span>CMS support</span>
+        </nav>
+        <section class="service-detail-hero" aria-labelledby="service-title">
+          <div>
+            <h1 id="service-title">
+              Make everyday publishing easier to manage.
+            </h1>
+            <p class="service-detail-lead">
+              Focused WordPress and Craft CMS improvements, with clear
+              templates, tested workflows and a practical handoff.
+            </p>
+            <a class="btn" href="/?inquiry_type=WordPress%20support#contact"
+              >Discuss CMS support</a
+            >
+          </div>
+          <figure class="service-detail-media">
+            <a href="/work/#uaid"
+              ><img
+                src="/assets/work/uaid-usa-home.png"
+                width="1920"
+                height="1670"
+                fetchpriority="high"
+                alt="Published UAid Direct USA homepage showing regional navigation and reusable content sections"
+            /></a>
+            <figcaption>Selected WordPress work · UAid Direct</figcaption>
+          </figure>
+        </section>
+        <section class="service-starts" aria-label="Common starting points">
+          <div>
+            <h2>Improve a template</h2>
+            <p>
+              Refine a layout or reusable content structure within the existing
+              platform.
+            </p>
+          </div>
+          <div>
+            <h2>Simplify a content workflow</h2>
+            <p>
+              Review how editors create, update and publish the content they
+              maintain.
+            </p>
+          </div>
+          <div>
+            <h2>Review a bounded change</h2>
+            <p>
+              Confirm dependencies, review conditions and the journeys affected
+              by the update.
+            </p>
+          </div>
+        </section>
+
+        <section
+          class="service-deliverables"
+          aria-labelledby="deliverables-title"
         >
-      </section>
-      <section class="section container">
-        <h2>When this is useful</h2>
-        <p>
-          For an existing CMS site that needs a defined improvement, a clearer
-          editing workflow, or a reviewed maintenance and support plan.
-        </p>
-        <h2>What the work can include</h2>
-        <ul>
-          <li>
-            A review of the relevant templates, content model, editor workflow,
-            and dependencies.
-          </li>
-          <li>
-            Scoped template, layout, or content workflow improvements using the
-            existing platform.
-          </li>
-          <li>
-            Testing of the agreed editor and visitor journeys, with a staging
-            and rollback plan where available.
-          </li>
-          <li>
-            Editor guidance, a change record, and a list of remaining
-            maintenance considerations.
-          </li>
-        </ul>
-        <h2>How we work</h2>
-        <ol>
-          <li>
-            Confirm the CMS version, hosting, backup process, access, and the
-            specific issue or workflow.
-          </li>
-          <li>
-            Agree a bounded change and a safe review environment before
-            implementation.
-          </li>
-          <li>
-            Test the change, review it with the owner, and document deployment
-            and ongoing responsibilities.
-          </li>
-        </ol>
-        <h2>Before we talk</h2>
-        <p>
-          Share the public URL, CMS, hosting arrangement, and a description of
-          the workflow or issue. For Craft inquiries, select WordPress support
-          in the form and identify Craft in your message. Do not send
-          credentials through the contact form.
-        </p>
-        <h2>Scope and limitations</h2>
-        <p>
-          Plugin or module licenses, hosting, emergency response, migrations,
-          and ongoing maintenance require an agreed scope. No uptime, security
-          certification, or unsupported platform compatibility is implied.
-        </p>
-        <p>
-          <a href="/work/">Review selected work and demonstration concepts</a>
-        </p>
-        <a class="btn" href="/?inquiry_type=WordPress%20support#contact"
-          >Start a project conversation</a
+          <div>
+            <h2 id="deliverables-title">What the work can include</h2>
+            <p>Define the deliverables before implementation begins.</p>
+            <p>
+              For an existing CMS site that needs a defined improvement, a
+              clearer editing workflow, or a reviewed maintenance and support
+              plan.
+            </p>
+          </div>
+          <dl>
+            <div>
+              <dt>Platform &amp; workflow review</dt>
+              <dd>
+                A review of the relevant templates, content model, editor
+                workflow, and dependencies.
+              </dd>
+            </div>
+            <div>
+              <dt>Focused implementation</dt>
+              <dd>
+                Scoped template, layout, or content workflow improvements using
+                the existing platform.
+              </dd>
+            </div>
+            <div>
+              <dt>Editor &amp; visitor testing</dt>
+              <dd>
+                Testing of the agreed editor and visitor journeys, with a
+                staging and rollback plan where available.
+              </dd>
+            </div>
+            <div>
+              <dt>Guidance &amp; change record</dt>
+              <dd>
+                Editor guidance, a change record, and a list of remaining
+                maintenance considerations.
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section class="service-detail-process" aria-labelledby="process-title">
+          <h2 id="process-title">From first review to a documented release.</h2>
+          <ol>
+            <li>
+              <h3>Confirm the environment</h3>
+              <p>
+                Confirm the CMS version, hosting, backup process, access, and
+                the specific issue or workflow.
+              </p>
+            </li>
+            <li>
+              <h3>Bound the change</h3>
+              <p>
+                Agree a bounded change and a safe review environment before
+                implementation.
+              </p>
+            </li>
+            <li>
+              <h3>Review &amp; document</h3>
+              <p>
+                Test the change, review it with the owner, and document
+                deployment and ongoing responsibilities.
+              </p>
+            </li>
+          </ol>
+        </section>
+        <section
+          class="service-scope"
+          aria-label="Preparing and agreeing scope"
         >
-      </section>
+          <div>
+            <h2>Before we talk</h2>
+            <p>
+              Share the public URL, CMS, hosting arrangement, and a description
+              of the workflow or issue. For Craft inquiries, select WordPress
+              support in the form and identify Craft in your message. Do not
+              send credentials through the contact form.
+            </p>
+          </div>
+          <div>
+            <h2>Scope, clearly agreed</h2>
+            <p>
+              Plugin or module licenses, hosting, emergency response,
+              migrations, and ongoing maintenance require an agreed scope. No
+              uptime, security certification, or unsupported platform
+              compatibility is implied.
+            </p>
+          </div>
+        </section>
+        <section class="service-detail-next" aria-labelledby="next-title">
+          <h2 id="next-title">Tell me what needs to change.</h2>
+          <div>
+            <a class="btn" href="/?inquiry_type=WordPress%20support#contact"
+              >Start a project conversation</a
+            ><a class="text-link" href="/services/responsible-implementation/"
+              >Accessibility &amp; measurement approach</a
+            >
+          </div>
+        </section>
+      </div>
     </main>
 
     <!-- shared:footer:start -->

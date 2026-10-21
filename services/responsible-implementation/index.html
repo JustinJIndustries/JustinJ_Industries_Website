@@ -10,7 +10,7 @@
     />
     <link rel="stylesheet" href="/styles.css?v=c4fa2ff273" />
     <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
-
+    <link rel="stylesheet" href="/assets/service-journeys.css?v=db664dedf9" />
     <title>Responsible Implementation | JustinJ Industries</title>
     <meta
       name="description"
@@ -124,7 +124,7 @@
       }
     </script>
   </head>
-  <body class="page-policies">
+  <body class="page-services page-service-detail">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -142,7 +142,7 @@
 
         <ul class="nav-links">
           <li><a href="/">Home</a></li>
-          <li><a href="/services/">Services</a></li>
+          <li><a href="/services/" aria-current="page">Services</a></li>
           <li><a href="/work/">Work</a></li>
           <li><a href="/catalogue/">Designs</a></li>
           <li><a href="/about/">About</a></li>
@@ -189,7 +189,7 @@
     >
       <ul class="overlay-menu">
         <li><a href="/">Home</a></li>
-        <li><a href="/services/">Services</a></li>
+        <li><a href="/services/" aria-current="page">Services</a></li>
         <li><a href="/work/">Work</a></li>
         <li><a href="/catalogue/">Designs</a></li>
         <li><a href="/about/">About</a></li>
@@ -199,74 +199,101 @@
     </div>
 
     <main id="main" tabindex="-1">
-      <section
-        class="section container policy-intro"
-        aria-labelledby="implementation-title"
-      >
-        <a href="/services/">All services</a>
-        <p class="eyebrow">Client project approach</p>
-        <h1 id="implementation-title">
-          Accessible experiences. Responsible measurement.
-        </h1>
-        <p>
-          Our approach to accessibility and analytics depends on each project’s
-          scope, content, and platform. These statements describe how we work on
-          client projects.
+      <div class="container service-detail service-approach">
+        <nav class="service-breadcrumb" aria-label="Breadcrumb">
+          <a href="/services/">Services</a><span aria-hidden="true">/</span
+          ><span>Implementation approach</span>
+        </nav>
+        <section
+          class="service-approach-intro"
+          aria-labelledby="implementation-title"
+        >
+          <h1 id="implementation-title">
+            Agree what good looks like. Then test the work.
+          </h1>
+          <p class="service-detail-lead">
+            Accessibility, measurement and handoff requirements belong in the
+            project scope and review record.
+          </p>
+        </section>
+        <div class="service-approach-areas">
+          <section
+            id="accessibility"
+            aria-labelledby="implementation-accessibility-title"
+          >
+            <h2 id="implementation-accessibility-title">
+              Accessible visitor journeys
+            </h2>
+            <ul>
+              <li>
+                Build with semantic HTML, readable content structure, keyboard
+                access and visible focus.
+              </li>
+              <li>
+                Agree acceptance criteria, manual testing and third-party
+                component review for the individual project.
+              </li>
+              <li>
+                Document review findings and ongoing content responsibilities.
+              </li>
+            </ul>
+          </section>
+          <section
+            id="measurement"
+            aria-labelledby="implementation-measurement-title"
+          >
+            <h2 id="implementation-measurement-title">
+              Measurement with clear boundaries
+            </h2>
+            <ul>
+              <li>
+                Define event taxonomies around agreed business questions and
+                implementation QA.
+              </li>
+              <li>
+                Keep names, email addresses and contact-form messages in contact
+                systems and out of analytics event payloads.
+              </li>
+              <li>
+                Document tagging behavior, validation evidence and known
+                limitations.
+              </li>
+            </ul>
+          </section>
+        </div>
+        <p class="service-approach-note">
+          Accessibility conformance should be validated for each project’s
+          scope, content, and platform.
         </p>
-      </section>
-      <div class="container policy-content">
         <section
-          id="accessibility"
-          aria-labelledby="implementation-accessibility-title"
+          class="service-scope"
+          aria-label="Agreeing review responsibilities"
         >
-          <h2 id="implementation-accessibility-title">
-            Accessibility in client work
-          </h2>
           <div>
+            <h2>Decide the review scope</h2>
             <p>
-              JustinJ Industries aims to build accessible, usable digital
-              experiences using semantic HTML, keyboard-friendly interactions,
-              readable content structure, and practical QA. Accessibility
-              conformance should be validated for each project’s scope, content,
-              and platform.
+              Agree the platform, content, visitor journeys, review methods and
+              handoff needs before implementation. Each project needs its own
+              acceptance criteria.
             </p>
+          </div>
+          <div>
+            <h2>Keep the record useful</h2>
             <p>
-              Review scope, acceptance criteria, manual testing, third-party
-              components, and ongoing content responsibilities should be agreed
-              for the individual project.
+              Record what was tested, what remains outside scope and who
+              maintains content and configuration after handoff.
             </p>
           </div>
         </section>
         <section
-          id="measurement"
-          aria-labelledby="implementation-measurement-title"
+          class="service-detail-next"
+          aria-labelledby="implementation-next-title"
         >
-          <h2 id="implementation-measurement-title">Responsible measurement</h2>
+          <h2 id="implementation-next-title">Define the work together.</h2>
           <div>
+            <a class="btn" href="/#contact">Discuss scope</a>
             <p>
-              Measurement work is designed to be documented, testable, and
-              privacy-aware. JustinJ Industries can help teams define event
-              taxonomies, QA tagging behavior, and avoid sending sensitive form
-              contents or unnecessary personal data into analytics platforms.
-            </p>
-            <p>
-              When analytics is implemented, event collection should be scoped
-              to business outcomes and implementation QA. Contact-form message
-              content, names, and email addresses should remain in contact
-              systems and out of analytics event payloads.
-            </p>
-          </div>
-        </section>
-        <section aria-labelledby="implementation-next-title">
-          <h2 id="implementation-next-title">Discuss the scope</h2>
-          <div>
-            <p>
-              We can review the platform, content, visitor journeys, and handoff
-              needs before agreeing the work.
-            </p>
-            <a class="btn" href="/#contact">Discuss a project</a>
-            <p class="small">
-              For information about using this website, read its
+              For information about this website, read its
               <a href="/policies/#privacy">privacy statement</a> and
               <a href="/policies/#accessibility">accessibility statement</a>.
             </p>

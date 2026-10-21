@@ -10,7 +10,7 @@
     />
     <link rel="stylesheet" href="/styles.css?v=c4fa2ff273" />
     <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
-
+    <link rel="stylesheet" href="/assets/service-journeys.css?v=db664dedf9" />
     <title>Analytics &amp; Tagging Implementation | JustinJ Industries</title>
     <meta
       name="description"
@@ -135,7 +135,7 @@
       }
     </script>
   </head>
-  <body class="page-services">
+  <body class="page-services page-service-detail">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header">
@@ -153,7 +153,7 @@
 
         <ul class="nav-links">
           <li><a href="/">Home</a></li>
-          <li><a href="/services/">Services</a></li>
+          <li><a href="/services/" aria-current="page">Services</a></li>
           <li><a href="/work/">Work</a></li>
           <li><a href="/catalogue/">Designs</a></li>
           <li><a href="/about/">About</a></li>
@@ -200,7 +200,7 @@
     >
       <ul class="overlay-menu">
         <li><a href="/">Home</a></li>
-        <li><a href="/services/">Services</a></li>
+        <li><a href="/services/" aria-current="page">Services</a></li>
         <li><a href="/work/">Work</a></li>
         <li><a href="/catalogue/">Designs</a></li>
         <li><a href="/about/">About</a></li>
@@ -210,84 +210,180 @@
     </div>
 
     <main id="main" tabindex="-1">
-      <section class="section container">
-        <a href="/services/">All services</a>
-        <p class="eyebrow">JustinJ Industries services</p>
-        <h1>Analytics &amp; Tagging Implementation</h1>
-        <p class="lead">
-          Make measurement understandable and testable. JustinJ Industries helps
-          connect website interactions to an agreed measurement plan, with clear
-          event definitions and a record of what was validated.
-        </p>
-        <a
-          class="btn"
-          href="/?inquiry_type=Analytics%20tagging%20%2F%20QA#contact"
-          >Discuss analytics &amp; tagging implementation</a
+      <div class="container service-detail">
+        <nav class="service-breadcrumb" aria-label="Breadcrumb">
+          <a href="/services/">Services</a><span aria-hidden="true">/</span
+          ><span>Analytics &amp; tagging</span>
+        </nav>
+        <section class="service-detail-hero" aria-labelledby="service-title">
+          <div>
+            <h1 id="service-title">
+              Turn tracking questions into a testable plan.
+            </h1>
+            <p class="service-detail-lead">
+              Define what matters, configure the agreed events and document what
+              actually happened in validation.
+            </p>
+            <a
+              class="btn"
+              href="/?inquiry_type=Analytics%20tagging%20%2F%20QA#contact"
+              >Discuss measurement</a
+            >
+          </div>
+          <ol class="measurement-model">
+            <li>
+              <h2>Business question</h2>
+              <p>What decision should the measurement support?</p>
+            </li>
+            <li>
+              <h2>Event definition</h2>
+              <p>
+                Agree the trigger, parameters and sensitive-data exclusions.
+              </p>
+            </li>
+            <li>
+              <h2>Validation</h2>
+              <p>
+                Compare expected and observed behavior on the agreed journeys.
+              </p>
+            </li>
+            <li>
+              <h2>Handoff</h2>
+              <p>Document configuration, limitations and ongoing ownership.</p>
+            </li>
+          </ol>
+        </section>
+
+        <section class="service-example" aria-labelledby="example-title">
+          <h2 id="example-title">An implementation you can explain.</h2>
+          <figure class="service-detail-media">
+            <a href="/work/#northside"
+              ><img
+                src="/assets/work/northside-dashboard-demo.png"
+                width="1600"
+                height="1000"
+                loading="lazy"
+                alt="Northside reporting demonstration with synthetic acquisition and inquiry data"
+            /></a>
+            <figcaption>
+              Northside · Synthetic reporting concept; not client results.
+            </figcaption>
+          </figure>
+          <p>
+            A reporting example shows how questions can be organized. The
+            implementation still needs an agreed event plan and validation
+            against the actual website.
+          </p>
+          <a class="text-link" href="/work/#northside"
+            >Review the reporting demonstration</a
+          >
+        </section>
+        <section
+          class="service-deliverables"
+          aria-labelledby="deliverables-title"
         >
-      </section>
-      <section class="section container">
-        <h2>When this is useful</h2>
-        <p>
-          For teams preparing an implementation, troubleshooting inconsistent
-          events, or reviewing whether existing reporting reflects the actions
-          they actually need to understand.
-        </p>
-        <h2>What the work can include</h2>
-        <ul>
-          <li>
-            A measurement plan with agreed events, parameters, and acceptance
-            criteria.
-          </li>
-          <li>
-            GA4 and GTM configuration or a review of an existing implementation,
-            according to scope.
-          </li>
-          <li>
-            Consent and data-handling considerations documented alongside the
-            tagging design.
-          </li>
-          <li>
-            QA evidence, known limitations, and implementation or reporting
-            handoff notes.
-          </li>
-        </ul>
-        <h2>How we work</h2>
-        <ol>
-          <li>
-            Review business questions, the site, existing tags, consent
-            behavior, and access requirements.
-          </li>
-          <li>
-            Define events and exclusions before configuration, including what
-            must never enter analytics.
-          </li>
-          <li>
-            Validate agreed journeys, compare expected and observed behavior,
-            and document the result.
-          </li>
-        </ol>
-        <h2>Before we talk</h2>
-        <p>
-          Share the site URL, the questions reporting should answer, and the
-          tools already in use. Access should be granted through the relevant
-          platform; do not send account passwords or customer records.
-        </p>
-        <h2>Scope and limitations</h2>
-        <p>
-          Server-side tagging, Adobe Analytics or AEP support, Looker Studio
-          dashboards, and complex integrations are scoped separately. A button
-          click does not by itself establish a qualified lead, completed sale,
-          or connected phone call.
-        </p>
-        <p>
-          <a href="/work/">Review selected work and demonstration concepts</a>
-        </p>
-        <a
-          class="btn"
-          href="/?inquiry_type=Analytics%20tagging%20%2F%20QA#contact"
-          >Start a project conversation</a
+          <div>
+            <h2 id="deliverables-title">What the work can include</h2>
+            <p>Define the deliverables before implementation begins.</p>
+            <p>
+              For teams preparing an implementation, troubleshooting
+              inconsistent events, or reviewing whether existing reporting
+              reflects the actions they actually need to understand.
+            </p>
+          </div>
+          <dl>
+            <div>
+              <dt>Measurement specification</dt>
+              <dd>
+                A measurement plan with agreed events, parameters, and
+                acceptance criteria.
+              </dd>
+            </div>
+            <div>
+              <dt>Configuration &amp; review</dt>
+              <dd>
+                GA4 and GTM configuration or a review of an existing
+                implementation, according to scope.
+              </dd>
+            </div>
+            <div>
+              <dt>Data-handling boundaries</dt>
+              <dd>
+                Consent and data-handling considerations documented alongside
+                the tagging design.
+              </dd>
+            </div>
+            <div>
+              <dt>Validation &amp; handoff</dt>
+              <dd>
+                QA evidence, known limitations, and implementation or reporting
+                handoff notes.
+              </dd>
+            </div>
+          </dl>
+        </section>
+        <section class="service-detail-process" aria-labelledby="process-title">
+          <h2 id="process-title">From first review to a documented release.</h2>
+          <ol>
+            <li>
+              <h3>Review the setup</h3>
+              <p>
+                Review business questions, the site, existing tags, consent
+                behavior, and access requirements.
+              </p>
+            </li>
+            <li>
+              <h3>Define the events</h3>
+              <p>
+                Define events and exclusions before configuration, including
+                what must never enter analytics.
+              </p>
+            </li>
+            <li>
+              <h3>Validate the journeys</h3>
+              <p>
+                Validate agreed journeys, compare expected and observed
+                behavior, and document the result.
+              </p>
+            </li>
+          </ol>
+        </section>
+        <section
+          class="service-scope"
+          aria-label="Preparing and agreeing scope"
         >
-      </section>
+          <div>
+            <h2>Before we talk</h2>
+            <p>
+              Share the site URL, the questions reporting should answer, and the
+              tools already in use. Access should be granted through the
+              relevant platform; do not send account passwords or customer
+              records.
+            </p>
+          </div>
+          <div>
+            <h2>Scope, clearly agreed</h2>
+            <p>
+              Server-side tagging, Adobe Analytics or AEP support, Looker Studio
+              dashboards, and complex integrations are scoped separately. A
+              button click does not by itself establish a qualified lead,
+              completed sale, or connected phone call.
+            </p>
+          </div>
+        </section>
+        <section class="service-detail-next" aria-labelledby="next-title">
+          <h2 id="next-title">Tell me what needs to change.</h2>
+          <div>
+            <a
+              class="btn"
+              href="/?inquiry_type=Analytics%20tagging%20%2F%20QA#contact"
+              >Start a project conversation</a
+            ><a class="text-link" href="/services/responsible-implementation/"
+              >Accessibility &amp; measurement approach</a
+            >
+          </div>
+        </section>
+      </div>
     </main>
 
     <!-- shared:footer:start -->

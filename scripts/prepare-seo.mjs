@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { format } from "prettier";
+import { servicePageContent } from "./service-page-content.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const check = process.argv.includes("--check");
@@ -229,7 +230,7 @@ function page(main, bodyClass = "page-services") {
       prefix
         .replaceAll('href="/#services"', 'href="/services/"')
         .replace(/<a href="\/services\/"/g, (link) =>
-          bodyClass.includes("page-service-hub")
+          bodyClass.includes("page-service")
             ? `${link} aria-current="page"`
             : link,
         ),
@@ -239,6 +240,15 @@ function page(main, bodyClass = "page-services") {
       `<main id="main" tabindex="-1">${main}</main>`,
     );
 }
+const journeyCssVersion = createHash("sha256")
+  .update(await read("assets/service-journeys.css"))
+  .digest("hex")
+  .slice(0, 10);
+const withJourneys = (source) =>
+  source.replace(
+    "</head>",
+    `<link rel="stylesheet" href="/assets/service-journeys.css?v=${journeyCssVersion}" /></head>`,
+  );
 const statementPages = [
   {
     file: "services/responsible-implementation/index.html",
@@ -253,20 +263,16 @@ const statementPages = [
 for (const entry of statementPages) {
   await save(
     entry.file,
-    metadata(page(await read(entry.partial), "page-policies"), entry),
+    metadata(
+      withJourneys(
+        page(await read(entry.partial), "page-services page-service-detail"),
+      ),
+      entry,
+    ),
   );
   if (!entries.some((item) => item.file === entry.file)) entries.push(entry);
 }
 
-const journeyCssVersion = createHash("sha256")
-  .update(await read("assets/service-journeys.css"))
-  .digest("hex")
-  .slice(0, 10);
-const withJourneys = (source) =>
-  source.replace(
-    "</head>",
-    `<link rel="stylesheet" href="/assets/service-journeys.css?v=${journeyCssVersion}" /></head>`,
-  );
 const serviceHub = {
   file: "services.html",
   route: "/services/",
@@ -296,8 +302,14 @@ for (const service of services) {
     service: true,
     parent: { name: "Services", route: "/services/" },
   };
-  const main = `<section class="section container"><a href="/services/">All services</a><p class="eyebrow">JustinJ Industries services</p><h1>${escape(service.title)}</h1><p class="lead">${escape(service.intro)}</p><a class="btn" href="/?inquiry_type=${encodeURIComponent(service.inquiry)}#contact">Discuss ${escape(service.title.toLowerCase())}</a></section><section class="section container"><h2>When this is useful</h2><p>${escape(service.fit)}</p><h2>What the work can include</h2><ul>${service.deliverables.map((item) => `<li>${escape(item)}</li>`).join("")}</ul><h2>How we work</h2><ol>${service.process.map((item) => `<li>${escape(item)}</li>`).join("")}</ol><h2>Before we talk</h2><p>${escape(service.prepare)}</p><h2>Scope and limitations</h2><p>${escape(service.boundary)}</p><p><a href="/work/">Review selected work and demonstration concepts</a></p><a class="btn" href="/?inquiry_type=${encodeURIComponent(service.inquiry)}#contact">Start a project conversation</a></section>`;
-  await save(entry.file, metadata(page(main), entry));
+  const main = servicePageContent(service);
+  await save(
+    entry.file,
+    metadata(
+      withJourneys(page(main, "page-services page-service-detail")),
+      entry,
+    ),
+  );
   entries.push(entry);
 }
 const designVersion = createHash("sha256")

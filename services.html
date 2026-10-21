@@ -10,7 +10,7 @@
     />
     <link rel="stylesheet" href="/styles.css?v=c4fa2ff273" />
     <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
-    <link rel="stylesheet" href="/assets/service-journeys.css?v=d3ea3001e0" />
+    <link rel="stylesheet" href="/assets/service-journeys.css?v=db664dedf9" />
     <title>Website, CMS &amp; Analytics Services | JustinJ Industries</title>
     <meta
       name="description"
@@ -190,64 +190,40 @@
     </div>
 
     <main id="main" tabindex="-1">
-      <section class="container services-hero" aria-labelledby="services-title">
-        <div class="services-hero__copy">
-          <h1 id="services-title">
-            Websites people can use. Data you can act on.
-          </h1>
-          <p>
-            From the first page to the measurement behind it, build around the
-            work your business needs to get done.
-          </p>
-          <a class="btn" href="#service-paths"
-            >Find your starting point
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M5 12h14m-6-6 6 6-6 6" /></svg
-          ></a>
-        </div>
-        <figure class="services-hero__media">
-          <a
-            href="/design/harbor-ledger/"
-            aria-label="Explore the Harbor Ledger website design concept"
-            ><img
-              src="/assets/catalogue/harbor-home.png"
-              width="1600"
-              height="1000"
-              alt="Harbor Ledger website concept with a clear introduction and service navigation"
-              fetchpriority="high"
-          /></a>
-          <figcaption>Harbor Ledger · Website design concept</figcaption>
-        </figure>
-      </section>
-      <nav
-        id="service-paths"
-        class="container service-paths"
-        aria-label="Choose a service"
+      <section
+        class="container services-selector"
+        aria-labelledby="services-title"
       >
-        <a href="#websites"
-          ><span>01</span>Websites
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M7 17 17 7M7 7h10v10" /></svg
-        ></a>
-        <a href="#measurement"
-          ><span>02</span>Measurement
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M7 17 17 7M7 7h10v10" /></svg
-        ></a>
-        <a href="#cms-support"
-          ><span>03</span>CMS support
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M7 17 17 7M7 7h10v10" /></svg
-        ></a>
-      </nav>
+        <h1 id="services-title">
+          Find the right support for your next change.
+        </h1>
+        <p>
+          Build or redesign a website, resolve measurement gaps, or improve a
+          WordPress or Craft workflow. Start with the problem you need to solve.
+        </p>
+        <nav
+          id="service-paths"
+          class="service-jump"
+          aria-label="Jump to a service"
+        >
+          <p>Jump to a service</p>
+          <div>
+            <a href="#websites">Websites</a
+            ><a href="#measurement">Measurement</a
+            ><a href="#cms-support">CMS support</a>
+          </div>
+        </nav>
+      </section>
       <section
         id="websites"
-        class="container service-journey service-journey--media-first"
+        class="container service-journey"
         aria-labelledby="service-websites-title"
       >
         <div class="service-journey__copy">
-          <p class="service-label">01 / Website development</p>
-          <h2 id="service-websites-title">Give visitors a clear next step.</h2>
+          <p class="service-label">Website development</p>
+          <h2 id="service-websites-title">
+            Build a clearer path from first visit to inquiry.
+          </h2>
           <p>
             Useful content, responsive implementation and accessible visitor
             journeys help people find what they need and take action.
@@ -274,7 +250,7 @@
               loading="lazy"
               alt="Northside heating-services website concept with a prominent service introduction"
           /></a>
-          <figcaption>Northside · Website concept</figcaption>
+          <figcaption>Northside · Fictional website concept</figcaption>
         </figure>
       </section>
       <section
@@ -283,7 +259,7 @@
         aria-labelledby="service-measurement-title"
       >
         <div class="service-journey__copy">
-          <p class="service-label">02 / Measurement &amp; insights</p>
+          <p class="service-label">Measurement &amp; insights</p>
           <h2 id="service-measurement-title">
             Know what happens after the click.
           </h2>
@@ -324,7 +300,7 @@
         aria-labelledby="service-cms-title"
       >
         <div class="service-journey__copy">
-          <p class="service-label">03 / CMS &amp; digital support</p>
+          <p class="service-label">CMS &amp; digital support</p>
           <h2 id="service-cms-title">
             Make publishing feel less like a workaround.
           </h2>
