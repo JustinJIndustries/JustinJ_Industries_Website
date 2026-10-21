@@ -70,6 +70,7 @@
         ]
       }
     </script>
+    <link rel="stylesheet" href="/assets/home-journeys.css?v=80951d1dc3" />
     <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
   </head>
   <body class="page-home">
@@ -194,8 +195,9 @@
 
       <section
         id="next-step"
-        class="home-story"
+        class="home-story business-stories"
         aria-labelledby="home-story-title"
+        aria-roledescription="carousel"
       >
         <div class="container home-story__inner">
           <div class="home-story__intro">
@@ -207,7 +209,7 @@
               belong in the same conversation.<sup class="work-note-ref"
                 ><a
                   href="#home-work-note-2"
-                  aria-label="Note 2: Northside synthetic portfolio context"
+                  aria-label="Note 2: Illustrative business journey context"
                   >2</a
                 ></sup
               >
@@ -216,239 +218,1351 @@
               >Talk through your next step</a
             >
           </div>
-          <div
-            class="home-story__visual"
-            role="group"
-            aria-label="A website leading to an inquiry and then to a measurement report"
-          >
-            <div class="home-story__stage home-story__stage--site">
-              <div class="numbered-step__head">
-                <span class="numbered-step__number" aria-hidden="true">01</span>
-                <h3>Make the next step clear</h3>
-              </div>
-              <div
-                class="home-story__site"
-                role="img"
-                aria-label="Northside heating website example: A warmer home starts here. From routine maintenance to boiler repairs, tell us what you need and we’ll help you plan the next step. Request service. Static illustration."
+          <div class="journeys__navigation">
+            <button class="journeys__play" type="button" hidden>
+              <span>Pause rotation</span>
+            </button>
+            <div
+              class="journeys__tabs"
+              role="group"
+              aria-label="Business journeys"
+            >
+              <a
+                id="journey-tab-northside"
+                href="#journey-northside"
+                class="journeys__tab"
+                >Northside</a
+              ><a
+                id="journey-tab-still"
+                href="#journey-still"
+                class="journeys__tab"
+                >STILL FORM</a
+              ><a id="journey-tab-aer" href="#journey-aer" class="journeys__tab"
+                >AER / FIELD</a
+              ><a
+                id="journey-tab-alder"
+                href="#journey-alder"
+                class="journeys__tab"
+                >Alder &amp; Lane</a
+              ><a
+                id="journey-tab-harbor"
+                href="#journey-harbor"
+                class="journeys__tab"
+                >Harbor Ledger</a
               >
-                <div class="home-story__site-content" aria-hidden="true">
-                  <span class="home-story__site-brand"
-                    >Northside <span>Heating &amp; Boiler Care</span></span
-                  >
-                  <span class="home-story__site-title"
-                    >A warmer home starts here.</span
-                  >
-                  <span class="home-story__site-copy"
-                    >From routine maintenance to boiler repairs, tell us what
-                    you need and we’ll help you plan the next step.</span
-                  >
-                  <span class="home-story__site-action"
-                    >Request service
-                    <svg
-                      viewBox="0 0 20 20"
-                      aria-hidden="true"
-                      focusable="false"
-                    >
-                      <path d="M4 10h12m-5-5 5 5-5 5" /></svg
-                  ></span>
-                  <img
-                    class="home-story__site-photo"
-                    src="/assets/work/northside-boiler-room.png"
-                    alt=""
-                    width="1254"
-                    height="1254"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              <p>
-                Structure, content, and interaction give visitors somewhere
-                useful to go.
-              </p>
             </div>
-            <div class="home-story__connector" aria-hidden="true">→</div>
-            <div class="home-story__stage home-story__stage--enquiry">
-              <div class="numbered-step__head">
-                <span class="numbered-step__number" aria-hidden="true">02</span>
-                <h3>Make the inquiry usable</h3>
-              </div>
-              <div
-                class="home-story__form"
-                role="img"
-                aria-label="Example Northside heating inquiry with a service choice, system type, sample contact details and a short boiler issue. Static illustration; no request can be sent."
-              >
-                <div class="home-story__form-content" aria-hidden="true">
-                  <div class="home-story__form-heading">
-                    <span class="home-story__form-brand">Northside</span>
-                  </div>
-                  <div class="home-story__form-field">
-                    <span class="home-story__form-label">Service needed</span>
-                    <span
-                      class="home-story__form-input home-story__form-select"
+          </div>
+          <div class="journeys__viewport">
+            <div
+              class="home-story__visual journeys__panel journey--northside"
+              id="journey-northside"
+              data-brand="Northside"
+              role="group"
+              aria-label="Northside: website, inquiry and dashboard sequence"
+            >
+              <div class="home-story__stage home-story__stage--site">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >01</span
+                  >
+                  <h3 id="journey-title-northside">Make the next step clear</h3>
+                </div>
+                <div
+                  class="home-story__site"
+                  role="img"
+                  aria-label="Northside heating website illustration: A warmer home starts here. From routine maintenance to boiler repairs, tell us what you need and we’ll help you plan the next step. Request service. Static illustration."
+                >
+                  <div class="home-story__site-content" aria-hidden="true">
+                    <span class="home-story__site-brand"
+                      >Northside <span>Heating &amp; Boiler Care</span></span
                     >
-                      Boiler care
+                    <span class="home-story__site-title"
+                      >A warmer home starts here.</span
+                    >
+                    <span class="home-story__site-copy"
+                      >From routine maintenance to boiler repairs, tell us what
+                      you need and we’ll help you plan the next step.</span
+                    >
+                    <span class="home-story__site-action"
+                      >Request service
                       <svg
-                        viewBox="0 0 16 16"
+                        viewBox="0 0 20 20"
                         aria-hidden="true"
                         focusable="false"
                       >
-                        <path d="m4 6 4 4 4-4" />
+                        <path d="M4 10h12m-5-5 5 5-5 5" /></svg
+                    ></span>
+                    <img
+                      class="home-story__site-photo"
+                      src="/assets/work/northside-boiler-room.png"
+                      alt=""
+                      width="1254"
+                      height="1254"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                <p>
+                  Structure, content, and interaction give visitors somewhere
+                  useful to go.
+                </p>
+              </div>
+              <div class="home-story__connector" aria-hidden="true">→</div>
+              <div class="home-story__stage home-story__stage--enquiry">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >02</span
+                  >
+                  <h3>Make the inquiry usable</h3>
+                </div>
+                <div
+                  class="home-story__form"
+                  role="img"
+                  aria-label="Northside heating inquiry illustration with a service choice, system type, contact details and a short boiler issue. Static illustration; no request can be sent."
+                >
+                  <div class="home-story__form-content" aria-hidden="true">
+                    <div class="home-story__form-heading">
+                      <span class="home-story__form-brand">Northside</span>
+                    </div>
+                    <div class="home-story__form-field">
+                      <span class="home-story__form-label">Service needed</span>
+                      <span
+                        class="home-story__form-input home-story__form-select"
+                      >
+                        Boiler care
+                        <svg
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="m4 6 4 4 4-4" />
+                        </svg>
+                      </span>
+                    </div>
+                    <div class="home-story__form-row">
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label"
+                          >Heating system</span
+                        >
+                        <span
+                          class="home-story__form-input home-story__form-select"
+                        >
+                          Gas boiler
+                          <svg
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <path d="m4 6 4 4 4-4" />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="home-story__form-field home-story__form-timing"
+                      >
+                        <span class="home-story__form-label"
+                          >Preferred timing</span
+                        >
+                        <span
+                          class="home-story__form-input home-story__form-select"
+                        >
+                          Next 2 weeks
+                          <svg
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <path d="m4 6 4 4 4-4" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="home-story__form-row">
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Your name</span>
+                        <span class="home-story__form-input">Alex Morgan</span>
+                      </div>
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Phone</span>
+                        <span class="home-story__form-input">617 555 0148</span>
+                      </div>
+                    </div>
+                    <div class="home-story__form-field">
+                      <span class="home-story__form-label"
+                        >What have you noticed?</span
+                      >
+                      <span
+                        class="home-story__form-input home-story__form-message"
+                        >Boiler pressure keeps dropping between heating
+                        cycles.</span
+                      >
+                    </div>
+                    <span class="home-story__form-button">
+                      Submit
+                      <svg
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path d="M4 10h12m-5-5 5 5-5 5" />
                       </svg>
                     </span>
                   </div>
-                  <div class="home-story__form-row">
-                    <div class="home-story__form-field">
-                      <span class="home-story__form-label">Heating system</span>
-                      <span
-                        class="home-story__form-input home-story__form-select"
-                      >
-                        Gas boiler
-                        <svg
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                        >
-                          <path d="m4 6 4 4 4-4" />
-                        </svg>
-                      </span>
-                    </div>
-                    <div class="home-story__form-field home-story__form-timing">
-                      <span class="home-story__form-label"
-                        >Preferred timing</span
-                      >
-                      <span
-                        class="home-story__form-input home-story__form-select"
-                      >
-                        Next 2 weeks
-                        <svg
-                          viewBox="0 0 16 16"
-                          aria-hidden="true"
-                          focusable="false"
-                        >
-                          <path d="m4 6 4 4 4-4" />
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="home-story__form-row">
-                    <div class="home-story__form-field">
-                      <span class="home-story__form-label">Your name</span>
-                      <span class="home-story__form-input">Alex Morgan</span>
-                    </div>
-                    <div class="home-story__form-field">
-                      <span class="home-story__form-label">Phone</span>
-                      <span class="home-story__form-input">617 555 0148</span>
-                    </div>
-                  </div>
-                  <div class="home-story__form-field">
-                    <span class="home-story__form-label"
-                      >What have you noticed?</span
-                    >
-                    <span
-                      class="home-story__form-input home-story__form-message"
-                      >Boiler pressure keeps dropping between heating
-                      cycles.</span
-                    >
-                  </div>
-                  <span class="home-story__form-button">
-                    Submit
-                    <svg
-                      viewBox="0 0 20 20"
-                      aria-hidden="true"
-                      focusable="false"
-                    >
-                      <path d="M4 10h12m-5-5 5 5-5 5" />
-                    </svg>
-                  </span>
                 </div>
-              </div>
 
-              <p>
-                Capture the question with enough context for a thoughtful
-                response.
-              </p>
-            </div>
-            <div class="home-story__connector" aria-hidden="true">→</div>
-            <div class="home-story__stage home-story__stage--report">
-              <div class="numbered-step__head">
-                <span class="numbered-step__number" aria-hidden="true">03</span>
-                <h3>See what to do next</h3>
+                <p>
+                  Capture the question with enough context for a thoughtful
+                  response.
+                </p>
               </div>
-              <div
-                class="home-story__report"
-                role="img"
-                aria-label="Synthetic Northside dashboard example: 1,382 website leads, 34,941 sessions and a 3.96 percent lead rate for October 2025 to September 2026. The illustrative monthly trend finishes at a steady peak. These are synthetic sample data, not client results."
-              >
-                <div class="home-story__report-content" aria-hidden="true">
-                  <div class="home-story__report-heading">
-                    <span class="home-story__report-brand">Northside</span>
-                  </div>
-                  <span class="home-story__report-period"
-                    >Overview · Oct 2025–Sep 2026</span
+              <div class="home-story__connector" aria-hidden="true">→</div>
+              <div class="home-story__stage home-story__stage--report">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >03</span
                   >
-                  <div class="home-story__report-metrics">
-                    <div
-                      class="home-story__report-metric home-story__report-metric--primary"
+                  <h3>See what to do next</h3>
+                </div>
+                <div
+                  class="home-story__report"
+                  role="img"
+                  aria-label="Northside dashboard illustration with website inquiries, call intent, booked visits and an unscaled activity chart. No performance values are shown."
+                >
+                  <div class="home-story__report-content" aria-hidden="true">
+                    <div class="home-story__report-heading">
+                      <span class="home-story__report-brand">Northside</span>
+                    </div>
+                    <span class="home-story__report-period"
+                      >Forms · Calls · Bookings</span
                     >
-                      <span>Website leads</span><strong>1,382</strong>
+                    <div class="home-story__report-metrics">
+                      <div
+                        class="home-story__report-metric home-story__report-metric--primary"
+                      >
+                        <span>Website leads</span><strong>—</strong>
+                      </div>
+                      <div class="home-story__report-metric">
+                        <span>Call intent</span><strong>—</strong>
+                      </div>
+                      <div class="home-story__report-metric">
+                        <span>Booked visits</span><strong>—</strong>
+                      </div>
                     </div>
-                    <div class="home-story__report-metric">
-                      <span>Sessions</span><strong>34,941</strong>
-                    </div>
-                    <div class="home-story__report-metric">
-                      <span>Lead rate</span><strong>3.96%</strong>
+                    <div class="home-story__report-chart">
+                      <span class="home-story__report-chart-title"
+                        >Activity over time</span
+                      >
+                      <div class="home-story__report-plot">
+                        <div class="home-story__report-y">
+                          <span>—</span><span>—</span>
+                        </div>
+                        <svg
+                          viewBox="0 0 596 194"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <g
+                            fill="none"
+                            stroke="#edf2f6"
+                            stroke-width="1"
+                            vector-effect="non-scaling-stroke"
+                          >
+                            <path d="M4 4.00H592" />
+                            <path d="M4 41.20H592" />
+                            <path d="M4 78.40H592" />
+                            <path d="M4 115.60H592" />
+                            <path d="M4 152.80H592" />
+                            <path d="M4 190.00H592" />
+                          </g>
+                          <polyline
+                            points="4.00,175.12 29.57,190.00 55.13,152.80 80.70,167.68 106.26,190.00 131.83,190.00 157.39,182.56 182.96,175.12 208.52,175.12 234.09,152.80 259.65,152.80 285.22,167.68 310.78,137.92 336.35,182.56 361.91,167.68 387.48,182.56 413.04,190.00 438.61,137.92 464.17,93.28 489.74,56.08 515.30,33.76 540.87,26.32 566.43,26.32 592.00,26.32"
+                            fill="none"
+                            stroke="#07899b"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            vector-effect="non-scaling-stroke"
+                          />
+                        </svg>
+                      </div>
+                      <div class="home-story__report-x">
+                        <span>Earlier</span><span>Later</span>
+                      </div>
                     </div>
                   </div>
-                  <div class="home-story__report-chart">
-                    <span class="home-story__report-chart-title"
-                      >Website leads · monthly</span
+                </div>
+
+                <p>
+                  Measurement and QA turn activity into a clearer next decision.
+                </p>
+              </div>
+            </div>
+            <div
+              class="home-story__visual journeys__panel journey--still"
+              id="journey-still"
+              data-brand="STILL FORM"
+              role="group"
+              aria-label="STILL FORM: website, inquiry and dashboard sequence"
+            >
+              <div class="home-story__stage home-story__stage--site">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >01</span
+                  >
+                  <h3 id="journey-title-still">Make the next step clear</h3>
+                </div>
+                <div
+                  class="home-story__site"
+                  role="img"
+                  aria-label="STILL FORM website illustration: Ideas made tangible."
+                >
+                  <div class="home-story__site-content" aria-hidden="true">
+                    <span class="home-story__site-brand"
+                      >STILL FORM<span>Independent design studio</span></span
                     >
-                    <div class="home-story__report-plot">
-                      <div class="home-story__report-y">
-                        <span>130</span><span>105</span>
-                      </div>
+                    <span class="home-story__site-title"
+                      >Ideas made tangible.</span
+                    >
+                    <span class="home-story__site-copy"
+                      >Identity, digital and objects. Explore the work, then
+                      tell us what you have in mind.</span
+                    >
+                    <span class="home-story__site-action"
+                      >Discuss a project
                       <svg
-                        viewBox="0 0 596 194"
+                        viewBox="0 0 20 20"
                         aria-hidden="true"
                         focusable="false"
                       >
-                        <g
-                          fill="none"
-                          stroke="#edf2f6"
-                          stroke-width="1"
-                          vector-effect="non-scaling-stroke"
-                        >
-                          <path d="M4 4.00H592" />
-                          <path d="M4 41.20H592" />
-                          <path d="M4 78.40H592" />
-                          <path d="M4 115.60H592" />
-                          <path d="M4 152.80H592" />
-                          <path d="M4 190.00H592" />
-                        </g>
-                        <polyline
-                          points="4.00,175.12 29.57,190.00 55.13,152.80 80.70,167.68 106.26,190.00 131.83,190.00 157.39,182.56 182.96,175.12 208.52,175.12 234.09,152.80 259.65,152.80 285.22,167.68 310.78,137.92 336.35,182.56 361.91,167.68 387.48,182.56 413.04,190.00 438.61,137.92 464.17,93.28 489.74,56.08 515.30,33.76 540.87,26.32 566.43,26.32 592.00,26.32"
-                          fill="none"
-                          stroke="#07899b"
-                          stroke-width="1.8"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          vector-effect="non-scaling-stroke"
-                        />
-                      </svg>
+                        <path d="M4 10h12m-5-5 5 5-5 5" /></svg
+                    ></span>
+                    <img
+                      class="home-story__site-photo"
+                      src="/assets/catalogue/still-arches.jpg"
+                      alt=""
+                      width="1254"
+                      height="1254"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                <p>
+                  Let the portfolio explain your work and give the next project
+                  a clear way to begin.
+                </p>
+              </div>
+              <div class="home-story__connector" aria-hidden="true">→</div>
+              <div class="home-story__stage home-story__stage--enquiry">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >02</span
+                  >
+                  <h3>Make the inquiry usable</h3>
+                </div>
+                <div
+                  class="home-story__form"
+                  role="img"
+                  aria-label="STILL FORM inquiry illustration with service choices, contact context and Submit. No request can be sent."
+                >
+                  <div class="home-story__form-content" aria-hidden="true">
+                    <div class="home-story__form-heading">
+                      <span class="home-story__form-brand">STILL FORM</span>
                     </div>
-                    <div class="home-story__report-x">
-                      <span>Oct 2024</span><span>Sep 2026</span>
+                    <div class="home-story__form-field">
+                      <span class="home-story__form-label">Project type</span>
+                      <span
+                        class="home-story__form-input home-story__form-select"
+                      >
+                        Brand identity
+                        <svg
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="m4 6 4 4 4-4" />
+                        </svg>
+                      </span>
+                    </div>
+                    <div class="home-story__form-row">
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Deliverables</span>
+                        <span
+                          class="home-story__form-input home-story__form-select"
+                        >
+                          Identity &amp; digital
+                          <svg
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <path d="m4 6 4 4 4-4" />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="home-story__form-field home-story__form-timing"
+                      >
+                        <span class="home-story__form-label"
+                          >Preferred timing</span
+                        >
+                        <span
+                          class="home-story__form-input home-story__form-select"
+                        >
+                          Planning ahead
+                          <svg
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <path d="m4 6 4 4 4-4" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="home-story__form-row">
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Your name</span>
+                        <span class="home-story__form-input">Alex Morgan</span>
+                      </div>
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Email</span>
+                        <span class="home-story__form-input"
+                          >alex@example.org</span
+                        >
+                      </div>
+                    </div>
+                    <div class="home-story__form-field">
+                      <span class="home-story__form-label"
+                        >What are you planning?</span
+                      >
+                      <span
+                        class="home-story__form-input home-story__form-message"
+                        >We’re planning a new identity and a portfolio
+                        website.</span
+                      >
+                    </div>
+                    <span class="home-story__form-button">
+                      Submit
+                      <svg
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path d="M4 10h12m-5-5 5 5-5 5" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+
+                <p>
+                  Collect the scope, deliverables and context needed for a
+                  useful first conversation.
+                </p>
+              </div>
+              <div class="home-story__connector" aria-hidden="true">→</div>
+              <div class="home-story__stage home-story__stage--report">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >03</span
+                  >
+                  <h3>See what to do next</h3>
+                </div>
+                <div
+                  class="home-story__report"
+                  role="img"
+                  aria-label="STILL FORM dashboard illustration with Portfolio inquiries, Project briefs, Won projects and an unscaled activity chart. No performance values are shown."
+                >
+                  <div class="home-story__report-content" aria-hidden="true">
+                    <div class="home-story__report-heading">
+                      <span class="home-story__report-brand">STILL FORM</span>
+                    </div>
+                    <span class="home-story__report-period"
+                      >Portfolio · Briefs · Projects</span
+                    >
+                    <div class="home-story__report-metrics">
+                      <div
+                        class="home-story__report-metric home-story__report-metric--primary"
+                      >
+                        <span>Portfolio inquiries</span><strong>—</strong>
+                      </div>
+                      <div class="home-story__report-metric">
+                        <span>Project briefs</span><strong>—</strong>
+                      </div>
+                      <div class="home-story__report-metric">
+                        <span>Won projects</span><strong>—</strong>
+                      </div>
+                    </div>
+                    <div class="home-story__report-chart">
+                      <span class="home-story__report-chart-title"
+                        >Activity over time</span
+                      >
+                      <div class="home-story__report-plot">
+                        <div class="home-story__report-y">
+                          <span>—</span><span>—</span>
+                        </div>
+                        <svg
+                          viewBox="0 0 596 194"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <g
+                            fill="none"
+                            stroke="#edf2f6"
+                            stroke-width="1"
+                            vector-effect="non-scaling-stroke"
+                          >
+                            <path d="M4 4.00H592" />
+                            <path d="M4 41.20H592" />
+                            <path d="M4 78.40H592" />
+                            <path d="M4 115.60H592" />
+                            <path d="M4 152.80H592" />
+                            <path d="M4 190.00H592" />
+                          </g>
+                          <polyline
+                            points="4.00,175.12 29.57,190.00 55.13,152.80 80.70,167.68 106.26,190.00 131.83,190.00 157.39,182.56 182.96,175.12 208.52,175.12 234.09,152.80 259.65,152.80 285.22,167.68 310.78,137.92 336.35,182.56 361.91,167.68 387.48,182.56 413.04,190.00 438.61,137.92 464.17,93.28 489.74,56.08 515.30,33.76 540.87,26.32 566.43,26.32 592.00,26.32"
+                            fill="none"
+                            stroke="#07899b"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            vector-effect="non-scaling-stroke"
+                          />
+                        </svg>
+                      </div>
+                      <div class="home-story__report-x">
+                        <span>Earlier</span><span>Later</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <p>
-                Measurement and QA turn activity into a clearer next decision.
-              </p>
+                <p>
+                  Connect portfolio interest to qualified projects through
+                  agreed CRM records.
+                </p>
+              </div>
+            </div>
+            <div
+              class="home-story__visual journeys__panel journey--aer"
+              id="journey-aer"
+              data-brand="AER / FIELD"
+              role="group"
+              aria-label="AER / FIELD: website, inquiry and dashboard sequence"
+            >
+              <div class="home-story__stage home-story__stage--site">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >01</span
+                  >
+                  <h3 id="journey-title-aer">Make the next step clear</h3>
+                </div>
+                <div
+                  class="home-story__site"
+                  role="img"
+                  aria-label="AER / FIELD website illustration: The view changes everything."
+                >
+                  <div class="home-story__site-content" aria-hidden="true">
+                    <span class="home-story__site-brand"
+                      >AER / FIELD<span
+                        >Aerial film &amp; photography</span
+                      ></span
+                    >
+                    <span class="home-story__site-title"
+                      >The view changes everything.</span
+                    >
+                    <span class="home-story__site-copy"
+                      >Landscapes, places and perspective. Find the right film
+                      for your next production.</span
+                    >
+                    <span class="home-story__site-action"
+                      >Plan a shoot
+                      <svg
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path d="M4 10h12m-5-5 5 5-5 5" /></svg
+                    ></span>
+                    <img
+                      class="home-story__site-photo"
+                      src="/assets/catalogue/aer-golf.jpg"
+                      alt=""
+                      width="1254"
+                      height="1254"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                <p>
+                  Bring search and display visitors to films and services that
+                  fit their intent.
+                </p>
+              </div>
+              <div class="home-story__connector" aria-hidden="true">→</div>
+              <div class="home-story__stage home-story__stage--enquiry">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >02</span
+                  >
+                  <h3>Make the inquiry usable</h3>
+                </div>
+                <div
+                  class="home-story__form"
+                  role="img"
+                  aria-label="AER / FIELD inquiry illustration with service choices, contact context and Submit. No request can be sent."
+                >
+                  <div class="home-story__form-content" aria-hidden="true">
+                    <div class="home-story__form-heading">
+                      <span class="home-story__form-brand">AER / FIELD</span>
+                    </div>
+                    <div class="home-story__form-field">
+                      <span class="home-story__form-label"
+                        >Production type</span
+                      >
+                      <span
+                        class="home-story__form-input home-story__form-select"
+                      >
+                        Aerial film
+                        <svg
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="m4 6 4 4 4-4" />
+                        </svg>
+                      </span>
+                    </div>
+                    <div class="home-story__form-row">
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label"
+                          >Project focus</span
+                        >
+                        <span
+                          class="home-story__form-input home-story__form-select"
+                        >
+                          Golf &amp; leisure
+                          <svg
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <path d="m4 6 4 4 4-4" />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="home-story__form-field home-story__form-timing"
+                      >
+                        <span class="home-story__form-label"
+                          >Preferred timing</span
+                        >
+                        <span
+                          class="home-story__form-input home-story__form-select"
+                        >
+                          Planning phase
+                          <svg
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <path d="m4 6 4 4 4-4" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="home-story__form-row">
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Your name</span>
+                        <span class="home-story__form-input">Alex Morgan</span>
+                      </div>
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Email</span>
+                        <span class="home-story__form-input"
+                          >alex@example.org</span
+                        >
+                      </div>
+                    </div>
+                    <div class="home-story__form-field">
+                      <span class="home-story__form-label"
+                        >Tell us about the shoot</span
+                      >
+                      <span
+                        class="home-story__form-input home-story__form-message"
+                        >An aerial film and campaign landing page for a
+                        golf-course launch.</span
+                      >
+                    </div>
+                    <span class="home-story__form-button">
+                      Submit
+                      <svg
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path d="M4 10h12m-5-5 5 5-5 5" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+
+                <p>
+                  Capture the location, production scope and next step for a
+                  relevant brief.
+                </p>
+              </div>
+              <div class="home-story__connector" aria-hidden="true">→</div>
+              <div class="home-story__stage home-story__stage--report">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >03</span
+                  >
+                  <h3>See what to do next</h3>
+                </div>
+                <div
+                  class="home-story__report"
+                  role="img"
+                  aria-label="AER / FIELD dashboard illustration with Campaign source, Production leads, Recorded revenue and an unscaled activity chart. No performance values are shown."
+                >
+                  <div class="home-story__report-content" aria-hidden="true">
+                    <div class="home-story__report-heading">
+                      <span class="home-story__report-brand">AER / FIELD</span>
+                    </div>
+                    <span class="home-story__report-period"
+                      >Search · Display · Projects</span
+                    >
+                    <div class="home-story__report-metrics">
+                      <div
+                        class="home-story__report-metric home-story__report-metric--primary"
+                      >
+                        <span>Campaign source</span><strong>—</strong>
+                      </div>
+                      <div class="home-story__report-metric">
+                        <span>Production leads</span><strong>—</strong>
+                      </div>
+                      <div class="home-story__report-metric">
+                        <span>Recorded revenue</span><strong>—</strong>
+                      </div>
+                    </div>
+                    <div class="home-story__report-chart">
+                      <span class="home-story__report-chart-title"
+                        >Activity over time</span
+                      >
+                      <div class="home-story__report-plot">
+                        <div class="home-story__report-y">
+                          <span>—</span><span>—</span>
+                        </div>
+                        <svg
+                          viewBox="0 0 596 194"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <g
+                            fill="none"
+                            stroke="#edf2f6"
+                            stroke-width="1"
+                            vector-effect="non-scaling-stroke"
+                          >
+                            <path d="M4 4.00H592" />
+                            <path d="M4 41.20H592" />
+                            <path d="M4 78.40H592" />
+                            <path d="M4 115.60H592" />
+                            <path d="M4 152.80H592" />
+                            <path d="M4 190.00H592" />
+                          </g>
+                          <polyline
+                            points="4.00,175.12 29.57,190.00 55.13,152.80 80.70,167.68 106.26,190.00 131.83,190.00 157.39,182.56 182.96,175.12 208.52,175.12 234.09,152.80 259.65,152.80 285.22,167.68 310.78,137.92 336.35,182.56 361.91,167.68 387.48,182.56 413.04,190.00 438.61,137.92 464.17,93.28 489.74,56.08 515.30,33.76 540.87,26.32 566.43,26.32 592.00,26.32"
+                            fill="none"
+                            stroke="#07899b"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            vector-effect="non-scaling-stroke"
+                          />
+                        </svg>
+                      </div>
+                      <div class="home-story__report-x">
+                        <span>Earlier</span><span>Later</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p>
+                  Review campaign context, project fit and recorded revenue with
+                  the right integrations.
+                </p>
+              </div>
+            </div>
+            <div
+              class="home-story__visual journeys__panel journey--alder"
+              id="journey-alder"
+              data-brand="Alder &amp; Lane"
+              role="group"
+              aria-label="Alder &amp; Lane: website, inquiry and dashboard sequence"
+            >
+              <div class="home-story__stage home-story__stage--site">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >01</span
+                  >
+                  <h3 id="journey-title-alder">Make the next step clear</h3>
+                </div>
+                <div
+                  class="home-story__site"
+                  role="img"
+                  aria-label="Alder &amp; Lane website illustration: Make room for better ways of working."
+                >
+                  <div class="home-story__site-content" aria-hidden="true">
+                    <span class="home-story__site-brand"
+                      >Alder &amp; Lane<span
+                        >Business operations support</span
+                      ></span
+                    >
+                    <span class="home-story__site-title"
+                      >Make room for better ways of working.</span
+                    >
+                    <span class="home-story__site-copy"
+                      >Planning sessions, process mapping and practical support
+                      for the work behind your work.</span
+                    >
+                    <span class="home-story__site-action"
+                      >Start a conversation
+                      <svg
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path d="M4 10h12m-5-5 5 5-5 5" /></svg
+                    ></span>
+                    <div class="home-story__site-photo story-alder-art">
+                      <div>
+                        <svg
+                          viewBox="0 0 40 40"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path
+                            d="M20 2v36M2 20h36M7.3 7.3l25.4 25.4M32.7 7.3 7.3 32.7"
+                          /></svg
+                        ><strong>Small steps.<br />Useful structure.</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p>
+                  Explain the service clearly and make it easier for the right
+                  people to find you.
+                </p>
+              </div>
+              <div class="home-story__connector" aria-hidden="true">→</div>
+              <div class="home-story__stage home-story__stage--enquiry">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >02</span
+                  >
+                  <h3>Make the inquiry usable</h3>
+                </div>
+                <div
+                  class="home-story__form"
+                  role="img"
+                  aria-label="Alder &amp; Lane inquiry illustration with service choices, contact context and Submit. No request can be sent."
+                >
+                  <div class="home-story__form-content" aria-hidden="true">
+                    <div class="home-story__form-heading">
+                      <span class="home-story__form-brand"
+                        >Alder &amp; Lane</span
+                      >
+                    </div>
+                    <div class="home-story__form-field">
+                      <span class="home-story__form-label">Support needed</span>
+                      <span
+                        class="home-story__form-input home-story__form-select"
+                      >
+                        Process mapping
+                        <svg
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="m4 6 4 4 4-4" />
+                        </svg>
+                      </span>
+                    </div>
+                    <div class="home-story__form-row">
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Workflow</span>
+                        <span
+                          class="home-story__form-input home-story__form-select"
+                        >
+                          Client handoff
+                          <svg
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <path d="m4 6 4 4 4-4" />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="home-story__form-field home-story__form-timing"
+                      >
+                        <span class="home-story__form-label"
+                          >Preferred timing</span
+                        >
+                        <span
+                          class="home-story__form-input home-story__form-select"
+                        >
+                          This quarter
+                          <svg
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <path d="m4 6 4 4 4-4" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="home-story__form-row">
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Your name</span>
+                        <span class="home-story__form-input">Alex Morgan</span>
+                      </div>
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Email</span>
+                        <span class="home-story__form-input"
+                          >alex@example.org</span
+                        >
+                      </div>
+                    </div>
+                    <div class="home-story__form-field">
+                      <span class="home-story__form-label"
+                        >Where could work be clearer?</span
+                      >
+                      <span
+                        class="home-story__form-input home-story__form-message"
+                        >Map our inquiry-to-delivery handoff and clarify the
+                        next steps.</span
+                      >
+                    </div>
+                    <span class="home-story__form-button">
+                      Submit
+                      <svg
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path d="M4 10h12m-5-5 5 5-5 5" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+
+                <p>
+                  Gather useful workflow context through a separately scoped
+                  inquiry option.
+                </p>
+              </div>
+              <div class="home-story__connector" aria-hidden="true">→</div>
+              <div class="home-story__stage home-story__stage--report">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >03</span
+                  >
+                  <h3>See what to do next</h3>
+                </div>
+                <div
+                  class="home-story__report"
+                  role="img"
+                  aria-label="Alder &amp; Lane dashboard illustration with Profile actions, Website interest, Contact intent and an unscaled activity chart. No performance values are shown."
+                >
+                  <div class="home-story__report-content" aria-hidden="true">
+                    <div class="home-story__report-heading">
+                      <span class="home-story__report-brand"
+                        >Alder &amp; Lane</span
+                      >
+                    </div>
+                    <span class="home-story__report-period"
+                      >Discovery · Services · Contact</span
+                    >
+                    <div class="home-story__report-metrics">
+                      <div
+                        class="home-story__report-metric home-story__report-metric--primary"
+                      >
+                        <span>Profile actions</span><strong>—</strong>
+                      </div>
+                      <div class="home-story__report-metric">
+                        <span>Website interest</span><strong>—</strong>
+                      </div>
+                      <div class="home-story__report-metric">
+                        <span>Contact intent</span><strong>—</strong>
+                      </div>
+                    </div>
+                    <div class="home-story__report-chart">
+                      <span class="home-story__report-chart-title"
+                        >Activity over time</span
+                      >
+                      <div class="home-story__report-plot">
+                        <div class="home-story__report-y">
+                          <span>—</span><span>—</span>
+                        </div>
+                        <svg
+                          viewBox="0 0 596 194"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <g
+                            fill="none"
+                            stroke="#edf2f6"
+                            stroke-width="1"
+                            vector-effect="non-scaling-stroke"
+                          >
+                            <path d="M4 4.00H592" />
+                            <path d="M4 41.20H592" />
+                            <path d="M4 78.40H592" />
+                            <path d="M4 115.60H592" />
+                            <path d="M4 152.80H592" />
+                            <path d="M4 190.00H592" />
+                          </g>
+                          <polyline
+                            points="4.00,175.12 29.57,190.00 55.13,152.80 80.70,167.68 106.26,190.00 131.83,190.00 157.39,182.56 182.96,175.12 208.52,175.12 234.09,152.80 259.65,152.80 285.22,167.68 310.78,137.92 336.35,182.56 361.91,167.68 387.48,182.56 413.04,190.00 438.61,137.92 464.17,93.28 489.74,56.08 515.30,33.76 540.87,26.32 566.43,26.32 592.00,26.32"
+                            fill="none"
+                            stroke="#07899b"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            vector-effect="non-scaling-stroke"
+                          />
+                        </svg>
+                      </div>
+                      <div class="home-story__report-x">
+                        <span>Earlier</span><span>Later</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p>
+                  Keep eligible profile actions and direction requests separate
+                  from confirmed visits.
+                </p>
+              </div>
+            </div>
+            <div
+              class="home-story__visual journeys__panel journey--harbor"
+              id="journey-harbor"
+              data-brand="Harbor Ledger"
+              role="group"
+              aria-label="Harbor Ledger: website, inquiry and dashboard sequence"
+            >
+              <div class="home-story__stage home-story__stage--site">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >01</span
+                  >
+                  <h3 id="journey-title-harbor">Make the next step clear</h3>
+                </div>
+                <div
+                  class="home-story__site"
+                  role="img"
+                  aria-label="Harbor Ledger website illustration: Clear thinking. Confident decisions."
+                >
+                  <div class="home-story__site-content" aria-hidden="true">
+                    <span class="home-story__site-brand"
+                      >Harbor Ledger<span>Accounting &amp; advisory</span></span
+                    >
+                    <span class="home-story__site-title"
+                      >Clear thinking. Confident decisions.</span
+                    >
+                    <span class="home-story__site-copy"
+                      >Accounting, tax support and business advisory that
+                      connect the detail to the decision.</span
+                    >
+                    <span class="home-story__site-action"
+                      >Start a conversation
+                      <svg
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path d="M4 10h12m-5-5 5 5-5 5" /></svg
+                    ></span>
+                    <svg
+                      class="home-story__site-photo story-harbor-art"
+                      viewBox="0 0 660 640"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <g
+                        fill="none"
+                        stroke="#b9d0c9"
+                        stroke-width="1"
+                        opacity=".65"
+                      >
+                        <path d="M140 35v510M20 500 630 440" />
+                        <path d="M154 35v510M20 512 630 452" />
+                        <path d="M168 35v510M20 524 630 464" />
+                        <path d="M182 35v510M20 536 630 476" />
+                        <path d="M196 35v510M20 548 630 488" />
+                        <path d="M210 35v510M20 560 630 500" />
+                        <path d="M224 35v510M20 572 630 512" />
+                        <path d="M238 35v510M20 584 630 524" />
+                        <path d="m390 360 245-78v318l-245-70Z" />
+                        <path d="M570 305v305" />
+                        <path d="M583 301v305" />
+                        <path d="M596 297v305" />
+                        <path d="M609 293v305" />
+                        <path d="M622 289v305" />
+                      </g>
+                      <path
+                        d="M250 80 470 174v386l-220-94Zm25 42v326l171 74V194Z"
+                        fill="#dceae3"
+                        fill-rule="evenodd"
+                      />
+                      <path
+                        d="M530 44 650 96v470l-120-51Zm22 40v416l76 32V112Z"
+                        fill="#327c70"
+                        fill-rule="evenodd"
+                      />
+                      <path
+                        d="M75 225 280 321v292L75 525Zm23 36v248l160 73V337Z"
+                        fill="#19766b"
+                        fill-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                <p>
+                  Make complex services easy to understand and give visitors a
+                  useful next step.
+                </p>
+              </div>
+              <div class="home-story__connector" aria-hidden="true">→</div>
+              <div class="home-story__stage home-story__stage--enquiry">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >02</span
+                  >
+                  <h3>Make the inquiry usable</h3>
+                </div>
+                <div
+                  class="home-story__form"
+                  role="img"
+                  aria-label="Harbor Ledger inquiry illustration with service choices, contact context and Submit. No request can be sent."
+                >
+                  <div class="home-story__form-content" aria-hidden="true">
+                    <div class="home-story__form-heading">
+                      <span class="home-story__form-brand">Harbor Ledger</span>
+                    </div>
+                    <div class="home-story__form-field">
+                      <span class="home-story__form-label">Support needed</span>
+                      <span
+                        class="home-story__form-input home-story__form-select"
+                      >
+                        Tax planning
+                        <svg
+                          viewBox="0 0 16 16"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <path d="m4 6 4 4 4-4" />
+                        </svg>
+                      </span>
+                    </div>
+                    <div class="home-story__form-row">
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Industry</span>
+                        <span
+                          class="home-story__form-input home-story__form-select"
+                        >
+                          Professional services
+                          <svg
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <path d="m4 6 4 4 4-4" />
+                          </svg>
+                        </span>
+                      </div>
+                      <div
+                        class="home-story__form-field home-story__form-timing"
+                      >
+                        <span class="home-story__form-label"
+                          >Preferred timing</span
+                        >
+                        <span
+                          class="home-story__form-input home-story__form-select"
+                        >
+                          Planning ahead
+                          <svg
+                            viewBox="0 0 16 16"
+                            aria-hidden="true"
+                            focusable="false"
+                          >
+                            <path d="m4 6 4 4 4-4" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="home-story__form-row">
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Your name</span>
+                        <span class="home-story__form-input">Alex Morgan</span>
+                      </div>
+                      <div class="home-story__form-field">
+                        <span class="home-story__form-label">Email</span>
+                        <span class="home-story__form-input"
+                          >alex@example.org</span
+                        >
+                      </div>
+                    </div>
+                    <div class="home-story__form-field">
+                      <span class="home-story__form-label"
+                        >What would you like to review?</span
+                      >
+                      <span
+                        class="home-story__form-input home-story__form-message"
+                        >Review our reporting workflow and plan the next
+                        engagement.</span
+                      >
+                    </div>
+                    <span class="home-story__form-button">
+                      Submit
+                      <svg
+                        viewBox="0 0 20 20"
+                        aria-hidden="true"
+                        focusable="false"
+                      >
+                        <path d="M4 10h12m-5-5 5 5-5 5" />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+
+                <p>
+                  Give a consultation request enough context for a thoughtful
+                  response.
+                </p>
+              </div>
+              <div class="home-story__connector" aria-hidden="true">→</div>
+              <div class="home-story__stage home-story__stage--report">
+                <div class="numbered-step__head">
+                  <span class="numbered-step__number" aria-hidden="true"
+                    >03</span
+                  >
+                  <h3>See what to do next</h3>
+                </div>
+                <div
+                  class="home-story__report"
+                  role="img"
+                  aria-label="Harbor Ledger dashboard illustration with Review inquiries, Booking interest, Paid engagements and an unscaled activity chart. No performance values are shown."
+                >
+                  <div class="home-story__report-content" aria-hidden="true">
+                    <div class="home-story__report-heading">
+                      <span class="home-story__report-brand"
+                        >Harbor Ledger</span
+                      >
+                    </div>
+                    <span class="home-story__report-period"
+                      >Inquiries · Bookings · Billing</span
+                    >
+                    <div class="home-story__report-metrics">
+                      <div
+                        class="home-story__report-metric home-story__report-metric--primary"
+                      >
+                        <span>Review inquiries</span><strong>—</strong>
+                      </div>
+                      <div class="home-story__report-metric">
+                        <span>Booking interest</span><strong>—</strong>
+                      </div>
+                      <div class="home-story__report-metric">
+                        <span>Paid engagements</span><strong>—</strong>
+                      </div>
+                    </div>
+                    <div class="home-story__report-chart">
+                      <span class="home-story__report-chart-title"
+                        >Activity over time</span
+                      >
+                      <div class="home-story__report-plot">
+                        <div class="home-story__report-y">
+                          <span>—</span><span>—</span>
+                        </div>
+                        <svg
+                          viewBox="0 0 596 194"
+                          aria-hidden="true"
+                          focusable="false"
+                        >
+                          <g
+                            fill="none"
+                            stroke="#edf2f6"
+                            stroke-width="1"
+                            vector-effect="non-scaling-stroke"
+                          >
+                            <path d="M4 4.00H592" />
+                            <path d="M4 41.20H592" />
+                            <path d="M4 78.40H592" />
+                            <path d="M4 115.60H592" />
+                            <path d="M4 152.80H592" />
+                            <path d="M4 190.00H592" />
+                          </g>
+                          <polyline
+                            points="4.00,175.12 29.57,190.00 55.13,152.80 80.70,167.68 106.26,190.00 131.83,190.00 157.39,182.56 182.96,175.12 208.52,175.12 234.09,152.80 259.65,152.80 285.22,167.68 310.78,137.92 336.35,182.56 361.91,167.68 387.48,182.56 413.04,190.00 438.61,137.92 464.17,93.28 489.74,56.08 515.30,33.76 540.87,26.32 566.43,26.32 592.00,26.32"
+                            fill="none"
+                            stroke="#07899b"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            vector-effect="non-scaling-stroke"
+                          />
+                        </svg>
+                      </div>
+                      <div class="home-story__report-x">
+                        <span>Earlier</span><span>Later</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p>
+                  Distinguish interest from confirmed bookings and paid work
+                  using agreed source records.
+                </p>
+              </div>
             </div>
           </div>
+          <div class="journeys__controls" hidden>
+            <span class="journeys__count" aria-hidden="true">1 / 5</span
+            ><button
+              class="journeys__previous"
+              type="button"
+              aria-label="Previous business journey"
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                <path d="M4 10h12m-5-5 5 5-5 5" />
+              </svg></button
+            ><button
+              class="journeys__next"
+              type="button"
+              aria-label="Next business journey"
+            >
+              <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                <path d="M4 10h12m-5-5 5 5-5 5" />
+              </svg>
+            </button>
+          </div>
+          <p
+            class="journeys__announcement sr-only"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+          ></p>
         </div>
       </section>
 
@@ -930,10 +2044,16 @@
           performance.
         </p>
         <p id="home-work-note-2" tabindex="-1">
-          <sup>2</sup> Northside is a synthetic portfolio concept. The homepage
-          cover, inquiry illustration, and dashboard show a conceptual journey,
-          not a real client implementation, integrated tracking setup, or
-          result.
+          <sup>2</sup> Northside, STILL FORM, AER / FIELD, Alder &amp; Lane and
+          Harbor Ledger are portfolio concepts. These website, inquiry and
+          dashboard journeys illustrate potential, separately scoped options,
+          not implemented client systems, measured results or guarantees. Charts
+          are unscaled illustrations; no performance values are shown. Confirmed
+          calls, bookings and revenue require appropriate source integrations,
+          matching rules and consent. Profile direction requests require an
+          eligible customer-facing location and do not confirm visits. Existing
+          design-package scopes remain unchanged. ARC architecture: Luke
+          Thornton / Unsplash.
         </p>
         <p id="home-wordpress-note-3" tabindex="-1">
           <sup>3</sup> WordPress and the WordPress logo are trademarks of the
@@ -990,6 +2110,7 @@
     </footer>
     <!-- shared:footer:end -->
 
+    <script src="/assets/home-journeys.js?v=ba30632721" defer></script>
     <script src="/script.js?v=762eaa75d4" defer></script>
   </body>
 </html>
