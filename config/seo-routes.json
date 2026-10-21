@@ -1,0 +1,162 @@
+[
+  {
+    "file": "index.html",
+    "route": "/",
+    "title": "JustinJ Industries | Websites, Analytics & Support",
+    "description": "Website builds and redesigns, WordPress and Craft CMS support, GA4 and GTM implementation, analytics QA, and practical handoffs from JustinJ Industries."
+  },
+  {
+    "file": "about.html",
+    "route": "/about/",
+    "title": "About",
+    "description": "Meet JustinJ Industries, an independent Boston-based studio for hands-on website development, analytics implementation, QA, and practical handoffs."
+  },
+  {
+    "file": "work.html",
+    "route": "/work/",
+    "title": "Selected Work & Website Concepts",
+    "description": "Explore selected website work and clearly labeled demonstration concepts from JustinJ Industries, with implementation context and project inquiry paths."
+  },
+  {
+    "file": "catalogue.html",
+    "route": "/catalogue/",
+    "title": "Website Design Catalogue",
+    "description": "Explore five demonstration website designs for service businesses and creative teams. Review sample pages, scope, and a nonbinding project inquiry path."
+  },
+  {
+    "file": "design.html",
+    "route": "/design/",
+    "title": "Explore Website Design Concepts",
+    "description": "Compare JustinJ Industries website concepts, explore their example pages, and review the scope before starting a nonbinding project inquiry."
+  },
+  {
+    "file": "government-buyers.html",
+    "route": "/government-buyers/",
+    "title": "Government Buyers & Primes",
+    "description": "Review JustinJ Industries web development, analytics implementation, QA, and documentation capabilities for public-sector buyers and prime-contractor teams."
+  },
+  {
+    "file": "capability-statement.html",
+    "route": "/capability-statement/",
+    "title": "Capability Statement",
+    "description": "JustinJ Industries LLC: websites, measurement and digital support for public-sector teams and prime contractors. Services, selected examples and contact details."
+  },
+  {
+    "file": "policies.html",
+    "route": "/policies/",
+    "title": "Website Policies",
+    "description": "Read the JustinJ Industries website privacy and accessibility statements, including inquiry handling, optional embeds, evaluation status, and contact information."
+  },
+  {
+    "file": "services/responsible-implementation/index.html",
+    "route": "/services/responsible-implementation/",
+    "title": "Responsible Implementation",
+    "description": "JustinJ Industries’ approach to accessibility, testable measurement, sensitive-data exclusions, and practical QA for scoped client projects.",
+    "partial": "partials/responsible-implementation-content.html",
+    "parent": {
+      "name": "Services",
+      "route": "/services/"
+    }
+  },
+  {
+    "file": "services.html",
+    "route": "/services/",
+    "title": "Website, CMS & Analytics Services",
+    "description": "Review JustinJ Industries website development, WordPress and Craft CMS support, and analytics implementation services, with scope, process, and handoff details."
+  },
+  {
+    "file": "services/website-development/index.html",
+    "route": "/services/website-development/",
+    "title": "Website Development & Redesign",
+    "description": "Website builds and redesigns with accessible page structure, practical content workflows, technical SEO foundations, and a documented handoff from JustinJ Industries.",
+    "service": true,
+    "parent": {
+      "name": "Services",
+      "route": "/services/"
+    }
+  },
+  {
+    "file": "services/analytics-tagging/index.html",
+    "route": "/services/analytics-tagging/",
+    "title": "Analytics & Tagging Implementation",
+    "description": "GA4 and GTM implementation, tagging QA, consent-aware measurement planning, and Looker Studio reporting with documented validation from JustinJ Industries.",
+    "service": true,
+    "parent": {
+      "name": "Services",
+      "route": "/services/"
+    }
+  },
+  {
+    "file": "services/cms-support/index.html",
+    "route": "/services/cms-support/",
+    "title": "WordPress & Craft CMS Support",
+    "description": "WordPress and Craft CMS implementation support, content-template improvements, maintenance review, QA, and practical editor documentation from JustinJ Industries.",
+    "service": true,
+    "parent": {
+      "name": "Services",
+      "route": "/services/"
+    }
+  },
+  {
+    "file": "design/alder-lane/index.html",
+    "route": "/design/alder-lane/",
+    "title": "Alder & Lane Website Concept",
+    "description": "A focused business-services concept with clear service choices, a concise studio story and direct contact paths. A fictional design demonstration by JustinJ Industries, with scope and inquiry details.",
+    "concept": "Alder & Lane",
+    "parent": {
+      "name": "Designs",
+      "route": "/catalogue/"
+    }
+  },
+  {
+    "file": "design/harbor-ledger/index.html",
+    "route": "/design/harbor-ledger/",
+    "title": "Harbor Ledger Website Concept",
+    "description": "An editorial accounting and advisory experience with connected services, industry context, useful FAQs and a guided consultation journey. A fictional design demonstration by JustinJ Industries, with scope and inquiry details.",
+    "concept": "Harbor Ledger",
+    "parent": {
+      "name": "Designs",
+      "route": "/catalogue/"
+    }
+  },
+  {
+    "file": "design/still-form/index.html",
+    "route": "/design/still-form/",
+    "title": "Still Form Website Concept",
+    "description": "An image-led studio portfolio with category filters, quick views and full project stories for branding, packaging and digital work. A fictional design demonstration by JustinJ Industries, with scope and inquiry details.",
+    "concept": "Still Form",
+    "parent": {
+      "name": "Designs",
+      "route": "/catalogue/"
+    }
+  },
+  {
+    "file": "design/aer-field/index.html",
+    "route": "/design/aer-field/",
+    "title": "AER / FIELD Website Concept",
+    "description": "A motion-led film portfolio with a cinematic opening, dedicated film pages, image galleries and clear playback controls. A fictional design demonstration by JustinJ Industries, with scope and inquiry details.",
+    "concept": "AER / FIELD",
+    "parent": {
+      "name": "Designs",
+      "route": "/catalogue/"
+    }
+  },
+  {
+    "file": "design/northside/index.html",
+    "route": "/design/northside/",
+    "title": "Northside Website Concept",
+    "description": "A practical heating-services experience with clear service choices, boiler-care guidance and a grouped inquiry journey. A fictional design demonstration by JustinJ Industries, with scope and inquiry details.",
+    "concept": "Northside",
+    "parent": {
+      "name": "Designs",
+      "route": "/catalogue/"
+    }
+  },
+  {
+    "file": "404.html",
+    "route": "/404.html",
+    "title": "Page Not Found",
+    "description": "This page could not be found. Return to JustinJ Industries services, website designs, or the contact form.",
+    "noindex": true
+  }
+]

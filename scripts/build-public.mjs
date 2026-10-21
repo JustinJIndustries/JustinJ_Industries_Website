@@ -12,7 +12,24 @@ import {
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { checkReleaseHolds } from "./check-release-holds.mjs";
+await checkReleaseHolds(fileURLToPath(new URL("../", import.meta.url)));
+
 const publicFiles = Object.freeze([
+  "404.html",
+  "services.html",
+  "services/website-development/index.html",
+  "services/analytics-tagging/index.html",
+  "services/cms-support/index.html",
+  "services/responsible-implementation/index.html",
+  "design/alder-lane/index.html",
+  "design/harbor-ledger/index.html",
+  "design/still-form/index.html",
+  "design/aer-field/index.html",
+  "design/northside/index.html",
+  "assets/service-journeys.css",
+  "assets/jji-social.png",
+
   "index.html",
   "about.html",
   "policies.html",
@@ -173,7 +190,9 @@ const cleanRouteCopies = new Map(
   publicFiles
     .filter(
       (relativePath) =>
-        relativePath.endsWith(".html") && !relativePath.endsWith("index.html"),
+        relativePath.endsWith(".html") &&
+        relativePath !== "404.html" &&
+        !relativePath.endsWith("index.html"),
     )
     .map((relativePath) => [
       relativePath,
@@ -395,6 +414,8 @@ if (
     `Built artifact is missing files: ${missingFiles.join(", ")}`,
   );
 }
+
+await import("./check-public-content.mjs");
 
 const output = [`Built dist/ with ${artifactFiles.length} public files:`];
 

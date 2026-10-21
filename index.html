@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <!-- Crawler directives -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -10,11 +8,15 @@
       href="/assets/logos/JJI-Logo-Only-grey.png"
       type="image/png"
     />
+    <link rel="stylesheet" href="/styles.css?v=69b20435b5" />
+    <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
+
     <title>JustinJ Industries | Websites, Analytics &amp; Support</title>
     <meta
       name="description"
-      content="Full website builds, redesigns, ongoing support, GA4 and GTM implementation, Adobe Analytics QA, and Looker Studio reporting from JustinJ Industries."
+      content="Website builds and redesigns, WordPress and Craft CMS support, GA4 and GTM implementation, analytics QA, and practical handoffs from JustinJ Industries."
     />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="https://www.justinjindustries.com/" />
     <meta
       property="og:title"
@@ -22,55 +24,76 @@
     />
     <meta
       property="og:description"
-      content="Thoughtful website builds and redesigns, reliable measurement, and practical support."
+      content="Website builds and redesigns, WordPress and Craft CMS support, GA4 and GTM implementation, analytics QA, and practical handoffs from JustinJ Industries."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.justinjindustries.com/" />
+    <meta property="og:site_name" content="JustinJ Industries" />
+    <meta property="og:locale" content="en_US" />
     <meta
       property="og:image"
-      content="https://www.justinjindustries.com/assets/work/uaid-usa-home.png"
+      content="https://www.justinjindustries.com/assets/jji-social.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="JustinJ Industries — Websites, measurement and digital support"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="/styles.css?v=69b20435b5" />
+    <meta
+      name="twitter:title"
+      content="JustinJ Industries | Websites, Analytics &amp; Support"
+    />
+    <meta
+      name="twitter:description"
+      content="Website builds and redesigns, WordPress and Craft CMS support, GA4 and GTM implementation, analytics QA, and practical handoffs from JustinJ Industries."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.justinjindustries.com/assets/jji-social.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="JustinJ Industries — Websites, measurement and digital support"
+    />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
           {
             "@type": "Organization",
+            "@id": "https://www.justinjindustries.com/#organization",
             "name": "JustinJ Industries",
             "url": "https://www.justinjindustries.com/",
             "email": "info@justinjindustries.com",
             "telephone": "+1-617-800-9291",
-            "areaServed": ["Massachusetts", "United States"]
+            "logo": "https://www.justinjindustries.com/assets/logos/JJI-Logo-Only-grey.png"
           },
           {
             "@type": "WebSite",
+            "@id": "https://www.justinjindustries.com/#website",
+            "url": "https://www.justinjindustries.com/",
             "name": "JustinJ Industries",
-            "url": "https://www.justinjindustries.com/"
+            "publisher": {
+              "@id": "https://www.justinjindustries.com/#organization"
+            }
           },
           {
-            "@type": "ProfessionalService",
-            "name": "JustinJ Industries",
+            "@type": "WebPage",
+            "@id": "https://www.justinjindustries.com/#webpage",
             "url": "https://www.justinjindustries.com/",
-            "description": "Website builds, redesigns, ongoing support, analytics implementation and QA, and Looker Studio reporting for teams in Massachusetts and remotely.",
-            "areaServed": ["Massachusetts", "United States"],
-            "serviceType": [
-              "Full website builds",
-              "Website redesign",
-              "WordPress support",
-              "GA4 and GTM implementation",
-              "Adobe Analytics QA",
-              "Adobe Experience Platform support",
-              "Looker Studio reporting",
-              "Tagging and measurement QA",
-              "Technical documentation",
-              "Website maintenance"
-            ]
+            "name": "JustinJ Industries | Websites, Analytics & Support",
+            "description": "Website builds and redesigns, WordPress and Craft CMS support, GA4 and GTM implementation, analytics QA, and practical handoffs from JustinJ Industries.",
+            "isPartOf": { "@id": "https://www.justinjindustries.com/#website" },
+            "about": {
+              "@id": "https://www.justinjindustries.com/#organization"
+            }
           }
         ]
       }
     </script>
-    <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
   </head>
   <body class="page-home">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -90,7 +113,7 @@
 
         <ul class="nav-links">
           <li><a href="/" aria-current="page">Home</a></li>
-          <li><a href="#services">Services</a></li>
+          <li><a href="/services/">Services</a></li>
           <li><a href="/work/">Work</a></li>
           <li><a href="/catalogue/">Designs</a></li>
           <li><a href="/about/">About</a></li>
@@ -137,7 +160,7 @@
     >
       <ul class="overlay-menu">
         <li><a href="/" aria-current="page">Home</a></li>
-        <li><a href="#services">Services</a></li>
+        <li><a href="/services/">Services</a></li>
         <li><a href="/work/">Work</a></li>
         <li><a href="/catalogue/">Designs</a></li>
         <li><a href="/about/">About</a></li>
@@ -621,6 +644,11 @@
             >Government buyers</a
           >
         </div>
+        <p>
+          <a class="text-link" href="/services/"
+            >Review service scopes and process</a
+          >
+        </p>
       </section>
 
       <section
@@ -953,7 +981,7 @@
           <nav class="jji-footer__nav" aria-label="Footer explore">
             <h2>Explore</h2>
             <ul>
-              <li><a href="/#services">Services</a></li>
+              <li><a href="/services/">Services</a></li>
               <li><a href="/work/">Selected work</a></li>
               <li><a href="/catalogue/">Website designs</a></li>
               <li><a href="/about/">About</a></li>
@@ -990,6 +1018,6 @@
     </footer>
     <!-- shared:footer:end -->
 
-    <script src="/script.js?v=762eaa75d4" defer></script>
+    <script src="/script.js?v=201629bc0d" defer></script>
   </body>
 </html>

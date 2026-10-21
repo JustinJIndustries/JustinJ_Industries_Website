@@ -11,12 +11,15 @@
     "check:a11y": "npm run build && start-server-and-test serve http://127.0.0.1:8080 \"pa11y http://127.0.0.1:8080 --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/about/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/policies/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/work/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/government-buyers/ --standard WCAG2AA --timeout 120000 && pa11y http://127.0.0.1:8080/capability-statement/ --standard WCAG2AA --timeout 120000\"",
     "check:format": "prettier --check --ignore-unknown \"*.{html,css,js,md,xml,txt}\" \"docs/**/*.md\"",
     "format": "prettier --write --ignore-unknown \"*.{html,css,js,md,xml,txt}\" \"docs/**/*.md\"",
-    "check": "npm run check:footer && npm run check:html && npm run check:links && npm run check:a11y && npm run check:format",
+    "check": "npm run check:footer && npm run check:html && npm run check:links && npm run check:a11y && npm run check:format && npm run check:seo && npm run check:public-content",
     "preview": "npm run build && npm run serve",
     "sync:footer": "node scripts/sync-footer.mjs --write",
     "check:footer": "node scripts/sync-footer.mjs && prettier --check assets/site-footer.css partials/site-footer.html scripts/sync-footer.mjs",
     "build:capability": "node scripts/build-capability-pdf.mjs",
-    "check:capability": "node scripts/check-capability-pdf.mjs"
+    "check:capability": "node scripts/check-capability-pdf.mjs",
+    "prepare:seo": "node scripts/prepare-seo.mjs",
+    "check:seo": "node scripts/prepare-seo.mjs --check && node scripts/check-seo.mjs",
+    "check:public-content": "node scripts/check-public-content.mjs"
   },
   "devDependencies": {
     "html-validate": "^10.0.0",

@@ -1,0 +1,11 @@
+{
+  "homepageCarousel": {
+    "status": "publication_hold",
+    "referenceCommit": "b57ca1ad098d4ec18ffe896e5bf69e72de89c8b8",
+    "sectionId": "next-step",
+    "sha256": "14a00877225868071370261c22ef0fb2401e7703d8d1a6d5660e4b74c76b39ff",
+    "forbiddenSources": ["assets/home-journeys.css", "assets/home-journeys.js"],
+    "forbiddenMarkup": ["home-journeys", "journeys__", "business-stories"],
+    "approvalRequired": "Explicit owner approval is required before replacing the currently published section."
+  }
+}

@@ -1,14 +1,14 @@
 const designConcepts = {
   alder: {
     calloutIntro:
-      "A clear, compact starting point for independent consultants and small service businesses.",
+      "A calm, clear introduction for consultants and small service teams.",
     calloutCopy:
-      "Introduce what you do, explain your services, and give visitors an easy way to get in touch. We can shape this four-page direction around your business, with your wording, branding, and images. Tell us what you have in mind.",
+      "Lead with the problems you help solve. This four-page experience connects a focused introduction, practical service summaries and a concise studio story with direct contact paths.",
     name: "Alder & Lane",
     startingPrice: "$950",
-    type: "Static four-page starter · DEMO",
+    type: "Business operations & consulting • Demo",
     description:
-      "A demo business-operations sample from the four-page static starter, with real navigable example pages.",
+      "A focused business-services concept with clear service choices, a concise studio story and direct contact paths.",
     service: "Static four-page site",
     scope:
       "The $950 static package covers Home, Services, About, and Contact with email and phone links. It does not include a CMS, backend, contact form, commerce, or blog.",
@@ -33,28 +33,28 @@ const designConcepts = {
         name: "About",
         eyebrow: "ABOUT ALDER & LANE",
         title: "A little about the team behind the work.",
-        body: "Space for a real story, principles, and client-provided imagery.",
+        body: "A concise introduction to the studio’s approach and way of working.",
         blocks: ["Our approach", "What matters", "Contact us"],
       },
       {
         name: "Contact",
         eyebrow: "CONTACT",
         title: "Start a conversation.",
-        body: "The starter uses email and phone links. A form would require separately agreed scope.",
+        body: "Direct email and phone routes for a simple service-business contact experience.",
         blocks: ["Email us", "Call us", "Service area"],
       },
     ],
   },
   harbor: {
     calloutIntro:
-      "For accounting and advisory teams ready for a more confident first impression.",
+      "Give a complex professional service a clear, confident introduction.",
     calloutCopy:
-      "Make complex services easy to understand, connect your expertise to the industries you support, and give visitors a clear way to begin. We can shape this five-page WordPress direction around your firm’s services, voice and consultation process.",
+      "Connect accounting, tax support and advisory expertise to the decisions visitors face. Industry sections, practical FAQs and a guided consultation journey help a potential client arrive at a more useful conversation.",
     name: "Harbor Ledger",
     startingPrice: "$1,999",
-    type: "Accounting & advisory WordPress direction · DEMO",
+    type: "Accounting & advisory • Demo",
     description:
-      "An editorial accounting and advisory direction with structured services, industry context and a clear consultation journey.",
+      "An editorial accounting and advisory experience with connected services, industry context, useful FAQs and a guided consultation journey.",
     service: "Simple WordPress site",
     scope:
       "The $1,999 WordPress package covers Home, Services, About, FAQ, and Contact, with a standard contact form, basic antispam, and simple metadata. This is a straightforward theme-based scope.",
@@ -116,14 +116,14 @@ const designConcepts = {
   },
   still: {
     calloutIntro:
-      "An editorial portfolio direction for designers, creative studios, and independent makers.",
+      "Let the work lead, then give people a reason to look closer.",
     calloutCopy:
-      "Put your projects, process, and point of view at the center. We can tailor the visual direction around your work, imagery, and story, then discuss the project pages and portfolio features that fit your practice. Start with a few examples of what you’d like to show.",
+      "Move from an editorial project index into quick views and full project stories. Category filters, deliberate typography and spacious imagery give identity, packaging and digital work room to stand out.",
     name: "Still Form",
     startingPrice: "$1,695",
-    type: "Custom-scope design-studio concept · DEMO",
+    type: "Branding & design studios • Demo",
     description:
-      "An editorial design-studio direction with a prominent project gallery and deliberate typography.",
+      "An image-led studio portfolio with category filters, quick views and full project stories for branding, packaging and digital work.",
     service: "Still Form website setup",
     scope:
       "Still Form website setup starts at $1,695 for core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
@@ -141,7 +141,7 @@ const designConcepts = {
         name: "Work",
         eyebrow: "SELECTED WORK",
         title: "Considered work, made visible.",
-        body: "A sample project index. No real client identities or outcomes are implied.",
+        body: "Browse branding, packaging and digital concepts through filters, quick views and project stories.",
         blocks: ["Identity study", "Editorial system", "Digital experience"],
       },
       {
@@ -155,28 +155,28 @@ const designConcepts = {
         name: "About",
         eyebrow: "THE STUDIO",
         title: "Curiosity with purpose.",
-        body: "A place for verified team details and process copy.",
+        body: "The studio’s perspective, process and collaboration style.",
         blocks: ["Perspective", "Process", "Collaborate"],
       },
       {
         name: "Contact",
         eyebrow: "LET'S TALK",
         title: "Start with a conversation.",
-        body: "An inquiry path adapted to the real project scope.",
+        body: "A focused introduction to the project, timing and next conversation.",
         blocks: ["Project outline", "Timeline", "Get in touch"],
       },
     ],
   },
   aer: {
     calloutIntro:
-      "A cinematic direction for drone operators, filmmakers, and visual production studios.",
+      "A cinematic first impression, with more to explore beyond the reel.",
     calloutCopy:
-      "Give your films, photography, and services room to lead. We can shape the presentation around your own reel and project imagery, with a clear path from viewing the work to discussing a brief. Tell us what you want to showcase and how you want people to inquire.",
+      "Bring films and photography into a focused presentation. A motion-led opening, dedicated film pages and supporting galleries connect the view to the production approach and a clear project-inquiry path.",
     name: "AER / FIELD",
     startingPrice: "$1,995",
-    type: "Custom-scope aerial-film concept · DEMO",
+    type: "Aerial film & visual production • Demo",
     description:
-      "A cinematic direction for an aerial-film business. Video, gallery, and motion behavior require custom scoping.",
+      "A motion-led film portfolio with a cinematic opening, dedicated film pages, image galleries and clear playback controls.",
     service: "AER / FIELD website setup",
     scope:
       "AER / FIELD website setup starts at $1,995 for core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
@@ -194,7 +194,7 @@ const designConcepts = {
         name: "Film",
         eyebrow: "FILM",
         title: "Places with a story to tell.",
-        body: "A proposed film index. Footage and claims require approved sources and rights.",
+        body: "Explore property, landscape and commercial film studies.",
         blocks: ["Landscape study", "Built environment", "Property study"],
       },
       {
@@ -208,27 +208,27 @@ const designConcepts = {
         name: "About",
         eyebrow: "ABOUT",
         title: "Perspective, with intention.",
-        body: "A placeholder for verified experience and production details.",
+        body: "A considered approach to planning, capture and delivery.",
         blocks: ["Approach", "Process", "Collaborate"],
       },
       {
         name: "Contact",
         eyebrow: "CONTACT",
         title: "Tell us what you want to show.",
-        body: "A scoped inquiry for the real project and its media needs.",
+        body: "An inquiry journey that starts with the location, brief and intended use.",
         blocks: ["The brief", "Timing", "Get in touch"],
       },
     ],
   },
   northside: {
     calloutIntro:
-      "A straightforward service-site direction for heating specialists and local trade businesses.",
+      "Help a homeowner find the right service before they get in touch.",
     calloutCopy:
-      "Help visitors explore your services, understand the work you take on, and find the right contact route. We can tailor this direction around your service areas, photos, and business details. Share how you handle inquiries so we can plan a suitable contact setup.",
-    name: "Northside Heating & Boiler Care",
-    type: "WordPress block theme sample · DEMO",
+      "Make boiler care, heating repairs and replacement planning easy to navigate. Service guidance, practical FAQs and a grouped inquiry help visitors explain the work they need without starting from a blank message.",
+    name: "Northside",
+    type: "Heating & home services • Demo",
     description:
-      "A WordPress-ready block theme concept with editable content, native navigation, service pages, and a non-sending inquiry path.",
+      "A practical heating-services experience with clear service choices, boiler-care guidance and a grouped inquiry journey.",
     service: "Custom scope",
     scope:
       "A WordPress-ready demo package with Home, Services, Boiler Care, About, and Contact routes. The content is synthetic and the form is a non-sending demonstration.",
@@ -238,15 +238,15 @@ const designConcepts = {
       {
         name: "Home",
         eyebrow: "NORTHSIDE HEATING & BOILER CARE",
-        title: "A warmer home. A clearer next step.",
-        body: "A clear service journey with the approved boiler-room photograph.",
+        title: "A warmer home starts here.",
+        body: "A photo-led introduction to boiler care, heating repairs and the next step.",
         blocks: ["Boiler care", "Heating repairs", "Replacement planning"],
       },
       {
         name: "Services",
         eyebrow: "PRACTICAL HELP",
         title: "The right help for your home’s heating.",
-        body: "A service overview with editable native content.",
+        body: "Clear service choices with practical explanations and next steps.",
         blocks: ["Boiler care", "Heating repairs", "Replacement planning"],
       },
       {
@@ -271,7 +271,7 @@ const designConcepts = {
         name: "Contact",
         eyebrow: "START A CONVERSATION",
         title: "Let’s talk about your heating.",
-        body: "A non-sending inquiry demonstration for the WordPress concept.",
+        body: "A guided service inquiry with clear validation and a visible demonstration confirmation.",
         blocks: ["Your service need", "A little more detail", "Send inquiry"],
       },
     ],
@@ -279,9 +279,20 @@ const designConcepts = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  const key = new URLSearchParams(window.location.search).get("design");
-  const concept = designConcepts[key];
+  const requestedKey = new URLSearchParams(window.location.search).get(
+    "design",
+  );
+  const key = document.body.dataset.designKey || requestedKey;
+  const concept = Object.hasOwn(designConcepts, key)
+    ? designConcepts[key]
+    : null;
   if (!concept) {
+    if (requestedKey) {
+      document.title = "Design Not Found | JustinJ Industries";
+      document.getElementById("design-title").textContent = "Design not found";
+      document.querySelector('meta[name="robots"]').content = "noindex, follow";
+      document.querySelector('link[rel="canonical"]')?.remove();
+    }
     document.getElementById("design-description").innerHTML =
       'Choose a concept from the <a href="/catalogue/">design catalogue</a>.';
     document
@@ -308,8 +319,18 @@ document.addEventListener("DOMContentLoaded", () => {
     northside: "northside",
   };
   const previewSlug = previewSlugs[key];
+  // Legacy query links remain usable, including their attribution and fragment.
+  // Static project routes provide distinct metadata before JavaScript runs.
+  const canonicalUrl = `https://www.justinjindustries.com/design/${previewSlug}/`;
+  document.querySelector('link[rel="canonical"]').href = canonicalUrl;
+  document.querySelector('meta[property="og:url"]').content = canonicalUrl;
   const mobileImage = document.getElementById("design-mobile-image");
-  const mobilePreviewVersion = key === "harbor" ? "abf6e597d2" : "b5b373813f";
+  const mobilePreviewVersion =
+    key === "harbor"
+      ? "abf6e597d2"
+      : key === "northside"
+        ? "1f38506f5f"
+        : "b5b373813f";
   mobileImage.dataset.src = `/assets/previews/${previewSlug}-mobile.png?v=${mobilePreviewVersion}`;
   mobileImage.dataset.srcset = `${mobileImage.dataset.src} 1x, /assets/previews/${previewSlug}-mobile@3x.webp?v=${mobilePreviewVersion} 3x`;
   mobileImage.alt = `${concept.name} responsive sample homepage preview`;
@@ -363,7 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
   title.textContent = concept.name;
   document.getElementById("sample-pages-title").firstChild.textContent =
     `Explore ${concept.name} pages`;
-  document.title = `${concept.name} Website Concept | JustinJ Industries`;
+  document.title = `${key === "northside" ? "Northside" : concept.name} Website Concept | JustinJ Industries`;
   const metadata = document.getElementById("design-type");
   metadata.textContent = concept.type;
   if (concept.startingPrice) {
@@ -535,15 +556,28 @@ document.addEventListener("DOMContentLoaded", () => {
     error.hidden = false;
     if (control) {
       control.setAttribute("aria-invalid", "true");
+      const descriptions = new Set(
+        (control.getAttribute("aria-describedby") || "")
+          .split(/\s+/)
+          .filter(Boolean),
+      );
+      descriptions.add("enquiry-error");
+      control.setAttribute("aria-describedby", [...descriptions].join(" "));
       control.focus();
     } else error.focus();
   };
   const clearError = () => {
     error.textContent = "";
     error.hidden = true;
-    form
-      .querySelectorAll('[aria-invalid="true"]')
-      .forEach((control) => control.removeAttribute("aria-invalid"));
+    form.querySelectorAll('[aria-invalid="true"]').forEach((control) => {
+      control.removeAttribute("aria-invalid");
+      const descriptions = (control.getAttribute("aria-describedby") || "")
+        .split(/\s+/)
+        .filter((id) => id && id !== "enquiry-error");
+      if (descriptions.length)
+        control.setAttribute("aria-describedby", descriptions.join(" "));
+      else control.removeAttribute("aria-describedby");
+    });
   };
   const showStep = (index) => {
     currentStep = index;

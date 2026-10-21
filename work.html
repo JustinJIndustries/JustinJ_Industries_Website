@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -9,25 +8,109 @@
       href="/assets/logos/JJI-Logo-Only-grey.png"
       type="image/png"
     />
-    <title>Selected Work | JustinJ Industries</title>
-    <meta
-      name="description"
-      content="Explore JustinJ Industries website and measurement work: UAid Direct regional WordPress multisite and a clearly labeled synthetic Looker Studio demo."
-    />
-    <link rel="canonical" href="https://www.justinjindustries.com/work/" />
-    <meta property="og:title" content="Selected Work | JustinJ Industries" />
-    <meta
-      property="og:description"
-      content="A regional nonprofit website and a synthetic reporting demo with clear scope and attribution."
-    />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:image"
-      content="https://www.justinjindustries.com/assets/work/uaid-usa-home.png"
-    />
-    <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="/styles.css?v=c4fa2ff273" />
     <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
+
+    <title>Selected Work &amp; Website Concepts | JustinJ Industries</title>
+    <meta
+      name="description"
+      content="Explore selected website work and clearly labeled demonstration concepts from JustinJ Industries, with implementation context and project inquiry paths."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://www.justinjindustries.com/work/" />
+    <meta
+      property="og:title"
+      content="Selected Work &amp; Website Concepts | JustinJ Industries"
+    />
+    <meta
+      property="og:description"
+      content="Explore selected website work and clearly labeled demonstration concepts from JustinJ Industries, with implementation context and project inquiry paths."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.justinjindustries.com/work/" />
+    <meta property="og:site_name" content="JustinJ Industries" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:image"
+      content="https://www.justinjindustries.com/assets/jji-social.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="JustinJ Industries — Websites, measurement and digital support"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Selected Work &amp; Website Concepts | JustinJ Industries"
+    />
+    <meta
+      name="twitter:description"
+      content="Explore selected website work and clearly labeled demonstration concepts from JustinJ Industries, with implementation context and project inquiry paths."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.justinjindustries.com/assets/jji-social.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="JustinJ Industries — Websites, measurement and digital support"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.justinjindustries.com/#organization",
+            "name": "JustinJ Industries",
+            "url": "https://www.justinjindustries.com/",
+            "email": "info@justinjindustries.com",
+            "telephone": "+1-617-800-9291",
+            "logo": "https://www.justinjindustries.com/assets/logos/JJI-Logo-Only-grey.png"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.justinjindustries.com/#website",
+            "url": "https://www.justinjindustries.com/",
+            "name": "JustinJ Industries",
+            "publisher": {
+              "@id": "https://www.justinjindustries.com/#organization"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.justinjindustries.com/work/#webpage",
+            "url": "https://www.justinjindustries.com/work/",
+            "name": "Selected Work & Website Concepts | JustinJ Industries",
+            "description": "Explore selected website work and clearly labeled demonstration concepts from JustinJ Industries, with implementation context and project inquiry paths.",
+            "isPartOf": { "@id": "https://www.justinjindustries.com/#website" },
+            "about": {
+              "@id": "https://www.justinjindustries.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.justinjindustries.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Selected Work & Website Concepts",
+                "item": "https://www.justinjindustries.com/work/"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body class="page-work">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -45,7 +128,7 @@
         </a>
         <ul class="nav-links">
           <li><a href="/">Home</a></li>
-          <li><a href="/#services">Services</a></li>
+          <li><a href="/services/">Services</a></li>
           <li><a href="/work/" aria-current="page">Work</a></li>
           <li><a href="/catalogue/">Designs</a></li>
           <li><a href="/about/">About</a></li>
@@ -87,7 +170,7 @@
     >
       <ul class="overlay-menu">
         <li><a href="/">Home</a></li>
-        <li><a href="/#services">Services</a></li>
+        <li><a href="/services/">Services</a></li>
         <li><a href="/work/" aria-current="page">Work</a></li>
         <li><a href="/catalogue/">Designs</a></li>
         <li><a href="/about/">About</a></li>
@@ -196,12 +279,17 @@
             type="button"
             class="btn btn--small work-report__toggle js-only"
             id="northside-report-toggle"
+            aria-describedby="northside-report-privacy"
             aria-expanded="false"
             aria-controls="northside-report-panel"
             hidden
           >
             Load interactive dashboard
           </button>
+          <p id="northside-report-privacy" class="small">
+            Loading or opening the report connects to Google.
+            <a href="/policies/#privacy">Read the privacy details</a>.
+          </p>
         </div>
         <figure class="work-detail__media">
           <img
@@ -298,7 +386,7 @@
           <nav class="jji-footer__nav" aria-label="Footer explore">
             <h2>Explore</h2>
             <ul>
-              <li><a href="/#services">Services</a></li>
+              <li><a href="/services/">Services</a></li>
               <li><a href="/work/">Selected work</a></li>
               <li><a href="/catalogue/">Website designs</a></li>
               <li><a href="/about/">About</a></li>
@@ -334,6 +422,6 @@
       </div>
     </footer>
     <!-- shared:footer:end -->
-    <script src="/script.js?v=762eaa75d4" defer></script>
+    <script src="/script.js?v=201629bc0d" defer></script>
   </body>
 </html>

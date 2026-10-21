@@ -1,0 +1,65 @@
+[
+  {
+    "slug": "website-development",
+    "title": "Website Development & Redesign",
+    "description": "Website builds and redesigns with accessible page structure, practical content workflows, technical SEO foundations, and a documented handoff from JustinJ Industries.",
+    "intro": "Build a useful website around what visitors need to understand and do. JustinJ Industries connects page structure, implementation, accessibility, and the practical details of keeping a site current.",
+    "inquiry": "Website build or improvement",
+    "fit": "For a new business site, a focused redesign, or an existing site whose content and visitor paths have become difficult to maintain.",
+    "deliverables": [
+      "A page and content plan tied to the agreed visitor journeys.",
+      "Responsive implementation with semantic structure, keyboard access, visible focus, and clear form states.",
+      "Page titles, descriptions, canonical URLs, and an indexable sitemap appropriate to the agreed scope.",
+      "A review record, deployment notes, and a practical maintenance handoff."
+    ],
+    "process": [
+      "Review the existing site, content, hosting, and priorities.",
+      "Agree the pages, design direction, platform, inputs, and acceptance criteria.",
+      "Build and review across desktop and mobile, then document the agreed release."
+    ],
+    "prepare": "Share the current URL, the pages you need, examples of visitor tasks, and any platform or hosting constraints. Avoid sending passwords or private customer information.",
+    "boundary": "Copywriting, CMS work, migrations, integrations, hosting, and ongoing updates depend on the written scope. Accessibility conformance should be validated for each project’s scope, content, and platform."
+  },
+  {
+    "slug": "analytics-tagging",
+    "title": "Analytics & Tagging Implementation",
+    "description": "GA4 and GTM implementation, tagging QA, consent-aware measurement planning, and Looker Studio reporting with documented validation from JustinJ Industries.",
+    "intro": "Make measurement understandable and testable. JustinJ Industries helps connect website interactions to an agreed measurement plan, with clear event definitions and a record of what was validated.",
+    "inquiry": "Analytics tagging / QA",
+    "fit": "For teams preparing an implementation, troubleshooting inconsistent events, or reviewing whether existing reporting reflects the actions they actually need to understand.",
+    "deliverables": [
+      "A measurement plan with agreed events, parameters, and acceptance criteria.",
+      "GA4 and GTM configuration or a review of an existing implementation, according to scope.",
+      "Consent and data-handling considerations documented alongside the tagging design.",
+      "QA evidence, known limitations, and implementation or reporting handoff notes."
+    ],
+    "process": [
+      "Review business questions, the site, existing tags, consent behavior, and access requirements.",
+      "Define events and exclusions before configuration, including what must never enter analytics.",
+      "Validate agreed journeys, compare expected and observed behavior, and document the result."
+    ],
+    "prepare": "Share the site URL, the questions reporting should answer, and the tools already in use. Access should be granted through the relevant platform; do not send account passwords or customer records.",
+    "boundary": "Server-side tagging, Adobe Analytics or AEP support, Looker Studio dashboards, and complex integrations are scoped separately. A button click does not by itself establish a qualified lead, completed sale, or connected phone call."
+  },
+  {
+    "slug": "cms-support",
+    "title": "WordPress & Craft CMS Support",
+    "description": "WordPress and Craft CMS implementation support, content-template improvements, maintenance review, QA, and practical editor documentation from JustinJ Industries.",
+    "intro": "Keep the publishing workflow practical for the people who use it. JustinJ Industries supports WordPress and Craft CMS work with attention to templates, content structure, testing, and clear handoff notes.",
+    "inquiry": "WordPress support",
+    "fit": "For an existing CMS site that needs a defined improvement, a clearer editing workflow, or a reviewed maintenance and support plan.",
+    "deliverables": [
+      "A review of the relevant templates, content model, editor workflow, and dependencies.",
+      "Scoped template, layout, or content workflow improvements using the existing platform.",
+      "Testing of the agreed editor and visitor journeys, with a staging and rollback plan where available.",
+      "Editor guidance, a change record, and a list of remaining maintenance considerations."
+    ],
+    "process": [
+      "Confirm the CMS version, hosting, backup process, access, and the specific issue or workflow.",
+      "Agree a bounded change and a safe review environment before implementation.",
+      "Test the change, review it with the owner, and document deployment and ongoing responsibilities."
+    ],
+    "prepare": "Share the public URL, CMS, hosting arrangement, and a description of the workflow or issue. For Craft inquiries, select WordPress support in the form and identify Craft in your message. Do not send credentials through the contact form.",
+    "boundary": "Plugin or module licenses, hosting, emergency response, migrations, and ongoing maintenance require an agreed scope. No uptime, security certification, or unsupported platform compatibility is implied."
+  }
+]

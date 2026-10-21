@@ -36,12 +36,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const media = window.matchMedia("(prefers-color-scheme: dark)");
   const LS_KEY = "theme"; // 'auto' | 'dark' | 'light'
 
+  let pageTheme = "auto";
+
   function getStoredTheme() {
-    return localStorage.getItem(LS_KEY) || "auto";
+    try {
+      const stored = localStorage.getItem(LS_KEY);
+      return ["auto", "dark", "light"].includes(stored) ? stored : pageTheme;
+    } catch {
+      return pageTheme;
+    }
   }
 
   function setStoredTheme(val) {
-    localStorage.setItem(LS_KEY, val);
+    pageTheme = val;
+    try {
+      localStorage.setItem(LS_KEY, val);
+    } catch {
+      // Keep appearance controls usable when browser storage is unavailable.
+    }
   }
 
   function applyTheme() {
@@ -439,7 +451,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Initial
-  if (!localStorage.getItem(LS_KEY)) setStoredTheme("auto");
+  setStoredTheme(getStoredTheme());
   applyTheme();
 });
 

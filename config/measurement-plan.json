@@ -1,0 +1,61 @@
+{
+  "status": "inactive_planning_only",
+  "runtimeCollectionAdded": false,
+  "notes": "No analytics SDK, pixel, queue, dataLayer event, cookie, or external request is added by this plan. Activation requires separate owner approval and consent review.",
+  "events": [
+    {
+      "name": "service_inquiry_click",
+      "condition": "A visitor follows a service-page CTA to the existing contact form",
+      "meaning": "Inquiry intent only",
+      "allowedParameters": ["service_slug", "cta_location"],
+      "conversion": false
+    },
+    {
+      "name": "design_inquiry_open",
+      "condition": "The design inquiry dialog opens",
+      "meaning": "Exploration only",
+      "allowedParameters": ["design_slug"],
+      "conversion": false
+    },
+    {
+      "name": "contact_phone_click",
+      "condition": "A visitor follows a tel link",
+      "meaning": "Phone-link intent, not a connected call",
+      "allowedParameters": ["cta_location"],
+      "conversion": false
+    },
+    {
+      "name": "generate_lead",
+      "condition": "The existing form receives HTTP success AND JSON ok:true from its configured backend",
+      "meaning": "Backend-accepted inquiry, not a qualified lead or sale",
+      "allowedParameters": ["form_id", "service_slug", "design_slug"],
+      "conversion": true
+    }
+  ],
+  "excludedData": [
+    "names",
+    "email addresses",
+    "phone numbers",
+    "message fields",
+    "solicitation details",
+    "form answers",
+    "raw URLs or queries",
+    "arbitrary UTM values",
+    "account identifiers"
+  ],
+  "attribution": {
+    "source": "lowercase publisher slug, e.g. google",
+    "medium": "cpc for paid search",
+    "campaign": "jji-service-intent-region-period using approved slug values",
+    "content": "creative variant slug only",
+    "term": "not emitted; avoid capturing free-text search queries"
+  },
+  "activationGates": [
+    "Owner approval of tools, accounts, costs, consent behavior and retention",
+    "Final conversion definition and deduplication across forms and providers",
+    "No PII in event payloads, page-location queries or URLs",
+    "Consent-granted and consent-denied QA",
+    "Validate accepted, rejected, timeout, retry and duplicate-submit paths",
+    "Confirm analytics observations against backend receipt; a thank-you URL visit is not a conversion"
+  ]
+}

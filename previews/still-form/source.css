@@ -1299,7 +1299,7 @@ button {
   flex-shrink: 0;
 }
 
-/* Pending owner review: open mobile headline tracking without changing desktop. */
+/* Mobile headline spacing. */
 @media (max-width: 680px) {
   .hero-editor-content h1 {
     letter-spacing: -0.04em;

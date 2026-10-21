@@ -14,6 +14,17 @@ const pages = [
   "government-buyers.html",
   "policies.html",
   "capability-statement.html",
+  "404.html",
+  "services.html",
+  "services/website-development/index.html",
+  "services/analytics-tagging/index.html",
+  "services/cms-support/index.html",
+  "services/responsible-implementation/index.html",
+  "design/alder-lane/index.html",
+  "design/harbor-ledger/index.html",
+  "design/still-form/index.html",
+  "design/aer-field/index.html",
+  "design/northside/index.html",
 ];
 const template = (
   await readFile(path.join(root, "partials/site-footer.html"), "utf8")
