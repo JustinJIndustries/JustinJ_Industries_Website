@@ -7,14 +7,14 @@
     "inquiry": "Website build or improvement",
     "fit": "For a new business site, a focused redesign, or an existing site whose content and visitor paths have become difficult to maintain.",
     "deliverables": [
-      "A page and content plan tied to the agreed visitor journeys.",
+      "A page and content plan tied to the agreed visitor journeys, including campaign landing pages where scoped.",
       "Responsive implementation with semantic structure, keyboard access, visible focus, and clear form states.",
       "Page titles, descriptions, canonical URLs, and an indexable sitemap appropriate to the agreed scope.",
       "A review record, deployment notes, and a practical maintenance handoff."
     ],
     "process": [
       "Review the existing site, content, hosting, and priorities.",
-      "Agree the pages, design direction, platform, inputs, and acceptance criteria.",
+      "Agree on the pages, design direction, platform, inputs, and acceptance criteria.",
       "Build and review across desktop and mobile, then document the agreed release."
     ],
     "prepare": "Share the current URL, the pages you need, examples of visitor tasks, and any platform or hosting constraints. Avoid sending passwords or private customer information.",
@@ -23,7 +23,7 @@
   {
     "slug": "analytics-tagging",
     "title": "Analytics & Tagging Implementation",
-    "description": "GA4/GTM implementation, Adobe Analytics and Tags (Adobe Launch) specifications and QA, plus reporting in Analysis Workspace or Data Studio from JustinJ Industries.",
+    "description": "Google Analytics (GA4) and Google Tag Manager (GTM) implementation, Adobe Analytics/Tags QA, and reporting in Analysis Workspace or Data Studio.",
     "intro": "Make measurement understandable and testable. JustinJ Industries helps connect website interactions to an agreed measurement plan, with clear event definitions and a record of what was validated.",
     "inquiry": "Analytics tagging / QA",
     "fit": "For teams preparing an implementation, troubleshooting inconsistent events, or reviewing whether existing reporting reflects the actions they actually need to understand.",
@@ -56,10 +56,57 @@
     ],
     "process": [
       "Confirm the CMS version, hosting, backup process, access, and the specific issue or workflow.",
-      "Agree a bounded change and a safe review environment before implementation.",
+      "Agree on a bounded change and a safe review environment before implementation.",
       "Test the change, review it with the owner, and document deployment and ongoing responsibilities."
     ],
     "prepare": "Share the public URL, CMS, hosting arrangement, and a description of the workflow or issue. For Craft inquiries, select WordPress support in the form and identify Craft in your message. Do not send credentials through the contact form.",
     "boundary": "Plugin or module licenses, hosting, emergency response, migrations, and ongoing maintenance require an agreed scope. No uptime, security certification, or unsupported platform compatibility is implied."
+  },
+  {
+    "slug": "advertising",
+    "title": "Digital Advertising Support",
+    "description": "Paid search, display and paid social support across Google Ads, Microsoft Advertising (Bing Ads) and Meta Ads, with clear landing-page and measurement scope.",
+    "intro": "Connect the offer, audience, landing page and measurement before a campaign goes live.",
+    "inquiry": "Advertising campaign support",
+    "fit": "For a scoped campaign launch, a review of an existing advertising setup, or a clearer connection between paid traffic and the actions reporting should measure.",
+    "deliverables": [
+      "A campaign brief covering objectives, audience, placements, messaging, landing pages and review criteria.",
+      "Google Ads, Microsoft Advertising (Bing Ads) or Meta Ads campaign setup and review within the agreed account access, media budget and scope.",
+      "Landing-page and conversion-path checks, naming and campaign parameters, with tracking dependencies identified separately.",
+      "Optimization notes and reporting in the relevant advertising platform or Data Studio, with definitions, limitations and next steps."
+    ],
+    "channels": [
+      {
+        "key": "search",
+        "title": "Paid search",
+        "intro": "Connect what someone searches for to a useful offer and landing page.",
+        "setup": "Plan keyword themes, negative keywords, ad copy and landing-page alignment for Google Ads or Microsoft Advertising (Bing Ads).",
+        "review": "Review available search-term reports for relevance. Refine exclusions, copy and the page journey; document the reason for changes.",
+        "report": "Report on available search terms, clicks, cost and agreed conversions, with attribution windows and tracking limitations."
+      },
+      {
+        "key": "display",
+        "title": "Display",
+        "intro": "Give visual creative a clear audience, placement and next step.",
+        "setup": "Prepare image and text variants for the selected formats. Review audience settings, placements or content exclusions, and the destination page.",
+        "review": "Check available placement reports and creative performance. Review exposure and frequency controls where the platform and campaign type support them.",
+        "report": "Document impressions, clicks, cost and defined conversions. Keep view-through and click-through attribution distinct where reported."
+      },
+      {
+        "key": "social",
+        "title": "Paid social",
+        "intro": "Match the message and creative to the people you want to reach.",
+        "setup": "Plan Meta Ads audience settings, creative and copy variants, placements, and the intended action on a landing page or approved lead form.",
+        "review": "Review delivery, audience and creative breakdowns where available. Document changes and check the handoff from the ad to the intended action.",
+        "report": "Separate engagement from confirmed inquiries or purchases. Report agreed conversion definitions and attribution settings alongside results."
+      }
+    ],
+    "process": [
+      "Review the offer, audience, existing account structure and visitor journey. Agree on the objective, budget authority, access and success measures.",
+      "Prepare the agreed campaign structure, messaging and landing-page handoff. Review links, tracking dependencies and approval checkpoints before launch.",
+      "Review campaign and conversion data against agreed definitions. Document changes, reporting limitations and the next decisions."
+    ],
+    "prepare": "Share the business objective, audience or service area, landing page and advertising platforms in use. Account access is arranged through platform permissions; do not send passwords or customer lists through the inquiry form.",
+    "boundary": "Account access, media budget, creative production and ongoing management require an agreed scope. Tracking and consent configuration have their own implementation scope."
   }
 ]

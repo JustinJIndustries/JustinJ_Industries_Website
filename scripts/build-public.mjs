@@ -20,6 +20,7 @@ const publicFiles = Object.freeze([
   "services.html",
   "services/website-development/index.html",
   "services/analytics-tagging/index.html",
+  "services/advertising/index.html",
   "services/cms-support/index.html",
   "services/responsible-implementation/index.html",
   "design/alder-lane/index.html",

@@ -166,7 +166,7 @@ const entries = [
     route: "/",
     title: "JustinJ Industries | Websites, Analytics & Support",
     description:
-      "Website builds, CMS support, GA4/GTM implementation, Adobe Analytics and Tags QA, and practical measurement handoffs from JustinJ Industries.",
+      "Website builds, CMS support, digital advertising, GA4/GTM implementation, Adobe Analytics and Tags QA, and practical handoffs from JustinJ Industries.",
   },
   {
     file: "about.html",
@@ -201,14 +201,14 @@ const entries = [
     route: "/government-buyers/",
     title: "Government Buyers & Primes",
     description:
-      "Review JustinJ Industries web development, analytics implementation, QA, and documentation capabilities for public-sector buyers and prime-contractor teams.",
+      "Review JustinJ Industries website, digital advertising, measurement, QA and documentation support for public-sector buyers and prime-contractor teams.",
   },
   {
     file: "capability-statement.html",
     route: "/capability-statement/",
     title: "Capability Statement",
     description:
-      "JustinJ Industries LLC: websites, measurement and digital support for public-sector teams and prime contractors. Services, selected examples and contact details.",
+      "JustinJ Industries LLC: websites, advertising, measurement and digital support for public-sector teams and prime contractors. Services, examples and contact details.",
   },
   {
     file: "policies.html",
@@ -276,9 +276,9 @@ for (const entry of statementPages) {
 const serviceHub = {
   file: "services.html",
   route: "/services/",
-  title: "Website, CMS & Analytics Services",
+  title: "Websites, Analytics & Advertising",
   description:
-    "Review JustinJ Industries website development, WordPress and Craft CMS support, and analytics implementation services, with scope, process, and handoff details.",
+    "Review JustinJ Industries website development, CMS support, analytics and advertising services, with scope, process and practical handoff details.",
 };
 await save(
   serviceHub.file,

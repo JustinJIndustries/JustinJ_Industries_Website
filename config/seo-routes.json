@@ -3,7 +3,7 @@
     "file": "index.html",
     "route": "/",
     "title": "JustinJ Industries | Websites, Analytics & Support",
-    "description": "Website builds, CMS support, GA4/GTM implementation, Adobe Analytics and Tags QA, and practical measurement handoffs from JustinJ Industries."
+    "description": "Website builds, CMS support, digital advertising, GA4/GTM implementation, Adobe Analytics and Tags QA, and practical handoffs from JustinJ Industries."
   },
   {
     "file": "about.html",
@@ -33,13 +33,13 @@
     "file": "government-buyers.html",
     "route": "/government-buyers/",
     "title": "Government Buyers & Primes",
-    "description": "Review JustinJ Industries web development, analytics implementation, QA, and documentation capabilities for public-sector buyers and prime-contractor teams."
+    "description": "Review JustinJ Industries website, digital advertising, measurement, QA and documentation support for public-sector buyers and prime-contractor teams."
   },
   {
     "file": "capability-statement.html",
     "route": "/capability-statement/",
     "title": "Capability Statement",
-    "description": "JustinJ Industries LLC: websites, measurement and digital support for public-sector teams and prime contractors. Services, selected examples and contact details."
+    "description": "JustinJ Industries LLC: websites, advertising, measurement and digital support for public-sector teams and prime contractors. Services, examples and contact details."
   },
   {
     "file": "policies.html",
@@ -61,8 +61,8 @@
   {
     "file": "services.html",
     "route": "/services/",
-    "title": "Website, CMS & Analytics Services",
-    "description": "Review JustinJ Industries website development, WordPress and Craft CMS support, and analytics implementation services, with scope, process, and handoff details."
+    "title": "Websites, Analytics & Advertising",
+    "description": "Review JustinJ Industries website development, CMS support, analytics and advertising services, with scope, process and practical handoff details."
   },
   {
     "file": "services/website-development/index.html",
@@ -79,7 +79,7 @@
     "file": "services/analytics-tagging/index.html",
     "route": "/services/analytics-tagging/",
     "title": "Analytics & Tagging Implementation",
-    "description": "GA4/GTM implementation, Adobe Analytics and Tags (Adobe Launch) specifications and QA, plus reporting in Analysis Workspace or Data Studio from JustinJ Industries.",
+    "description": "Google Analytics (GA4) and Google Tag Manager (GTM) implementation, Adobe Analytics/Tags QA, and reporting in Analysis Workspace or Data Studio.",
     "service": true,
     "parent": {
       "name": "Services",
@@ -91,6 +91,17 @@
     "route": "/services/cms-support/",
     "title": "WordPress & Craft CMS Support",
     "description": "WordPress and Craft CMS implementation support, content-template improvements, maintenance review, QA, and practical editor documentation from JustinJ Industries.",
+    "service": true,
+    "parent": {
+      "name": "Services",
+      "route": "/services/"
+    }
+  },
+  {
+    "file": "services/advertising/index.html",
+    "route": "/services/advertising/",
+    "title": "Digital Advertising Support",
+    "description": "Paid search, display and paid social support across Google Ads, Microsoft Advertising (Bing Ads) and Meta Ads, with clear landing-page and measurement scope.",
     "service": true,
     "parent": {
       "name": "Services",

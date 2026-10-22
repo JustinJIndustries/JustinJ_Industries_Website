@@ -400,6 +400,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const serviceDisclosure = document.querySelector(".service-jump__mobile");
+  serviceDisclosure?.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && serviceDisclosure.open) {
+      serviceDisclosure.open = false;
+      serviceDisclosure.querySelector("summary").focus();
+    }
+  });
+
   // Smooth scroll
   document.querySelectorAll('a[href^=\"#\"]').forEach((a) => {
     a.addEventListener("click", (e) => {
@@ -410,6 +418,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (el) {
         e.preventDefault();
         if (overlay.classList.contains("active")) closeMenu();
+        const serviceMenu = a.closest(".service-jump__mobile");
+        if (serviceMenu) {
+          serviceMenu.open = false;
+          el.tabIndex = -1;
+          el.focus({ preventScroll: true });
+        }
         if (window.location.hash !== id) {
           window.history.pushState(null, "", id);
         }

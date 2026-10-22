@@ -10,11 +10,11 @@
     />
     <link rel="stylesheet" href="/styles.css?v=c4fa2ff273" />
     <link rel="stylesheet" href="/assets/site-footer.css?v=61efc97f24" />
-    <link rel="stylesheet" href="/assets/service-journeys.css?v=87541d67d8" />
+    <link rel="stylesheet" href="/assets/service-journeys.css?v=27456ff347" />
     <title>Analytics &amp; Tagging Implementation | JustinJ Industries</title>
     <meta
       name="description"
-      content="GA4/GTM implementation, Adobe Analytics and Tags (Adobe Launch) specifications and QA, plus reporting in Analysis Workspace or Data Studio from JustinJ Industries."
+      content="Google Analytics (GA4) and Google Tag Manager (GTM) implementation, Adobe Analytics/Tags QA, and reporting in Analysis Workspace or Data Studio."
     />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link
@@ -27,7 +27,7 @@
     />
     <meta
       property="og:description"
-      content="GA4/GTM implementation, Adobe Analytics and Tags (Adobe Launch) specifications and QA, plus reporting in Analysis Workspace or Data Studio from JustinJ Industries."
+      content="Google Analytics (GA4) and Google Tag Manager (GTM) implementation, Adobe Analytics/Tags QA, and reporting in Analysis Workspace or Data Studio."
     />
     <meta property="og:type" content="website" />
     <meta
@@ -54,7 +54,7 @@
     />
     <meta
       name="twitter:description"
-      content="GA4/GTM implementation, Adobe Analytics and Tags (Adobe Launch) specifications and QA, plus reporting in Analysis Workspace or Data Studio from JustinJ Industries."
+      content="Google Analytics (GA4) and Google Tag Manager (GTM) implementation, Adobe Analytics/Tags QA, and reporting in Analysis Workspace or Data Studio."
     />
     <meta
       name="twitter:image"
@@ -91,7 +91,7 @@
             "@id": "https://www.justinjindustries.com/services/analytics-tagging/#webpage",
             "url": "https://www.justinjindustries.com/services/analytics-tagging/",
             "name": "Analytics & Tagging Implementation | JustinJ Industries",
-            "description": "GA4/GTM implementation, Adobe Analytics and Tags (Adobe Launch) specifications and QA, plus reporting in Analysis Workspace or Data Studio from JustinJ Industries.",
+            "description": "Google Analytics (GA4) and Google Tag Manager (GTM) implementation, Adobe Analytics/Tags QA, and reporting in Analysis Workspace or Data Studio.",
             "isPartOf": { "@id": "https://www.justinjindustries.com/#website" },
             "about": {
               "@id": "https://www.justinjindustries.com/#organization"
@@ -125,7 +125,7 @@
             "@id": "https://www.justinjindustries.com/services/analytics-tagging/#service",
             "name": "Analytics & Tagging Implementation",
             "serviceType": "Analytics & Tagging Implementation",
-            "description": "GA4/GTM implementation, Adobe Analytics and Tags (Adobe Launch) specifications and QA, plus reporting in Analysis Workspace or Data Studio from JustinJ Industries.",
+            "description": "Google Analytics (GA4) and Google Tag Manager (GTM) implementation, Adobe Analytics/Tags QA, and reporting in Analysis Workspace or Data Studio.",
             "url": "https://www.justinjindustries.com/services/analytics-tagging/",
             "provider": {
               "@id": "https://www.justinjindustries.com/#organization"
@@ -218,9 +218,9 @@
               Turn tracking questions into a testable plan.
             </h1>
             <p class="service-detail-lead">
-              Connect business questions to GA4/GTM implementation or Adobe
-              Analytics and Tags (Adobe Launch) specification review and QA,
-              with documented validation.
+              Connect business questions to Google Analytics (GA4) and Google
+              Tag Manager (GTM) implementation, or Adobe Analytics and Tags
+              (Adobe Launch) specification review and QA.
             </p>
             <a
               class="btn"
@@ -236,7 +236,7 @@
             <li>
               <h2>Event definition</h2>
               <p>
-                Agree the trigger, parameters and sensitive-data exclusions.
+                Agree on the trigger, parameters and sensitive-data exclusions.
               </p>
             </li>
             <li>
@@ -261,19 +261,15 @@
             service a customer wants and the page where the inquiry began. Count
             confirmed completions after the server accepts the request.
           </p>
-          <figure class="instrumentation-demo">
+          <figure class="instrumentation-demo" aria-labelledby="example-title">
             <div class="instrumentation-demo__header">
-              <strong>From quote request to confirmed inquiry</strong
-              ><span>Demo</span>
+              <strong>From quote request to confirmed inquiry</strong>
             </div>
             <ol class="instrumentation-flow">
               <li>
                 <h3>Quote request success</h3>
                 <p>Confirmation after the server accepts the inquiry.</p>
                 <div class="instrumentation-success">
-                  <div class="instrumentation-success__header">
-                    Home cleaning · Request a quote
-                  </div>
                   <div class="instrumentation-success__body">
                     <svg
                       class="instrumentation-success__icon"
@@ -465,7 +461,6 @@
                 </dl>
               </li>
             </ol>
-            <figcaption>Home-cleaning quote request</figcaption>
           </figure>
           <p>
             <code>inquiry_source: service_page</code> identifies the on-site
@@ -486,6 +481,10 @@
               For teams preparing an implementation, troubleshooting
               inconsistent events, or reviewing whether existing reporting
               reflects the actions they actually need to understand.
+            </p>
+            <p>
+              Campaign setup and optimization have their own
+              <a href="/services/advertising/">advertising scope</a>.
             </p>
           </div>
           <dl>
@@ -584,8 +583,9 @@
         </section>
         <aside class="service-page-disclosure" aria-label="Service demo notes">
           <p>
-            Demo workflow: the success screen, event and validation values are
-            illustrative; no form is submitted and no client results are shown.
+            Illustrative workflow: the success screen, event and validation
+            values are illustrative; no form is submitted and no client results
+            are shown.
           </p>
         </aside>
       </div>
@@ -638,6 +638,6 @@
     </footer>
     <!-- shared:footer:end -->
 
-    <script src="/script.js?v=d143274c8a" defer></script>
+    <script src="/script.js?v=cc2a96fcee" defer></script>
   </body>
 </html>

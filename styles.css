@@ -2020,6 +2020,22 @@ select[aria-invalid="true"] {
 .page-home #services .service:nth-child(even) {
   border-top-color: var(--brand-2);
 }
+.page-home #services .service--advertising {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 16px 36px;
+  align-items: center;
+}
+.page-home #services .service--advertising p {
+  color: var(--muted);
+  margin-block: 12px 16px;
+}
+@media (max-width: 650px) {
+  .page-home #services .service--advertising {
+    grid-template-columns: 1fr;
+  }
+}
 .page-home .cta-row {
   margin-top: 0.55rem;
 }
