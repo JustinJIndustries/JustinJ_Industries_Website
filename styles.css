@@ -3960,6 +3960,11 @@ select[aria-invalid="true"] {
   }
 }
 
+.page-home #contact .section__head,
+.page-home #contact .section__head > p:first-of-type {
+  max-width: none;
+}
+
 #contact .section__head a {
   overflow-wrap: anywhere;
 }
