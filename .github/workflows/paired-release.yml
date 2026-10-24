@@ -1,5 +1,5 @@
-# INACTIVE: .example prevents registration. Enabling and replacing the old
-# publisher require exact approval. No push, PR event or schedule.
+# Owner-approved manual paired publisher. No push, PR event or schedule.
+# Every run requires protected owner review and the exact source/workflow inputs.
 name: Protected paired JJI publication
 on:
   workflow_dispatch:

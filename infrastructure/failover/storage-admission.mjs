@@ -13,6 +13,21 @@ export const RETENTION = Object.freeze({
 const OWNER = "JustinJIndustries";
 const REPO = `${OWNER}/JustinJ_Industries_Website`;
 const integer = (v) => Number.isSafeInteger(v) && v >= 0;
+function repositoryIdentity(r) {
+  if (
+    typeof r.fullName === "string" &&
+    new RegExp(`^${OWNER}/[A-Za-z0-9_.-]+$`).test(r.fullName)
+  )
+    return "name:" + r.fullName;
+  if (
+    r.fullName === undefined &&
+    r.owner === OWNER &&
+    r.metadataRedacted === true &&
+    /^[a-f0-9]{64}$/.test(r.opaqueIdentity ?? "")
+  )
+    return "opaque:" + r.opaqueIdentity;
+  throw new Error("Verified owned repository identity required");
+}
 
 // A trusted read-only inspector supplies the complete account inventory. These
 // owner attestations are not authenticated by this module; live CI must bind
@@ -26,7 +41,7 @@ export function inspectLogicalInventory(i, observedAt) {
     !/^\d+$/.test(i.currentRunId ?? "") ||
     !Array.isArray(i.repositories) ||
     !i.repositories.length ||
-    new Set(i.repositories.map((r) => r.fullName)).size !==
+    new Set(i.repositories.map(repositoryIdentity)).size !==
       i.repositories.length ||
     i.packages?.complete !== true ||
     !integer(i.packages.bytes) ||
@@ -42,7 +57,6 @@ export function inspectLogicalInventory(i, observedAt) {
     currentRunTransientCount = 0;
   for (const r of i.repositories) {
     if (
-      !new RegExp(`^${OWNER}/[A-Za-z0-9_.-]+$`).test(r.fullName) ||
       r.artifactsComplete !== true ||
       !Array.isArray(r.artifacts) ||
       new Set(r.artifacts.map((a) => a.id)).size !== r.artifacts.length

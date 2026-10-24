@@ -80,6 +80,54 @@ function inventory(now) {
     packages: { complete: true, bytes: 0, source: "owner-ui-empty" },
   };
 }
+
+test("complete inventory may redact unrelated repository names without dropping bytes or permitting duplicate identities", () => {
+  const now = Date.now(),
+    input = inventory(now);
+  input.repositories.push({
+    owner: "JustinJIndustries",
+    opaqueIdentity: "a".repeat(64),
+    metadataRedacted: true,
+    artifactsComplete: true,
+    artifacts: [{ id: 999, name: "redacted", bytes: 1234 }],
+  });
+  const result = inspectLogicalInventory(input, now);
+  assert.equal(result.accountUsedBytes, 1234);
+  assert.equal(result.retainedReceiptCount, 0);
+  assert.equal(input.repositories[1].fullName, undefined);
+  assert.throws(() =>
+    inspectLogicalInventory(
+      {
+        ...input,
+        repositories: [...input.repositories, input.repositories[1]],
+      },
+      now,
+    ),
+  );
+  assert.throws(() =>
+    inspectLogicalInventory(
+      {
+        ...input,
+        repositories: [{ ...input.repositories[1], owner: "other" }],
+      },
+      now,
+    ),
+  );
+  assert.throws(() =>
+    inspectLogicalInventory(
+      {
+        ...input,
+        repositories: [
+          {
+            ...input.repositories[1],
+            artifacts: [{ id: 999, name: "redacted" }],
+          },
+        ],
+      },
+      now,
+    ),
+  );
+});
 async function fixture(t) {
   const root = await mkdtemp(
     path.join(os.tmpdir(), "jji-inactive-publication-"),
