@@ -1,0 +1,107 @@
+# Manual preview-only test. The infrastructure commit uses [skip ci] to prevent
+# the existing push publisher from deploying; that publisher is not modified.
+name: JJI backup-only preview test
+on:
+  workflow_dispatch:
+    inputs:
+      approved_workflow_sha:
+        description: Exact reviewed commit of this test workflow
+        required: true
+      budget_verified_at:
+        description: UTC Unix milliseconds of fresh $0 Actions/Packages blocking verification
+        required: true
+      zero_spend_confirmed:
+        description: Explicit yes only after checking existing blocked paid usage; no budget changes
+        required: true
+      verify_deployment_id:
+        description: Optional existing preview UUID for read-only verification after an uncertain test; never re-upload
+        required: false
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: jji-backup-only-test
+  cancel-in-progress: false
+jobs:
+  preview:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries'
+    environment: failover-sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      APPROVED_WORKFLOW_SHA: ${{ inputs.approved_workflow_sha }}
+      BUDGET_VERIFIED_AT: ${{ inputs.budget_verified_at }}
+      ZERO_SPEND_CONFIRMED: ${{ inputs.zero_spend_confirmed }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      VERIFY_DEPLOYMENT_ID: ${{ inputs.verify_deployment_id }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: d6574ede41a8620f838b6eafd3e7ba76ea7ebf68
+          path: production
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Verify trusted manual context before any credential use
+        run: |
+          node --input-type=module -e 'import {assertContext} from "./control/infrastructure/backup-test/backup-only.mjs"; assertContext(process.env)'
+          test "$(git -C production rev-parse HEAD)" = d6574ede41a8620f838b6eafd3e7ba76ea7ebf68
+      - name: Install exact source validation tools without lifecycle scripts or caches
+        working-directory: production
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate source and produce the approved allowlisted artifact
+        working-directory: production
+        run: |
+          npm run check:html
+          npm run check:links
+          npm run check:public-content
+      - name: Install isolated pinned Pages upload toolchain without lifecycle scripts
+        run: npm ci --prefix control/infrastructure/backup-test/toolchain --ignore-scripts --no-audit --no-fund
+      - name: Run focused preview-safety tests
+        working-directory: control
+        run: node --test tests/backup-test/*.test.mjs
+      - name: Prepare namespaced preview and exact rollback material on runner disk only
+        run: node control/infrastructure/backup-test/backup-only.mjs prepare production/dist "$RUNNER_TEMP/jji-backup-only"
+      - name: Upload once to preview; verify provider receipt, all hashes, routes and recovery
+        env:
+          CLOUDFLARE_PAGES_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}
+        run: node control/infrastructure/backup-test/backup-only.mjs deploy "$RUNNER_TEMP/jji-backup-only"
+      - name: Store only small test receipts, never the full website
+        id: evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jji-backup-only-evidence-${{ github.run_id }}
+          path: ${{ runner.temp }}/jji-backup-only/evidence/
+          retention-days: 1
+          if-no-files-found: error
+          compression-level: 0
+      - name: Verify GitHub artifact identity and digest independently
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ steps.evidence.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.evidence.outputs.artifact-digest }}
+        run: |
+          node --input-type=module <<'NODE'
+          const id=process.env.ARTIFACT_ID, digest=process.env.ARTIFACT_DIGEST;
+          if(!/^[0-9]+$/.test(id)||!/^[a-f0-9]{64}$/.test(digest)) throw new Error('Invalid artifact receipt');
+          const r=await fetch(`https://api.github.com/repos/JustinJIndustries/JustinJ_Industries_Website/actions/artifacts/${id}`,{headers:{authorization:`Bearer ${process.env.GH_TOKEN}`,accept:'application/vnd.github+json'},redirect:'error',signal:AbortSignal.timeout(15000)});
+          if(!r.ok) throw new Error('Artifact metadata read failed');
+          const a=await r.json();
+          if(a.id!==Number(id)||a.digest!==`sha256:${digest}`||a.expired!==false||a.workflow_run?.id!==Number(process.env.GITHUB_RUN_ID)||a.workflow_run?.head_sha!==process.env.GITHUB_SHA||a.name!==`jji-backup-only-evidence-${process.env.GITHUB_RUN_ID}`||a.size_in_bytes>2*1024*1024) throw new Error('Artifact provenance/digest mismatch');
+          console.log(JSON.stringify({id:a.id,digest:a.digest,bytes:a.size_in_bytes,run:a.workflow_run.id}));
+          NODE
+      - name: Independently download the stored receipt artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          artifact-ids: ${{ steps.evidence.outputs.artifact-id }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/jji-backup-evidence-readback
+      - name: Compare actual artifact bytes and recover again from hosted immutable origins
+        run: node control/infrastructure/backup-test/backup-only.mjs readback "$RUNNER_TEMP/jji-backup-only" "$RUNNER_TEMP/jji-backup-evidence-readback"

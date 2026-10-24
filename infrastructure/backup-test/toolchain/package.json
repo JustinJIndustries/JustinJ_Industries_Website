@@ -1,0 +1,9 @@
+{
+  "name": "jji-pages-deployment-toolchain",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Isolated pinned deployment tooling; excluded from public build",
+  "devDependencies": {
+    "wrangler": "4.152.0"
+  }
+}

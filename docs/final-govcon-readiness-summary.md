@@ -60,3 +60,10 @@ The original design checkout is preserved. No commit, push, public PR or deploym
 The owner approved inclusion of both replacement Website Development and CMS overview visuals and explicitly authorized deployment after checks pass. The Website handset matches the actual AER / FIELD780:1688screen,29percent composition width (30percent on small mobile), borders and bottom-right placement. Six matched-width comparisons passed. These code-native website/CMS concepts replace the rejected schematics; the original demo sites and approved AER / FIELD detail captures remain intact. A concise disclosure immediately above the footer establishes their illustrative, non-interactive context.
 
 The final combined package retains the approved advertising rollout/capability PDF, navigation, homepage alignment and AI Workflow Support, CTA/divider fixes, Measurement illustration/copy, JJI-only UAid cover and follow-redirects1.16.1 patch. Private review files, prior rejected schematics, the unimplemented qualified-lead heading, privacy/consent rollout, unrelated dependency remediation, client maintenance and infrastructure settings remain excluded. Production deployment and post-release verification will be recorded externally after successful publication.
+
+## Backup-only CI test — October 24, 2026
+
+Added an explicitly authorized manually triggered preview-only test with a fixed
+approved public-source checkout, protected environment, single preview upload and
+small provider receipt/readback/recovery. No public marketing/procurement copy or
+primary publisher is changed. See `docs/failover/backup-only-ci-test-20261024.md`.

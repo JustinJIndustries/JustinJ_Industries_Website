@@ -1,0 +1,210 @@
+[
+  {
+    "source": "/services.html",
+    "target": "/services/"
+  },
+  {
+    "source": "/services/website-development/index.html",
+    "target": "/services/website-development/"
+  },
+  {
+    "source": "/services/analytics-tagging/index.html",
+    "target": "/services/analytics-tagging/"
+  },
+  {
+    "source": "/services/cms-support/index.html",
+    "target": "/services/cms-support/"
+  },
+  {
+    "source": "/services/responsible-implementation/index.html",
+    "target": "/services/responsible-implementation/"
+  },
+  {
+    "source": "/design/alder-lane/index.html",
+    "target": "/design/alder-lane/"
+  },
+  {
+    "source": "/design/harbor-ledger/index.html",
+    "target": "/design/harbor-ledger/"
+  },
+  {
+    "source": "/design/still-form/index.html",
+    "target": "/design/still-form/"
+  },
+  {
+    "source": "/design/aer-field/index.html",
+    "target": "/design/aer-field/"
+  },
+  {
+    "source": "/design/northside/index.html",
+    "target": "/design/northside/"
+  },
+  {
+    "source": "/index.html",
+    "target": "/"
+  },
+  {
+    "source": "/about.html",
+    "target": "/about/"
+  },
+  {
+    "source": "/policies.html",
+    "target": "/policies/"
+  },
+  {
+    "source": "/work.html",
+    "target": "/work/"
+  },
+  {
+    "source": "/catalogue.html",
+    "target": "/catalogue/"
+  },
+  {
+    "source": "/design.html",
+    "target": "/design/"
+  },
+  {
+    "source": "/government-buyers.html",
+    "target": "/government-buyers/"
+  },
+  {
+    "source": "/capability-statement.html",
+    "target": "/capability-statement/"
+  },
+  {
+    "source": "/previews/alder-lane/index.html",
+    "target": "/previews/alder-lane/"
+  },
+  {
+    "source": "/previews/alder-lane/services.html",
+    "target": "/previews/alder-lane/services/"
+  },
+  {
+    "source": "/previews/alder-lane/about.html",
+    "target": "/previews/alder-lane/about/"
+  },
+  {
+    "source": "/previews/alder-lane/contact.html",
+    "target": "/previews/alder-lane/contact/"
+  },
+  {
+    "source": "/previews/harbor-ledger/index.html",
+    "target": "/previews/harbor-ledger/"
+  },
+  {
+    "source": "/previews/harbor-ledger/services.html",
+    "target": "/previews/harbor-ledger/services/"
+  },
+  {
+    "source": "/previews/harbor-ledger/about.html",
+    "target": "/previews/harbor-ledger/about/"
+  },
+  {
+    "source": "/previews/harbor-ledger/faq.html",
+    "target": "/previews/harbor-ledger/faq/"
+  },
+  {
+    "source": "/previews/harbor-ledger/contact.html",
+    "target": "/previews/harbor-ledger/contact/"
+  },
+  {
+    "source": "/previews/still-form/index.html",
+    "target": "/previews/still-form/"
+  },
+  {
+    "source": "/previews/still-form/work.html",
+    "target": "/previews/still-form/work/"
+  },
+  {
+    "source": "/previews/still-form/services.html",
+    "target": "/previews/still-form/services/"
+  },
+  {
+    "source": "/previews/still-form/about.html",
+    "target": "/previews/still-form/about/"
+  },
+  {
+    "source": "/previews/still-form/contact.html",
+    "target": "/previews/still-form/contact/"
+  },
+  {
+    "source": "/previews/still-form/project/arc/index.html",
+    "target": "/previews/still-form/project/arc/"
+  },
+  {
+    "source": "/previews/still-form/project/noon/index.html",
+    "target": "/previews/still-form/project/noon/"
+  },
+  {
+    "source": "/previews/still-form/project/form/index.html",
+    "target": "/previews/still-form/project/form/"
+  },
+  {
+    "source": "/previews/still-form/project/kindred/index.html",
+    "target": "/previews/still-form/project/kindred/"
+  },
+  {
+    "source": "/previews/still-form/project/ground/index.html",
+    "target": "/previews/still-form/project/ground/"
+  },
+  {
+    "source": "/previews/still-form/project/elsewhere/index.html",
+    "target": "/previews/still-form/project/elsewhere/"
+  },
+  {
+    "source": "/previews/aer-field/index.html",
+    "target": "/previews/aer-field/"
+  },
+  {
+    "source": "/previews/aer-field/work.html",
+    "target": "/previews/aer-field/work/"
+  },
+  {
+    "source": "/previews/aer-field/services.html",
+    "target": "/previews/aer-field/services/"
+  },
+  {
+    "source": "/previews/aer-field/studio.html",
+    "target": "/previews/aer-field/studio/"
+  },
+  {
+    "source": "/previews/aer-field/contact.html",
+    "target": "/previews/aer-field/contact/"
+  },
+  {
+    "source": "/previews/aer-field/films/golf.html",
+    "target": "/previews/aer-field/films/golf/"
+  },
+  {
+    "source": "/previews/aer-field/films/real-estate.html",
+    "target": "/previews/aer-field/films/real-estate/"
+  },
+  {
+    "source": "/previews/aer-field/films/business.html",
+    "target": "/previews/aer-field/films/business/"
+  },
+  {
+    "source": "/previews/northside/index.html",
+    "target": "/previews/northside/"
+  },
+  {
+    "source": "/previews/northside/services/index.html",
+    "target": "/previews/northside/services/"
+  },
+  {
+    "source": "/previews/northside/services/boiler-care/index.html",
+    "target": "/previews/northside/services/boiler-care/"
+  },
+  {
+    "source": "/previews/northside/about/index.html",
+    "target": "/previews/northside/about/"
+  },
+  {
+    "source": "/previews/northside/contact/index.html",
+    "target": "/previews/northside/contact/"
+  },
+  {
+    "source": "/services/advertising/index.html",
+    "target": "/services/advertising/"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "name": "wrangler",
+  "version": "4.152.0",
+  "registry": "https://registry.npmjs.org/",
+  "integrity": "sha512-lmXTF1sCDEqBaEMpreGczvg/x3AIh1d/qxc4BN7utQ4jEDwdA4YG0L6kr3ev0TtVLHRb6QLySNAOAunwn+dHeA==",
+  "cliSha256": "780661a508810f3b65786895b1ca9aacbc4f55d329ae6b8c1e49ec8433569f77",
+  "nodeMajor": 24,
+  "lifecycleScripts": false
+}
