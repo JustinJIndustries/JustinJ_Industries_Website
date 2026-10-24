@@ -47,6 +47,12 @@ import {
   waitForProof,
 } from "./checkpoint-github.mjs";
 
+import {
+  startDiagnostics,
+  readDiagnosticOutcome,
+  readCoordinatorProgress,
+} from "./coordinator-diagnostics.mjs";
+
 const REPO = "JustinJIndustries/JustinJ_Industries_Website";
 const ACCOUNT = "986b5334eba2d05d253ee98ca9842dfe";
 const PROJECT = "jji-backup-20261023";
@@ -115,7 +121,7 @@ export async function requestOidc(env, fetcher = fetch) {
 // Fresh owner-reviewed account inventory is the basis, not fabricated capacity.
 // Re-read every current-repository artifact before each write; retain other
 // account repositories/Packages evidence and its ORIGINAL 15-minute timestamp.
-async function refreshBudget(env, read, context) {
+export async function refreshBudget(env, read, context) {
   if ((await read(`/repos/${REPO}/commits/main`)).sha !== context.sha)
     throw new Error("Main advanced during publication; stop before next write");
   const base = JSON.parse(env.STORAGE_SNAPSHOT ?? "null");
@@ -347,7 +353,7 @@ export async function runPreparedPublisher({
   )(packageRoot, adapters);
 }
 
-async function main(command, root, env = process.env) {
+async function main(command, root, env = process.env, diagnostics) {
   if (command === "paths") {
     for (const value of [env.RUNNER_TEMP, env.GITHUB_WORKSPACE])
       if (
@@ -419,6 +425,20 @@ async function main(command, root, env = process.env) {
       digest: env.PUBLIC_PROOF_DIGEST,
     });
   if (command === "summary") {
+    const progress = await readCoordinatorProgress(root);
+    if (progress && env.GITHUB_STEP_SUMMARY)
+      await writeFile(
+        env.GITHUB_STEP_SUMMARY,
+        `\nLast coordinator checkpoint: ${progress.stage}; PID: ${progress.pid}. This is progress only, not proof of publication or process liveness.\n`,
+        { flag: "a" },
+      );
+    const diagnostic = await readDiagnosticOutcome(root);
+    if (diagnostic && env.GITHUB_STEP_SUMMARY)
+      await writeFile(
+        env.GITHUB_STEP_SUMMARY,
+        `\nCoordinator stopped: ${diagnostic.code}; stage: ${diagnostic.stage}. Inspect before retry.\n`,
+        { flag: "a" },
+      );
     const bytes = await readFile(path.join(root, "journal.json")).catch(
       () => null,
     );
@@ -469,8 +489,10 @@ async function main(command, root, env = process.env) {
     }
     throw new Error("Publisher outcome uncertain");
   }
+  await diagnostics?.stage("inputs");
   const event = await json(env.GITHUB_EVENT_PATH),
     policy = assertPairedInputs(env, event);
+  await diagnostics?.stage("identity");
   const context = await inspectTrustedCi({
     env,
     event,
@@ -480,6 +502,7 @@ async function main(command, root, env = process.env) {
     read: githubInspector({ token: env.GH_READ_TOKEN }),
   });
   const read = (endpoint) => readGithub(endpoint, env.GH_READ_TOKEN);
+  await diagnostics?.stage("publisher");
   for (const status of [
     "in_progress",
     "queued",
@@ -502,6 +525,9 @@ async function main(command, root, env = process.env) {
     await refreshStorage();
     return;
   }
+  await diagnostics?.stage("storage");
+  const storage = await refreshStorage();
+  await diagnostics?.stage("provider");
   const journal = new WriteJournal(path.join(root, "journal.json"));
   const provider = createProviderAdapters({
     account: ACCOUNT,
@@ -511,7 +537,7 @@ async function main(command, root, env = process.env) {
     workerToken: env.CLOUDFLARE_WORKER_TOKEN,
     githubToken: env.GH_READ_TOKEN,
     context,
-    storage: await refreshStorage(),
+    storage,
     storagePolicy,
     refreshStorage,
     journal,
@@ -539,7 +565,7 @@ async function main(command, root, env = process.env) {
       authenticateProof: (args) => authenticateRecord({ ...args, read }),
     });
   if (command === "prepare") {
-    await mkdir(root);
+    await diagnostics?.stage("package");
     const previous =
       env.PAIRED_MODE === "release" ? path.join(root, "previous") : undefined;
     let prior;
@@ -590,6 +616,7 @@ async function main(command, root, env = process.env) {
         env.SOURCE_COMMIT,
       );
     }
+    await diagnostics?.stage("baseline");
     const verifyPrimary = await m1Verifier(meta);
     const primaryVerification = await verifyPrimary(primary, "baseline");
     await cloudflarePackage(packageRoot, cf, routes);
@@ -661,7 +688,7 @@ async function main(command, root, env = process.env) {
     return;
   }
   if (command !== "promote") throw new Error("Unknown publication command");
-  await mkdir(root);
+  await diagnostics?.stage("candidate");
   const incoming = env.CANDIDATE_DIRECTORY;
   const bytes = await readFile(path.join(incoming, "receipt.json"));
   if (hash(bytes) !== env.CANDIDATE_RECEIPT_SHA256)
@@ -679,11 +706,13 @@ async function main(command, root, env = process.env) {
     env.CANDIDATE_RECEIPT_SHA256,
     { approved: policy.allowOwnerMacArchive },
   );
+  await diagnostics?.stage("recovery");
   await recoverPackage({
     receiptBytes: bytes,
     expectedDigest: env.CANDIDATE_RECEIPT_SHA256,
     output: packageRoot,
   });
+  await diagnostics?.stage("package");
   await cloudflarePackage(packageRoot, cf, routes);
   await artifactPlan(
     packageRoot,
@@ -704,9 +733,11 @@ async function main(command, root, env = process.env) {
     );
     assertPublishedSourceRun(runs.workflow_runs?.[0], env.SOURCE_COMMIT);
   }
+  await diagnostics?.stage("baseline");
   const verifyPrimary = await m1Verifier(meta);
   const baseline =
     candidate.mode === "bootstrap" ? meta.sourceFiles : meta.previousFiles;
+  await diagnostics?.stage("publication");
   const result = await runPreparedPublisher({
     writesApproved: true,
     packageRoot,
@@ -759,12 +790,14 @@ if (
   import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href
 ) {
   const [command, root] = process.argv.slice(2);
-  main(command, root).catch(async (error) => {
+  let diagnostics;
+  (async () => {
+    if (["prepare", "promote"].includes(command))
+      diagnostics = await startDiagnostics(root, command, process.env);
+    await main(command, root, process.env, diagnostics);
+  })().catch(async (error) => {
     // No raw provider response/URL/credential or stack is printed.
-    if (["promote", "prepare"].includes(command))
-      await save(path.join(root, "outcome.json"), { status: "failed" }).catch(
-        () => {},
-      );
+    if (diagnostics) await diagnostics.failed(error).catch(() => {});
     console.error(
       "Paired publisher stopped. Inspect phase/provider outcome before any retry.",
     );

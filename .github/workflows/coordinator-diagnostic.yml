@@ -1,0 +1,75 @@
+# Read-only manual troubleshooting. No publishing credential/environment/OIDC.
+name: Read-only coordinator runner diagnostic
+on:
+  workflow_dispatch:
+    inputs:
+      approved_control_sha:
+        description: Exact reviewed diagnostic control commit
+        required: true
+      storage_snapshot:
+        description: Fresh complete non-secret inventory with verified zero-spend blocking
+        required: true
+      owner_archive_proof:
+        description: Existing exact owner archive readback proof (non-secret)
+        required: true
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: coordinator-readonly-diagnostic
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries'
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    env:
+      APPROVED_DIAGNOSTIC_SHA: ${{ inputs.approved_control_sha }}
+      STORAGE_SNAPSHOT: ${{ inputs.storage_snapshot }}
+      OWNER_ARCHIVE_PROOF: ${{ inputs.owner_archive_proof }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          artifact-ids: 12570834463
+          run-id: 40121633653
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/incoming-candidate
+      - name: Start actual coordinator prerequisite replay without any publisher permission
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          (
+            set +e
+            node infrastructure/failover/coordinator-diagnostic-ci.mjs run "$RUNNER_TEMP/jji-paired" > "$RUNNER_TEMP/diagnostic-private-stderr.log" 2>&1
+            code=$?
+            printf '{"exitCode":%s}\n' "$code" > "$RUNNER_TEMP/diagnostic-exit.json"
+          ) < /dev/null &
+          echo "DIAGNOSTIC_SUPERVISOR_PID=$!" >> "$GITHUB_ENV"
+      - name: Capture bounded exit and sanitized evidence after starter shell exits
+        run: node infrastructure/failover/coordinator-diagnostic-ci.mjs observe "$RUNNER_TEMP/jji-paired"
+      - name: Stop only this local diagnostic process after completion or failure
+        if: always()
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          try {
+            const lines = fs.readFileSync(path.join(process.env.RUNNER_TEMP, 'jji-paired/coordinator.jsonl'), 'utf8').trim().split('\n');
+            const p = JSON.parse(lines[0]);
+            if (p.schema === 1 && Number.isSafeInteger(p.pid) && p.pid > 1) process.kill(p.pid, 'SIGTERM');
+          } catch {}
+          NODE
+          if [[ "${DIAGNOSTIC_SUPERVISOR_PID:-}" =~ ^[0-9]+$ ]]; then
+            kill "$DIAGNOSTIC_SUPERVISOR_PID" 2>/dev/null || true
+          fi
