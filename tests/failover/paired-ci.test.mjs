@@ -409,12 +409,9 @@ test("primary provenance marker rejects matching fallback bytes instead of maski
   assert.equal(primary.headers.get("x-jji-source"), "primary");
 });
 
-test("inactive workflow invokes actual publication handoffs, uses pinned actions and contains no automatic trigger", async () => {
+test("paired workflow invokes actual publication handoffs, uses pinned actions and contains no automatic trigger", async () => {
   const yaml = await readFile(
-    new URL(
-      "../../.github/workflows/paired-release.yml.example",
-      import.meta.url,
-    ),
+    new URL("../../.github/workflows/paired-release.yml", import.meta.url),
     "utf8",
   );
   assert.match(yaml, /paired-ci\.mjs promote/);
