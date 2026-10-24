@@ -704,7 +704,7 @@ if (
   import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href
 ) {
   const [command, root] = process.argv.slice(2);
-  main(command, root).catch(async () => {
+  main(command, root).catch(async (error) => {
     // No raw provider response/URL/credential or stack is printed.
     if (command === "promote")
       await save(path.join(root, "outcome.json"), { status: "failed" }).catch(
@@ -713,6 +713,20 @@ if (
     console.error(
       "Paired publisher stopped. Inspect phase/provider outcome before any retry.",
     );
+    const safeDiagnostics = new Set([
+      "Repository/remote does not match approved public GitHub origin",
+      "Untrusted workflow identity or unapproved revision",
+      "Main advanced; do not publish a stale run",
+      "Untrusted run provenance",
+      "Required owner review and exact main-only environment protection missing",
+      "Independent production publisher is not paused; no write permitted",
+      "GitHub prerequisite read failed; do not expand access automatically",
+      "Unverified zero-spend storage guard",
+      "Logical inventory admission is disabled or unapproved",
+      "Complete owner-verified logical inventory required",
+      "Snapshot does not match complete inventory",
+    ]);
+    if (safeDiagnostics.has(error?.message)) console.error(error.message);
     process.exitCode = 1;
   });
 }

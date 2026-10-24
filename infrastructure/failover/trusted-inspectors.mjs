@@ -17,7 +17,7 @@ export function assertRemoteMetadata(repo, remote) {
     repo.private !== false ||
     repo.default_branch !== "main" ||
     repo.clone_url !== GIT ||
-    remote.trim() !== GIT
+    ![GIT, GIT.slice(0, -4)].includes(remote.trim())
   )
     throw new Error(
       "Repository/remote does not match approved public GitHub origin",

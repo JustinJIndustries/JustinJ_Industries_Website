@@ -65,6 +65,19 @@ const read = async (endpoint) => {
     return { state: "disabled_manually" };
   return metadata;
 };
+
+test("official checkout origin spelling without .git keeps the exact same repository boundary", () => {
+  assert.doesNotThrow(() =>
+    assertRemoteMetadata(metadata, metadata.clone_url.slice(0, -4)),
+  );
+  for (const remote of [
+    "https://github.com/other/repo",
+    "https://github.com/JustinJIndustries/JustinJ_Industries_Website.evil",
+    "http://github.com/JustinJIndustries/JustinJ_Industries_Website",
+    "https://github.com.evil/JustinJIndustries/JustinJ_Industries_Website",
+  ])
+    assert.throws(() => assertRemoteMetadata(metadata, remote));
+});
 test("trusted inspectors reject PRs, arbitrary refs, stale approvals, local remotes and absent reviewer", () => {
   assert.doesNotThrow(() => assertCiIdentity(env, event));
   for (const change of [
