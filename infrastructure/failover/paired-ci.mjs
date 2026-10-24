@@ -36,6 +36,10 @@ import { artifactPlan } from "./artifact-plan.mjs";
 import { assertStorageBudget } from "./release-policy.mjs";
 import { inspectLogicalInventory, RETENTION } from "./storage-admission.mjs";
 import { sanitizedJournal } from "./recovery-store.mjs";
+import {
+  createPublicArtifactVerifier,
+  assertPublishedSourceRun,
+} from "./public-parity.mjs";
 
 const REPO = "JustinJIndustries/JustinJ_Industries_Website";
 const ACCOUNT = "986b5334eba2d05d253ee98ca9842dfe";
@@ -543,9 +547,30 @@ async function main(command, root, env = process.env) {
     const primary = previous
       ? decodeReceipt(prior.bytes, prior.sha256).metadata.files
       : meta.sourceFiles;
-    await verifyOriginManifest("https://www.justinjindustries.com/", primary, {
+    let sourcePublication;
+    if (!previous) {
+      const runs = await read(
+        `/repos/${REPO}/actions/workflows/jekyll-gh-pages.yml/runs?status=success&branch=main&per_page=1`,
+      );
+      sourcePublication = assertPublishedSourceRun(
+        runs.workflow_runs?.[0],
+        env.SOURCE_COMMIT,
+      );
+    }
+    const verifyPrimary = await createPublicArtifactVerifier({
+      packageRoot,
+      provenance: {
+        repository: REPO,
+        sourceCommit: env.SOURCE_COMMIT,
+        workflowCommit: context.sha,
+        workflowRunId: context.runId,
+      },
+      approvedSourceCommit: env.SOURCE_COMMIT,
+      approvedWorkflowCommit: context.approvedSha,
+      approvedRelease: env.APPROVED_RELEASE,
       requirePrimaryMarker: !!previous,
     });
+    const primaryVerification = await verifyPrimary(primary);
     await cloudflarePackage(packageRoot, cf, routes);
     const plan = await artifactPlan(
       packageRoot,
@@ -598,6 +623,8 @@ async function main(command, root, env = process.env) {
       sourceCommit: env.SOURCE_COMMIT,
       workflowCommit: context.sha,
       receiptSha256: issued.sha256,
+      sourcePublication,
+      primaryVerification,
     });
     if (env.GITHUB_STEP_SUMMARY)
       await writeFile(
@@ -645,10 +672,25 @@ async function main(command, root, env = process.env) {
       throw new Error("Worker changed since review");
   }
   const meta = r.metadata;
-  const verifyPrimary = (entries) =>
-    verifyOriginManifest("https://www.justinjindustries.com/", entries, {
-      requirePrimaryMarker: candidate.mode !== "bootstrap",
-    });
+  if (candidate.mode === "bootstrap") {
+    const runs = await read(
+      `/repos/${REPO}/actions/workflows/jekyll-gh-pages.yml/runs?status=success&branch=main&per_page=1`,
+    );
+    assertPublishedSourceRun(runs.workflow_runs?.[0], env.SOURCE_COMMIT);
+  }
+  const verifyPrimary = await createPublicArtifactVerifier({
+    packageRoot,
+    provenance: {
+      repository: REPO,
+      sourceCommit: env.SOURCE_COMMIT,
+      workflowCommit: context.sha,
+      workflowRunId: context.runId,
+    },
+    approvedSourceCommit: env.SOURCE_COMMIT,
+    approvedWorkflowCommit: context.approvedSha,
+    approvedRelease: env.APPROVED_RELEASE,
+    requirePrimaryMarker: candidate.mode !== "bootstrap",
+  });
   const baseline =
     candidate.mode === "bootstrap" ? meta.sourceFiles : meta.previousFiles;
   await verifyPrimary(baseline);
@@ -725,6 +767,16 @@ if (
       "Logical inventory admission is disabled or unapproved",
       "Complete owner-verified logical inventory required",
       "Snapshot does not match complete inventory",
+      "Successful approved-source production provenance required",
+      "Reviewed build provenance or public verification host mismatch",
+      "Reviewed artifact identity mismatch",
+      "Verification inventory is not bound to reviewed artifact",
+      "Local reviewed artifact bytes changed",
+      "Public HTML differs beyond the pinned Cloudflare transformations",
+      "Public asset bytes differ from reviewed artifact",
+      "Origin security challenge; no bypass permitted",
+      "Origin verification failed; no TLS bypass permitted",
+      "Origin manifest/status mismatch; stop publication",
     ]);
     if (safeDiagnostics.has(error?.message)) console.error(error.message);
     process.exitCode = 1;

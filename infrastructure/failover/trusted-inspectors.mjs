@@ -133,13 +133,11 @@ export async function inspectTrustedCi({ env, event, remote, read }) {
   };
 }
 
-export async function verifyOriginManifest(
+export async function readOriginManifestEntry(
   origin,
-  entries,
+  e,
   { fetcher = globalThis.fetch, requirePrimaryMarker = false } = {},
 ) {
-  if (!Array.isArray(entries) || entries.length === 0 || entries.length > 2000)
-    throw new Error("Missing or excessive verification inventory");
   const root = new URL(origin);
   if (
     root.protocol !== "https:" ||
@@ -153,47 +151,61 @@ export async function verifyOriginManifest(
     root.hash
   )
     throw new Error("Unapproved verification origin");
-  for (const e of entries) {
-    if (
-      !/^[\w.@/-]+$/.test(e.path) ||
-      e.path.includes("..") ||
-      e.path.startsWith("/") ||
-      !/^[a-f0-9]{64}$/.test(e.sha256)
-    )
-      throw new Error("Unsafe manifest entry");
-    let url = new URL(e.path, root),
-      response;
-    const seen = new Set();
-    for (let hop = 0; hop < 6; hop++) {
-      if (seen.has(url.href)) throw new Error("Verification redirect loop");
-      seen.add(url.href);
-      try {
-        response = await fetcher(url, {
-          redirect: "manual",
-          signal: AbortSignal.timeout(15000),
-          headers: { "cache-control": "no-cache" },
-        });
-      } catch {
-        throw new Error("Origin verification failed; no TLS bypass permitted");
-      }
-      if (response.headers.get("cf-mitigated") === "challenge")
-        throw new Error("Origin security challenge; no bypass permitted");
-      if (![301, 302, 303, 307, 308].includes(response.status)) break;
-      const target = new URL(response.headers.get("location") ?? "", url);
-      if (response.body) await response.body.cancel();
-      if (target.origin !== root.origin || target.username || target.password)
-        throw new Error("Foreign verification redirect");
-      url = target;
+  if (
+    !/^[\w.@/-]+$/.test(e.path) ||
+    e.path.includes("..") ||
+    e.path.startsWith("/") ||
+    !/^[a-f0-9]{64}$/.test(e.sha256)
+  )
+    throw new Error("Unsafe manifest entry");
+  let url = new URL(e.path, root),
+    response;
+  const seen = new Set();
+  for (let hop = 0; hop < 6; hop++) {
+    if (seen.has(url.href)) throw new Error("Verification redirect loop");
+    seen.add(url.href);
+    try {
+      response = await fetcher(url, {
+        redirect: "manual",
+        signal: AbortSignal.timeout(15000),
+        headers: { "cache-control": "no-cache" },
+      });
+    } catch {
+      throw new Error("Origin verification failed; no TLS bypass permitted");
     }
-    if (
-      response.status !== 200 ||
-      (requirePrimaryMarker &&
-        response.headers.get("x-jji-source") !== "primary") ||
-      digest(Buffer.from(await response.arrayBuffer())) !== e.sha256
-    )
+    if (response.headers.get("cf-mitigated") === "challenge")
+      throw new Error("Origin security challenge; no bypass permitted");
+    if (![301, 302, 303, 307, 308].includes(response.status)) break;
+    const target = new URL(response.headers.get("location") ?? "", url);
+    if (response.body) await response.body.cancel();
+    if (target.origin !== root.origin || target.username || target.password)
+      throw new Error("Foreign verification redirect");
+    url = target;
+  }
+  if (
+    response.status !== 200 ||
+    (requirePrimaryMarker && response.headers.get("x-jji-source") !== "primary")
+  )
+    throw new Error("Origin manifest/status mismatch; stop publication");
+  try {
+    return {
+      bytes: Buffer.from(await response.arrayBuffer()),
+      contentType: response.headers.get("content-type") ?? "",
+    };
+  } catch {
+    throw new Error("Origin body verification failed; no TLS bypass permitted");
+  }
+}
+
+export async function verifyOriginManifest(origin, entries, options = {}) {
+  if (!Array.isArray(entries) || !entries.length || entries.length > 2000)
+    throw new Error("Missing or excessive verification inventory");
+  for (const e of entries) {
+    const result = await readOriginManifestEntry(origin, e, options);
+    if (digest(result.bytes) !== e.sha256)
       throw new Error("Origin manifest/status mismatch; stop publication");
   }
-  return { origin: root.href, verifiedFiles: entries.length };
+  return { origin: new URL(origin).href, verifiedFiles: entries.length };
 }
 
 export async function verifyToolchain(root) {

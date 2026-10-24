@@ -73,3 +73,9 @@ primary publisher is changed. See `docs/failover/backup-only-ci-test-20261024.md
 Local implementation now connects protected preparation/promotion to the tested coordinator, official pinned artifact actions, GitHub Pages API/OIDC, immutable Pages preview readback and an owner-operated Mac archive/restore helper. The workflow remains .yml.example and unregistered; no publisher, secret, infrastructure setting or production change occurred. See [current wiring and rollout gates](failover/paired-publisher-20261024.md). Public source remains d6574ed and the completed backup-only CI test is preserved.
 
 Verification: 138 local failover tests, source HTML, 2,395 built links, formatting, capability PDF and a 189-file allowlisted build passed. The active publisher and root dependency files remain byte-identical to remote main. No new hosted test, route activation or browser accessibility audit is implied.
+
+## Local public-verifier correction — October 24, 2026
+
+The paused rollout's public-edge hash mismatch is traced to Cloudflare transformations. A local artifact/provenance-bound parity verifier now reverses only pinned transformations before demanding full byte equality; immutable backup hashes and ordinary Host/SNI/TLS validation remain strict. All 170 local failover tests and read-only verification of 189 public files through 51 legacy 301 redirects passed. No public content or procurement claims changed. The old publisher remains active, paired publisher disabled, and no rollout retry occurred. See [verification policy and evidence](failover/origin-verifier-20261024.md). Parent review is required before a new live attempt.
+
+Independent review found and locally corrected a protected-HTML-context gap before publication. Added textarea/raw-text/comment/attribute/template and foreign-content placement regressions; the corrected patch remains unpublished pending independent re-review.
