@@ -49,7 +49,7 @@ jobs:
     if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries'
     environment: failover-sync
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     defaults:
       run:
         working-directory: control
@@ -111,22 +111,6 @@ jobs:
           run-id: ${{ env.PREVIOUS_RUN_ID }}
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/previous-receipt
-      - name: Prepare one immutable backup and fully verified candidate receipt
-        if: inputs.phase == 'prepare'
-        env:
-          GH_READ_TOKEN: ${{ github.token }}
-          CLOUDFLARE_PAGES_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}
-          CLOUDFLARE_WORKER_TOKEN: ${{ secrets.CLOUDFLARE_WORKER_TOKEN }}
-        run: node infrastructure/failover/paired-ci.mjs prepare "$PAIRED_ROOT"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: inputs.phase == 'prepare'
-        id: candidate
-        with:
-          name: paired-candidate-${{ github.run_id }}
-          path: ${{ runner.temp }}/jji-paired/candidate/
-          retention-days: 1
-          compression-level: 0
-          if-no-files-found: error
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         if: inputs.phase == 'promote'
         with:
@@ -135,6 +119,15 @@ jobs:
           run-id: ${{ env.CANDIDATE_RUN_ID }}
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/incoming-candidate
+      - name: Start bounded backup preparation awaiting M1 verification
+        if: inputs.phase == 'prepare'
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+          CLOUDFLARE_PAGES_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}
+          CLOUDFLARE_WORKER_TOKEN: ${{ secrets.CLOUDFLARE_WORKER_TOKEN }}
+        run: |
+          node infrastructure/failover/paired-ci.mjs prepare "$PAIRED_ROOT" > "$RUNNER_TEMP/paired-publisher.log" 2>&1 &
+          echo "PAIRED_PID=$!" >> "$GITHUB_ENV"
       - name: Start bounded coordinator from prepared backup and owner archive proof
         if: inputs.phase == 'promote'
         env:
@@ -143,6 +136,44 @@ jobs:
         run: |
           node infrastructure/failover/paired-ci.mjs promote "$PAIRED_ROOT" > "$RUNNER_TEMP/paired-publisher.log" 2>&1 &
           echo "PAIRED_PID=$!" >> "$GITHUB_ENV"
+      - name: Wait for exact M1 baseline checkpoint request
+        env:
+          ARTIFACT_PHASE: public-baseline
+        run: node infrastructure/failover/paired-ci.mjs wait "$PAIRED_ROOT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: paired-checkpoint-${{ github.run_id }}-baseline
+          path: ${{ runner.temp }}/jji-paired/checkpoints/baseline/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Await protected owner-M1 baseline proof
+        env:
+          PUBLIC_PHASE: baseline
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/failover/paired-ci.mjs wait-proof "$PAIRED_ROOT"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          artifact-ids: ${{ env.PUBLIC_PROOF_ARTIFACT_ID }}
+          run-id: ${{ env.PUBLIC_PROOF_RUN_ID }}
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/jji-paired/proofs/baseline
+      - name: Hand fresh authenticated baseline evidence to coordinator
+        env:
+          PUBLIC_PHASE: baseline
+        run: node infrastructure/failover/paired-ci.mjs proof-reply "$PAIRED_ROOT"
+      - name: Verify backup preparation outcome
+        if: inputs.phase == 'prepare'
+        run: node infrastructure/failover/paired-ci.mjs status "$PAIRED_ROOT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: inputs.phase == 'prepare'
+        with:
+          name: paired-candidate-${{ github.run_id }}
+          path: ${{ runner.temp }}/jji-paired/candidate/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
       - name: Wait for verified stage artifact request
         if: inputs.phase == 'promote'
         env:
@@ -162,6 +193,38 @@ jobs:
           ARTIFACT_ID: ${{ steps.stage.outputs.artifact_id }}
           GH_READ_TOKEN: ${{ github.token }}
         run: node infrastructure/failover/paired-ci.mjs action-reply "$PAIRED_ROOT"
+      - name: Wait for exact M1 stage checkpoint request
+        if: inputs.phase == 'promote'
+        env:
+          ARTIFACT_PHASE: public-stage
+        run: node infrastructure/failover/paired-ci.mjs wait "$PAIRED_ROOT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: inputs.phase == 'promote'
+        with:
+          name: paired-checkpoint-${{ github.run_id }}-stage
+          path: ${{ runner.temp }}/jji-paired/checkpoints/stage/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Await protected owner-M1 stage proof
+        if: inputs.phase == 'promote'
+        env:
+          PUBLIC_PHASE: stage
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/failover/paired-ci.mjs wait-proof "$PAIRED_ROOT"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: inputs.phase == 'promote'
+        with:
+          artifact-ids: ${{ env.PUBLIC_PROOF_ARTIFACT_ID }}
+          run-id: ${{ env.PUBLIC_PROOF_RUN_ID }}
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/jji-paired/proofs/stage
+      - name: Hand fresh authenticated stage evidence to coordinator
+        if: inputs.phase == 'promote'
+        env:
+          PUBLIC_PHASE: stage
+        run: node infrastructure/failover/paired-ci.mjs proof-reply "$PAIRED_ROOT"
       - name: Wait for verified stage, backup and recovery record
         if: inputs.phase == 'promote'
         env:
@@ -209,9 +272,43 @@ jobs:
           GH_READ_TOKEN: ${{ github.token }}
         run: |
           node infrastructure/failover/paired-ci.mjs action-reply "$PAIRED_ROOT"
-          node infrastructure/failover/paired-ci.mjs status "$PAIRED_ROOT"
+      - name: Wait for exact M1 final checkpoint request
+        if: inputs.phase == 'promote'
+        env:
+          ARTIFACT_PHASE: public-final
+        run: node infrastructure/failover/paired-ci.mjs wait "$PAIRED_ROOT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: inputs.phase == 'promote'
+        with:
+          name: paired-checkpoint-${{ github.run_id }}-final
+          path: ${{ runner.temp }}/jji-paired/checkpoints/final/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Await protected owner-M1 final proof
+        if: inputs.phase == 'promote'
+        env:
+          PUBLIC_PHASE: final
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/failover/paired-ci.mjs wait-proof "$PAIRED_ROOT"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: inputs.phase == 'promote'
+        with:
+          artifact-ids: ${{ env.PUBLIC_PROOF_ARTIFACT_ID }}
+          run-id: ${{ env.PUBLIC_PROOF_RUN_ID }}
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/jji-paired/proofs/final
+      - name: Hand fresh authenticated final evidence to coordinator
+        if: inputs.phase == 'promote'
+        env:
+          PUBLIC_PHASE: final
+        run: node infrastructure/failover/paired-ci.mjs proof-reply "$PAIRED_ROOT"
+      - name: Verify final paired outcome after M1 public checkpoint
+        if: inputs.phase == 'promote'
+        run: node infrastructure/failover/paired-ci.mjs status "$PAIRED_ROOT"
       - name: Stop local coordinator after job completion or failure
-        if: always() && inputs.phase == 'promote'
+        if: always()
         run: |
           if [[ "${PAIRED_PID:-}" =~ ^[0-9]+$ ]]; then
             kill "$PAIRED_PID" 2>/dev/null || true

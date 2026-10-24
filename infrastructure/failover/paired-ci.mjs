@@ -36,10 +36,16 @@ import { artifactPlan } from "./artifact-plan.mjs";
 import { assertStorageBudget } from "./release-policy.mjs";
 import { inspectLogicalInventory, RETENTION } from "./storage-admission.mjs";
 import { sanitizedJournal } from "./recovery-store.mjs";
+import { assertPublishedSourceRun } from "./public-parity.mjs";
 import {
-  createPublicArtifactVerifier,
-  assertPublishedSourceRun,
-} from "./public-parity.mjs";
+  createM1Gate,
+  assertCheckpointArtifactBudget,
+} from "./public-checkpoint.mjs";
+import {
+  authenticateRecord,
+  listArtifacts,
+  waitForProof,
+} from "./checkpoint-github.mjs";
 
 const REPO = "JustinJIndustries/JustinJ_Industries_Website";
 const ACCOUNT = "986b5334eba2d05d253ee98ca9842dfe";
@@ -400,6 +406,18 @@ async function main(command, root, env = process.env) {
     return;
   }
   if (command === "wait") return bridge.waitRequest(env.ARTIFACT_PHASE);
+  if (command === "wait-proof")
+    return waitForProof({
+      root,
+      phase: env.PUBLIC_PHASE,
+      read: (endpoint) => readGithub(endpoint, env.GH_READ_TOKEN),
+      env,
+    });
+  if (command === "proof-reply")
+    return bridge.reply("public-" + env.PUBLIC_PHASE, {
+      id: Number(env.PUBLIC_PROOF_ARTIFACT_ID),
+      digest: env.PUBLIC_PROOF_DIGEST,
+    });
   if (command === "summary") {
     const bytes = await readFile(path.join(root, "journal.json")).catch(
       () => null,
@@ -505,6 +523,21 @@ async function main(command, root, env = process.env) {
   const packageRoot = path.join(root, "package"),
     cf = path.join(root, "cloudflare");
   const routes = await json(path.join(here, "legacy-redirects.json"));
+  const m1Verifier = (metadata) =>
+    createM1Gate({
+      root,
+      packageRoot,
+      metadata,
+      context: { ...context, sourceCommit: env.SOURCE_COMMIT },
+      requirePrimaryMarker: env.PAIRED_MODE !== "bootstrap",
+      bridge,
+      beforeWrite: async () => {
+        const snapshot = await refreshStorage();
+        assertCheckpointArtifactBudget(await listArtifacts(read));
+        return snapshot;
+      },
+      authenticateProof: (args) => authenticateRecord({ ...args, read }),
+    });
   if (command === "prepare") {
     await mkdir(root);
     const previous =
@@ -557,20 +590,8 @@ async function main(command, root, env = process.env) {
         env.SOURCE_COMMIT,
       );
     }
-    const verifyPrimary = await createPublicArtifactVerifier({
-      packageRoot,
-      provenance: {
-        repository: REPO,
-        sourceCommit: env.SOURCE_COMMIT,
-        workflowCommit: context.sha,
-        workflowRunId: context.runId,
-      },
-      approvedSourceCommit: env.SOURCE_COMMIT,
-      approvedWorkflowCommit: context.approvedSha,
-      approvedRelease: env.APPROVED_RELEASE,
-      requirePrimaryMarker: !!previous,
-    });
-    const primaryVerification = await verifyPrimary(primary);
+    const verifyPrimary = await m1Verifier(meta);
+    const primaryVerification = await verifyPrimary(primary, "baseline");
     await cloudflarePackage(packageRoot, cf, routes);
     const plan = await artifactPlan(
       packageRoot,
@@ -632,6 +653,11 @@ async function main(command, root, env = process.env) {
         `Prepared backup only. Receipt SHA256: ${issued.sha256}\nSource: ${env.SOURCE_COMMIT}\nOrigin: ${deployed.origin}\nReserved peak bytes: ${plan.peakBytes}\nOwner must restore an archive before a separate protected promotion run.\n`,
         { flag: "a" },
       );
+    await save(path.join(root, "outcome.json"), {
+      status: "success",
+      phase: "prepare",
+      release: meta.release,
+    });
     return;
   }
   if (command !== "promote") throw new Error("Unknown publication command");
@@ -678,22 +704,9 @@ async function main(command, root, env = process.env) {
     );
     assertPublishedSourceRun(runs.workflow_runs?.[0], env.SOURCE_COMMIT);
   }
-  const verifyPrimary = await createPublicArtifactVerifier({
-    packageRoot,
-    provenance: {
-      repository: REPO,
-      sourceCommit: env.SOURCE_COMMIT,
-      workflowCommit: context.sha,
-      workflowRunId: context.runId,
-    },
-    approvedSourceCommit: env.SOURCE_COMMIT,
-    approvedWorkflowCommit: context.approvedSha,
-    approvedRelease: env.APPROVED_RELEASE,
-    requirePrimaryMarker: candidate.mode !== "bootstrap",
-  });
+  const verifyPrimary = await m1Verifier(meta);
   const baseline =
     candidate.mode === "bootstrap" ? meta.sourceFiles : meta.previousFiles;
-  await verifyPrimary(baseline);
   const result = await runPreparedPublisher({
     writesApproved: true,
     packageRoot,
@@ -706,7 +719,7 @@ async function main(command, root, env = process.env) {
     provider,
     bridge,
     inspectCurrent: async () => {
-      await verifyPrimary(baseline);
+      await verifyPrimary(baseline, "baseline");
       return candidate.mode === "bootstrap"
         ? {
             exclusivePublisher: true,
@@ -748,7 +761,7 @@ if (
   const [command, root] = process.argv.slice(2);
   main(command, root).catch(async (error) => {
     // No raw provider response/URL/credential or stack is printed.
-    if (command === "promote")
+    if (["promote", "prepare"].includes(command))
       await save(path.join(root, "outcome.json"), { status: "failed" }).catch(
         () => {},
       );
@@ -777,6 +790,12 @@ if (
       "Origin security challenge; no bypass permitted",
       "Origin verification failed; no TLS bypass permitted",
       "Origin manifest/status mismatch; stop publication",
+      "M1 checkpoint timed out; inspect deployed phase before recovery",
+      "Stale public checkpoint request",
+      "Stale or future M1 public proof",
+      "Public proof phase/run/artifact mismatch",
+      "Untrusted public checkpoint workflow/run",
+      "M1 proof already published; no duplicate",
     ]);
     if (safeDiagnostics.has(error?.message)) console.error(error.message);
     process.exitCode = 1;

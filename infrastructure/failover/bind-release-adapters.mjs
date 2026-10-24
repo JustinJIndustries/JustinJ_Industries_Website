@@ -60,7 +60,7 @@ export function bindReleaseAdapters({
         throw new Error("Worker changed before asset stage; no write");
     },
     publishAssetStage: (directory) => publishGithub(directory, "stage"),
-    verifyAssetStage: () => verifyPrimary(release.stageFiles),
+    verifyAssetStage: () => verifyPrimary(release.stageFiles, "stage"),
     async publishBackup() {
       if (!writesApproved) throw new Error("Publication wiring is disabled");
       await verifyCloudflareDirectory(packageRoot, cloudflareDirectory, routes);
@@ -92,7 +92,7 @@ export function bindReleaseAdapters({
     },
     publishPrimary: (directory) => publishGithub(directory, "final"),
     async verifyPairedRelease(_meta, origin) {
-      await verifyPrimary(release.files);
+      await verifyPrimary(release.files, "final");
       await verifyBackup(origin, release.files);
       if ((await provider.currentWorkerDeployment()).id !== deployment)
         throw new Error("Worker changed during paired verification");
@@ -158,7 +158,7 @@ export function bindBootstrapAdapters({
         throw new Error("Bootstrap raw baseline/exclusive publisher mismatch");
     },
     publishAssetStage: (directory) => publish(directory, "stage"),
-    verifyAssetStage: () => verifyPrimary(release.stageFiles),
+    verifyAssetStage: () => verifyPrimary(release.stageFiles, "stage"),
     async publishBackup() {
       gate();
       await verifyCloudflareDirectory(root, cloudflareDirectory, routes);
@@ -176,7 +176,7 @@ export function bindBootstrapAdapters({
     },
     publishPrimary: (directory) => publish(directory, "final"),
     async verifyPairedRelease(_meta, origin) {
-      await verifyPrimary(release.files);
+      await verifyPrimary(release.files, "final");
       await verifyBackup(origin, release.files);
     },
   };

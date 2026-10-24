@@ -72,6 +72,7 @@ export function assertStorageBudget(s, now = Date.now(), policy = {}) {
     Math.ceil(s.recoveryArtifactBytes * 1.2) * (1 - s.currentRunReceiptCount) +
     s.largestPagesArtifactBytes *
       (s.transientCopies - s.currentRunTransientCount) +
+    2 * 1024 * 1024 + // bounded M1 request/proof artifacts; no full-site copy
     20 * 1024 * 1024;
   if (peak > s.freeStorageBytes)
     throw new Error(
@@ -85,6 +86,7 @@ export function assertStorageBudget(s, now = Date.now(), policy = {}) {
     projectedReceiptCount: s.retainedReceiptCount + 1,
     projectedTransientCount: s.retainedTransientCount + s.transientCopies,
     recoveryArtifactBytes: RETENTION.recoveryArtifactBytes,
+    publicCheckpointReserveBytes: 2 * 1024 * 1024,
   };
 }
 

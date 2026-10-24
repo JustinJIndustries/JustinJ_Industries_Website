@@ -4,7 +4,14 @@ import { mkdir, readFile, writeFile, rename, lstat } from "node:fs/promises";
 import path from "node:path";
 import { randomUUID } from "node:crypto";
 
-const phases = new Set(["stage", "recovery", "final"]);
+const phases = new Set([
+  "stage",
+  "recovery",
+  "final",
+  "public-baseline",
+  "public-stage",
+  "public-final",
+]);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function json(file) {
   try {
@@ -24,11 +31,16 @@ async function write(file, value) {
   });
   await rename(file + ".next", file);
 }
-export function actionBridge(root, { timeoutMs = 120000, pollMs = 100 } = {}) {
+export function actionBridge(
+  root,
+  { timeoutMs = 120000, publicTimeoutMs = 600000, pollMs = 100 } = {},
+) {
   if (
     !path.isAbsolute(root) ||
     timeoutMs <= 0 ||
     timeoutMs > 180000 ||
+    publicTimeoutMs <= 0 ||
+    publicTimeoutMs > 600000 ||
     pollMs <= 0
   )
     throw new Error("Invalid bounded action bridge");
@@ -37,7 +49,8 @@ export function actionBridge(root, { timeoutMs = 120000, pollMs = 100 } = {}) {
     return path.join(root, `${phase}.${kind}.json`);
   };
   async function wait(phase, kind) {
-    const end = Date.now() + timeoutMs;
+    const end =
+      Date.now() + (phase.startsWith("public-") ? publicTimeoutMs : timeoutMs);
     while (Date.now() < end) {
       const result = await json(file(phase, kind));
       if (result) return result;

@@ -554,7 +554,7 @@ test("current-run uploads are counted once; prior-run overlap cannot be relabele
   const p = assertStorageBudget(admitted, Date.now(), policy);
   assert.equal(
     p.peakBytes,
-    counts.accountUsedBytes + s.largestPagesArtifactBytes + 20 * 1024 * 1024,
+    counts.accountUsedBytes + s.largestPagesArtifactBytes + 22 * 1024 * 1024,
   );
   assert.equal(p.projectedReceiptCount, 1);
   assert.throws(() =>
