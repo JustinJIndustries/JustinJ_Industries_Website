@@ -1,0 +1,224 @@
+# INACTIVE: .example prevents registration. Enabling and replacing the old
+# publisher require exact approval. No push, PR event or schedule.
+name: Protected paired JJI publication
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        type: choice
+        options: [prepare, promote]
+        required: true
+      mode:
+        type: choice
+        options: [bootstrap, release]
+        required: true
+      source_commit:
+        description: Exact reviewed public-source commit
+        required: true
+      approved_public_release:
+        description: Exact public manifest identity
+        required: true
+      approved_workflow_sha:
+        description: Exact reviewed main workflow commit
+        required: true
+      storage_snapshot:
+        description: Fresh complete account inventory and verified $0 blocking JSON
+        required: true
+      policy_approval:
+        description: Inventory, retention, owner-Mac archive and no-route approval JSON
+        required: true
+      prepared_candidate:
+        description: Promotion run_id, artifact_id, receipt_sha256, expected_worker_deployment JSON
+        required: false
+      owner_archive_proof:
+        description: Actual local archive/restore proof JSON; promotion only
+        required: false
+      previous_receipt:
+        description: Prior run_id, artifact_id, receipt_sha256 JSON; release preparation only
+        required: false
+permissions:
+  contents: read
+  actions: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  paired:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries'
+    environment: failover-sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: control
+    env:
+      PAIRED_WRITES_APPROVED: "yes"
+      PAIRED_PHASE: ${{ inputs.phase }}
+      PAIRED_MODE: ${{ inputs.mode }}
+      SOURCE_COMMIT: ${{ inputs.source_commit }}
+      APPROVED_RELEASE: ${{ inputs.approved_public_release }}
+      APPROVED_WORKFLOW_SHA: ${{ inputs.approved_workflow_sha }}
+      STORAGE_SNAPSHOT: ${{ inputs.storage_snapshot }}
+      POLICY_APPROVAL: ${{ inputs.policy_approval }}
+      PREPARED_CANDIDATE: ${{ inputs.prepared_candidate }}
+      PREVIOUS_RECEIPT: ${{ inputs.previous_receipt }}
+      OWNER_ARCHIVE_PROOF: ${{ inputs.owner_archive_proof }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Set trusted local working paths after runner allocation
+        run: node infrastructure/failover/paired-ci.mjs paths "$RUNNER_TEMP/jji-paired"
+      - name: Parse bounded non-secret artifact identities
+        run: node infrastructure/failover/paired-ci.mjs inputs "$PAIRED_ROOT"
+      - name: Guard trusted main, reviewed environment and independently paused publisher
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/failover/paired-ci.mjs guard "$PAIRED_ROOT"
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        if: inputs.phase == 'prepare'
+        with:
+          ref: ${{ inputs.source_commit }}
+          path: production
+          persist-credentials: false
+      - name: Validate exact source and allowlisted public build
+        if: inputs.phase == 'prepare'
+        working-directory: production
+        run: |
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run check:html
+          npm run check:links
+          npm run check:public-content
+          npm run check:capability
+      - name: Install pinned toolchain without lifecycle scripts
+        if: inputs.phase == 'prepare'
+        run: npm ci --prefix infrastructure/failover/toolchain --ignore-scripts --no-audit --no-fund
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: inputs.phase == 'prepare' && inputs.mode == 'release'
+        with:
+          artifact-ids: ${{ env.PREVIOUS_ARTIFACT_ID }}
+          merge-multiple: true
+          run-id: ${{ env.PREVIOUS_RUN_ID }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/previous-receipt
+      - name: Prepare one immutable backup and fully verified candidate receipt
+        if: inputs.phase == 'prepare'
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+          CLOUDFLARE_PAGES_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}
+          CLOUDFLARE_WORKER_TOKEN: ${{ secrets.CLOUDFLARE_WORKER_TOKEN }}
+        run: node infrastructure/failover/paired-ci.mjs prepare "$PAIRED_ROOT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: inputs.phase == 'prepare'
+        id: candidate
+        with:
+          name: paired-candidate-${{ github.run_id }}
+          path: ${{ runner.temp }}/jji-paired/candidate/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: inputs.phase == 'promote'
+        with:
+          artifact-ids: ${{ env.CANDIDATE_ARTIFACT_ID }}
+          merge-multiple: true
+          run-id: ${{ env.CANDIDATE_RUN_ID }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/incoming-candidate
+      - name: Start bounded coordinator from prepared backup and owner archive proof
+        if: inputs.phase == 'promote'
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+          CLOUDFLARE_WORKER_TOKEN: ${{ secrets.CLOUDFLARE_WORKER_TOKEN }}
+        run: |
+          node infrastructure/failover/paired-ci.mjs promote "$PAIRED_ROOT" > "$RUNNER_TEMP/paired-publisher.log" 2>&1 &
+          echo "PAIRED_PID=$!" >> "$GITHUB_ENV"
+      - name: Wait for verified stage artifact request
+        if: inputs.phase == 'promote'
+        env:
+          ARTIFACT_PHASE: stage
+        run: node infrastructure/failover/paired-ci.mjs wait "$PAIRED_ROOT"
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        if: inputs.phase == 'promote'
+        id: stage
+        with:
+          name: paired-stage
+          path: ${{ runner.temp }}/jji-paired/package/stage
+          retention-days: 1
+      - name: Hand stage artifact to Pages/OIDC adapter
+        if: inputs.phase == 'promote'
+        env:
+          ARTIFACT_PHASE: stage
+          ARTIFACT_ID: ${{ steps.stage.outputs.artifact_id }}
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/failover/paired-ci.mjs action-reply "$PAIRED_ROOT"
+      - name: Wait for verified stage, backup and recovery record
+        if: inputs.phase == 'promote'
+        env:
+          ARTIFACT_PHASE: recovery
+        run: node infrastructure/failover/paired-ci.mjs wait "$PAIRED_ROOT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: inputs.phase == 'promote'
+        id: recovery
+        with:
+          name: paired-release-receipt
+          path: ${{ runner.temp }}/jji-paired/record/
+          retention-days: 7
+          compression-level: 0
+          if-no-files-found: error
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: inputs.phase == 'promote'
+        with:
+          artifact-ids: ${{ steps.recovery.outputs.artifact-id }}
+          path: ${{ runner.temp }}/jji-paired/readback
+          merge-multiple: true
+      - name: Hand recovery artifact back after actual official download
+        if: inputs.phase == 'promote'
+        env:
+          ARTIFACT_PHASE: recovery
+          ARTIFACT_ID: ${{ steps.recovery.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.recovery.outputs.artifact-digest }}
+        run: node infrastructure/failover/paired-ci.mjs reply "$PAIRED_ROOT"
+      - name: Wait for durable recovery and pointer before final HTML
+        if: inputs.phase == 'promote'
+        env:
+          ARTIFACT_PHASE: final
+        run: node infrastructure/failover/paired-ci.mjs wait "$PAIRED_ROOT"
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        if: inputs.phase == 'promote'
+        id: final
+        with:
+          name: paired-final
+          path: ${{ runner.temp }}/jji-paired/package/public
+          retention-days: 1
+      - name: Hand final artifact to Pages adapter and verify both hosts
+        if: inputs.phase == 'promote'
+        env:
+          ARTIFACT_PHASE: final
+          ARTIFACT_ID: ${{ steps.final.outputs.artifact_id }}
+          GH_READ_TOKEN: ${{ github.token }}
+        run: |
+          node infrastructure/failover/paired-ci.mjs action-reply "$PAIRED_ROOT"
+          node infrastructure/failover/paired-ci.mjs status "$PAIRED_ROOT"
+      - name: Stop local coordinator after job completion or failure
+        if: always() && inputs.phase == 'promote'
+        run: |
+          if [[ "${PAIRED_PID:-}" =~ ^[0-9]+$ ]]; then
+            kill "$PAIRED_PID" 2>/dev/null || true
+          fi
+      - name: Preserve sanitized phase journal in the run summary without another artifact upload
+        if: always()
+        run: node infrastructure/failover/paired-ci.mjs summary "$PAIRED_ROOT"
+
+# No automatic pruning or retry. A failed/uncertain write is inspected read-only.
+# No production publisher, environment, token, Worker route or setting is edited.
