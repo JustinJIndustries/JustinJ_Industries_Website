@@ -550,8 +550,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const optionValues = Array.from(inquiryTypeField.options).map(
       (opt) => opt.value,
     );
-    if (optionValues.includes(value)) {
-      inquiryTypeField.value = value;
+    const currentValue =
+      value === "WordPress support" ? "WordPress / Craft CMS support" : value;
+    if (optionValues.includes(currentValue)) {
+      inquiryTypeField.value = currentValue;
       resetFieldError(inquiryTypeField);
     }
   };

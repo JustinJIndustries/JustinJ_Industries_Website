@@ -3,6 +3,7 @@
   max-width: 100%;
 }
 .sf-video-frame {
+  aspect-ratio: 16 / 9;
   position: relative;
   background: #171916;
   max-width: 100%;

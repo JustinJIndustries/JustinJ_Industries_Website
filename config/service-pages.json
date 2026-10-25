@@ -46,7 +46,7 @@
     "title": "WordPress & Craft CMS Support",
     "description": "WordPress and Craft CMS implementation support, content-template improvements, maintenance review, QA, and practical editor documentation from JustinJ Industries.",
     "intro": "Keep the publishing workflow practical for the people who use it. JustinJ Industries supports WordPress and Craft CMS work with attention to templates, content structure, testing, and clear handoff notes.",
-    "inquiry": "WordPress support",
+    "inquiry": "WordPress / Craft CMS support",
     "fit": "For an existing CMS site that needs a defined improvement, a clearer editing workflow, or a reviewed maintenance and support plan.",
     "deliverables": [
       "A review of the relevant templates, content model, editor workflow, and dependencies.",
@@ -59,7 +59,7 @@
       "Agree on a bounded change and a safe review environment before implementation.",
       "Test the change, review it with the owner, and document deployment and ongoing responsibilities."
     ],
-    "prepare": "Share the public URL, CMS, hosting arrangement, and a description of the workflow or issue. For Craft inquiries, select WordPress support in the form and identify Craft in your message. Do not send credentials through the contact form.",
+    "prepare": "Share the public URL, CMS, hosting arrangement, and a description of the workflow or issue. Do not send credentials through the contact form.",
     "boundary": "Plugin or module licenses, hosting, emergency response, migrations, and ongoing maintenance require an agreed scope. No uptime, security certification, or unsupported platform compatibility is implied."
   },
   {

@@ -87,3 +87,21 @@ The approved local revision keeps exact artifact/provenance/backup/archive check
 ## Local coordinator diagnostics — October 24, 2026
 
 The failed paired promotion is cancelled with the original publisher active and paired disabled. A narrow local correction now preserves fixed startup/stage and early-failure diagnostics before asynchronous prerequisites. Actual CLI replay with the verified archive bytes reaches the baseline request, including survival after the starter shell exits. The historical GitHub runner cause remains unproven because its redirected coordinator output was not retained; this is not authorization or evidence for another promotion. All integrity, freshness, archive and security gates remain unchanged. See [diagnosis, tests, limitations and required next evidence](failover/coordinator-diagnostics-20261024.md). No production or public-content changes occurred.
+
+## Analytics example paragraph width — local review only, October 24
+
+Expanded only the explanatory paragraph immediately below the analytics instrumentation illustration to the established content margins. The introduction paragraph, illustration, all copy, mobile gutters, other service layouts and existing disclosures are unchanged. This separate local patch starts from production control580796c and excludes the pending commissioning-status release, held CMS illustration and manual failover control work. No publication or artifact deletion is authorized.
+
+## October 25, 2026 — full public copy review, local only
+
+All 53 unique JJI/demo HTML documents (79 artifact paths) were source-reviewed, with 131 live canonical/file URL checks and separate embedded-report, raster/vector/video text evidence. Narrow local fixes remove internal review/template notes, clarify inactive demo contact behavior, improve exact image descriptions, correct a validation choice and stale capability links, and preserve attribution. The analytics explanatory paragraph matches the enclosing content margins. The older commissioning-copy package remains held for grammar corrections and review; no publication or infrastructure change occurred. Full coverage records and remaining policy/CMS/chart decisions are in the task’s external docs/full-copy-review-20261024 evidence directory.
+
+## October 24 commissioning-status wording — approved copy-only release
+
+The owner authorized removing unsolicited commissioning/client-status qualifications from the JJI site and portfolio examples. This isolated change uses neutral illustrative wording, preserves image credits, sample-data context, inactive-form notices, accessibility/privacy language and government-past-performance boundaries, and updates the matching capability PDF. Shared Services source and generated design/detail pages keep the wording consistent. No new client commissions, endorsements or results are claimed.
+
+The held CMS detail hero and its CSS remain excluded, along with all other design work, tracking/privacy changes, failover control code, credentials and infrastructure settings. Publication requires the established paired archive/provenance/fresh M1 verification process and a supported manual Worker pointer handoff; no new Worker credential is authorized.
+
+## October 25 local nested HTML remediation
+
+Owner-approved local corrections resolve all 43 documented nested HTML validation errors. All 53 source documents and 79 built HTML documents now validate with zero errors and warnings. Native Safari checks cover named project groups, ARC media controls and responsive layout, STILL FORM disabled demo controls, and Northside native Enter/repeated reset without network submission. Prior copy/width/chart/CMS-inquiry corrections are preserved. Held CMS artwork, dependency updates, privacy configuration and infrastructure changes remain excluded. No production publication or accessibility conformance claim. Detailed evidence is retained outside the public artifact under the task's docs/html-remediation-review-20261025 directory.

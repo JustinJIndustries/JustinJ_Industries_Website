@@ -11,7 +11,7 @@
       const video = figure.querySelector("video");
       video?.addEventListener("error", () =>
         message(
-          "This video cannot be played. Open the source below, or check its format and permissions.",
+          "This video cannot be played. Open the video file below, or read the visual description.",
         ),
       );
       video

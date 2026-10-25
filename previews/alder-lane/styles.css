@@ -1,6 +1,6 @@
 @import url("/assets/arrow-links.css");
 
-/* Original starter styles. Brand colors are injected by build.py from config JSON. */
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--paper); color: var(--ink); font-family: Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.6; }

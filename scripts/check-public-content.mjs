@@ -4,6 +4,9 @@ import { fileURLToPath } from "node:url";
 const artifactRoot = fileURLToPath(new URL("../dist/", import.meta.url));
 const root = artifactRoot;
 const forbidden = [
+  /\bLoading\s+or\s+opening\s+the\s+report\s+connects\s+to\s+Google\b/i,
+  /\b(?:local|internal)\s+icon[-\s]+alignment\s+preview\b/i,
+  /\b(?:source demo saves enquiries|source WordPress form stores a submission|Fields marked \* are required in the source demonstration)\b/i,
   /\b(?:codex|chatgpt)\b/i,
   /\b(?:TODO|FIXME|XXX)\b/,
   /\b(?:local review|review draft|owner review|owner-review|audit notes?|internal notes?|fresh test visit|before publication|before publishing|under review)\b/i,

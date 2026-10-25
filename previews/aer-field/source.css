@@ -19,7 +19,7 @@
 @media(prefers-reduced-motion:reduce){.services-video,.services-utility .media-toggle{display:none!important}}
 @media(max-width:700px){body.admin-bar.home .site-header{top:46px}}
 
-/* Give the masthead room beneath WordPress chrome while keeping the film full bleed. */
+
 .site-header{gap:28px;padding:clamp(34px,3.1vw,46px) var(--gutter) clamp(31px,2.8vw,42px);background:linear-gradient(180deg,rgba(8,15,14,.58),rgba(8,15,14,.18) 76%,transparent)}
 body.admin-bar.home .site-header{top:32px}
 body:not(.home) .site-header{background:var(--ink)}

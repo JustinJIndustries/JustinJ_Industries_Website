@@ -123,7 +123,6 @@
       status.focus();
       return true;
     };
-    button.addEventListener("click", validate);
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       validate();

@@ -54,7 +54,7 @@ const publicFiles = Object.freeze([
   "assets/logos/wordpress-wmark-gray.png",
   "assets/logos/wordpress-wmark-white.png",
   "assets/catalogue/harbor-home.png",
-  "assets/catalogue/alder-home.webp",
+  "assets/catalogue/alder-home.jpg",
   "assets/catalogue/still-arches.jpg",
   "assets/catalogue/aer-hero.jpg",
   "assets/catalogue/aer-golf.jpg",
