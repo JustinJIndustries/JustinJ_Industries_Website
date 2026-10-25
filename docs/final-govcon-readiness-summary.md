@@ -109,3 +109,7 @@ Owner-approved local corrections resolve all 43 documented nested HTML validatio
 ## Reviewed manual Worker handoff control
 
 The previously tested manual dashboard checkpoint implementation from fe374e0dd02e36c48cecf312816b94cd05ed4b15 is reconciled without behavioral changes for the current approved content source f06b614d253d3c810c4067c3e80d2ed1eec718e5. It retains fresh nonce-bound Worker version/configuration readback, owner archive and public verification gates, existing settings/routes and the no-new-Worker-token design. Runtime execution remains subject to unchanged storage, credential validity and protected release checks. No additional cleanup or security changes are authorized.
+
+## Bounded Pages queued-status correction
+
+Recognize GitHub Pages deployment_queued as a pending state within the existing polling bound; require explicit succeed and continue rejecting failure or unknown states. The approved correction passes all 211 failover tests, including queued progression, timeout and terminal/unknown refusal. No freshness, integrity, security, credential or storage limits change.

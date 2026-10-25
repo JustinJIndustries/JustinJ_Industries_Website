@@ -460,9 +460,13 @@ export function createProviderAdapters({
         const r = await gh(`/repos/${REPO}/pages/deployments/${id}`);
         if (r.status === "succeed") return { id };
         if (
-          !["deployment_in_progress", "queued", "pending", "waiting"].includes(
-            r.status,
-          )
+          ![
+            "deployment_queued",
+            "deployment_in_progress",
+            "queued",
+            "pending",
+            "waiting",
+          ].includes(r.status)
         )
           throw new Error("GitHub deployment did not succeed");
         if (i + 1 < polls) await delay(5000);

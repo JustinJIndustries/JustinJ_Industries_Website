@@ -344,6 +344,29 @@ test("GitHub only deploys main artifact with exact digest; bounded status failur
   await assert.rejects(i.client.waitGithub(sha, 1), /did not succeed/);
 });
 
+test("GitHub queued deployments remain bounded and require explicit success", async (t) => {
+  const queued = await fixture(t, [
+    { status: "deployment_queued" },
+    { status: "deployment_in_progress" },
+    { status: "succeed" },
+  ]);
+  await queued.client.waitGithub(sha, 3);
+  assert.equal(queued.calls.length, 3);
+  assert.ok(queued.calls.every((c) => c.method === "GET"));
+  const exhausted = await fixture(t, [{ status: "deployment_queued" }]);
+  await assert.rejects(exhausted.client.waitGithub(sha, 1), /still pending/);
+  for (const status of [
+    "deployment_failed",
+    "deployment_cancelled",
+    "unknown_status",
+    "unexpected",
+  ]) {
+    const failed = await fixture(t, [{ status }]);
+    await assert.rejects(failed.client.waitGithub(sha, 3), /did not succeed/);
+    assert.equal(failed.calls.length, 1);
+  }
+});
+
 test("provider failure is sanitized, uncertain write is never automatically repeated", async (t) => {
   const f = await fixture(t, [
     result({ bindings: [], observability: { enabled: false } }),
