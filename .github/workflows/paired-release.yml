@@ -124,7 +124,6 @@ jobs:
         env:
           GH_READ_TOKEN: ${{ github.token }}
           CLOUDFLARE_PAGES_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}
-          CLOUDFLARE_WORKER_TOKEN: ${{ secrets.CLOUDFLARE_WORKER_TOKEN }}
         run: |
           node infrastructure/failover/paired-ci.mjs prepare "$PAIRED_ROOT" > "$RUNNER_TEMP/paired-publisher.log" 2>&1 &
           echo "PAIRED_PID=$!" >> "$GITHUB_ENV"
@@ -132,7 +131,6 @@ jobs:
         if: inputs.phase == 'promote'
         env:
           GH_READ_TOKEN: ${{ github.token }}
-          CLOUDFLARE_WORKER_TOKEN: ${{ secrets.CLOUDFLARE_WORKER_TOKEN }}
         run: |
           node infrastructure/failover/paired-ci.mjs promote "$PAIRED_ROOT" > "$RUNNER_TEMP/paired-publisher.log" 2>&1 &
           echo "PAIRED_PID=$!" >> "$GITHUB_ENV"
@@ -162,6 +160,38 @@ jobs:
       - name: Hand fresh authenticated baseline evidence to coordinator
         env:
           PUBLIC_PHASE: baseline
+        run: node infrastructure/failover/paired-ci.mjs proof-reply "$PAIRED_ROOT"
+      - name: Wait for exact dashboard baseline checkpoint
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        env:
+          ARTIFACT_PHASE: public-workerbaseline
+        run: node infrastructure/failover/paired-ci.mjs wait "$PAIRED_ROOT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        with:
+          name: paired-checkpoint-${{ github.run_id }}-workerbaseline
+          path: ${{ runner.temp }}/jji-paired/checkpoints/workerbaseline/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Await protected dashboard baseline readback
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        env:
+          PUBLIC_PHASE: workerbaseline
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/failover/paired-ci.mjs wait-proof "$PAIRED_ROOT"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        with:
+          artifact-ids: ${{ env.PUBLIC_PROOF_ARTIFACT_ID }}
+          run-id: ${{ env.PUBLIC_PROOF_RUN_ID }}
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/jji-paired/proofs/workerbaseline
+      - name: Hand authenticated dashboard baseline readback to coordinator
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        env:
+          PUBLIC_PHASE: workerbaseline
         run: node infrastructure/failover/paired-ci.mjs proof-reply "$PAIRED_ROOT"
       - name: Verify backup preparation outcome
         if: inputs.phase == 'prepare'
@@ -252,6 +282,38 @@ jobs:
           ARTIFACT_ID: ${{ steps.recovery.outputs.artifact-id }}
           ARTIFACT_DIGEST: ${{ steps.recovery.outputs.artifact-digest }}
         run: node infrastructure/failover/paired-ci.mjs reply "$PAIRED_ROOT"
+      - name: Wait for exact dashboard promotion checkpoint
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        env:
+          ARTIFACT_PHASE: public-workerpromote
+        run: node infrastructure/failover/paired-ci.mjs wait "$PAIRED_ROOT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        with:
+          name: paired-checkpoint-${{ github.run_id }}-workerpromote
+          path: ${{ runner.temp }}/jji-paired/checkpoints/workerpromote/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Await protected dashboard promotion readback
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        env:
+          PUBLIC_PHASE: workerpromote
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/failover/paired-ci.mjs wait-proof "$PAIRED_ROOT"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        with:
+          artifact-ids: ${{ env.PUBLIC_PROOF_ARTIFACT_ID }}
+          run-id: ${{ env.PUBLIC_PROOF_RUN_ID }}
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/jji-paired/proofs/workerpromote
+      - name: Hand authenticated dashboard promotion readback to coordinator
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        env:
+          PUBLIC_PHASE: workerpromote
+        run: node infrastructure/failover/paired-ci.mjs proof-reply "$PAIRED_ROOT"
       - name: Wait for durable recovery and pointer before final HTML
         if: inputs.phase == 'promote'
         env:
@@ -303,6 +365,38 @@ jobs:
         if: inputs.phase == 'promote'
         env:
           PUBLIC_PHASE: final
+        run: node infrastructure/failover/paired-ci.mjs proof-reply "$PAIRED_ROOT"
+      - name: Wait for exact dashboard final checkpoint
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        env:
+          ARTIFACT_PHASE: public-workerfinal
+        run: node infrastructure/failover/paired-ci.mjs wait "$PAIRED_ROOT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        with:
+          name: paired-checkpoint-${{ github.run_id }}-workerfinal
+          path: ${{ runner.temp }}/jji-paired/checkpoints/workerfinal/
+          retention-days: 1
+          compression-level: 0
+          if-no-files-found: error
+      - name: Await protected dashboard final readback
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        env:
+          PUBLIC_PHASE: workerfinal
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/failover/paired-ci.mjs wait-proof "$PAIRED_ROOT"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        with:
+          artifact-ids: ${{ env.PUBLIC_PROOF_ARTIFACT_ID }}
+          run-id: ${{ env.PUBLIC_PROOF_RUN_ID }}
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/jji-paired/proofs/workerfinal
+      - name: Hand authenticated dashboard final readback to coordinator
+        if: inputs.phase == 'promote' && inputs.mode == 'release'
+        env:
+          PUBLIC_PHASE: workerfinal
         run: node infrastructure/failover/paired-ci.mjs proof-reply "$PAIRED_ROOT"
       - name: Verify final paired outcome after M1 public checkpoint
         if: inputs.phase == 'promote'

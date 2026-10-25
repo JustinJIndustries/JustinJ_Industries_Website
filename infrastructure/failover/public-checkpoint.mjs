@@ -1,3 +1,8 @@
+import {
+  WORKER_PHASES,
+  validateWorkerRequest,
+  validateWorkerProof,
+} from "./manual-worker-checkpoint.mjs";
 // Owner-attested M1 evidence, authenticated through a protected GitHub workflow.
 // This is not hardware remote attestation. A bare success flag is never accepted.
 import { createHash, randomUUID } from "node:crypto";
@@ -36,7 +41,7 @@ const MACHINE = {
   arch: "arm64",
   hostname: "M1-Max-MacBook-Pro",
 };
-const phases = new Set(["baseline", "stage", "final"]);
+const phases = new Set(["baseline", "stage", "final", ...WORKER_PHASES]);
 function exactKeys(value, keys) {
   return (
     value &&
@@ -63,6 +68,8 @@ export function proofName(r) {
   return `paired-public-proof-${r.parentRunId}-${r.phase}-${r.nonce}`;
 }
 export function validateRequest(r, { now = Date.now(), fresh = true } = {}) {
+  if (r?.schema === "jji-manual-worker-request-1")
+    return validateWorkerRequest(r, { now, fresh });
   if (
     !exactKeys(r, [
       "schema",
@@ -172,6 +179,8 @@ export function validateProof(
   requestDigest,
   { now = Date.now(), requestArtifact } = {},
 ) {
+  if (r?.schema === "jji-manual-worker-request-1")
+    return validateWorkerProof(p, r, requestDigest, { now, requestArtifact });
   validateRequest(r, { now });
   if (
     !exactKeys(p, [
@@ -400,6 +409,32 @@ export function assertCheckpointArtifactBudget(artifacts) {
     retained: kept.length,
     reservedNextBytes: Math.ceil(CHECKPOINT.requestBytes * 1.2),
   };
+}
+// Reserve the entire remaining protocol before any provider write. No pruning.
+export function assertCheckpointReleaseBudget(artifacts, { phase, mode }) {
+  const current = assertCheckpointArtifactBudget(artifacts);
+  const required =
+    mode === "release"
+      ? phase === "prepare"
+        ? 14
+        : phase === "promote"
+          ? 12
+          : NaN
+      : mode === "bootstrap"
+        ? phase === "prepare"
+          ? 8
+          : phase === "promote"
+            ? 6
+            : NaN
+        : NaN;
+  if (
+    !Number.isSafeInteger(required) ||
+    current.retained + required > CHECKPOINT.maxArtifacts
+  )
+    throw new Error(
+      "Entire paired release exceeds checkpoint retention cap; no writes or pruning",
+    );
+  return { ...current, required, cap: CHECKPOINT.maxArtifacts };
 }
 export async function createM1Gate({
   root,

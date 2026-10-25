@@ -105,3 +105,7 @@ The held CMS detail hero and its CSS remain excluded, along with all other desig
 ## October 25 local nested HTML remediation
 
 Owner-approved local corrections resolve all 43 documented nested HTML validation errors. All 53 source documents and 79 built HTML documents now validate with zero errors and warnings. Native Safari checks cover named project groups, ARC media controls and responsive layout, STILL FORM disabled demo controls, and Northside native Enter/repeated reset without network submission. Prior copy/width/chart/CMS-inquiry corrections are preserved. Held CMS artwork, dependency updates, privacy configuration and infrastructure changes remain excluded. No production publication or accessibility conformance claim. Detailed evidence is retained outside the public artifact under the task's docs/html-remediation-review-20261025 directory.
+
+## Reviewed manual Worker handoff control
+
+The previously tested manual dashboard checkpoint implementation from fe374e0dd02e36c48cecf312816b94cd05ed4b15 is reconciled without behavioral changes for the current approved content source f06b614d253d3c810c4067c3e80d2ed1eec718e5. It retains fresh nonce-bound Worker version/configuration readback, owner archive and public verification gates, existing settings/routes and the no-new-Worker-token design. Runtime execution remains subject to unchanged storage, credential validity and protected release checks. No additional cleanup or security changes are authorized.

@@ -1,3 +1,10 @@
+import {
+  assertLocalControlClean,
+  captureWorkerState,
+  makeWorkerProof,
+} from "./owner-worker-readback.mjs";
+import { WORKER_PHASES } from "./manual-worker-checkpoint.mjs";
+import { verifyPackage } from "./prepare-release.mjs";
 // Owner-operated M1 checkpoint. Uses existing gh authentication, never reads keys.
 // Creates proof only after every actual public HTTPS response passes verification.
 import { execFileSync } from "node:child_process";
@@ -36,7 +43,8 @@ const read = async (endpoint) => {
   return JSON.parse(gh(["api", endpoint]));
 };
 try {
-  const [runId, phase, packageRoot, destination] = process.argv.slice(2);
+  const [runId, phase, packageRoot, destination, operation] =
+    process.argv.slice(2);
   if (
     os.platform() !== "darwin" ||
     os.arch() !== "arm64" ||
@@ -51,15 +59,7 @@ try {
   const user = JSON.parse(gh(["api", "user"]));
   if (user.login !== OWNER || user.id !== OWNER_ID)
     throw new Error("Existing owner GitHub identity required");
-  const control = execFileSync("git", ["rev-parse", "HEAD"], {
-    cwd: here,
-    encoding: "utf8",
-  }).trim();
-  execFileSync(
-    "git",
-    ["diff", "--quiet", "HEAD", "--", "infrastructure/failover"],
-    { cwd: here },
-  );
+  const control = assertLocalControlClean(here);
   if ((await read(`/repos/${REPO}/commits/main`)).sha !== control)
     throw new Error("M1 control checkout is not reviewed current main");
   assertRun(await read(`/repos/${REPO}/actions/runs/${runId}`), {
@@ -108,12 +108,87 @@ try {
     Date.parse(artifact.created_at) < request.issuedAt - CHECKPOINT.skewMs
   )
     throw new Error("M1 request identity mismatch");
-  const proof = await verifyOnM1({
-    requestBytes,
-    packageRoot,
-    requestArtifact: artifact,
-  });
-  await mkdir(destination); // Never overwrite/reuse an earlier checkpoint.
+  let proof;
+  const worker = WORKER_PHASES.includes(phase);
+  if (worker) {
+    if ((await verifyPackage(packageRoot)).release !== request.release)
+      throw new Error("Worker checkpoint package mismatch");
+    const capture = () => captureWorkerState({ request });
+    if (phase === "workerpromote") {
+      if (operation === "begin") {
+        const startedAt = Date.now(),
+          before = await capture();
+        if (
+          before.deployment !== request.expectedDeployment ||
+          (request.expectedVersion !== null &&
+            before.version !== request.expectedVersion) ||
+          JSON.stringify(before.config) !== JSON.stringify(request.beforeConfig)
+        )
+          throw new Error("Dashboard predecessor changed; no update permitted");
+        await mkdir(destination);
+        await writeFile(
+          path.join(destination, "before.json"),
+          JSON.stringify({
+            requestSha256: hash(requestBytes),
+            startedAt,
+            before,
+          }) + "\n",
+          { flag: "wx", mode: 0o600 },
+        );
+        console.log(
+          JSON.stringify({
+            phase,
+            runId,
+            requestSha256: hash(requestBytes),
+            beforeVersion: before.version,
+            expiresAt: request.expiresAt,
+            next: "Perform the exact reviewed dashboard pointer update, then finish this same request; do not restart or reuse stale evidence.",
+          }),
+        );
+        process.exit(0);
+      }
+      if (operation !== "finish")
+        throw new Error(
+          "Manual promotion requires begin, exact dashboard update, then finish",
+        );
+      const file = path.join(destination, "before.json");
+      if ((await lstat(file)).isSymbolicLink())
+        throw new Error("Worker predecessor proof symlink");
+      const saved = JSON.parse(await readFile(file));
+      if (saved.requestSha256 !== hash(requestBytes))
+        throw new Error("Worker predecessor request mismatch");
+      const after = await capture();
+      proof = makeWorkerProof({
+        requestBytes,
+        requestArtifact: artifact,
+        before: saved.before,
+        after,
+        startedAt: saved.startedAt,
+      });
+    } else {
+      if (operation)
+        throw new Error("Read-only Worker phase takes no operation");
+      const startedAt = Date.now(),
+        before = await capture(),
+        after = await capture();
+      proof = makeWorkerProof({
+        requestBytes,
+        requestArtifact: artifact,
+        before,
+        after,
+        startedAt,
+      });
+      await mkdir(destination);
+    }
+  } else {
+    if (operation) throw new Error("Unexpected public-check operation");
+    proof = await verifyOnM1({
+      requestBytes,
+      packageRoot,
+      requestArtifact: artifact,
+    });
+    await mkdir(destination);
+  }
   await writeFile(path.join(destination, "request.json"), requestBytes, {
     flag: "wx",
     mode: 0o600,
@@ -144,6 +219,7 @@ try {
       requestArtifactId: artifact.id,
       requestSha256: hash(requestBytes),
       verifiedFiles: proof.fileCount,
+      verifiedWorkerVersion: proof.after?.version,
       completedAt: proof.completedAt,
       proofSha256: hash(JSON.stringify(proof)),
       authentication: "Awaiting separate protected owner proof-workflow review",

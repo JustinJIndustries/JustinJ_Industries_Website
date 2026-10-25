@@ -1,3 +1,8 @@
+import {
+  createWorkerDashboardGate,
+  manualWorkerProvider,
+  inspectDashboardReleaseCurrent,
+} from "./manual-worker-checkpoint.mjs";
 // Inactive workflow's concrete runner. Importing this module performs no I/O.
 // External writes require the exact protected manual context and explicit policy.
 import { mkdir, readFile, writeFile, readdir, lstat } from "node:fs/promises";
@@ -40,6 +45,7 @@ import { assertPublishedSourceRun } from "./public-parity.mjs";
 import {
   createM1Gate,
   assertCheckpointArtifactBudget,
+  assertCheckpointReleaseBudget,
 } from "./public-checkpoint.mjs";
 import {
   authenticateRecord,
@@ -522,6 +528,10 @@ async function main(command, root, env = process.env, diagnostics) {
   };
   const refreshStorage = () => refreshBudget(env, read, context);
   if (command === "guard") {
+    assertCheckpointReleaseBudget(await listArtifacts(read), {
+      phase: env.PAIRED_PHASE,
+      mode: env.PAIRED_MODE,
+    });
     await refreshStorage();
     return;
   }
@@ -529,12 +539,13 @@ async function main(command, root, env = process.env, diagnostics) {
   const storage = await refreshStorage();
   await diagnostics?.stage("provider");
   const journal = new WriteJournal(path.join(root, "journal.json"));
-  const provider = createProviderAdapters({
+  let provider = createProviderAdapters({
     account: ACCOUNT,
     worker:
       env.PAIRED_MODE === "bootstrap" ? "jji-failover-test" : "jji-failover",
     pagesToken: env.CLOUDFLARE_PAGES_TOKEN,
-    workerToken: env.CLOUDFLARE_WORKER_TOKEN,
+    // Live releases use the protected dashboard handoff, never a Worker token.
+    workerToken: undefined,
     githubToken: env.GH_READ_TOKEN,
     context,
     storage,
@@ -722,7 +733,33 @@ async function main(command, root, env = process.env, diagnostics) {
   );
   let pointer;
   if (candidate.mode !== "bootstrap") {
-    pointer = await provider.currentWorkerDeployment();
+    const workerGate = await createWorkerDashboardGate({
+      root,
+      context: { ...context, sourceCommit: env.SOURCE_COMMIT },
+      metadata: r.metadata,
+      sourceSha256: hash(await readFile(path.join(here, "worker.mjs"))),
+      bridge,
+      beforeWrite: async () => {
+        const budget = await refreshStorage();
+        assertCheckpointArtifactBudget(await listArtifacts(read));
+        return budget;
+      },
+      authenticateProof: (args) => authenticateRecord({ ...args, read }),
+    });
+    const baselineConfig = {
+      origin: r.ancestor.origin,
+      current: r.metadata.previousRelease,
+      retained: r.metadata.releases.slice(2),
+    };
+    provider = {
+      ...provider,
+      ...manualWorkerProvider({
+        gate: workerGate,
+        baselineConfig,
+        expectedDeployment: env.EXPECTED_WORKER_DEPLOYMENT,
+      }),
+    };
+    pointer = { id: env.EXPECTED_WORKER_DEPLOYMENT };
     if (pointer.id !== env.EXPECTED_WORKER_DEPLOYMENT)
       throw new Error("Worker changed since review");
   }
@@ -750,20 +787,20 @@ async function main(command, root, env = process.env, diagnostics) {
     provider,
     bridge,
     inspectCurrent: async () => {
+      if (candidate.mode !== "bootstrap")
+        return inspectDashboardReleaseCurrent({
+          verifyPrimary,
+          baseline,
+          metadata: meta,
+          provider,
+          expectedDeployment: pointer.id,
+        });
       await verifyPrimary(baseline, "baseline");
-      return candidate.mode === "bootstrap"
-        ? {
-            exclusivePublisher: true,
-            workerActive: false,
-            primaryFiles: meta.sourceFiles,
-          }
-        : {
-            exclusivePublisher: true,
-            primaryFiles: meta.previousFiles,
-            release: meta.previousRelease,
-            pointerCurrent: (await provider.currentWorkerConfiguration())
-              .current,
-          };
+      return {
+        exclusivePublisher: true,
+        workerActive: false,
+        primaryFiles: meta.sourceFiles,
+      };
     },
     verifyPrimary,
     verifyBackup: (origin, entries) => verifyOriginManifest(origin, entries),

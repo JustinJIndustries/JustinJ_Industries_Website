@@ -1,0 +1,28 @@
+{
+  "compatibility_date": "2026-10-24",
+  "compatibility_flags": [],
+  "logpush": false,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1,
+    "issues": {
+      "enabled": false
+    },
+    "logs": {
+      "enabled": false,
+      "head_sampling_rate": 1,
+      "invocation_logs": true,
+      "persist": true
+    },
+    "redact_query_string": false,
+    "traces": {
+      "enabled": false,
+      "head_sampling_rate": 1,
+      "persist": true
+    }
+  },
+  "placement": {},
+  "tags": [],
+  "tail_consumers": [],
+  "usage_model": "standard"
+}

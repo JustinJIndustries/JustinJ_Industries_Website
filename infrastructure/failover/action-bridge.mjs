@@ -11,6 +11,9 @@ const phases = new Set([
   "public-baseline",
   "public-stage",
   "public-final",
+  "public-workerbaseline",
+  "public-workerpromote",
+  "public-workerfinal",
 ]);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function json(file) {
