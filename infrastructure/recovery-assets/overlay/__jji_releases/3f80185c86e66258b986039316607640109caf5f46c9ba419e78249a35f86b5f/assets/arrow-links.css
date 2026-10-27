@@ -1,0 +1,21 @@
+/* Text links keep their decorative arrow outside the underline. */
+a.arrow-text-link {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: var(--arrow-link-gap, 0.35em);
+  max-width: 100%;
+  border-bottom: 0;
+  text-decoration: none;
+}
+a.arrow-text-link .arrow-text-link__label {
+  min-width: 0;
+  font-size: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+a.arrow-text-link .arrow-text-link__icon {
+  flex: none;
+  text-decoration: none;
+  white-space: nowrap;
+}

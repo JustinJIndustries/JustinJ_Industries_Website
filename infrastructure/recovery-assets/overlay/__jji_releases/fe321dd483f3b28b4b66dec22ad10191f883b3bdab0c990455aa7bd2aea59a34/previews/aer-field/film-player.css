@@ -1,0 +1,42 @@
+.short-film-loader {
+  margin: 18px var(--gutter) 32px;
+  color: var(--ink, #171c1d);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.short-film-loader[hidden],
+.short-film-loader [hidden] {
+  display: none;
+}
+.short-film-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.short-film-actions button {
+  border: 1px solid currentColor;
+  border-radius: 0;
+  padding: 12px 16px;
+  min-height: 44px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.short-film-actions button:hover,
+.short-film-actions button:focus-visible {
+  background: #171c1d;
+  color: #f5f3ed;
+}
+.short-film-actions button:focus-visible {
+  outline: 3px solid #395fc4;
+  outline-offset: 3px;
+}
+.short-film-actions button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+video[data-short-film] {
+  background: #171c1d;
+  color: #f5f3ed;
+}

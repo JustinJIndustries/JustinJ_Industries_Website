@@ -1,0 +1,236 @@
+/* Shared JJI footer. Independent of page layouts, including the print statement. */
+.jji-footer {
+  box-sizing: border-box;
+  margin: 0;
+  border-top: 1px solid #2a3d52;
+  background: #111821;
+  color: #e7e9ee;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: left;
+}
+.jji-footer *,
+.jji-footer *::before,
+.jji-footer *::after {
+  box-sizing: border-box;
+}
+.jji-footer__container {
+  width: min(1280px, calc(100% - 64px));
+  margin-inline: auto;
+}
+.jji-footer__main {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns:
+    minmax(230px, 1.4fr) minmax(130px, 0.8fr) minmax(170px, 1fr)
+    minmax(250px, 1.2fr);
+  gap: 40px;
+  padding-block: 64px 48px;
+}
+.jji-footer__identity {
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-height: 220px;
+}
+/* CSS decoration has no focus target or accessible image announcement. */
+.jji-footer__identity::before {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: min(100%, 220px);
+  height: 220px;
+  transform: translate(-50%, -50%);
+  background: url("/__jji_releases/8d48f9c73c091082c02919259979c473316c6d5aba01745fdc34248d5793c640/assets/logos/JJI-Logo-Only-white.png") center / contain
+    no-repeat;
+  opacity: 0.045;
+  pointer-events: none;
+  content: "";
+}
+.jji-footer__main > * {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+.jji-footer__identity p {
+  position: relative;
+  z-index: 1;
+  max-width: 26ch;
+  margin: 6px auto 0;
+  color: #b7c8d8;
+  font-size: 1rem;
+  text-align: center;
+}
+.jji-footer h2 {
+  margin: 6px 0 14px;
+  color: #e7e9ee;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: normal;
+}
+.jji-footer a {
+  border-bottom: 0;
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+}
+.jji-footer__nav ul {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.jji-footer__nav li {
+  margin: 0;
+  padding: 0;
+}
+.jji-footer__nav a,
+.jji-footer__contact address a,
+.jji-footer__policies a {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  min-height: 44px;
+  padding-block: 6px;
+  color: #9bd8ff;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+.jji-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.jji-footer a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.jji-footer__contact address {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  font-style: normal;
+}
+.jji-footer .jji-footer__cta {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 44px;
+  max-width: 100%;
+  width: fit-content;
+  margin-top: 18px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #62a8ff, #7cffe1);
+  color: #0a1018;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.jji-footer .jji-footer__cta:hover {
+  color: #0a1018;
+  text-decoration: none;
+}
+.jji-footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 32px;
+  padding-block: 20px 24px;
+  border-top: 1px solid #2a3d52;
+  font-size: 0.875rem;
+}
+.jji-footer__bottom p {
+  margin: 0;
+  color: #b7c8d8;
+}
+.jji-footer__policies {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 28px;
+}
+@media (max-width: 1050px) {
+  .jji-footer__main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 48px;
+  }
+}
+@media (max-width: 600px) {
+  .jji-footer__container {
+    width: calc(100% - 48px);
+  }
+  .jji-footer__main {
+    gap: 30px 24px;
+    padding-block: 40px 32px;
+  }
+  .jji-footer__identity,
+  .jji-footer__contact {
+    grid-column: 1 / -1;
+  }
+  .jji-footer__identity {
+    min-height: 112px;
+  }
+  .jji-footer__identity::before {
+    width: 112px;
+    height: 112px;
+  }
+  .jji-footer__identity p {
+    max-width: 30ch;
+  }
+  .jji-footer__bottom,
+  .jji-footer__policies {
+    align-items: flex-start;
+  }
+  .jji-footer__bottom {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+/* Keep the existing JJI light-theme button treatment on the standalone statement too. */
+.theme-light .jji-footer .jji-footer__cta {
+  color: #fff;
+  background: linear-gradient(135deg, #1d4ed8, #0e7490);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+}
+.theme-light .jji-footer .jji-footer__cta:hover {
+  color: #fff;
+  background: linear-gradient(135deg, #1e40af, #0f766e);
+}
+@media (prefers-color-scheme: light) {
+  :root:not(.theme-dark) .jji-footer .jji-footer__cta {
+    color: #fff;
+    background: linear-gradient(135deg, #1d4ed8, #0e7490);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.28);
+  }
+  :root:not(.theme-dark) .jji-footer .jji-footer__cta:hover {
+    color: #fff;
+    background: linear-gradient(135deg, #1e40af, #0f766e);
+  }
+}
+@media (forced-colors: active) {
+  .jji-footer__identity::before {
+    display: none;
+  }
+  .jji-footer a:focus-visible {
+    outline-color: Highlight;
+  }
+}
+@media print {
+  .jji-footer {
+    display: none;
+  }
+}

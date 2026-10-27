@@ -1,0 +1,130 @@
+.sf-project-video {
+  margin: clamp(44px, 6vw, 90px) 0;
+  max-width: 100%;
+}
+.sf-video-frame {
+  aspect-ratio: 16 / 9;
+  position: relative;
+  background: #171916;
+  max-width: 100%;
+  overflow: hidden;
+}
+.sf-video-frame video,
+.sf-video-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: 0;
+}
+.sf-video-frame [hidden],
+.sf-project-video [hidden] {
+  display: none !important;
+}
+.sf-video-consent {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #f1efe5;
+  text-align: center;
+  padding: 24px;
+}
+.sf-video-consent > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+}
+.sf-video-consent > div {
+  position: relative;
+  max-width: 34rem;
+}
+.sf-video-consent p {
+  margin: 0 0 16px;
+}
+.sf-video-consent button {
+  min-height: 44px;
+  padding: 12px 20px;
+  color: #191b18;
+  background: #e9e6d9;
+  border: 1px solid currentColor;
+  cursor: pointer;
+  font: inherit;
+}
+.sf-video-consent button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+.sf-video-privacy,
+.sf-video-fallback,
+.sf-video-status,
+.sf-project-video figcaption {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.sf-video-privacy {
+  margin-top: 16px !important;
+}
+.sf-project-video figcaption {
+  margin-top: 12px;
+}
+.sf-video-fallback a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-underline-offset: 4px;
+}
+.sf-video-status {
+  padding: 12px;
+  border: 1px solid currentColor;
+}
+.sf-video-transcript summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding-block: 10px;
+  font-size: 14px;
+}
+.sf-video-transcript p {
+  white-space: normal;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+#sf-video-admin-preview {
+  max-width: 720px;
+}
+#sf-video-admin-preview .sf-project-video {
+  margin: 24px 0;
+}
+.sf-media-control {
+  padding: 8px 0;
+}
+@media (max-width: 480px) {
+  .sf-video-consent {
+    padding: 14px;
+  }
+  .sf-video-privacy {
+    font-size: 11px;
+  }
+}
+
+.sf-motion-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 12px;
+  padding: 10px 18px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.sf-motion-toggle:focus-visible {
+  outline: 3px solid #2654de;
+  outline-offset: 4px;
+}

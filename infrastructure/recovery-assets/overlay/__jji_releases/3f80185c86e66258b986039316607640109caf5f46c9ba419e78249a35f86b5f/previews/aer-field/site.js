@@ -1,0 +1,266 @@
+(function () {
+  const playIcon = `<svg class="demo-icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m8 5 11 7-11 7Z"></path></svg>`;
+  const pauseIcon = `<svg class="demo-icon" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 5v14M16 5v14"></path></svg>`;
+  const menuButton = document.querySelector(".menu-toggle"),
+    menu = document.querySelector(".primary-nav");
+  if (menuButton && menu) {
+    const label = menuButton.querySelector(".menu-button-label");
+    function setMenu(open) {
+      menu.classList.toggle("is-open", open);
+      menuButton.setAttribute("aria-expanded", String(open));
+      if (label)
+        label.textContent = open
+          ? menuButton.dataset.closeLabel
+          : menuButton.dataset.openLabel;
+    }
+    menuButton.addEventListener("click", () => {
+      const open = !menu.classList.contains("is-open");
+      setMenu(open);
+      if (open) menu.querySelector("a")?.focus();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.classList.contains("is-open")) {
+        setMenu(false);
+        menuButton.focus();
+      }
+    });
+    document.addEventListener("click", (e) => {
+      if (
+        menu.classList.contains("is-open") &&
+        !menu.contains(e.target) &&
+        !menuButton.contains(e.target)
+      )
+        setMenu(false);
+    });
+  }
+  const motion = window.matchMedia("(prefers-reduced-motion: reduce)"),
+    data = window.matchMedia("(prefers-reduced-data: reduce)"),
+    mobile = window.matchMedia("(max-width: 700px)");
+  const hero = document.querySelector(".hero-video"),
+    toggle = document.querySelector("[data-video-toggle]");
+  let userPaused = false;
+  function syncButton() {
+    if (!toggle || !hero) return;
+    let paused = hero.paused || !hero.classList.contains("is-playing");
+    toggle.setAttribute(
+      "aria-label",
+      paused ? toggle.dataset.playLabel : toggle.dataset.pauseLabel,
+    );
+    toggle.querySelector("span").innerHTML = paused ? playIcon : pauseIcon;
+  }
+  function heroSource() {
+    return mobile.matches
+      ? hero.dataset.mobileSrc || hero.dataset.src
+      : hero.dataset.src;
+  }
+  async function playHero(manual = false) {
+    if (!hero || (!manual && motion.matches) || !heroSource()) return;
+    if (
+      !manual &&
+      (userPaused ||
+        data.matches ||
+        navigator.connection?.saveData ||
+        document.hidden)
+    )
+      return;
+    if (hero.src !== new URL(heroSource(), location.href).href)
+      hero.src = heroSource();
+    try {
+      await hero.play();
+      hero.classList.add("is-playing");
+    } catch (e) {
+      hero.pause();
+      hero.classList.remove("is-playing");
+    }
+    syncButton();
+  }
+  function stopHero() {
+    if (!hero) return;
+    hero.pause();
+    hero.classList.remove("is-playing");
+    syncButton();
+  }
+  if (hero) {
+    playHero();
+    syncButton();
+    document.addEventListener("visibilitychange", () =>
+      document.hidden ? stopHero() : playHero(),
+    );
+    motion.addEventListener("change", () =>
+      motion.matches ? stopHero() : playHero(),
+    );
+    data.addEventListener("change", () =>
+      data.matches ? stopHero() : playHero(),
+    );
+    mobile.addEventListener("change", () => {
+      stopHero();
+      hero.removeAttribute("src");
+      hero.load();
+      playHero();
+    });
+  }
+  if (toggle && hero)
+    toggle.addEventListener("click", () => {
+      if (!hero.paused && hero.classList.contains("is-playing")) {
+        userPaused = true;
+        stopHero();
+      } else {
+        userPaused = false;
+        playHero(true);
+      }
+    });
+  const servicesVideo = document.querySelector(".services-video"),
+    servicesToggle = document.querySelector("[data-services-video-toggle]");
+  let servicesPaused = false;
+  function syncServices() {
+    if (!servicesToggle || !servicesVideo) return;
+    const paused =
+      servicesVideo.paused || !servicesVideo.classList.contains("is-playing");
+    servicesToggle.setAttribute(
+      "aria-label",
+      paused
+        ? servicesToggle.dataset.playLabel
+        : servicesToggle.dataset.pauseLabel,
+    );
+    servicesToggle.querySelector("span").innerHTML = paused
+      ? playIcon
+      : pauseIcon;
+  }
+  function stopServices() {
+    if (!servicesVideo) return;
+    servicesVideo.pause();
+    servicesVideo.classList.remove("is-playing");
+    syncServices();
+  }
+  async function playServices(manual = false) {
+    if (
+      !servicesVideo ||
+      (!manual && motion.matches) ||
+      !servicesVideo.dataset.src
+    )
+      return;
+    if (
+      !manual &&
+      (servicesPaused ||
+        data.matches ||
+        navigator.connection?.saveData ||
+        document.hidden)
+    )
+      return;
+    if (!servicesVideo.src) servicesVideo.src = servicesVideo.dataset.src;
+    try {
+      await servicesVideo.play();
+      servicesVideo.classList.add("is-playing");
+    } catch (e) {
+      servicesVideo.pause();
+      servicesVideo.classList.remove("is-playing");
+    }
+    syncServices();
+  }
+  if (servicesVideo) {
+    playServices();
+    syncServices();
+    document.addEventListener("visibilitychange", () =>
+      document.hidden ? stopServices() : playServices(),
+    );
+    motion.addEventListener("change", () =>
+      motion.matches ? stopServices() : playServices(),
+    );
+    data.addEventListener("change", () =>
+      data.matches ? stopServices() : playServices(),
+    );
+    mobile.addEventListener("change", () => {
+      stopServices();
+      if (mobile.matches) {
+        servicesVideo.removeAttribute("src");
+        servicesVideo.load();
+      }
+      playServices();
+    });
+  }
+  if (servicesToggle && servicesVideo)
+    servicesToggle.addEventListener("click", () => {
+      if (
+        !servicesVideo.paused &&
+        servicesVideo.classList.contains("is-playing")
+      ) {
+        servicesPaused = true;
+        stopServices();
+      } else {
+        servicesPaused = false;
+        playServices(true);
+      }
+    });
+  const reels = document.querySelectorAll(".film-video[data-src]");
+  const reelToggle = document.querySelector("[data-reel-motion]");
+  if (reels.length && "IntersectionObserver" in window) {
+    const visibleReels = new Set();
+    let reelsPaused = false;
+    const motionAllowed = () =>
+      !motion.matches && !data.matches && !navigator.connection?.saveData;
+    const syncReelMotion = () => {
+      const allowed = motionAllowed();
+      if (reelToggle) reelToggle.hidden = !allowed;
+      return allowed;
+    };
+    async function syncReel(video) {
+      const allowed = syncReelMotion();
+      if (
+        reelsPaused ||
+        !allowed ||
+        !visibleReels.has(video) ||
+        document.hidden
+      ) {
+        video.pause();
+        video.classList.remove("is-playing");
+        return;
+      }
+      if (!video.src) video.src = video.dataset.src;
+      try {
+        await video.play();
+        const allowed = syncReelMotion();
+        if (
+          reelsPaused ||
+          !allowed ||
+          !visibleReels.has(video) ||
+          document.hidden
+        ) {
+          video.pause();
+          video.classList.remove("is-playing");
+        } else video.classList.add("is-playing");
+      } catch {
+        syncReelMotion();
+        video.pause();
+        video.classList.remove("is-playing");
+      }
+    }
+    const syncReels = () => {
+      syncReelMotion();
+      if (reelToggle) {
+        reelToggle.textContent = reelsPaused
+          ? "Play film previews"
+          : "Pause film previews";
+      }
+      reels.forEach(syncReel);
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visibleReels.add(entry.target);
+          else visibleReels.delete(entry.target);
+          syncReel(entry.target);
+        });
+      },
+      { rootMargin: "0px", threshold: 0.5 },
+    );
+    reels.forEach((video) => observer.observe(video));
+    reelToggle?.addEventListener("click", () => {
+      reelsPaused = !reelsPaused;
+      syncReels();
+    });
+    motion.addEventListener("change", syncReels);
+    data.addEventListener("change", syncReels);
+    document.addEventListener("visibilitychange", syncReels);
+    syncReels();
+  }
+})();

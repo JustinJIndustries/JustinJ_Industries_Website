@@ -1,0 +1,72 @@
+/* Portfolio-only return navigation. The demo keeps its own site navigation. */
+.jji-demo-bar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  min-height: 45px;
+  margin: 0;
+  padding: 0 clamp(16px, 3vw, 48px);
+  border: 0;
+  border-bottom: 1px solid #c6d1d8;
+  background: #e9eef2;
+  color: #163542;
+  font:
+    600 13px/1.3 system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  letter-spacing: normal;
+  text-align: left;
+  text-transform: none;
+}
+.jji-demo-bar .jji-demo-bar__back {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 8px;
+  min-height: 44px;
+  margin: 0 0 0 -8px;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 3px;
+  color: #163542;
+  font: inherit;
+  white-space: nowrap;
+  text-decoration: none;
+  text-transform: none;
+}
+.jji-demo-bar .jji-demo-bar__back:hover {
+  color: #163542;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.jji-demo-bar .jji-demo-bar__back:focus-visible {
+  outline: 2px solid #163542;
+  outline-offset: -3px;
+  box-shadow: none;
+}
+.jji-demo-bar__arrow {
+  display: block;
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+.jji-demo-bar .jji-demo-bar__label {
+  flex: 0 0 auto;
+  color: #163542;
+  font: inherit;
+  white-space: nowrap;
+}
+.jji-demo-embedded .jji-demo-bar {
+  display: none;
+}
+@media print {
+  .jji-demo-bar {
+    display: none;
+  }
+}

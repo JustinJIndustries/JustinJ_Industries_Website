@@ -1,0 +1,587 @@
+[
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/about/experience-measurement.svg",
+    "bytes": 3067,
+    "sha256": "7ab431c3cd006ebbcd4a472ebcc9cfec231796b410ed61c84b22824489254fc5"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/arrow-links.css",
+    "bytes": 529,
+    "sha256": "03962ad073b6068c95a98e6ff6ad347f08991ba8a3cbd2b6dbdf4d92217a2a61"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/catalogue/aer-home.jpg",
+    "bytes": 463375,
+    "sha256": "5f43558110636b2f64d3ea6723ad9e51ef1ad215bd91c02cccc96ad6d2e0b84a"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/catalogue/alder-home.jpg",
+    "bytes": 266823,
+    "sha256": "17337da4c4ee40225c49f1279aa1029eeb9d1e1ecdd4f7783aec3b38e5f2a760"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/demo-return.css",
+    "bytes": 1475,
+    "sha256": "53fedc5b5a00d5a9b761ec477a431420b0c4be97415ca5b6477fa0553957cd59"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/demo-return.js",
+    "bytes": 202,
+    "sha256": "670b57aa8dcf5d111d272052fc21b35f5f18f14a07ead663ae0de413c962f0e7"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/previews/aer-field-mobile.png",
+    "bytes": 165422,
+    "sha256": "78494a993b84732370d784ae94776528b4d1c7d6826e682759cea9c561454cb8"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/previews/aer-field-mobile@3x.webp",
+    "bytes": 52870,
+    "sha256": "b5b373813fa3793323dd6f0949d3da58e06b27ecd939c041d7c3bb2802687065"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/previews/alder-lane-mobile.png",
+    "bytes": 35152,
+    "sha256": "6700a325289361cf30d16f25f7fa3e44721f6dd45535480d6415c8cfa4585617"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/previews/alder-lane-mobile@3x.webp",
+    "bytes": 72824,
+    "sha256": "984c73701951e9fbca6c6de33618702f95dfac5e3a26d07bcb91a4774475824d"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/previews/harbor-ledger-mobile.png",
+    "bytes": 37511,
+    "sha256": "bff96465c6a9437a949ed00159234f9c359aef813caae3c1f7951c9ee2c7ca96"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/previews/harbor-ledger-mobile@3x.webp",
+    "bytes": 73356,
+    "sha256": "63fe572c35d8c3dd89e23263cf42bf5878339fbadc0e5693eaeccb96a2f776ee"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/previews/northside-mobile.png",
+    "bytes": 195034,
+    "sha256": "1f38506f5f15653fc2b2f4668e75cc953950a11488d3c4b0d37af33f8c94e2eb"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/previews/northside-mobile@3x.webp",
+    "bytes": 157996,
+    "sha256": "a965ed2a718a408895020514d39a06bf24f22220f08a8886c04a3b18bdd4066c"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/previews/still-form-mobile.png",
+    "bytes": 171810,
+    "sha256": "04bcd0ad340ea6a76cd787424302605d2b6e4bdf2adfc5966e2ad899d497410e"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/previews/still-form-mobile@3x.webp",
+    "bytes": 148720,
+    "sha256": "2e594fc76a524c6589acebf99a37974adc535b46c567565de6086a7523ada27d"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/service-journeys.css",
+    "bytes": 48991,
+    "sha256": "f40aa36faa3abf3ebaa148f581076a69ac4d0f46a7b52af9ad93f01467889ff9"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/site-footer.css",
+    "bytes": 5128,
+    "sha256": "e2fbca99702ccb82184d9afc8750d6661c98f58495e4ba38832e486e4ba4418f"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/work/northside-cover.svg",
+    "bytes": 4020,
+    "sha256": "6c43106d9e5ddb26cf992e9516a74bfc0d8c957f8b5090f23394b299b663f3db"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/design.js",
+    "bytes": 31567,
+    "sha256": "f9b21e3d5f3d1d5c5fe5a9f04a1cc83b81cc2b6a145f9d55d11c9a3cefaa58d0"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/favicon.svg",
+    "bytes": 193,
+    "sha256": "980b537f5d8f4a0bbc319ee81a10de254b14f1c3dca02c3ef85832290b870e46"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/aer-field/favicon.svg",
+    "bytes": 374,
+    "sha256": "b9f705a98a6bcc1e122845e0cc54bef31fefc84c8f1d0c2f7e56bfc5015fc807"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/aer-field/preview.css",
+    "bytes": 3100,
+    "sha256": "a23001e13f252a0afc1659a78221d7e71510532785927a31d8adbb710cc57f53"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/aer-field/site.js",
+    "bytes": 8481,
+    "sha256": "2f712221aba56444d3fa2b2d1edef7231517181df8f8a9f98cbb19f9a1d95d39"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/aer-field/source.css",
+    "bytes": 19265,
+    "sha256": "bbca57a6f8d5db5717c4a46293cc1d6310f71a73913f8620df511edc92c8b749"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/alder-lane/favicon.svg",
+    "bytes": 329,
+    "sha256": "79bfa44d4a8b7776e983632fd973433c294cb6f701361edb60f2d1d791802bf2"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/alder-lane/site.js",
+    "bytes": 952,
+    "sha256": "120ed3f911a333f700e0133bbaf3a0eb6703f14a1ac9759daffe70309b26c541"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/alder-lane/styles.css",
+    "bytes": 14678,
+    "sha256": "8c6ee180c3a52462e987c7958b926348254770ce82b21d5ad790df8d070daf01"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/harbor-ledger/favicon.svg",
+    "bytes": 253,
+    "sha256": "664910ca680d952795dc9dc2138ca166711630ff71c306dc39e6adc4129e4eae"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/harbor-ledger/preview.css",
+    "bytes": 387,
+    "sha256": "9126833147acb5355d71094d7530b1b157fe62be4c507fc0ca718c55d3524c53"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/harbor-ledger/site.js",
+    "bytes": 4122,
+    "sha256": "c31bb475e2f702d6ce6d0917b2467c7884e99e098c4be5d67fa82bbf2309acc0"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/harbor-ledger/source.css",
+    "bytes": 19977,
+    "sha256": "c9c4ee13a4f3c51d490013c88021d0df016ed2f2a79a18489b8cdcc675ad7c38"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/northside/favicon.svg",
+    "bytes": 325,
+    "sha256": "2054523e141927c5adc2f56df98e086f39bb5dfea89f49a371dafe6099f2ed23"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/northside/inquiry.css",
+    "bytes": 1874,
+    "sha256": "37cb7e80dbb7e26eb778e04c4ff6b47a5687a902f2f8aba11a2cc9da507cfcfb"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/northside/navigation.css",
+    "bytes": 1951,
+    "sha256": "6b777f34942323111801e5dd49428ca5c8bad7013167c6c3f926671f4fedd49c"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/northside/navigation.js",
+    "bytes": 2470,
+    "sha256": "475e3409829beb5f93795cce98c0cd85fc4f8f5785cd525fb5a133bf92af5d25"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/northside/preview.css",
+    "bytes": 11475,
+    "sha256": "af4193c93339189a4f3d5cd37ce3f0a99bcbe20bf3b8add99e3ce67c6f1d8ded"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/northside/site.js",
+    "bytes": 5461,
+    "sha256": "77e25b83658a18ac3b752612159413840e5506f8b322a2fd815a19703e2165d7"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/arc-identity.svg",
+    "bytes": 1261,
+    "sha256": "ca033e82917ea566a9e372a0ebc454f49e0b31a90f9610e950b1eabb0634b3c2"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/arc-posters.svg",
+    "bytes": 1999,
+    "sha256": "085fdf314e7b572b865132f526088a77d3d720580363f39f029848d4f2f0ace2"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/arc-programme.svg",
+    "bytes": 1783,
+    "sha256": "4734e95aa64b10aac7f4639ab70b4c96cfc83c2337680737c7279f456d8f8316"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/arc.svg",
+    "bytes": 964,
+    "sha256": "ea1aa8b9697b6f28a913d74cbfb9cd8cc2f4b65fb29d3ff9738cfdc5162ac34f"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/elsewhere.svg",
+    "bytes": 1616,
+    "sha256": "90820f7102d8aa04662df9619eb6778450ea85289e1629073c94351b101257b8"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/form.svg",
+    "bytes": 886,
+    "sha256": "aa24c8eb599c7a68a795e08d94203621a219b6bb7c74273b51e8b4bbc6747238"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/ground.svg",
+    "bytes": 1101,
+    "sha256": "00c9457c3a59c8c8f2fb557393bd23857fc0ee58fd1809a86e16f511b00f6344"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/kindred.svg",
+    "bytes": 1390,
+    "sha256": "c8e1edc699b1a72dbf6856102488ee831270fc92cbd1b5cdd62c41c9dd9b3bf7"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/noon-campaign.svg",
+    "bytes": 1575,
+    "sha256": "436a3c0fb409d36178d3ddb85b28316826438adc008901b7264cc84e765fa13f"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/noon-label.svg",
+    "bytes": 1556,
+    "sha256": "0a2a1aaf875473918d76102b94433078093805722e64c39df4492e86a661bbca"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/noon-range.svg",
+    "bytes": 2371,
+    "sha256": "59b24988628785329719a1f4490e0bd9d12586207fcd790716db72e65f2fd0e1"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/assets/design/noon.svg",
+    "bytes": 1219,
+    "sha256": "33544d1ce97870c181f4571e57df9137b7b27f0cae9bbb5bc1887b1e012fed95"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/favicon.svg",
+    "bytes": 401,
+    "sha256": "95319bbee32feae5e0f78014e68e9597912c7db6afc891b801aae69bab98d391"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/preview.css",
+    "bytes": 1272,
+    "sha256": "826d7476fcf061037545ec9e83d7df7a33cf89cb22c8f9d12af867d44acf6e02"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/project-media.css",
+    "bytes": 2386,
+    "sha256": "dec0212a98846d4df0302b037ddc06ceff420321ab683a5eff06ac1e47d95b45"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/project-media.js",
+    "bytes": 4200,
+    "sha256": "5c255a22000f565beebb2fa04ce8d6fc47742f12467202f34321849348f5047b"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/site.js",
+    "bytes": 4635,
+    "sha256": "315db0a188307c938c869ca895dd7221caaae08460670ee3feaa1db87dce5c08"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/previews/still-form/source.css",
+    "bytes": 25386,
+    "sha256": "eff748a7bcc8223b78c40aad587588f6533faaaa011ae1641f090869ec27bbd8"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/script.js",
+    "bytes": 21770,
+    "sha256": "b33004bc96131ec690061a349bd7910e1aa98a63b503f11cfbc33a1357db3b59"
+  },
+  {
+    "path": "__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/styles.css",
+    "bytes": 85294,
+    "sha256": "1dcd434c19abd08c9d04d9a646cfffebc1161cb62c10e7af0f78e19f97b6cca7"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/about/experience-measurement.svg",
+    "bytes": 3067,
+    "sha256": "7ab431c3cd006ebbcd4a472ebcc9cfec231796b410ed61c84b22824489254fc5"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/arrow-links.css",
+    "bytes": 529,
+    "sha256": "03962ad073b6068c95a98e6ff6ad347f08991ba8a3cbd2b6dbdf4d92217a2a61"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/demo-return.css",
+    "bytes": 1475,
+    "sha256": "53fedc5b5a00d5a9b761ec477a431420b0c4be97415ca5b6477fa0553957cd59"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/demo-return.js",
+    "bytes": 202,
+    "sha256": "670b57aa8dcf5d111d272052fc21b35f5f18f14a07ead663ae0de413c962f0e7"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/previews/aer-field-mobile.png",
+    "bytes": 165422,
+    "sha256": "78494a993b84732370d784ae94776528b4d1c7d6826e682759cea9c561454cb8"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/previews/aer-field-mobile@3x.webp",
+    "bytes": 52870,
+    "sha256": "b5b373813fa3793323dd6f0949d3da58e06b27ecd939c041d7c3bb2802687065"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/previews/alder-lane-mobile.png",
+    "bytes": 35152,
+    "sha256": "6700a325289361cf30d16f25f7fa3e44721f6dd45535480d6415c8cfa4585617"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/previews/alder-lane-mobile@3x.webp",
+    "bytes": 72824,
+    "sha256": "984c73701951e9fbca6c6de33618702f95dfac5e3a26d07bcb91a4774475824d"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/previews/harbor-ledger-mobile.png",
+    "bytes": 37511,
+    "sha256": "bff96465c6a9437a949ed00159234f9c359aef813caae3c1f7951c9ee2c7ca96"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/previews/harbor-ledger-mobile@3x.webp",
+    "bytes": 73356,
+    "sha256": "63fe572c35d8c3dd89e23263cf42bf5878339fbadc0e5693eaeccb96a2f776ee"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/previews/northside-mobile.png",
+    "bytes": 195034,
+    "sha256": "1f38506f5f15653fc2b2f4668e75cc953950a11488d3c4b0d37af33f8c94e2eb"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/previews/northside-mobile@3x.webp",
+    "bytes": 157996,
+    "sha256": "a965ed2a718a408895020514d39a06bf24f22220f08a8886c04a3b18bdd4066c"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/previews/still-form-mobile.png",
+    "bytes": 171810,
+    "sha256": "04bcd0ad340ea6a76cd787424302605d2b6e4bdf2adfc5966e2ad899d497410e"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/previews/still-form-mobile@3x.webp",
+    "bytes": 148720,
+    "sha256": "2e594fc76a524c6589acebf99a37974adc535b46c567565de6086a7523ada27d"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/service-journeys.css",
+    "bytes": 48991,
+    "sha256": "f40aa36faa3abf3ebaa148f581076a69ac4d0f46a7b52af9ad93f01467889ff9"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/site-footer.css",
+    "bytes": 5128,
+    "sha256": "e2fbca99702ccb82184d9afc8750d6661c98f58495e4ba38832e486e4ba4418f"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/assets/work/northside-cover.svg",
+    "bytes": 4020,
+    "sha256": "6c43106d9e5ddb26cf992e9516a74bfc0d8c957f8b5090f23394b299b663f3db"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/design.js",
+    "bytes": 31567,
+    "sha256": "794659a414e059c04e24574ab2acf20d08893321c625ead05f265ac1a2e3a3cd"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/favicon.svg",
+    "bytes": 193,
+    "sha256": "980b537f5d8f4a0bbc319ee81a10de254b14f1c3dca02c3ef85832290b870e46"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/aer-field/favicon.svg",
+    "bytes": 374,
+    "sha256": "b9f705a98a6bcc1e122845e0cc54bef31fefc84c8f1d0c2f7e56bfc5015fc807"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/aer-field/film-player.css",
+    "bytes": 844,
+    "sha256": "34f2295e6601a48086f07f4ada5c5b874a8edf37922c606dfed4a96e966aaf64"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/aer-field/film-player.js",
+    "bytes": 7411,
+    "sha256": "d2ba1b2af7bdb186721b3ad77dcfd8cffd832a61c031f254bcb0cd477350429a"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/aer-field/preview.css",
+    "bytes": 3100,
+    "sha256": "a23001e13f252a0afc1659a78221d7e71510532785927a31d8adbb710cc57f53"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/aer-field/site.js",
+    "bytes": 8481,
+    "sha256": "2f712221aba56444d3fa2b2d1edef7231517181df8f8a9f98cbb19f9a1d95d39"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/aer-field/source.css",
+    "bytes": 19265,
+    "sha256": "4348636c139096e84a749b2694b88ded4822f3a5d563ddc2dcdae013b0197768"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/alder-lane/favicon.svg",
+    "bytes": 329,
+    "sha256": "79bfa44d4a8b7776e983632fd973433c294cb6f701361edb60f2d1d791802bf2"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/alder-lane/site.js",
+    "bytes": 952,
+    "sha256": "120ed3f911a333f700e0133bbaf3a0eb6703f14a1ac9759daffe70309b26c541"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/alder-lane/styles.css",
+    "bytes": 14678,
+    "sha256": "041e3943a377e96a5c98efbf913050d9de74e3904088dda6e74985a144f1f4bd"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/harbor-ledger/favicon.svg",
+    "bytes": 253,
+    "sha256": "664910ca680d952795dc9dc2138ca166711630ff71c306dc39e6adc4129e4eae"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/harbor-ledger/preview.css",
+    "bytes": 387,
+    "sha256": "9126833147acb5355d71094d7530b1b157fe62be4c507fc0ca718c55d3524c53"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/harbor-ledger/site.js",
+    "bytes": 4122,
+    "sha256": "c31bb475e2f702d6ce6d0917b2467c7884e99e098c4be5d67fa82bbf2309acc0"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/harbor-ledger/source.css",
+    "bytes": 19977,
+    "sha256": "c9c4ee13a4f3c51d490013c88021d0df016ed2f2a79a18489b8cdcc675ad7c38"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/northside/favicon.svg",
+    "bytes": 325,
+    "sha256": "2054523e141927c5adc2f56df98e086f39bb5dfea89f49a371dafe6099f2ed23"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/northside/inquiry.css",
+    "bytes": 1874,
+    "sha256": "37cb7e80dbb7e26eb778e04c4ff6b47a5687a902f2f8aba11a2cc9da507cfcfb"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/northside/navigation.css",
+    "bytes": 1951,
+    "sha256": "6b777f34942323111801e5dd49428ca5c8bad7013167c6c3f926671f4fedd49c"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/northside/navigation.js",
+    "bytes": 2470,
+    "sha256": "475e3409829beb5f93795cce98c0cd85fc4f8f5785cd525fb5a133bf92af5d25"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/northside/preview.css",
+    "bytes": 11475,
+    "sha256": "af4193c93339189a4f3d5cd37ce3f0a99bcbe20bf3b8add99e3ce67c6f1d8ded"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/northside/site.js",
+    "bytes": 5461,
+    "sha256": "77e25b83658a18ac3b752612159413840e5506f8b322a2fd815a19703e2165d7"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/arc-identity.svg",
+    "bytes": 1261,
+    "sha256": "ca033e82917ea566a9e372a0ebc454f49e0b31a90f9610e950b1eabb0634b3c2"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/arc-posters.svg",
+    "bytes": 1999,
+    "sha256": "085fdf314e7b572b865132f526088a77d3d720580363f39f029848d4f2f0ace2"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/arc-programme.svg",
+    "bytes": 1783,
+    "sha256": "4734e95aa64b10aac7f4639ab70b4c96cfc83c2337680737c7279f456d8f8316"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/arc.svg",
+    "bytes": 964,
+    "sha256": "ea1aa8b9697b6f28a913d74cbfb9cd8cc2f4b65fb29d3ff9738cfdc5162ac34f"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/elsewhere.svg",
+    "bytes": 1616,
+    "sha256": "90820f7102d8aa04662df9619eb6778450ea85289e1629073c94351b101257b8"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/form.svg",
+    "bytes": 886,
+    "sha256": "aa24c8eb599c7a68a795e08d94203621a219b6bb7c74273b51e8b4bbc6747238"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/ground.svg",
+    "bytes": 1101,
+    "sha256": "00c9457c3a59c8c8f2fb557393bd23857fc0ee58fd1809a86e16f511b00f6344"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/kindred.svg",
+    "bytes": 1390,
+    "sha256": "c8e1edc699b1a72dbf6856102488ee831270fc92cbd1b5cdd62c41c9dd9b3bf7"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/noon-campaign.svg",
+    "bytes": 1575,
+    "sha256": "436a3c0fb409d36178d3ddb85b28316826438adc008901b7264cc84e765fa13f"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/noon-label.svg",
+    "bytes": 1556,
+    "sha256": "0a2a1aaf875473918d76102b94433078093805722e64c39df4492e86a661bbca"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/noon-range.svg",
+    "bytes": 2371,
+    "sha256": "59b24988628785329719a1f4490e0bd9d12586207fcd790716db72e65f2fd0e1"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/assets/design/noon.svg",
+    "bytes": 1219,
+    "sha256": "33544d1ce97870c181f4571e57df9137b7b27f0cae9bbb5bc1887b1e012fed95"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/favicon.svg",
+    "bytes": 401,
+    "sha256": "95319bbee32feae5e0f78014e68e9597912c7db6afc891b801aae69bab98d391"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/motion-buffer.js",
+    "bytes": 6890,
+    "sha256": "f11b581b9b6fd059c85c48f18416c316f597050a5b36b24539160a1da737b337"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/preview.css",
+    "bytes": 1272,
+    "sha256": "826d7476fcf061037545ec9e83d7df7a33cf89cb22c8f9d12af867d44acf6e02"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/project-media.css",
+    "bytes": 2761,
+    "sha256": "f22b954210c683c8f503e7f5e31102e655a696be8f7c0fb23637f16c363adf3a"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/project-media.js",
+    "bytes": 4633,
+    "sha256": "8382d1cb17a698a6cdfd9442478bb1765475fdca1812df3d463cc14acea84036"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/site.js",
+    "bytes": 4635,
+    "sha256": "315db0a188307c938c869ca895dd7221caaae08460670ee3feaa1db87dce5c08"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/previews/still-form/source.css",
+    "bytes": 25386,
+    "sha256": "36d370f6d2729254a932c063322acd4c85d15a62c12a1bc1c1e45d554f5dae51"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/script.js",
+    "bytes": 21770,
+    "sha256": "b33004bc96131ec690061a349bd7910e1aa98a63b503f11cfbc33a1357db3b59"
+  },
+  {
+    "path": "__jji_releases/fe321dd483f3b28b4b66dec22ad10191f883b3bdab0c990455aa7bd2aea59a34/styles.css",
+    "bytes": 85294,
+    "sha256": "c908ab88bce9a15b5cf2294f995ba270f6a0a7198a5fc6505df5523c9466191f"
+  }
+]

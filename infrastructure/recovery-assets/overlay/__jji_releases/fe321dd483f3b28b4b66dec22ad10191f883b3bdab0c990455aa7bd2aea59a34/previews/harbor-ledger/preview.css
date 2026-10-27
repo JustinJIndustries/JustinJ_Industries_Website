@@ -1,0 +1,16 @@
+/* Preview context is separate from the accounting-firm marketing surface. */
+.demo-disclosures {
+  padding-top: 25px;
+  margin-block: 30px 55px;
+  border-top: 1px solid var(--hl-rule);
+}
+.demo-disclosures p {
+  font: 14px/1.65 var(--hl-sans);
+  margin: 0;
+  max-width: none;
+  color: #405953;
+}
+.demo-disclosures p:target {
+  outline: 2px solid var(--hl-teal);
+  outline-offset: 7px;
+}

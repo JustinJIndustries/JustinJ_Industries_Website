@@ -1,0 +1,82 @@
+name: Protected asset-only GitHub Pages recovery union
+on:
+  workflow_dispatch:
+    inputs:
+      approved_workflow_commit:
+        description: Exact reviewed main commit containing workflow and overlay
+        required: true
+      approved_union_sha256:
+        description: Exact reviewed union manifest SHA256
+        required: true
+      storage_snapshot:
+        description: Fresh complete owner-reviewed inventory and enforced Actions/Packages $0 evidence JSON
+        required: true
+permissions: {}
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1
+    environment: failover-sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read
+    env:
+      APPROVED_WORKFLOW_COMMIT: ${{ inputs.approved_workflow_commit }}
+      APPROVED_UNION_SHA256: ${{ inputs.approved_union_sha256 }}
+      STORAGE_SNAPSHOT: ${{ inputs.storage_snapshot }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Initial context and storage guard
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/recovery-assets/helper.mjs admit
+      - name: Require fresh receipt extraction destination
+        run: test ! -e "$RUNNER_TEMP/jji-recovery-receipt"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          artifact-ids: 12601233072
+          run-id: 40200650234
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/jji-recovery-receipt
+      - name: Verify exact original receipt
+        run: node infrastructure/recovery-assets/helper.mjs receipt "$RUNNER_TEMP/jji-recovery-receipt/receipt.json"
+      - name: Assemble old entrypoints with only reviewed immutable additions
+        run: node infrastructure/recovery-assets/helper.mjs prepare "$RUNNER_TEMP/jji-recovery-union"
+      - name: Verify exact union and fresh admission immediately before upload
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: |
+          node infrastructure/recovery-assets/helper.mjs verify "$RUNNER_TEMP/jji-recovery-union"
+          node infrastructure/recovery-assets/helper.mjs admit
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          name: recovery-union-${{ github.run_id }}
+          path: ${{ runner.temp }}/jji-recovery-union
+          retention-days: 1
+  deploy:
+    needs: prepare
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1 && inputs.approved_workflow_commit == github.sha && inputs.approved_union_sha256 == '73bb780680caf50b781da278b4c79f4959cf7001e9056f6c8041edd3993de304'
+    environment: failover-sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
+        with:
+          artifact_name: recovery-union-${{ github.run_id }}
+          timeout: 600000
