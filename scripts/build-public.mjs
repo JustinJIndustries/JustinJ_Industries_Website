@@ -57,6 +57,7 @@ const publicFiles = Object.freeze([
   "assets/catalogue/alder-home.jpg",
   "assets/catalogue/still-arches.jpg",
   "assets/catalogue/aer-hero.jpg",
+  "assets/catalogue/aer-home.jpg",
   "assets/catalogue/aer-golf.jpg",
   "assets/about/experience-measurement.svg",
   "assets/arrow-links.css",

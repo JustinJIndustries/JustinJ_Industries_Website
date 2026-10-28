@@ -5,15 +5,14 @@ const designConcepts = {
     calloutCopy:
       "Lead with the problems you help solve. This four-page experience connects a focused introduction, practical service summaries and a concise studio story with direct contact paths.",
     name: "Alder & Lane",
-    startingPrice: "$950",
     type: "Business operations & consulting • Demo",
     description:
       "A focused business-services concept with clear service choices, a concise studio story and direct contact paths.",
     service: "Static four-page site",
     scope:
-      "The $950 static package covers Home, Services, About, and Contact with email and phone links. It does not include a CMS, backend, contact form, commerce, or blog.",
+      "The static package covers Home, Services, About, and Contact with email and phone links. It does not include a CMS, backend, contact form, commerce, or blog.",
     terms:
-      "Two revisions, up to five sections per page, 2,000 client words and 12 licensed client images (logo excluded). Clients must have rights to supplied content. Fourteen calendar days begin after mandatory inputs arrive. One initial deployment to a compatible client-ready static host and seven days of defect fixes are included. Domain/DNS migration and server repair are excluded. Optional updates: $70/hour, $70 minimum per request, agreed beforehand.",
+      "Two revisions, up to five sections per page, 2,000 client words and 12 licensed client images (logo excluded). Clients must have rights to supplied content. Fourteen calendar days begin after mandatory inputs arrive. One initial deployment to a compatible client-ready static host and seven days of defect fixes are included. Domain/DNS migration and server repair are excluded. Optional updates are agreed beforehand.",
     pages: [
       {
         name: "Home",
@@ -51,13 +50,12 @@ const designConcepts = {
     calloutCopy:
       "Connect accounting, tax support and advisory expertise to the decisions visitors face. Industry sections, practical FAQs and a guided consultation journey help a potential client arrive at a more useful conversation.",
     name: "Harbor Ledger",
-    startingPrice: "$1,999",
     type: "Accounting & advisory • Demo",
     description:
       "An editorial accounting and advisory experience with connected services, industry context, useful FAQs and a guided consultation journey.",
     service: "Simple WordPress site",
     scope:
-      "The $1,999 WordPress package covers Home, Services, About, FAQ, and Contact, with a standard contact form, basic antispam, and simple metadata. This is a straightforward theme-based scope.",
+      "The WordPress package covers Home, Services, About, FAQ, and Contact, with a standard contact form, basic antispam, and simple metadata. This is a straightforward theme-based scope.",
     terms:
       "Two revisions, up to five sections per page, 3,000 client words, 20 licensed client images, and 10 FAQs. Twenty-eight calendar days begin after mandatory inputs arrive. A 30-minute handoff and seven days of defect fixes are included. Hosting, domains, paid tools, stock, and renewals are client-paid and agreed separately.",
     pages: [
@@ -120,13 +118,12 @@ const designConcepts = {
     calloutCopy:
       "Move from an editorial project index into quick views and full project stories. Category filters, deliberate typography and spacious imagery give identity, packaging and digital work room to stand out.",
     name: "Still Form",
-    startingPrice: "$1,695",
     type: "Branding & design studios • Demo",
     description:
       "An image-led studio portfolio with category filters, quick views and full project stories for branding, packaging and digital work.",
     service: "Still Form website setup",
     scope:
-      "Still Form website setup starts at $1,695 for core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
+      "Still Form website setup covers core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
     terms:
       "Portfolio interactions, animation, CMS features, integrations, extra pages, hosting, paid tools, and stock assets are scoped and quoted separately. The website demo does not include its source WordPress runtime.",
     pages: [
@@ -173,13 +170,12 @@ const designConcepts = {
     calloutCopy:
       "Bring films and photography into a focused presentation. A motion-led opening, dedicated film pages and supporting galleries connect the view to the production approach and a clear project-inquiry path.",
     name: "AER / FIELD",
-    startingPrice: "$1,995",
     type: "Aerial film & visual production • Demo",
     description:
       "A motion-led film portfolio with a cinematic opening, dedicated film pages, image galleries and clear playback controls.",
     service: "AER / FIELD website setup",
     scope:
-      "AER / FIELD website setup starts at $1,995 for core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
+      "AER / FIELD website setup covers core page setup and styling with client-supplied copy and licensed imagery. Pages, platform, timeline, and handoff are confirmed in writing.",
     terms:
       "Filming, editing, video delivery, interactive galleries, film detail features, custom motion, extra pages, hosting, paid tools, and stock assets are scoped and quoted separately. Preview footage is licensed for this demo study; demo forms are inactive.",
     pages: [
@@ -226,13 +222,12 @@ const designConcepts = {
     calloutCopy:
       "Make boiler care, heating repairs and replacement planning easy to navigate. Service guidance, practical FAQs and a grouped inquiry help visitors explain the work they need without starting from a blank message.",
     name: "Northside",
-    startingPrice: "$1,695 USD",
     type: "Heating & home services • Demo",
     description:
       "A practical heating-services experience with clear service choices, boiler-care guidance and a grouped inquiry journey.",
     service: "Northside WordPress build",
     scope:
-      "The Northside WordPress build starts at $1,695 USD. This concept demonstrates Home, Services, Boiler Care, About, and Contact. Final pages, content, hosting, integrations, form delivery, and handoff are confirmed in writing.",
+      "This Northside WordPress concept demonstrates Home, Services, Boiler Care, About, and Contact. Final pages, content, hosting, integrations, form delivery, and handoff are confirmed in writing.",
     terms:
       "Portfolio concept only. Final content, hosting, integrations, form delivery, and production redirects require separate scope and approval.",
     pages: [
@@ -388,15 +383,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.title = `${key === "northside" ? "Northside" : concept.name} Website Concept | JustinJ Industries`;
   const metadata = document.getElementById("design-type");
   metadata.textContent = concept.type;
-  if (concept.startingPrice) {
-    const separator = document.createElement("span");
-    separator.setAttribute("aria-hidden", "true");
-    separator.textContent = " • ";
-    const price = document.createElement("span");
-    price.className = "design-starting-price";
-    price.textContent = `From ${concept.startingPrice}`;
-    metadata.append(separator, price);
-  }
   document.getElementById("design-description").textContent =
     concept.description;
   document.getElementById("design-scope-copy").textContent =

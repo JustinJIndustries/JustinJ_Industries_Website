@@ -367,10 +367,6 @@ for (const [key, concept] of Object.entries(concepts)) {
     .replace(
       /(<div id="design-scope-details"[^>]*>)[\s\S]*?(<\/div>)/,
       `$1<p>${escape(concept.calloutCopy)}</p>$2`,
-    )
-    .replace(
-      "</section>\n      <section",
-      `<p><a href="/previews/${slug}/">Open the ${escape(concept.name)} demonstration</a></p></section>\n      <section`,
     );
   await save(entry.file, metadata(source, entry));
   entries.push(entry);

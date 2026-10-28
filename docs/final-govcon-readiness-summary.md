@@ -113,3 +113,27 @@ The previously tested manual dashboard checkpoint implementation from fe374e0dd0
 ## Bounded Pages queued-status correction
 
 Recognize GitHub Pages deployment_queued as a pending state within the existing polling bound; require explicit succeed and continue rejecting failure or unknown states. The approved correction passes all 211 failover tests, including queued progression, timeout and terminal/unknown refusal. No freshness, integrity, security, credential or storage limits change.
+
+## Local catalogue capture and detail navigation correction — 2026-10-25
+
+Recaptured Alder & Lane from its actual static source without cursor overlays or scrollbar chrome, and replaced the AER / FIELD catalogue approximation with an actual demo capture preserving its condensed headline and serif subheading. Both covers remain 2880 × 1620. Removed the raw cross-design list and bare demonstration link from all five detail landing pages, the shared template and the SEO generator; inquiry buttons, All designs navigation and styled preview controls remain. This isolated M2 patch is pending owner review and has not been published. Review captures and check limitations are retained outside the checkout in the sibling alder-review directory.
+
+## Local public pricing removal — 2026-10-25
+
+Removed the five displayed design prices, the public hourly/minimum update rate, price-dependent footnotes and pricing in inquiry selections and JavaScript-generated disclosures. Simplified affected wording while retaining service descriptions, scope limitations, inquiry controls and unrelated factual disclosures. Updated the shared source and all five generated detail pages. No new sales or quote copy, changes to private pricing/proposals, or publication. The linked capability PDF and other public surfaces were inventoried separately; evidence and the pricing-only patch remain in the sibling pricing-review directory.
+
+## Local reel motion-control synchronization — 2026-10-26
+
+The owner-approved local correction reconciles the AER / FIELD reel control with the current motion policy whenever playback is evaluated, completes or rejects. This covers the captured state where reduced motion was active and all reels paused while their control remained visible. Keyboard pause/resume, the user's pause choice, visibility handling and actual playback checks remain intact. Focused regressions cover delayed preference notification, pending playback and repeated transitions. The historical intermittent timeout's exact cause is not established, and this is not a formal accessibility conformance claim. Earlier package identities, archives and the 45-file hash review do not cover this new source; release evidence must be refreshed before any separately authorized publication. Detailed local validation remains outside the checkout in the Developer/Codex task report area.
+
+## Local GitHub-only content release preparation — October 28, 2026
+
+The owner approved production publication of the reviewed price-free content,
+corrected Alder/AER imagery, reduced-motion synchronization repair and undici
+validation dependency update. A separate checkout is based on main
+`98ee85b0c4f7b4b415eadf6c1783aa96fc4d4edc`; the original dirty candidate is
+unchanged. The local primary and rollback packages retain every published
+immutable recovery asset. The new manual GitHub-only publisher is a proposal
+awaiting independent review and exact commit/artifact binding; no push, workflow
+dispatch or deployment has occurred in this preparation. Cloudflare cutover,
+queued audit fixes, drafts and the Pages-only video adapter remain outside scope.

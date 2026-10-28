@@ -1,0 +1,28 @@
+{
+  "repo": "JustinJIndustries/JustinJ_Industries_Website",
+  "actor": "JustinJIndustries",
+  "baseCommit": "98ee85b0c4f7b4b415eadf6c1783aa96fc4d4edc",
+  "baselineManifestSha256": "73bb780680caf50b781da278b4c79f4959cf7001e9056f6c8041edd3993de304",
+  "roles": {
+    "primary": {
+      "files": 523,
+      "bytes": 190284780,
+      "manifestSha256": "65e6284e90a969b85f3d487c3e87e3196cff8068138ec689f0ab62401f22c439"
+    },
+    "overlay": {
+      "files": 87,
+      "bytes": 2112977
+    },
+    "rollback": {
+      "files": 523,
+      "bytes": 190348539,
+      "manifestSha256": "5baaacbb005f18ae515a1d505c6203b98d256178e422426436e6e874c2f25feb"
+    }
+  },
+  "reserve": 228418247,
+  "margin": 23068672,
+  "ceiling": 500000000,
+  "cap": 209715200,
+  "overlayHash": "40dbda9f98a63d06514883abf8844fe6e66cd44cb1b35464f980326976677e31",
+  "sourceHash": "2cb5f49ce53c042a64f56062c4fa6887e269573d9fb3ce3dd0585622cc4d35a6"
+}

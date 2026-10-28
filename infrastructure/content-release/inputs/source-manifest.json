@@ -1,0 +1,102 @@
+[
+  {
+    "path": "assets/catalogue/aer-home.jpg",
+    "bytes": 463375,
+    "sha256": "5f43558110636b2f64d3ea6723ad9e51ef1ad215bd91c02cccc96ad6d2e0b84a"
+  },
+  {
+    "path": "assets/catalogue/alder-home.jpg",
+    "bytes": 266823,
+    "sha256": "17337da4c4ee40225c49f1279aa1029eeb9d1e1ecdd4f7783aec3b38e5f2a760"
+  },
+  {
+    "path": "catalogue.html",
+    "bytes": 19418,
+    "sha256": "c96bd3ccf04d91929acc103233bf6e83388f981a31b0d9c1c7f8d6b8bda78cf0"
+  },
+  {
+    "path": "design.html",
+    "bytes": 30368,
+    "sha256": "f11a5e6b45026cbc6b966b087469e957bf4d7a75ce4e665168c413be4ed945b6"
+  },
+  {
+    "path": "design.js",
+    "bytes": 31407,
+    "sha256": "ec4c69888d28a09e1b873e30d98e8c55cae189fb4465213ced4d9aa9cf8ae9c0"
+  },
+  {
+    "path": "design/aer-field/index.html",
+    "bytes": 31888,
+    "sha256": "f1b2d1ee850b725015be80442c562353badc8a8411f17ed5c50eeb97662439a0"
+  },
+  {
+    "path": "design/alder-lane/index.html",
+    "bytes": 31833,
+    "sha256": "6407f437329067393d5f42d840bac80756280243dae9cb482bace8cedb60d67b"
+  },
+  {
+    "path": "design/harbor-ledger/index.html",
+    "bytes": 32046,
+    "sha256": "e0e04da7c735e866a5016f49ea68634c5fe925ed291752f8668df465bb6ae1d0"
+  },
+  {
+    "path": "design/northside/index.html",
+    "bytes": 31859,
+    "sha256": "c133390f4b382bc9158cda75e75ef8466cb0b42010a12dc7a1969ea4c1553480"
+  },
+  {
+    "path": "design/still-form/index.html",
+    "bytes": 31927,
+    "sha256": "c4fc60ccd58a3de3c183e3ccc4a56963820f26878acc2989bb846f9a75dd7544"
+  },
+  {
+    "path": "government-buyers.html",
+    "bytes": 27417,
+    "sha256": "6687c17af4dbc6fb5006575f6c75943763f6f27d74f7f46c247185485facfb50"
+  },
+  {
+    "path": "scripts/build-public.mjs",
+    "bytes": 14028,
+    "sha256": "a3680cd7a523cd9fee678615df3a1741d9c49849ef2e07a490dcd703d56688fd"
+  },
+  {
+    "path": "scripts/prepare-seo.mjs",
+    "bytes": 14138,
+    "sha256": "d2e1762e4c58ac1745365a47d9c17edf1214c6ec8ecafddea257cd9176a63039"
+  },
+  {
+    "path": "scripts/check-aer-video.mjs",
+    "bytes": 6458,
+    "sha256": "a6356ed423b3b6259b17e2551920de708c1476c0749839f2be67c99c29f975b6"
+  },
+  {
+    "path": "scripts/check-design-tabs.mjs",
+    "bytes": 4340,
+    "sha256": "e8249863d236342290b775f1a148ff15e183efb675037318f8b25da02ae95e73"
+  },
+  {
+    "path": "previews/aer-field/site.js",
+    "bytes": 8481,
+    "sha256": "2f712221aba56444d3fa2b2d1edef7231517181df8f8a9f98cbb19f9a1d95d39"
+  },
+  {
+    "path": "tests/aer-reel-motion.test.mjs",
+    "bytes": 6054,
+    "sha256": "57e51491d8267543802638eb77ace8a8d5b209e2087bf5856db66ccb7852bad1"
+  },
+  {
+    "path": "docs/final-govcon-readiness-summary.md",
+    "bytes": 20996,
+    "sha256": "19036df3d3e8c96634173f844d0dfd5aa8b3b2cce9db34150e36d7fad676fa1f"
+  },
+  {
+    "path": "package.json",
+    "bytes": 2223,
+    "sha256": "8429c24b05ba26903b5c990b1a3d7b6c764f2c146499bf9787cd0dafc18df705"
+  },
+  {
+    "path": "package-lock.json",
+    "bytes": 108270,
+    "sha256": "072caa200170d22b238011aff97c81bfccc6fa939832bde808ba5abb0683ba58"
+  }
+]

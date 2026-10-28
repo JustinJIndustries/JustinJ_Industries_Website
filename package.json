@@ -28,5 +28,10 @@
     "pa11y": "^9.0.1",
     "prettier": "^3.3.3",
     "start-server-and-test": "^2.0.3"
+  },
+  "overrides": {
+    "linkinator": {
+      "undici": "7.30.1"
+    }
   }
 }

@@ -198,10 +198,16 @@
     let reelsPaused = false;
     const motionAllowed = () =>
       !motion.matches && !data.matches && !navigator.connection?.saveData;
+    const syncReelMotion = () => {
+      const allowed = motionAllowed();
+      if (reelToggle) reelToggle.hidden = !allowed;
+      return allowed;
+    };
     async function syncReel(video) {
+      const allowed = syncReelMotion();
       if (
         reelsPaused ||
-        !motionAllowed() ||
+        !allowed ||
         !visibleReels.has(video) ||
         document.hidden
       ) {
@@ -212,9 +218,10 @@
       if (!video.src) video.src = video.dataset.src;
       try {
         await video.play();
+        const allowed = syncReelMotion();
         if (
           reelsPaused ||
-          !motionAllowed() ||
+          !allowed ||
           !visibleReels.has(video) ||
           document.hidden
         ) {
@@ -222,13 +229,14 @@
           video.classList.remove("is-playing");
         } else video.classList.add("is-playing");
       } catch {
+        syncReelMotion();
         video.pause();
         video.classList.remove("is-playing");
       }
     }
     const syncReels = () => {
+      syncReelMotion();
       if (reelToggle) {
-        reelToggle.hidden = !motionAllowed();
         reelToggle.textContent = reelsPaused
           ? "Play film previews"
           : "Pause film previews";

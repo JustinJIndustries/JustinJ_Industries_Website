@@ -1,0 +1,113 @@
+name: Protected GitHub-only approved content publication
+on:
+  workflow_dispatch:
+    inputs:
+      role:
+        type: choice
+        options: [primary, rollback]
+        required: true
+      approved_workflow_commit:
+        description: Exact independently reviewed main commit containing source and publisher
+        required: true
+      approved_manifest_sha256:
+        description: Exact reviewed primary or rollback manifest SHA256
+        required: true
+      storage_snapshot:
+        description: Fresh complete owner-reviewed account inventory and enforced zero-spend evidence JSON
+        required: true
+permissions: {}
+concurrency:
+  group: pages
+  cancel-in-progress: false
+env:
+  RELEASE_ROLE: ${{ inputs.role }}
+  APPROVED_WORKFLOW_COMMIT: ${{ inputs.approved_workflow_commit }}
+  APPROVED_MANIFEST_SHA256: ${{ inputs.approved_manifest_sha256 }}
+  STORAGE_SNAPSHOT: ${{ inputs.storage_snapshot }}
+jobs:
+  prepare:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1
+    environment: failover-sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      artifact_id: ${{ steps.upload.outputs.artifact_id }}
+      tar_sha256: ${{ steps.binding.outputs.tar_sha256 }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Verify exact source and fresh admission
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/content-release/helper.mjs admit
+      - name: Assemble only the reviewed deployment bytes
+        run: node infrastructure/content-release/helper.mjs assemble "$RUNNER_TEMP/jji-content"
+      - name: Recheck tree and admission immediately before one upload
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: |
+          node infrastructure/content-release/helper.mjs verify "$RUNNER_TEMP/jji-content"
+          node infrastructure/content-release/helper.mjs admit
+      - id: upload
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          name: approved-content-${{ github.run_id }}
+          path: ${{ runner.temp }}/jji-content
+          include-hidden-files: true
+          retention-days: 1
+      - id: binding
+        name: Verify and bind the actual uploaded Pages tar
+        run: |
+          archive_sha="$(sha256sum "$RUNNER_TEMP/artifact.tar" | cut -d ' ' -f 1)"
+          python3 infrastructure/content-release/verify-tar.py "$RUNNER_TEMP/artifact.tar" "infrastructure/content-release/inputs/$RELEASE_ROLE-manifest.json" "$archive_sha"
+          echo "tar_sha256=$archive_sha" >> "$GITHUB_OUTPUT"
+  deploy:
+    needs: prepare
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1 && inputs.approved_workflow_commit == github.sha
+    environment: failover-sync
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Recheck actual triggering owner, attempt, source and manifest
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node infrastructure/content-release/helper.mjs guard
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          artifact-ids: ${{ needs.prepare.outputs.artifact_id }}
+          run-id: ${{ github.run_id }}
+          github-token: ${{ github.token }}
+          merge-multiple: true
+          path: ${{ runner.temp }}/jji-content-artifact
+      - name: Verify exact current-run immutable artifact without extraction
+        env:
+          EXPECTED_TAR_SHA256: ${{ needs.prepare.outputs.tar_sha256 }}
+        run: |
+          test "$(find "$RUNNER_TEMP/jji-content-artifact" -mindepth 1 | wc -l)" -eq 1
+          python3 infrastructure/content-release/verify-tar.py "$RUNNER_TEMP/jji-content-artifact/artifact.tar" "infrastructure/content-release/inputs/$RELEASE_ROLE-manifest.json" "$EXPECTED_TAR_SHA256"
+      - uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
+        with:
+          artifact_name: approved-content-${{ github.run_id }}
+          timeout: 600000

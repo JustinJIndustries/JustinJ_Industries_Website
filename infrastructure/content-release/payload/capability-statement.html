@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="/__jji_releases/8d48f9c73c091082c02919259979c473316c6d5aba01745fdc34248d5793c640/assets/logos/JJI-Logo-Only-grey.png"
+      type="image/png"
+    />
+    <meta name="author" content="JustinJ Industries LLC" />
+    <link
+      rel="alternate"
+      type="application/pdf"
+      href="https://www.justinjindustries.com/assets/justinj-industries-capability-statement.pdf"
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --page: #edf2f6;
+        --paper: #fff;
+        --ink: #182d3d;
+        --muted: #40586b;
+        --line: #cbd7e0;
+        --tint: #f0f5f8;
+        --link: #075b96;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--page);
+        color: var(--ink);
+        font:
+          16px/1.5 Arial,
+          Helvetica,
+          sans-serif;
+      }
+      a {
+        color: var(--link);
+        text-underline-offset: 0.2em;
+        text-decoration-thickness: 1px;
+      }
+      a:hover {
+        text-decoration-thickness: 2px;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid #1769aa;
+        outline-offset: 4px;
+        border-radius: 3px;
+      }
+      .skip-link {
+        position: fixed;
+        left: -9999px;
+        top: 12px;
+        z-index: 10;
+      }
+      .skip-link:focus {
+        left: 12px;
+        padding: 10px 16px;
+        background: var(--paper);
+      }
+      .capability-return {
+        width: min(1000px, calc(100% - 48px));
+        margin: 20px auto -16px;
+        font-size: 0.875rem;
+      }
+      .capability-return a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 44px;
+        max-width: 100%;
+      }
+      .capability-return svg {
+        width: 18px;
+        height: 18px;
+        flex: none;
+      }
+      .capability-sheet {
+        width: min(1000px, calc(100% - 48px));
+        margin: 32px auto;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        background: var(--paper);
+        box-shadow: 0 16px 48px #10203314;
+      }
+      .capability-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 26px 28px;
+        background: #111e2c;
+        color: #f5f8fb;
+      }
+      .capability-brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+      /* Original transparent monogram remains unchanged; colour is presentation only. */
+      .capability-brand__mark {
+        display: block;
+        width: 48px;
+        height: 48px;
+        flex: none;
+        background: linear-gradient(135deg, #62a8ff, #5de3eb);
+        -webkit-mask: url("/__jji_releases/8d48f9c73c091082c02919259979c473316c6d5aba01745fdc34248d5793c640/assets/logos/JJI-Logo-Only-white.png") center /
+          contain no-repeat;
+        mask: url("/__jji_releases/8d48f9c73c091082c02919259979c473316c6d5aba01745fdc34248d5793c640/assets/logos/JJI-Logo-Only-white.png") center / contain
+          no-repeat;
+      }
+      .capability-brand__name {
+        margin: 0;
+        font-size: 1.35rem;
+        font-weight: 700;
+      }
+      .capability-brand__legal {
+        margin: 4px 0 0;
+        color: #c3d3df;
+        font-size: 0.8rem;
+      }
+      .capability-heading {
+        min-width: 0;
+      }
+      h1 {
+        margin: 0;
+        font-size: 1.9rem;
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+      }
+      .capability-audience {
+        margin: 7px 0 0;
+        color: #c3d3df;
+        font-size: 0.8rem;
+      }
+      .capability-strap {
+        margin: 0;
+        padding: 13px 28px;
+        background: #e7f0f7;
+        color: #25475f;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.055em;
+      }
+      .capability-intro {
+        margin: 0;
+        padding: 20px 28px;
+        font-size: 1.04rem;
+      }
+      .capability-content {
+        padding: 0 28px 24px;
+      }
+      .capability-section {
+        margin-top: 20px;
+      }
+      .capability-section:first-child {
+        margin-top: 0;
+      }
+      .capability-section h2 {
+        margin: 0 0 12px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.075em;
+        text-transform: uppercase;
+      }
+      .capability-services {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+      .capability-service {
+        border-top: 3px solid #3377a4;
+        padding-top: 12px;
+        min-width: 0;
+      }
+      .capability-sheet h3 {
+        margin: 0 0 8px;
+        font-size: 1.12rem;
+        line-height: 1.25;
+      }
+      .capability-service p,
+      .capability-example p {
+        margin: 0 0 9px;
+      }
+      .capability-output {
+        color: var(--muted);
+      }
+      .capability-practices {
+        margin: 0;
+        padding-left: 20px;
+        display: grid;
+        gap: 5px;
+      }
+      .capability-disclosure {
+        width: min(1000px, calc(100% - 48px));
+        margin: 28px auto 40px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+      .capability-disclosure p {
+        max-width: none;
+        margin: 0;
+      }
+      .capability-examples {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+      .capability-example {
+        min-width: 0;
+      }
+      .capability-example-label {
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.035em;
+        text-transform: uppercase;
+      }
+      .capability-example-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 18px;
+      }
+      .capability-example-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+      }
+      .capability-example-note {
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+      .capability-procurement {
+        padding: 14px 16px;
+        border-left: 3px solid #3377a4;
+        background: var(--tint);
+      }
+      .capability-procurement h2 {
+        margin-bottom: 6px;
+      }
+      .capability-procurement p {
+        margin: 0;
+      }
+      .capability-contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 22px;
+        margin-top: 16px;
+        padding-top: 12px;
+        border-top: 1px solid var(--line);
+        font-style: normal;
+      }
+      .capability-contact a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+      .capability-revision {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+      .screen-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        width: min(1000px, calc(100% - 48px));
+        margin: 0 auto 32px;
+      }
+      .screen-actions .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        max-width: 100%;
+        padding: 11px 18px;
+        border: 1px solid #174e75;
+        border-radius: 8px;
+        background: #174e75;
+        color: #fff;
+        font:
+          700 0.94rem/1.4 Arial,
+          Helvetica,
+          sans-serif;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .screen-actions .btn--secondary {
+        background: var(--paper);
+        color: var(--link);
+        border-color: var(--line);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --page: #0b1118;
+          --paper: #142231;
+          --ink: #ecf2f8;
+          --muted: #bfcedb;
+          --line: #415569;
+          --tint: #1b3044;
+          --link: #9bd8ff;
+        }
+      }
+      @media (max-width: 760px) {
+        .capability-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .capability-services {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+        .capability-examples {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+      }
+      @media (max-width: 420px) {
+        .capability-return {
+          width: calc(100% - 24px);
+          margin: 8px auto -8px;
+        }
+        .capability-sheet {
+          width: calc(100% - 24px);
+          margin: 16px auto 24px;
+        }
+        .capability-disclosure {
+          width: calc(100% - 24px);
+        }
+        .capability-header {
+          padding: 22px 18px;
+        }
+        .capability-brand__name {
+          font-size: 1.15rem;
+        }
+        .capability-brand__mark {
+          width: 40px;
+          height: 40px;
+        }
+        .capability-brand {
+          gap: 10px;
+        }
+        .capability-brand__legal {
+          max-width: 24ch;
+        }
+        .capability-strap {
+          padding: 12px 18px;
+          line-height: 1.7;
+        }
+        .capability-intro {
+          padding: 18px;
+        }
+        .capability-content {
+          padding: 0 18px 20px;
+        }
+        .screen-actions {
+          width: calc(100% - 32px);
+          flex-direction: column;
+        }
+      }
+      @media (scripting: none) {
+        #print-capability {
+          display: none;
+        }
+      }
+      @media print {
+        @page {
+          size: letter;
+          margin: 0.4in;
+        }
+        :root {
+          color-scheme: light;
+          --paper: #fff;
+          --ink: #182d3d;
+          --muted: #40586b;
+          --line: #cbd7e0;
+          --tint: #f0f5f8;
+          --link: #075b96;
+        }
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+          background: #fff;
+          font-size: 10.5pt;
+          line-height: 1.36;
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+        }
+        .capability-sheet {
+          width: 100%;
+          margin: 0;
+          border: 1px solid var(--line);
+          border-radius: 0;
+          box-shadow: none;
+          overflow: visible;
+        }
+        .capability-header {
+          padding: 12px 20px;
+          gap: 18px;
+          flex-direction: row;
+          align-items: center;
+        }
+        .capability-brand__mark {
+          width: 42px;
+          height: 42px;
+        }
+        .capability-brand__name {
+          font-size: 17pt;
+        }
+        .capability-brand__legal,
+        .capability-audience {
+          font-size: 8.8pt;
+        }
+        h1 {
+          font-size: 20pt;
+        }
+        .capability-strap {
+          padding: 7px 20px;
+          font-size: 9pt;
+        }
+        .capability-intro {
+          padding: 10px 20px;
+          font-size: 11pt;
+        }
+        .capability-content {
+          padding: 0 20px 8px;
+        }
+        .capability-section {
+          margin-top: 10px;
+          break-inside: avoid;
+        }
+        .capability-section h2 {
+          margin-bottom: 6px;
+          font-size: 9pt;
+        }
+        .capability-services {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 14px;
+        }
+        .capability-service {
+          padding-top: 9px;
+        }
+        .capability-sheet h3 {
+          font-size: 12pt;
+          margin-bottom: 6px;
+        }
+        .capability-service p,
+        .capability-example p {
+          margin-bottom: 6px;
+        }
+        .capability-disclosure {
+          width: 100%;
+          font-size: 9.2pt;
+          margin: 7px 0 0;
+          padding-top: 7px;
+          break-inside: avoid;
+        }
+        .capability-examples {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 18px;
+        }
+        .capability-example-label {
+          font-size: 8.4pt;
+        }
+        .capability-example-links a,
+        .capability-contact a {
+          min-height: 0;
+        }
+        .capability-example-links {
+          gap: 12px;
+        }
+        .capability-procurement {
+          padding: 10px 12px;
+        }
+        .capability-contact {
+          margin-top: 12px;
+          padding-top: 10px;
+          gap: 6px 20px;
+          font-size: 10.5pt;
+        }
+        .capability-revision {
+          margin-top: 7px;
+          font-size: 8.8pt;
+        }
+        .capability-return,
+        .screen-actions,
+        .skip-link,
+        .jji-footer {
+          display: none !important;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="/__jji_releases/3f80185c86e66258b986039316607640109caf5f46c9ba419e78249a35f86b5f/assets/site-footer.css?v=61efc97f24" />
+
+    <title>Capability Statement | JustinJ Industries</title>
+    <meta
+      name="description"
+      content="JustinJ Industries LLC: websites, advertising, measurement and digital support for public-sector teams and prime contractors. Services, examples and contact details."
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link
+      rel="canonical"
+      href="https://www.justinjindustries.com/capability-statement/"
+    />
+    <meta
+      property="og:title"
+      content="Capability Statement | JustinJ Industries"
+    />
+    <meta
+      property="og:description"
+      content="JustinJ Industries LLC: websites, advertising, measurement and digital support for public-sector teams and prime contractors. Services, examples and contact details."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://www.justinjindustries.com/capability-statement/"
+    />
+    <meta property="og:site_name" content="JustinJ Industries" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:image"
+      content="https://www.justinjindustries.com/assets/jji-social.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="JustinJ Industries — Websites, measurement and digital support"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Capability Statement | JustinJ Industries"
+    />
+    <meta
+      name="twitter:description"
+      content="JustinJ Industries LLC: websites, advertising, measurement and digital support for public-sector teams and prime contractors. Services, examples and contact details."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.justinjindustries.com/assets/jji-social.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="JustinJ Industries — Websites, measurement and digital support"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.justinjindustries.com/#organization",
+            "name": "JustinJ Industries",
+            "url": "https://www.justinjindustries.com/",
+            "email": "info@justinjindustries.com",
+            "telephone": "+1-617-800-9291",
+            "logo": "https://www.justinjindustries.com/assets/logos/JJI-Logo-Only-grey.png"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.justinjindustries.com/#website",
+            "url": "https://www.justinjindustries.com/",
+            "name": "JustinJ Industries",
+            "publisher": {
+              "@id": "https://www.justinjindustries.com/#organization"
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://www.justinjindustries.com/capability-statement/#webpage",
+            "url": "https://www.justinjindustries.com/capability-statement/",
+            "name": "Capability Statement | JustinJ Industries",
+            "description": "JustinJ Industries LLC: websites, advertising, measurement and digital support for public-sector teams and prime contractors. Services, examples and contact details.",
+            "isPartOf": { "@id": "https://www.justinjindustries.com/#website" },
+            "about": {
+              "@id": "https://www.justinjindustries.com/#organization"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://www.justinjindustries.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Capability Statement",
+                "item": "https://www.justinjindustries.com/capability-statement/"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <nav class="capability-return" aria-label="Return navigation">
+      <a href="/government-buyers/">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="m10 5-7 7 7 7M3 12h18" />
+        </svg>
+        Back to Government Buyers
+      </a>
+    </nav>
+    <main id="main">
+      <article class="capability-sheet" aria-labelledby="capability-title">
+        <header class="capability-header">
+          <div class="capability-brand">
+            <span class="capability-brand__mark" aria-hidden="true"></span>
+            <div>
+              <p class="capability-brand__name">JustinJ Industries</p>
+              <p class="capability-brand__legal">
+                JustinJ Industries LLC · Boston-based
+              </p>
+            </div>
+          </div>
+          <div class="capability-heading">
+            <h1 id="capability-title">Capability statement</h1>
+            <p class="capability-audience">
+              Government buyers &amp; prime contractors
+            </p>
+          </div>
+        </header>
+        <p class="capability-strap">
+          WEBSITES • MEASUREMENT • ADVERTISING • DIGITAL SUPPORT
+        </p>
+        <p class="capability-intro">
+          JustinJ Industries is a Boston-based studio for websites, advertising,
+          measurement and practical digital support. We help teams scope useful
+          changes, verify the work and maintain it after handoff.
+        </p>
+        <div class="capability-content">
+          <section
+            class="capability-section"
+            aria-labelledby="capability-services-title"
+          >
+            <h2 id="capability-services-title">Core services and outputs</h2>
+            <div class="capability-services">
+              <section
+                class="capability-service"
+                aria-labelledby="capability-websites"
+              >
+                <h3 id="capability-websites">Websites</h3>
+                <p>
+                  Website design, development and redesign; WordPress/Craft CMS,
+                  technical SEO and accessibility remediation.
+                </p>
+                <p class="capability-output">
+                  <strong>Outputs:</strong> Page templates, content patterns,
+                  metadata and editor notes.
+                </p>
+              </section>
+              <section
+                class="capability-service"
+                aria-labelledby="capability-measurement"
+              >
+                <h3 id="capability-measurement">Measurement</h3>
+                <p>
+                  GA4/GTM; Adobe Analytics and Tags (Adobe Launch)
+                  specifications and QA.
+                </p>
+                <p class="capability-output">
+                  <strong>Outputs:</strong> Measurement plans, data-layer
+                  definitions, consent-aware QA, Analysis Workspace reports and
+                  Data Studio dashboards.
+                </p>
+              </section>
+              <section
+                class="capability-service"
+                aria-labelledby="capability-advertising"
+              >
+                <h3 id="capability-advertising">Advertising</h3>
+                <p>
+                  Paid search, display and paid social. Google Ads, Microsoft
+                  Advertising (Bing Ads) and Meta Ads.
+                </p>
+                <p class="capability-output">
+                  <strong>Outputs:</strong> Channel plans, landing-page checks,
+                  optimization notes and reporting definitions.
+                </p>
+              </section>
+              <section
+                class="capability-service"
+                aria-labelledby="capability-support"
+              >
+                <h3 id="capability-support">Digital support</h3>
+                <p>
+                  Website/CMS maintenance, implementation reviews and practical
+                  technical documentation.
+                </p>
+                <p class="capability-output">
+                  <strong>Outputs:</strong> Scoped fixes, change logs, test
+                  notes and maintenance handoffs.
+                </p>
+              </section>
+            </div>
+          </section>
+          <section
+            class="capability-section"
+            aria-labelledby="capability-approach"
+          >
+            <h2 id="capability-approach">
+              Connected delivery. Documented checks.
+            </h2>
+            <ul class="capability-practices">
+              <li>
+                Website, advertising and measurement decisions reviewed
+                together.
+              </li>
+              <li>
+                WCAG-informed keyboard, semantic HTML and automated
+                accessibility checks.
+              </li>
+              <li>
+                Privacy-aware implementation, clear QA findings and practical
+                handoffs.
+              </li>
+            </ul>
+          </section>
+          <section
+            class="capability-section"
+            aria-labelledby="capability-evidence"
+          >
+            <h2 id="capability-evidence">Selected work and demonstration</h2>
+            <div class="capability-examples">
+              <section
+                class="capability-example"
+                aria-labelledby="capability-uaid"
+              >
+                <p class="capability-example-label">
+                  Published nonprofit website contribution
+                </p>
+                <h3 id="capability-uaid">UAid Direct</h3>
+                <p>
+                  Development contributions to a regional WordPress multisite:
+                  custom homepage/news templates, 11 reusable ACF layout
+                  choices, region-aware navigation and English/Ukrainian Help
+                  content.
+                </p>
+                <div class="capability-example-links">
+                  <a href="https://www.justinjindustries.com/work/#uaid"
+                    >Website work</a
+                  ><a href="https://uaiddirect.org/usa/">Published site</a>
+                </div>
+              </section>
+              <section
+                class="capability-example"
+                aria-labelledby="capability-northside"
+              >
+                <p class="capability-example-label">
+                  Synthetic portfolio demonstration
+                </p>
+                <h3 id="capability-northside">Northside</h3>
+                <p>
+                  Separate service-site and reporting demonstrations: editable
+                  content, a non-sending inquiry flow and an eight-page
+                  dashboard with illustrative sample data. The website, inquiry
+                  and reporting examples are separate.
+                </p>
+                <div class="capability-example-links">
+                  <a
+                    href="https://www.justinjindustries.com/design/?design=northside"
+                    >Website demo</a
+                  ><a href="https://www.justinjindustries.com/work/#northside"
+                    >Dashboard demo</a
+                  >
+                </div>
+              </section>
+            </div>
+          </section>
+          <section
+            class="capability-section capability-procurement"
+            aria-labelledby="capability-procurement-title"
+          >
+            <h2 id="capability-procurement-title">Discuss the opportunity</h2>
+            <p>
+              Share the solicitation or project need. We can review scope,
+              deliverables, the procurement route and required documentation
+              together. Registration and eligibility requirements must be
+              confirmed for the specific opportunity.
+            </p>
+          </section>
+          <address class="capability-contact">
+            <a href="mailto:info@justinjindustries.com"
+              >info@justinjindustries.com</a
+            >
+            <a href="tel:+16178009291">617‑800‑9291</a>
+            <a href="https://www.justinjindustries.com/"
+              >justinjindustries.com</a
+            >
+          </address>
+          <p class="capability-revision">
+            JustinJ Industries LLC · Revised
+            <time datetime="2026-10-22">October 22, 2026</time>
+          </p>
+        </div>
+      </article>
+      <nav class="screen-actions" aria-label="Capability statement actions">
+        <a
+          class="btn"
+          href="/__jji_releases/8d48f9c73c091082c02919259979c473316c6d5aba01745fdc34248d5793c640/assets/justinj-industries-capability-statement.pdf?v=20261022"
+          download="JustinJ-Industries-Capability-Statement.pdf"
+          >Download capability statement (PDF, 1 page)</a
+        >
+        <button id="print-capability" class="btn btn--secondary" type="button">
+          Print this page
+        </button>
+        <a class="btn btn--secondary" href="/government-buyers/"
+          >Government Buyers</a
+        >
+      </nav>
+      <aside
+        class="capability-disclosure"
+        aria-label="Capability statement notes"
+      >
+        <p>
+          These examples are not presented as government past performance.
+          Accessibility conformance should be validated for each project’s
+          scope, content and platform. Sensitive form contents are not sent to
+          analytics.
+        </p>
+      </aside>
+    </main>
+    <!-- shared:footer:start -->
+    <footer class="site-footer jji-footer">
+      <div class="jji-footer__container">
+        <div class="jji-footer__main">
+          <div class="jji-footer__identity">
+            <p>WEBSITES&nbsp;• MEASUREMENT&nbsp;• DIGITAL SUPPORT</p>
+          </div>
+          <nav class="jji-footer__nav" aria-label="Footer explore">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/services/">Services</a></li>
+              <li><a href="/work/">Selected work</a></li>
+              <li><a href="/catalogue/">Website designs</a></li>
+              <li><a href="/about/">About</a></li>
+            </ul>
+          </nav>
+          <nav class="jji-footer__nav" aria-label="Footer for buyers">
+            <h2>For buyers</h2>
+            <ul>
+              <li><a href="/government-buyers/">Government Buyers</a></li>
+              <li><a href="/capability-statement/">Capability statement</a></li>
+            </ul>
+          </nav>
+          <div class="jji-footer__contact">
+            <h2>Let’s talk</h2>
+            <address>
+              <a href="mailto:info@justinjindustries.com"
+                >info@justinjindustries.com</a
+              >
+              <a href="tel:+16178009291">617&#8209;800&#8209;9291</a>
+            </address>
+            <a class="btn btn--small jji-footer__cta" href="/#contact"
+              >Discuss a project</a
+            >
+          </div>
+        </div>
+        <div class="jji-footer__bottom">
+          <p>&copy; <span id="year">2026</span> JustinJ Industries LLC.</p>
+          <nav class="jji-footer__policies" aria-label="Footer policies">
+            <a href="/policies/#privacy">Privacy &amp; measurement</a>
+            <a href="/policies/#accessibility">Accessibility</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
+    <!-- shared:footer:end -->
+    <script>
+      document
+        .getElementById("print-capability")
+        ?.addEventListener("click", () => window.print());
+    </script>
+  </body>
+</html>
