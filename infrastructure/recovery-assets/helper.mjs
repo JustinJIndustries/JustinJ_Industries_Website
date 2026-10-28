@@ -326,10 +326,12 @@ export async function prepare(output, { root = here, readBaseline } = {}) {
     if (e.code !== "ENOENT") throw e;
   }
   await fs.mkdir(output, { recursive: false });
+  const deadlineAt = Date.now() + 8 * 60 * 1000;
   for (const e of [...base, ...overlay]) {
+    if (Date.now() >= deadlineAt) fail("Baseline assembly deadline exceeded");
     let b;
     if (base.includes(e)) {
-      b = readBaseline ? await readBaseline(e) : await download(e);
+      b = readBaseline ? await readBaseline(e) : await download(e, { deadlineAt });
     } else b = await fs.readFile(path.join(root, "overlay", e.path));
     if (b.length !== e.bytes || hash(b) !== e.sha256)
       fail("Input body mismatch: " + e.path);
@@ -344,39 +346,75 @@ export async function prepare(output, { root = here, readBaseline } = {}) {
     manifestSha256: C.unionHash,
   };
 }
-export async function download(e, { fetcher = fetch } = {}) {
-  let url = C.origin + "/" + e.path,
-    res;
-  for (let hop = 0; hop < 4; hop++) {
-    res = await fetcher(url, {
-      headers: { "Accept-Encoding": "identity" },
-      redirect: "manual",
-      signal: AbortSignal.timeout(25000),
-    });
-    if (![301, 302, 303, 307, 308].includes(res.status)) break;
-    await res.body?.cancel();
-    const next = new URL(res.headers.get("location"), url);
-    if (
-      next.origin !== C.origin ||
-      next.protocol !== "https:" ||
-      next.username ||
-      next.password
-    )
-      fail("Unapproved backup redirect");
-    url = next.href;
+export async function download(e, {
+  fetcher = fetch,
+  timeoutMs = 25000,
+  retryDelayMs = 1000,
+  deadlineAt = Date.now() + 51000,
+  logger = (record) => console.log(JSON.stringify(record)),
+} = {}) {
+  safe(e.path);
+  if (!Number.isInteger(timeoutMs) || timeoutMs < 1 || timeoutMs > 25000 ||
+      !Number.isInteger(retryDelayMs) || retryDelayMs < 0 || retryDelayMs > 1000 ||
+      !Number.isSafeInteger(deadlineAt)) fail("Invalid download bounds");
+  const started = Date.now();
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    const remaining = Math.min(timeoutMs, deadlineAt - Date.now());
+    if (remaining < 1) fail("Baseline deadline exceeded: " + e.path);
+    const signal = AbortSignal.timeout(remaining);
+    let phase = "headers", hop = 0, count = 0, res;
+    logger({ event: "baseline-start", path: e.path, attempt });
+    try {
+      let url = C.origin + "/" + e.path;
+      for (; hop < 4; hop++) {
+        res = await fetcher(url, {
+          headers: { "Accept-Encoding": "identity" },
+          redirect: "manual",
+          signal,
+        });
+        if (![301, 302, 303, 307, 308].includes(res.status)) break;
+        await res.body?.cancel();
+        const next = new URL(res.headers.get("location"), url);
+        if (next.origin !== C.origin || next.protocol !== "https:" ||
+            next.username || next.password) fail("Unapproved backup redirect");
+        url = next.href;
+      }
+      if (res.status !== 200) fail("Pinned backup response not200");
+      const n = res.headers.get("content-length");
+      if (n && Number(n) !== e.bytes) fail("Unexpected content length");
+      phase = "body";
+      const chunks = [];
+      for await (const chunk of res.body) {
+        count += chunk.length;
+        if (count > e.bytes) fail("Download exceeds pinned size");
+        chunks.push(chunk);
+      }
+      const body = Buffer.concat(chunks);
+      phase = "integrity";
+      if (body.length !== e.bytes || hash(body) !== e.sha256)
+        fail("Input body mismatch");
+      logger({ event: "baseline-complete", path: e.path, attempt,
+        bytes: count, elapsedMs: Date.now() - started });
+      return body;
+    } catch (error) {
+      await res?.body?.cancel().catch(() => {});
+      const rawCode = error.cause?.code || error.code;
+      const code = typeof rawCode === "string" ? rawCode : error.name;
+      const transient = error.name === "TimeoutError" ||
+        ["ECONNRESET", "ETIMEDOUT", "EAI_AGAIN", "UND_ERR_CONNECT_TIMEOUT",
+          "UND_ERR_HEADERS_TIMEOUT", "UND_ERR_BODY_TIMEOUT", "UND_ERR_SOCKET"].includes(code);
+      const retry = transient && attempt === 1 &&
+        Date.now() + retryDelayMs < deadlineAt;
+      logger({ event: "baseline-error", path: e.path, attempt, phase, hop,
+        bytes: count, elapsedMs: Date.now() - started, code, retry });
+      if (!retry) throw new Error(
+        `Baseline download failed: path=${e.path} attempt=${attempt} phase=${phase} code=${code}`,
+        { cause: error });
+      await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
+    }
   }
-  if (res.status !== 200) fail("Pinned backup response not200: " + e.path);
-  const n = res.headers.get("content-length");
-  if (n && Number(n) !== e.bytes) fail("Unexpected content length");
-  const chunks = [];
-  let count = 0;
-  for await (const c of res.body) {
-    count += c.length;
-    if (count > e.bytes) fail("Download exceeds pinned size");
-    chunks.push(c);
-  }
-  return Buffer.concat(chunks);
 }
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const mode = process.argv[2];
   context(process.env);
