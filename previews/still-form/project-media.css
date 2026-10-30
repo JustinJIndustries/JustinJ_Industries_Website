@@ -128,3 +128,22 @@
   outline: 3px solid #2654de;
   outline-offset: 4px;
 }
+
+[data-sf-buffer-action] {
+  min-height: 44px;
+  margin: 8px 8px 8px 0;
+  padding: 10px 16px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+[data-sf-buffer-action]:focus-visible {
+  outline: 3px solid #395fc4;
+  outline-offset: 3px;
+}
+video[data-sf-buffered] {
+  background: #171916;
+  color: #f1efe5;
+}

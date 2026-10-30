@@ -10,6 +10,8 @@
       rel="stylesheet"
       href="/previews/aer-field/preview.css?v=e5bc3fc7c8"
     />
+    <link rel="stylesheet" href="/previews/aer-field/film-player.css" />
+    <script src="/previews/aer-field/film-player.js" defer></script>
     <script src="/previews/aer-field/site.js?v=fd6a79a344" defer></script>
 
     <link rel="stylesheet" href="/assets/demo-return.css?v=53fedc5b5a" />
@@ -106,8 +108,10 @@
       <div class="detail-media">
         <video
           controls
+          data-short-film
+          data-film-bytes="6850278"
           playsinline
-          preload="metadata"
+          preload="none"
           poster="/previews/aer-field/assets/construction-poster.jpg"
           aria-label="Business aerial film study"
           aria-describedby="film-description"
@@ -118,6 +122,22 @@
           />
           Your browser does not support MP4 video.
         </video>
+      </div>
+      <div class="short-film-loader" data-film-loader hidden>
+        <p id="film-load-status" role="status" aria-live="polite">
+          Load this short film before playback to enable seeking.
+        </p>
+        <div class="short-film-actions">
+          <button type="button" data-film-load>Load film</button>
+          <button type="button" data-film-cancel hidden>Cancel loading</button>
+          <button type="button" data-film-release hidden>Unload film</button>
+          <button type="button" data-film-original>Use original player</button>
+        </div>
+        <p>
+          <a href="/previews/aer-field/assets/construction.mp4"
+            >Open video file</a
+          >
+        </p>
       </div>
       <details class="film-description" id="film-description">
         <summary>Visual description of this silent clip</summary>

@@ -29,28 +29,39 @@
         const labels = () => {
           toggle.textContent = video.paused ? "Play motion" : "Pause motion";
         };
-        const play = () =>
-          video
-            .play()
-            .then(() => {
-              status.hidden = true;
+        const buffer =
+          video.dataset.sfBuffered === "true"
+            ? window.sfCreateMotionBuffer?.({
+                video,
+                toggle,
+                message,
+                labels,
+                canAutoplay: () => !reduced.matches && !document.hidden,
+              })
+            : null;
+        const play = (manual = false) =>
+          (buffer ? buffer.play(manual) : video.play())
+            .then((played) => {
+              if (played !== false) status.hidden = true;
               labels();
             })
             .catch(() => {
-              message(
-                "Automatic playback is unavailable. Press Play motion to start.",
-              );
+              if (!buffer)
+                message(
+                  "Automatic playback is unavailable. Press Play motion to start.",
+                );
               labels();
             });
         video.addEventListener("play", labels);
         video.addEventListener("pause", labels);
         video.addEventListener("ended", labels);
         toggle.addEventListener("click", () => {
-          if (video.paused) play();
+          if (video.paused) play(true);
           else video.pause();
         });
         const preference = () => {
           if (reduced.matches) {
+            buffer?.cancel();
             video.autoplay = false;
             video.pause();
             message(
@@ -75,7 +86,7 @@
           );
           observer.observe(video);
         }
-        // Without JavaScript/observer support the native controls remain click-to-play.
+        // Without observer support, manual playback remains available.
         labels();
       }
       figure

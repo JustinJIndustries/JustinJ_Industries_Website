@@ -527,9 +527,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const dateWrap = document.getElementById("desired-date-wrap");
   const dateInput = document.getElementById("desired-date");
   const review = document.getElementById("enquiry-review");
+  const boilerCareChoice = document.getElementById("page-boiler-care-choice");
+  boilerCareChoice.hidden = key !== "northside";
   const applyPageDefaults = () => {
     form.elements.page_faq.checked = key === "harbor";
     form.elements.page_projects.checked = key === "still" || key === "aer";
+    form.elements.page_boiler_care.checked = key === "northside";
   };
   applyPageDefaults();
   let currentStep = 0;

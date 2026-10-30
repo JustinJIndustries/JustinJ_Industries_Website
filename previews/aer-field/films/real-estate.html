@@ -10,14 +10,25 @@
       rel="stylesheet"
       href="/previews/aer-field/preview.css?v=e5bc3fc7c8"
     />
+    <link rel="stylesheet" href="/previews/aer-field/film-player.css" />
+    <script src="/previews/aer-field/film-player.js" defer></script>
     <script src="/previews/aer-field/site.js?v=fd6a79a344" defer></script>
-
 
     <link rel="stylesheet" href="/assets/demo-return.css?v=53fedc5b5a" />
     <script src="/assets/demo-return.js?v=670b57aa8d"></script>
-  <link rel="icon" href="/previews/aer-field/favicon-32.png?v=8a4c575504" type="image/png" sizes="32x32" />
-<link rel="icon" href="/previews/aer-field/favicon.svg?v=b9f705a98a" type="image/svg+xml" sizes="any" />
-</head>
+    <link
+      rel="icon"
+      href="/previews/aer-field/favicon-32.png?v=8a4c575504"
+      type="image/png"
+      sizes="32x32"
+    />
+    <link
+      rel="icon"
+      href="/previews/aer-field/favicon.svg?v=b9f705a98a"
+      type="image/svg+xml"
+      sizes="any"
+    />
+  </head>
   <body class="">
     <a class="skip-link" href="#main">Skip to content</a>
     <nav class="preview-banner jji-demo-bar" aria-label="Demo return">
@@ -99,8 +110,10 @@
       <div class="detail-media">
         <video
           controls
+          data-short-film
+          data-film-bytes="11311269"
           playsinline
-          preload="metadata"
+          preload="none"
           poster="/previews/aer-field/assets/house-pool-poster.jpg"
           aria-label="Real estate aerial film study"
           aria-describedby="film-description"
@@ -111,6 +124,22 @@
           />
           Your browser does not support MP4 video.
         </video>
+      </div>
+      <div class="short-film-loader" data-film-loader hidden>
+        <p id="film-load-status" role="status" aria-live="polite">
+          Load this short film before playback to enable seeking.
+        </p>
+        <div class="short-film-actions">
+          <button type="button" data-film-load>Load film</button>
+          <button type="button" data-film-cancel hidden>Cancel loading</button>
+          <button type="button" data-film-release hidden>Unload film</button>
+          <button type="button" data-film-original>Use original player</button>
+        </div>
+        <p>
+          <a href="/previews/aer-field/assets/house-pool.mp4"
+            >Open video file</a
+          >
+        </p>
       </div>
       <details class="film-description" id="film-description">
         <summary>Visual description of this silent clip</summary>
@@ -174,7 +203,8 @@
     <aside class="demo-disclosures" aria-label="Demo notes">
       <p id="demo-note-1" tabindex="-1">
         <strong>About this demo:</strong> AER / FIELD is a demo studio concept
-        and static website preview with licensed stock footage. The film studies are illustrative. Forms are inactive.
+        and static website preview with licensed stock footage. The film studies
+        are illustrative. Forms are inactive.
       </p>
       <p id="demo-note-2" tabindex="-1">
         <strong>Real estate footage:</strong>
