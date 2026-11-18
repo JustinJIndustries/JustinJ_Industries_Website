@@ -1,13 +1,14 @@
 {
-  "revision": "2026-10-17",
+  "revision": "2026-11-18",
   "output": "assets/justinj-industries-capability-statement.pdf",
-  "sha256": "b2ac6bae270dac4f55e906e634fccf81d193390e3d0a809521b3a0f6f5b938a9",
+  "sha256": "c4af9c0e234056070f8a1c6013ce0b20644df132dff25ead8571839f008bc56a",
   "pages": 1,
   "sources": {
-    "capability-statement.html": "a1bf82bf02b30dcd7f5e31b21fd6948d85bd766e11e86bebf31aa1ee4fb66e80",
+    "capability-statement.html": "43e48b77ff5ab858d85f5f12a78f739322e4bde2e184f8e8ffdf353cdd2ba113",
     "assets/logos/JJI-Logo-Only-white.png": "384f051a7cbb4d1d36626408c597fe920974e58c8378b434d6044dfe1e276b24",
     "assets/site-footer.css": "61efc97f2465ec92c5ba9d29ca053d07c0468b353fd3f9b7008116b97fa242c3"
   },
-  "renderer": "Puppeteer/Chromium; Letter; tagged:true; outline:true",
-  "accessibility": "Title, en-US language, marked structure and links present. Not a PDF/UA certification."
+  "renderer": "LibreOfficeDev 26.8.0.0.alpha0 (X86_64); owner-approved version 5; imported unchanged",
+  "accessibility": "Title, en-US language, marked structure and links present. Not a PDF/UA certification.",
+  "provenance": "Separately approved PDF. Website source hashes below are drift guards, not PDF generation inputs; the HTML statement remains a separate revision."
 }
