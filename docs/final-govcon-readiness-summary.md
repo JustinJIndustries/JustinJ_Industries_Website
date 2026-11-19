@@ -137,3 +137,13 @@ immutable recovery asset. The new manual GitHub-only publisher is a proposal
 awaiting independent review and exact commit/artifact binding; no push, workflow
 dispatch or deployment has occurred in this preparation. Cloudflare cutover,
 queued audit fixes, drafts and the Pages-only video adapter remain outside scope.
+
+## Cloudflare dashboard package preflight — November 19, 2026
+
+Added a local-only manual Cloudflare package check using the documented dashboard
+limits of 1,000 selected files and 25 MiB per file. No aggregate archive/package
+limit is asserted because the applicable documentation does not publish one.
+Exact manifest, file integrity, static-content and target checks remain required;
+other publishing routes retain their existing controls. See
+[the manual-upload preflight](cloudflare-manual-upload.md). This source tooling
+change does not authorize or perform an upload, deployment or hosting change.
