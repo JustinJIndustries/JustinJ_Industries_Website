@@ -11,17 +11,14 @@ import {
 } from "../failover/control-identity.mjs";
 
 const environment = "backup-preview";
-export async function admitPreviewRun(env, read) {
-  assertDispatch(env);
-  await verifyControl(read, env.GITHUB_SHA, env.BACKUP_CONTROL_PIN);
-  const base = `/repos/${REPO}`;
-  const run = await read(`${base}/actions/runs/${env.GITHUB_RUN_ID}`);
+async function trustedRun(read, runId, control) {
+  const run = await read(`/repos/${REPO}/actions/runs/${runId}`);
   if (
-    String(run.id) !== env.GITHUB_RUN_ID ||
+    String(run.id) !== runId ||
     run.run_attempt !== 1 ||
     run.repository?.full_name !== REPO ||
     run.head_repository?.full_name !== REPO ||
-    run.head_sha !== env.GITHUB_SHA ||
+    run.head_sha !== control ||
     run.head_branch !== CONTROL_BRANCH ||
     run.path !== ".github/workflows/backup-only-test.yml" ||
     run.event !== "workflow_dispatch" ||
@@ -29,6 +26,14 @@ export async function admitPreviewRun(env, read) {
     !owner(run.triggering_actor)
   )
     throw new Error("Untrusted backup preview run");
+  return run;
+}
+
+export async function admitPreviewRun(env, read) {
+  assertDispatch(env);
+  await verifyControl(read, env.GITHUB_SHA, env.BACKUP_CONTROL_PIN);
+  const base = `/repos/${REPO}`;
+  await trustedRun(read, env.GITHUB_RUN_ID, env.GITHUB_SHA);
   const endpoint = `${base}/environments/${environment}`;
   const config = await read(endpoint);
   const policy = await read(endpoint + "/deployment-branch-policies");
@@ -50,6 +55,45 @@ export async function admitPreviewRun(env, read) {
     policy.branch_policies[0].name !== CONTROL_BRANCH
   )
     throw new Error("Missing protected backup preview environment");
+  if (env.VERIFY_DEPLOYMENT_ID) {
+    const original = await trustedRun(
+      read,
+      env.VERIFY_ORIGINAL_RUN_ID,
+      env.VERIFY_ORIGINAL_CONTROL_SHA,
+    );
+    const priorReview = await verifiedReviewTarget(
+      read,
+      env.VERIFY_ORIGINAL_RUN_ID,
+      environment,
+    );
+    if (original.status !== "completed" || priorReview.id !== config.id)
+      throw new Error(
+        "Original upload lacks a completed approved run in this environment",
+      );
+    const jobs = await read(
+      `${base}/actions/runs/${env.VERIFY_ORIGINAL_RUN_ID}/attempts/1/jobs?per_page=100`,
+    );
+    const previewJobs = jobs.jobs?.filter((job) => job.name === "preview");
+    const receiptName =
+      "Record backup operation " + env.VERIFY_OPERATION_SHA256;
+    const matching = previewJobs?.[0]?.steps?.filter(
+      (step) => step.name === receiptName,
+    );
+    if (
+      !Array.isArray(jobs.jobs) ||
+      jobs.total_count !== jobs.jobs.length ||
+      previewJobs.length !== 1 ||
+      String(previewJobs[0].run_id) !== env.VERIFY_ORIGINAL_RUN_ID ||
+      previewJobs[0].run_attempt !== 1 ||
+      previewJobs[0].head_sha !== env.VERIFY_ORIGINAL_CONTROL_SHA ||
+      matching?.length !== 1 ||
+      matching[0].status !== "completed" ||
+      matching[0].conclusion !== "success"
+    )
+      throw new Error(
+        "Original issuing runner did not record this approved provider operation",
+      );
+  }
   return { name: environment, id: config.id };
 }
 

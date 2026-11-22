@@ -54,3 +54,10 @@ secret = steps.each_index.select { |i| steps[i].to_s.include?('secrets.') }
 check('only the designated preview upload receives the token after the second admission check',
       verify.size == 2 && secret.size == 1 && restore && verify.first < restore && restore < verify.last &&
       secret.first == verify.last + 1 && steps[secret.first].fetch('run').include?('backup-only.mjs deploy'))
+
+
+marker = steps.find { |step| step.fetch('name', '').start_with?('Record backup operation ') }
+check('only a verified original upload may record the GitHub operation checkpoint',
+      marker && marker['name'] == 'Record backup operation ${{ steps.publication.outputs.operation_sha256 }}' &&
+      marker['if'].include?("inputs.verify_deployment_id == ''") && steps[secret.first]['id'] == 'publication' &&
+      marker.dig('env', 'OPERATION_SHA256') == '${{ steps.publication.outputs.operation_sha256 }}')

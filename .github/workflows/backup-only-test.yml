@@ -12,7 +12,16 @@ on:
         description: Explicit yes only after checking existing blocked paid usage; no budget changes
         required: true
       verify_deployment_id:
-        description: Optional existing preview UUID for read-only verification after an uncertain test; never re-upload
+        description: Existing preview UUID for read-only verification. Supply all four verification inputs together.
+        required: false
+      verify_original_run_id:
+        description: Original approved backup upload run ID
+        required: false
+      verify_original_control_sha:
+        description: Original enrolled backup upload control commit
+        required: false
+      verify_operation_sha256:
+        description: SHA-256 checkpoint recorded by the original GitHub preview job for this Cloudflare operation
         required: false
 permissions: {}
 concurrency:
@@ -46,6 +55,10 @@ jobs:
           APPROVED_WORKFLOW_SHA: ${{ inputs.approved_workflow_sha }}
           BUDGET_VERIFIED_AT: ${{ inputs.budget_verified_at }}
           ZERO_SPEND_CONFIRMED: ${{ inputs.zero_spend_confirmed }}
+          VERIFY_DEPLOYMENT_ID: ${{ inputs.verify_deployment_id }}
+          VERIFY_ORIGINAL_RUN_ID: ${{ inputs.verify_original_run_id }}
+          VERIFY_ORIGINAL_CONTROL_SHA: ${{ inputs.verify_original_control_sha }}
+          VERIFY_OPERATION_SHA256: ${{ inputs.verify_operation_sha256 }}
           GH_READ_TOKEN: ${{ github.token }}
         run: node control/infrastructure/backup-test/verify-run.mjs admit
   build:
@@ -103,6 +116,9 @@ jobs:
       ZERO_SPEND_CONFIRMED: ${{ inputs.zero_spend_confirmed }}
       CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       VERIFY_DEPLOYMENT_ID: ${{ inputs.verify_deployment_id }}
+      VERIFY_ORIGINAL_RUN_ID: ${{ inputs.verify_original_run_id }}
+      VERIFY_ORIGINAL_CONTROL_SHA: ${{ inputs.verify_original_control_sha }}
+      VERIFY_OPERATION_SHA256: ${{ inputs.verify_operation_sha256 }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
@@ -137,9 +153,15 @@ jobs:
           GH_READ_TOKEN: ${{ github.token }}
         run: node control/infrastructure/backup-test/verify-run.mjs
       - name: Upload once to preview; verify provider receipt, all hashes, routes and recovery
+        id: publication
         env:
           CLOUDFLARE_PAGES_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}
         run: node control/infrastructure/backup-test/backup-only.mjs deploy "$RUNNER_TEMP/jji-backup-only"
+      - name: Record backup operation ${{ steps.publication.outputs.operation_sha256 }}
+        if: ${{ !cancelled() && inputs.verify_deployment_id == '' && steps.publication.outputs.operation_sha256 != '' }}
+        env:
+          OPERATION_SHA256: ${{ steps.publication.outputs.operation_sha256 }}
+        run: '[[ "$OPERATION_SHA256" =~ ^[0-9a-f]{64}$ ]]'
       - name: Store only small test receipts, never the full website
         id: evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

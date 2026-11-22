@@ -44,6 +44,10 @@ jobs:
           test -z "${ACTIONS_ID_TOKEN_REQUEST_URL+x}${CLOUDFLARE_PAGES_TOKEN+x}"
           touch "$RUNNER_TEMP/jji-backup-build-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
           echo "boot_hash=$(sha256sum /proc/sys/kernel/random/boot_id | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+      - name: Record rehearsal operation ${{ steps.witness.outputs.boot_hash }}
+        env:
+          CHECKPOINT: ${{ steps.witness.outputs.boot_hash }}
+        run: '[[ "$CHECKPOINT" =~ ^[0-9a-f]{64}$ ]]'
       - name: Build the fixed source
         working-directory: source
         run: |
@@ -60,6 +64,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: read
+      actions: read
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
@@ -81,6 +86,20 @@ jobs:
           [[ "$BUILD_BOOT_HASH" =~ ^[0-9a-f]{64}$ ]]
           test "$(sha256sum /proc/sys/kernel/random/boot_id | cut -d ' ' -f 1)" != "$BUILD_BOOT_HASH"
           test ! -e "$RUNNER_TEMP/jji-backup-build-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: Verify GitHub recorded the original runner checkpoint
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_SOURCE: ${{ github.event.pull_request.head.sha }}
+          BUILD_BOOT_HASH: ${{ needs.build.outputs.boot_hash }}
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID/attempts/$GITHUB_RUN_ATTEMPT/jobs?per_page=100" |
+            jq -e --arg name "Record rehearsal operation $BUILD_BOOT_HASH" --arg head "$EXPECTED_SOURCE" \
+              --argjson run "$GITHUB_RUN_ID" --argjson attempt "$GITHUB_RUN_ATTEMPT" '
+                .total_count == (.jobs | length) and
+                ([.jobs[] | select(.name == "build" and .run_id == $run and .run_attempt == $attempt and .head_sha == $head) |
+                  .steps[] | select(.name == $name and .status == "completed" and .conclusion == "success")] | length == 1)
+              ' > /dev/null
       - name: Fetch approved Git objects without checking out the candidate
         run: git fetch --no-tags --depth=1 https://github.com/JustinJIndustries/JustinJ_Industries_Website.git d6574ede41a8620f838b6eafd3e7ba76ea7ebf68
       - name: Validate the received manifest, reconstructed files and local recovery

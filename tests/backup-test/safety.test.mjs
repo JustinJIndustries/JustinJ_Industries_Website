@@ -53,9 +53,12 @@ test("new preview is bound to the publishing run; verification-only requires the
   const id = "11111111-1111-4111-8111-111111111111";
   const production = "22222222-2222-4222-8222-222222222222";
   const record = {
+    ...deployment,
     id,
+    created_on: "2026-10-24T12:01:00Z",
     deployment_trigger: {
       metadata: {
+        ...deployment.deployment_trigger.metadata,
         commit_message:
           "JJI backup-only test run " +
           current.GITHUB_RUN_ID +
@@ -64,35 +67,51 @@ test("new preview is bound to the publishing run; verification-only requires the
       },
     },
   };
-  verifyPreviewOperation(record, production, current);
+  const issued = verifyPreviewOperation(record, production, current);
+  const next = {
+    ...current,
+    GITHUB_RUN_ID: "124",
+    VERIFY_DEPLOYMENT_ID: id,
+    VERIFY_ORIGINAL_RUN_ID: current.GITHUB_RUN_ID,
+    VERIFY_ORIGINAL_CONTROL_SHA: current.GITHUB_SHA,
+    VERIFY_OPERATION_SHA256: issued.digest,
+  };
+  assert.deepEqual(verifyPreviewOperation(record, production, next), issued);
+  for (const patch of [
+    { VERIFY_OPERATION_SHA256: undefined },
+    { VERIFY_OPERATION_SHA256: "b".repeat(64) },
+    { VERIFY_ORIGINAL_RUN_ID: "124" },
+    { VERIFY_ORIGINAL_RUN_ID: "144" },
+    { VERIFY_ORIGINAL_CONTROL_SHA: "c".repeat(40) },
+    { VERIFY_DEPLOYMENT_ID: production },
+  ])
+    assert.throws(() =>
+      verifyPreviewOperation(record, production, { ...next, ...patch }),
+    );
   assert.throws(() => verifyPreviewOperation(record, id, current));
-  assert.throws(() =>
-    verifyPreviewOperation({ ...record, id: "unknown" }, production, current),
-  );
-  const next = { ...current, GITHUB_RUN_ID: "124" };
-  assert.throws(() => verifyPreviewOperation(record, production, next));
   assert.throws(() =>
     verifyPreviewOperation(record, production, {
       ...current,
-      GITHUB_SHA: "b".repeat(40),
+      GITHUB_RUN_ID: "124",
     }),
   );
-  verifyPreviewOperation(record, production, {
-    ...next,
-    VERIFY_DEPLOYMENT_ID: id,
-  });
-  assert.throws(() =>
-    verifyPreviewOperation(record, production, {
-      ...next,
-      VERIFY_DEPLOYMENT_ID: production,
-    }),
-  );
-  assert.throws(() =>
-    verifyPreviewOperation({ id }, production, {
-      ...next,
-      VERIFY_DEPLOYMENT_ID: id,
-    }),
-  );
+  for (const patch of [
+    { id: production },
+    { created_on: "2026-10-25T12:01:00Z" },
+    { url: "https://11223344.jji-backup-20261023.pages.dev" },
+    { environment: "production" },
+    {
+      deployment_trigger: {
+        metadata: {
+          ...record.deployment_trigger.metadata,
+          commit_hash: "a".repeat(40),
+        },
+      },
+    },
+  ])
+    assert.throws(() =>
+      verifyPreviewOperation({ ...record, ...patch }, production, next),
+    );
 });
 
 test("only a complete, identified deployment inventory can authorize the next check", () => {
@@ -124,7 +143,7 @@ test("only a complete, identified deployment inventory can authorize the next ch
   assert.throws(() => completeDeployments({ result: [{}], result_info: page }));
 });
 
-test("approval matches the current environment ID as well as its name", async () => {
+function runFixture() {
   const current = env();
   current.BACKUP_ENVIRONMENT_ID = "17";
   const owner = { login: current.GITHUB_ACTOR, id: 107809547 };
@@ -192,6 +211,72 @@ test("approval matches the current environment ID as well as its name", async ()
     return records.get(route);
   };
   approve(17);
+  return { current, owner, base, run, endpoint, records, approve, read };
+}
+
+test("issuer and verifier each require independent run and environment approval, and GitHub's original operation digest", async () => {
+  const { current, base, run, records, read } = runFixture();
+  const env = {
+    ...current,
+    VERIFY_DEPLOYMENT_ID: "11111111-1111-4111-8111-111111111111",
+    VERIFY_ORIGINAL_RUN_ID: "122",
+    VERIFY_ORIGINAL_CONTROL_SHA: current.GITHUB_SHA,
+    VERIFY_OPERATION_SHA256: "d".repeat(64),
+  };
+  const original = base + "/actions/runs/122";
+  const originalRun = { ...records.get(run), id: 122, status: "completed" };
+  const approvals = records.get(run + "/approvals");
+  const step = {
+    name: "Record backup operation " + env.VERIFY_OPERATION_SHA256,
+    status: "completed",
+    conclusion: "success",
+  };
+  const job = {
+    name: "preview",
+    run_id: 122,
+    run_attempt: 1,
+    head_sha: current.GITHUB_SHA,
+    steps: [step],
+  };
+  const key = original + "/attempts/1/jobs?per_page=100";
+  records.set(original, originalRun);
+  records.set(original + "/approvals", approvals);
+  records.set(key, { total_count: 1, jobs: [job] });
+  await verifyPreviewRun(env, read);
+  for (const [path, bad] of [
+    [original, { ...originalRun, head_sha: "b".repeat(40) }],
+    [original, { ...originalRun, status: "in_progress" }],
+    [original, { ...originalRun, run_attempt: 2 }],
+    [original, { ...originalRun, actor: { login: "other", id: 1 } }],
+    [original + "/approvals", []],
+    [
+      original + "/approvals",
+      [{ ...approvals[0], environments: [{ id: 18, name: "backup-preview" }] }],
+    ],
+    [run + "/approvals", []],
+    [key, { total_count: 2, jobs: [job] }],
+    [key, { total_count: 2, jobs: [job, job] }],
+    ...[
+      { run_id: 123 },
+      { run_attempt: 2 },
+      { head_sha: "b".repeat(40) },
+      { steps: [] },
+      { steps: [step, step] },
+      { steps: [{ ...step, conclusion: "skipped" }] },
+      {
+        steps: [{ ...step, name: "Record backup operation " + "b".repeat(64) }],
+      },
+    ].map((change) => [key, { total_count: 1, jobs: [{ ...job, ...change }] }]),
+  ]) {
+    const originalRecord = records.get(path);
+    records.set(path, bad);
+    await assert.rejects(verifyPreviewRun(env, read));
+    records.set(path, originalRecord);
+  }
+});
+
+test("approval matches the current environment ID as well as its name", async () => {
+  const { current, endpoint, records, approve, read } = runFixture();
   const preflight = { ...current };
   delete preflight.CLOUDFLARE_ACCOUNT_ID;
   const target = await admitPreviewRun(preflight, read);
