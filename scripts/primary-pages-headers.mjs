@@ -1,6 +1,6 @@
-// Exact _headers bytes from approved primary Pages deployment 484d4ab3.
+// Exact primary Pages _headers bytes expected by the build and forward preflight.
 const approvedDigest =
-  "578679797ff71b614199c5d052efff257c208fde83f35e5d442973977bfe0b7e";
+  "3fc4e090f979c0514edd2e4abd124222e2d8ab27c076ddf72ffc32617b589d98";
 
 export function assertPrimaryPagesHeadersDigest(digest) {
   if (digest !== approvedDigest)

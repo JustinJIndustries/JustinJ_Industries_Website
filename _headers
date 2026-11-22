@@ -9,3 +9,35 @@ https://:version.:project.pages.dev/*
 
 https://www.justinjindustries.com/*
   Strict-Transport-Security: max-age=300
+
+https://www.justinjindustries.com/
+  Content-Security-Policy: frame-ancestors 'self'
+  X-Frame-Options: SAMEORIGIN
+
+https://www.justinjindustries.com/design
+  Content-Security-Policy: frame-ancestors 'self'
+  X-Frame-Options: SAMEORIGIN
+
+https://www.justinjindustries.com/design/
+  Content-Security-Policy: frame-ancestors 'self'
+  X-Frame-Options: SAMEORIGIN
+
+https://www.justinjindustries.com/design/aer-field/
+  Content-Security-Policy: frame-ancestors 'self'
+  X-Frame-Options: SAMEORIGIN
+
+https://www.justinjindustries.com/design/alder-lane/
+  Content-Security-Policy: frame-ancestors 'self'
+  X-Frame-Options: SAMEORIGIN
+
+https://www.justinjindustries.com/design/harbor-ledger/
+  Content-Security-Policy: frame-ancestors 'self'
+  X-Frame-Options: SAMEORIGIN
+
+https://www.justinjindustries.com/design/northside/
+  Content-Security-Policy: frame-ancestors 'self'
+  X-Frame-Options: SAMEORIGIN
+
+https://www.justinjindustries.com/design/still-form/
+  Content-Security-Policy: frame-ancestors 'self'
+  X-Frame-Options: SAMEORIGIN
