@@ -31,7 +31,11 @@
   },
   "overrides": {
     "linkinator": {
-      "undici": "7.30.1"
+      "undici": "7.30.1",
+      "glob": "14.0.3"
+    },
+    "html-validate": {
+      "glob": "14.0.3"
     }
   }
 }
