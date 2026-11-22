@@ -191,7 +191,7 @@ test("installed Wrangler and every locked deployment dependency are integrity pi
   const result = await verifyToolchain(
     path.resolve("infrastructure/failover/toolchain"),
   );
-  assert.equal(result.version, "4.152.0");
+  assert.equal(result.version, "4.166.0");
   assert.match(result.cliSha256, /^[a-f0-9]{64}$/);
 });
 
