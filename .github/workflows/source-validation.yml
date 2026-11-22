@@ -14,6 +14,8 @@ jobs:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
+      - name: Scan the checked-out Git index for credentials
+        run: python3 scripts/check-secret-blobs.py
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
         with:
           node-version: 24
@@ -23,3 +25,22 @@ jobs:
       - run: npm run check:links
       - run: npm run check:public-content
       - run: node --test tests/*.test.mjs
+      - name: Verify and install the Chrome version pinned by Puppeteer
+        shell: bash
+        working-directory: ${{ runner.temp }}
+        env:
+          # Chrome for Testing 148.0.7778.97, official linux64 archive.
+          CHROME_SHA256: 8a760543807c67d3836d530cc4bc2e39c93e217f1629ec6ea311415fdfa21a75
+        run: |
+          revision=$(cd "$GITHUB_WORKSPACE" && node -p 'require("puppeteer").default.defaultBrowserRevision')
+          [[ "$revision" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          curl --fail --silent --show-error --retry 3 --proto '=https' \
+            "https://storage.googleapis.com/chrome-for-testing-public/$revision/linux64/chrome-linux64.zip" \
+            --output chrome-linux64.zip
+          printf '%s  chrome-linux64.zip\n' "$CHROME_SHA256" | sha256sum --check --strict
+          unzip -q chrome-linux64.zip
+          echo "PUPPETEER_EXECUTABLE_PATH=$RUNNER_TEMP/chrome-linux64/chrome" >> "$GITHUB_ENV"
+      - name: Check inquiry consent on all six routes with intercepted requests
+        run: node scripts/check-design-consent.mjs --require-pinned-browser
+      - name: Verify the checks reject disposable negative fixtures
+        run: python3 tests/ci/check-security-fixtures.py

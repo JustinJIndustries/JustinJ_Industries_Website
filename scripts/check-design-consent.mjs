@@ -24,6 +24,11 @@ const routes = [
   "northside/",
 ];
 try {
+  const browserVersion = await browser.version();
+  if (process.argv.includes("--require-pinned-browser")) {
+    assert.equal(browserVersion, `Chrome/${puppeteer.defaultBrowserRevision}`);
+  }
+  console.log("Inquiry test browser:", browserVersion);
   for (const route of routes) {
     const page = await browser.newPage();
     let posts = 0,
@@ -103,6 +108,14 @@ try {
       };
     });
     await page.goto(origin + "/design/" + route);
+    assert.equal(
+      await page.$eval(
+        '[name="data_consent"]',
+        (box) => box.defaultChecked || box.checked,
+      ),
+      false,
+      "Inquiry processing consent must start unchecked",
+    );
     const run = (fn, ...args) => page.evaluate(fn, ...args);
     const step = () =>
       run(() =>
