@@ -47,7 +47,9 @@ jobs:
       - name: Build the fixed source
         working-directory: source
         run: |
+          set -euo pipefail
           test "$(git rev-parse HEAD)" = d6574ede41a8620f838b6eafd3e7ba76ea7ebf68
+          npm ci --ignore-scripts --no-audit --no-fund
           node scripts/build-public.mjs
       - name: Describe the source output
         id: record
@@ -85,5 +87,8 @@ jobs:
         env:
           BUILD_MANIFEST: ${{ needs.build.outputs.manifest }}
         run: node tests/backup-test/rehearse-handoff.mjs
-      - name: Check backup safety contracts
-        run: node --test tests/backup-test/*.test.mjs
+      - name: Check the dispatch workflow and backup safety contracts
+        run: |
+          set -euo pipefail
+          ruby tests/backup-test/workflow-policy.rb
+          node --test tests/backup-test/*.test.mjs

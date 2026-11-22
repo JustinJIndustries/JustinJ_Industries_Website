@@ -1,6 +1,7 @@
 // The preview environment and control pin are enrolled by the owner outside the candidate tree.
 import { pathToFileURL } from "node:url";
-import { assertContext } from "./backup-only.mjs";
+import { appendFile } from "node:fs/promises";
+import { assertDispatch, assertContext } from "./backup-only.mjs";
 import {
   CONTROL_BRANCH,
   REPO,
@@ -10,8 +11,8 @@ import {
 } from "../failover/control-identity.mjs";
 
 const environment = "backup-preview";
-export async function verifyPreviewRun(env, read) {
-  assertContext(env);
+export async function admitPreviewRun(env, read) {
+  assertDispatch(env);
   await verifyControl(read, env.GITHUB_SHA, env.BACKUP_CONTROL_PIN);
   const base = `/repos/${REPO}`;
   const run = await read(`${base}/actions/runs/${env.GITHUB_RUN_ID}`);
@@ -49,19 +50,30 @@ export async function verifyPreviewRun(env, read) {
     policy.branch_policies[0].name !== CONTROL_BRANCH
   )
     throw new Error("Missing protected backup preview environment");
+  return { name: environment, id: config.id };
+}
+
+export async function verifyPreviewRun(env, read) {
+  assertContext(env);
+  const target = await admitPreviewRun(env, read);
+  if (String(target.id) !== env.BACKUP_ENVIRONMENT_ID)
+    throw new Error("Backup preview environment changed after admission");
   const approved = await verifiedReviewTarget(
     read,
     env.GITHUB_RUN_ID,
     environment,
   );
-  if (approved.id !== config.id)
+  if (approved.id !== target.id)
     throw new Error(
       "Approval belongs to a different backup preview environment",
     );
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href)
-  await verifyPreviewRun(process.env, async (endpoint) => {
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(process.argv[1]).href
+) {
+  const read = async (endpoint) => {
     const response = await fetch("https://api.github.com" + endpoint, {
       headers: {
         authorization: "Bearer " + process.env.GH_READ_TOKEN,
@@ -73,4 +85,14 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href)
     });
     if (!response.ok) throw new Error("Backup control metadata unavailable");
     return response.json();
-  });
+  };
+  if (process.argv[2] === "admit") {
+    const target = await admitPreviewRun(process.env, read);
+    await appendFile(
+      process.env.GITHUB_OUTPUT,
+      `environment=${target.name}\nenvironment_id=${target.id}\n`,
+    );
+  } else if (process.argv.length === 2) {
+    await verifyPreviewRun(process.env, read);
+  } else throw new Error("Unknown preview verification operation");
+}

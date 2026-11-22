@@ -19,7 +19,37 @@ concurrency:
   group: jji-backup-only-test
   cancel-in-progress: false
 jobs:
+  admit:
+    if: github.repository == 'JustinJIndustries/JustinJ_Industries_Website' && github.ref == 'refs/heads/release-control' && github.sha == vars.JJI_BACKUP_CONTROL_SHA && github.sha == inputs.approved_workflow_sha && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      environment: ${{ steps.validate.outputs.environment }}
+      environment_id: ${{ steps.validate.outputs.environment_id }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Verify the protected environment already exists before requesting it
+        id: validate
+        env:
+          BACKUP_CONTROL_PIN: ${{ vars.JJI_BACKUP_CONTROL_SHA }}
+          APPROVED_WORKFLOW_SHA: ${{ inputs.approved_workflow_sha }}
+          BUDGET_VERIFIED_AT: ${{ inputs.budget_verified_at }}
+          ZERO_SPEND_CONFIRMED: ${{ inputs.zero_spend_confirmed }}
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node control/infrastructure/backup-test/verify-run.mjs admit
   build:
+    needs: admit
     if: github.repository == 'JustinJIndustries/JustinJ_Industries_Website' && github.ref == 'refs/heads/release-control' && github.sha == vars.JJI_BACKUP_CONTROL_SHA && github.sha == inputs.approved_workflow_sha && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -57,15 +87,16 @@ jobs:
         id: record
         run: node control/infrastructure/failover/build-handoff.mjs describe production/dist
   preview:
-    needs: build
-    if: github.repository == 'JustinJIndustries/JustinJ_Industries_Website' && github.ref == 'refs/heads/release-control' && github.sha == vars.JJI_BACKUP_CONTROL_SHA && github.sha == inputs.approved_workflow_sha && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1
-    environment: backup-preview
+    needs: [admit, build]
+    if: github.repository == 'JustinJIndustries/JustinJ_Industries_Website' && github.ref == 'refs/heads/release-control' && github.sha == vars.JJI_BACKUP_CONTROL_SHA && github.sha == inputs.approved_workflow_sha && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1 && needs.admit.outputs.environment == 'backup-preview' && needs.admit.outputs.environment_id != ''
+    environment: ${{ needs.admit.outputs.environment }}
     permissions:
       contents: read
       actions: read
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
+      BACKUP_ENVIRONMENT_ID: ${{ needs.admit.outputs.environment_id }}
       BACKUP_CONTROL_PIN: ${{ vars.JJI_BACKUP_CONTROL_SHA }}
       APPROVED_WORKFLOW_SHA: ${{ inputs.approved_workflow_sha }}
       BUDGET_VERIFIED_AT: ${{ inputs.budget_verified_at }}

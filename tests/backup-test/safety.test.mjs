@@ -11,7 +11,10 @@ import {
 import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { verifyPreviewRun } from "../../infrastructure/backup-test/verify-run.mjs";
+import {
+  admitPreviewRun,
+  verifyPreviewRun,
+} from "../../infrastructure/backup-test/verify-run.mjs";
 const env = () => ({
   GITHUB_REPOSITORY: "JustinJIndustries/JustinJ_Industries_Website",
   GITHUB_REF: "refs/heads/release-control",
@@ -123,6 +126,7 @@ test("only a complete, identified deployment inventory can authorize the next ch
 
 test("approval matches the current environment ID as well as its name", async () => {
   const current = env();
+  current.BACKUP_ENVIRONMENT_ID = "17";
   const owner = { login: current.GITHUB_ACTOR, id: 107809547 };
   const base = "/repos/" + current.GITHUB_REPOSITORY;
   const run = base + "/actions/runs/" + current.GITHUB_RUN_ID;
@@ -188,6 +192,14 @@ test("approval matches the current environment ID as well as its name", async ()
     return records.get(route);
   };
   approve(17);
+  const preflight = { ...current };
+  delete preflight.CLOUDFLARE_ACCOUNT_ID;
+  const target = await admitPreviewRun(preflight, read);
+  assert.deepEqual(target, { name: "backup-preview", id: 17 });
+  await assert.rejects(
+    verifyPreviewRun({ ...current, BACKUP_ENVIRONMENT_ID: "18" }, read),
+    /changed after admission/,
+  );
   await verifyPreviewRun(current, read);
   approve(18);
   await assert.rejects(
@@ -199,6 +211,8 @@ test("approval matches the current environment ID as well as its name", async ()
     verifyPreviewRun(current, read),
     /different backup preview environment/,
   );
+  records.delete(endpoint);
+  await assert.rejects(admitPreviewRun(preflight, read));
 });
 test("only exact reviewed owner/manual/enrolled-control/free-runner context is accepted", () => {
   assert.doesNotThrow(() => assertContext(env()));

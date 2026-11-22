@@ -28,7 +28,7 @@ const HOST = /^https:\/\/[a-f0-9]{8}\.jji-backup-20261023\.pages\.dev\/$/;
 const sha = (b) => createHash("sha256").update(b).digest("hex");
 const exec = promisify(execFile),
   here = path.dirname(fileURLToPath(import.meta.url));
-export function assertContext(env, now = Date.now()) {
+export function assertDispatch(env, now = Date.now()) {
   const budget = Number(env.BUDGET_VERIFIED_AT);
   if (
     env.GITHUB_REPOSITORY !== REPO ||
@@ -47,7 +47,6 @@ export function assertContext(env, now = Date.now()) {
     env.GITHUB_RUN_ATTEMPT !== "1" ||
     env.RUNNER_ENVIRONMENT !== "github-hosted" ||
     env.RUNNER_OS !== "Linux" ||
-    env.CLOUDFLARE_ACCOUNT_ID !== ACCOUNT ||
     env.ZERO_SPEND_CONFIRMED !== "yes" ||
     !Number.isSafeInteger(budget) ||
     budget > now ||
@@ -56,6 +55,11 @@ export function assertContext(env, now = Date.now()) {
     throw new Error(
       "Untrusted preview-test context or stale zero-spend attestation",
     );
+}
+export function assertContext(env, now = Date.now()) {
+  assertDispatch(env, now);
+  if (env.CLOUDFLARE_ACCOUNT_ID !== ACCOUNT)
+    throw new Error("Unexpected backup account");
 }
 export function assertPreview(project, deployment) {
   if (
