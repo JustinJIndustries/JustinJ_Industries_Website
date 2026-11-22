@@ -1,5 +1,6 @@
 import "./sync-footer.mjs";
 import "./check-capability-pdf.mjs";
+import { createHash } from "node:crypto";
 import {
   copyFile,
   lstat,
@@ -13,9 +14,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { checkReleaseHolds } from "./check-release-holds.mjs";
+import { assertPrimaryPagesHeadersDigest } from "./primary-pages-headers.mjs";
 await checkReleaseHolds(fileURLToPath(new URL("../", import.meta.url)));
 
 const publicFiles = Object.freeze([
+  "_headers",
   "404.html",
   "services.html",
   "services/website-development/index.html",
@@ -334,6 +337,10 @@ async function copyPublicFile(relativePath, sourcePath) {
   if (!sourceBytes.equals(artifactBytes)) {
     throw new Error(`Built artifact differs from its source: ${relativePath}`);
   }
+  if (relativePath === "_headers")
+    assertPrimaryPagesHeadersDigest(
+      createHash("sha256").update(artifactBytes).digest("hex"),
+    );
 }
 
 async function walkArtifact(
@@ -392,6 +399,12 @@ for (const relativePath of publicFiles) {
   resolveContainedPath(repositoryRoot, relativePath);
   sourcePaths.set(relativePath, await validateSourceFile(relativePath));
 }
+
+assertPrimaryPagesHeadersDigest(
+  createHash("sha256")
+    .update(await readFile(sourcePaths.get("_headers")))
+    .digest("hex"),
+);
 
 await prepareArtifactRoot();
 

@@ -51,7 +51,7 @@ jobs:
       - run: npm run check:html
       - run: npm run check:links
       - run: npm run check:public-content
-      - run: node --test tests/*.test.mjs
+      - run: node --test tests/*.test.mjs infrastructure/cloudflare-manual/preflight.test.mjs
       - name: Check inquiry consent on all six routes with intercepted requests
         run: node scripts/check-design-consent.mjs --require-pinned-browser
       - name: Verify the checks reject disposable negative fixtures

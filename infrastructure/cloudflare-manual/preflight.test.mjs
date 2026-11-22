@@ -2,23 +2,37 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
-import { mkdtemp, mkdir, writeFile, rm, symlink } from "node:fs/promises";
+import {
+  mkdtemp,
+  mkdir,
+  readFile,
+  writeFile,
+  rm,
+  symlink,
+} from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { LIMITS, TARGET, preflight } from "./preflight.mjs";
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const approvedHeaders = await readFile(
+  new URL("../../_headers", import.meta.url),
+);
 async function fixture(
   t,
   files = [["index.html", Buffer.from("public fixture")]],
+  headers = approvedHeaders,
 ) {
   const root = await mkdtemp(path.join(os.tmpdir(), "jji-manual-preflight-"));
   t.after(() => rm(root, { recursive: true, force: true }));
   const folder = path.join(root, "public");
   await mkdir(folder);
   const entries = [];
-  for (const [name, bytes] of files) {
+  for (const [name, bytes] of [
+    ...files,
+    ...(headers ? [["_headers", headers]] : []),
+  ]) {
     await mkdir(path.dirname(path.join(folder, name)), { recursive: true });
     await writeFile(path.join(folder, name), bytes);
     entries.push({ path: name, bytes: bytes.length, sha256: hash(bytes) });
@@ -37,10 +51,7 @@ test("1000 selected files including both controls pass; 1001 fail", async (t) =>
     `asset-${i}.txt`,
     Buffer.from("x"),
   ]);
-  files.push(
-    ["_headers", Buffer.from("/*\n  X-JJI-Source: primary\n")],
-    ["_redirects", Buffer.from("/old / 301\n")],
-  );
+  files.push(["_redirects", Buffer.from("/old / 301\n")]);
   const f = await fixture(t, files);
   const result = await preflight(f.options);
   assert.equal(result.files, 1000);
@@ -76,7 +87,7 @@ test("actual hashed folder above 256 MiB passes without an aggregate override", 
     Array.from({ length: 11 }, (_, i) => [`asset-${i}.bin`, bytes]),
   );
   const result = await preflight(f.options);
-  assert.equal(result.totalBytes, 288358400);
+  assert.equal(result.totalBytes, 288358400 + approvedHeaders.length);
   assert.ok(result.totalBytes > 256 * 1024 * 1024);
   assert.equal(result.providerAdmission, false);
   assert.equal(result.billingAdmission, false);
@@ -92,6 +103,26 @@ test("provider, project and role must match the manual forward route", async (t)
       /Wrong manual route/,
     );
   }
+});
+
+test("forward packages require the approved header even if a bad manifest is resealed", async (t) => {
+  const missing = await fixture(t, undefined, null);
+  await assert.rejects(
+    preflight(missing.options),
+    /Missing or unapproved primary Pages _headers/,
+  );
+  const changed = await fixture(
+    t,
+    undefined,
+    Buffer.concat([approvedHeaders, Buffer.from("\n")]),
+  );
+  await assert.rejects(
+    preflight(changed.options),
+    /Missing or unapproved primary Pages _headers/,
+  );
+  const removed = await fixture(t);
+  await rm(path.join(removed.folder, "_headers"));
+  await assert.rejects(preflight(removed.options), /Missing file from exact manifest/);
 });
 
 test("external manifest hash, content tampering, missing and extra files fail", async (t) => {
