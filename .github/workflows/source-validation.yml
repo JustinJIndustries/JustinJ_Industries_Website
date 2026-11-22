@@ -32,7 +32,7 @@ jobs:
           # Chrome for Testing 148.0.7778.97, official linux64 archive.
           CHROME_SHA256: 8a760543807c67d3836d530cc4bc2e39c93e217f1629ec6ea311415fdfa21a75
         run: |
-          revision=$(cd "$GITHUB_WORKSPACE" && node -p 'require("puppeteer").default.defaultBrowserRevision')
+          revision=$(cd "$GITHUB_WORKSPACE" && node -p 'require("puppeteer-core/internal/revisions.js").PUPPETEER_REVISIONS.chrome')
           [[ "$revision" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]
           curl --fail --silent --show-error --retry 3 --proto '=https' \
             "https://storage.googleapis.com/chrome-for-testing-public/$revision/linux64/chrome-linux64.zip" \

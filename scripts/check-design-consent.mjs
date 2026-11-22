@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
 import puppeteer from "puppeteer";
+import { PUPPETEER_REVISIONS } from "puppeteer-core/internal/revisions.js";
 
 const origin = "https://fixture.invalid";
 const endpoint = "https://formspree.io/f/mgvlrzdq";
@@ -26,7 +27,7 @@ const routes = [
 try {
   const browserVersion = await browser.version();
   if (process.argv.includes("--require-pinned-browser")) {
-    assert.equal(browserVersion, `Chrome/${puppeteer.defaultBrowserRevision}`);
+    assert.equal(browserVersion, `Chrome/${PUPPETEER_REVISIONS.chrome}`);
   }
   console.log("Inquiry test browser:", browserVersion);
   for (const route of routes) {
