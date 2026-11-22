@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
 import puppeteer from "puppeteer";
+import { PUPPETEER_REVISIONS } from "puppeteer-core/internal/revisions.js";
 
 const origin = "https://fixture.invalid";
 const endpoint = "https://formspree.io/f/mgvlrzdq";
@@ -24,6 +25,23 @@ const routes = [
   "northside/",
 ];
 try {
+  const browserVersion = await browser.version();
+  if (process.argv.includes("--require-pinned-browser")) {
+    assert.equal(browserVersion, `Chrome/${PUPPETEER_REVISIONS.chrome}`);
+    if (process.platform === "linux") {
+      const sandbox = await browser.newPage();
+      await sandbox.goto("chrome://sandbox/");
+      await sandbox.waitForSelector("#evaluation:not(:empty)");
+      assert.equal(
+        await sandbox.$eval("#evaluation", (element) => element.textContent),
+        "You are adequately sandboxed.",
+        "Chrome must confirm that its renderer sandbox is active",
+      );
+      await sandbox.close();
+      console.log("PASS Chrome renderer sandbox");
+    }
+  }
+  console.log("Inquiry test browser:", browserVersion);
   for (const route of routes) {
     const page = await browser.newPage();
     let posts = 0,
@@ -103,6 +121,14 @@ try {
       };
     });
     await page.goto(origin + "/design/" + route);
+    assert.equal(
+      await page.$eval(
+        '[name="data_consent"]',
+        (box) => box.defaultChecked || box.checked,
+      ),
+      false,
+      "Inquiry processing consent must start unchecked",
+    );
     const run = (fn, ...args) => page.evaluate(fn, ...args);
     const step = () =>
       run(() =>
