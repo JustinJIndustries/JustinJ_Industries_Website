@@ -1,15 +1,15 @@
-# Retained workflow identity for historical recovery receipts. Owner dispatch validates only.
+# Recovery trusts historical runs at this path. Keep validation reusable-only.
 name: Deploy deterministic public site to GitHub Pages
 
 on:
-  workflow_dispatch:
+  workflow_call:
 
 permissions: {}
 
 jobs:
   # Build job
   build:
-    if: github.ref == 'refs/heads/main' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1
+    if: github.repository == 'JustinJIndustries/JustinJ_Industries_Website' && github.ref == 'refs/heads/main' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1
     permissions:
       contents: read
     timeout-minutes: 25
