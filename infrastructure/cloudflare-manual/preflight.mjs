@@ -5,6 +5,7 @@ import { constants } from "node:fs";
 import { lstat, open, readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { assertPrimaryPagesHeadersDigest } from "../../scripts/primary-pages-headers.mjs";
 
 export const TARGET = Object.freeze({
   provider: "cloudflare-pages-manual",
@@ -167,6 +168,7 @@ export async function preflight({
   if (digest(raw) !== expectedManifestSha256)
     throw new Error("External manifest SHA-256 mismatch");
   const expected = parseManifest(raw);
+  assertPrimaryPagesHeadersDigest(expected.get("_headers")?.sha256);
   const found = new Set();
   let totalBytes = 0;
   let largestFileBytes = 0;
