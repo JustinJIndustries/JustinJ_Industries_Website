@@ -1,6 +1,13 @@
 // A manually authorized preview test. No Worker, route, DNS, settings, primary
 // publisher or GitHub Pages write API exists here. Never print provider bodies.
-import { readFile, writeFile, mkdir, readdir, stat } from "node:fs/promises";
+import {
+  appendFile,
+  readFile,
+  writeFile,
+  mkdir,
+  readdir,
+  stat,
+} from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -28,20 +35,26 @@ const HOST = /^https:\/\/[a-f0-9]{8}\.jji-backup-20261023\.pages\.dev\/$/;
 const sha = (b) => createHash("sha256").update(b).digest("hex");
 const exec = promisify(execFile),
   here = path.dirname(fileURLToPath(import.meta.url));
-export function assertContext(env, now = Date.now()) {
+export function assertDispatch(env, now = Date.now()) {
+  requireOperationInputs(env);
   const budget = Number(env.BUDGET_VERIFIED_AT);
   if (
     env.GITHUB_REPOSITORY !== REPO ||
-    env.GITHUB_REF !== "refs/heads/main" ||
+    env.GITHUB_REF !== "refs/heads/release-control" ||
     env.GITHUB_EVENT_NAME !== "workflow_dispatch" ||
     env.GITHUB_ACTOR !== "JustinJIndustries" ||
+    env.GITHUB_TRIGGERING_ACTOR !== "JustinJIndustries" ||
+    env.BACKUP_CONTROL_PIN !== env.GITHUB_SHA ||
+    env.GITHUB_WORKFLOW_SHA !== env.GITHUB_SHA ||
+    env.GITHUB_WORKFLOW_REF !==
+      REPO +
+        "/.github/workflows/backup-only-test.yml@refs/heads/release-control" ||
     !/^[a-f0-9]{40}$/.test(env.GITHUB_SHA ?? "") ||
     env.APPROVED_WORKFLOW_SHA !== env.GITHUB_SHA ||
-    !/^\d+$/.test(env.GITHUB_RUN_ID ?? "") ||
+    !/^[1-9]\d*$/.test(env.GITHUB_RUN_ID ?? "") ||
     env.GITHUB_RUN_ATTEMPT !== "1" ||
     env.RUNNER_ENVIRONMENT !== "github-hosted" ||
     env.RUNNER_OS !== "Linux" ||
-    env.CLOUDFLARE_ACCOUNT_ID !== ACCOUNT ||
     env.ZERO_SPEND_CONFIRMED !== "yes" ||
     !Number.isSafeInteger(budget) ||
     budget > now ||
@@ -51,11 +64,20 @@ export function assertContext(env, now = Date.now()) {
       "Untrusted preview-test context or stale zero-spend attestation",
     );
 }
+export function assertContext(env, now = Date.now()) {
+  assertDispatch(env, now);
+  if (env.CLOUDFLARE_ACCOUNT_ID !== ACCOUNT)
+    throw new Error("Unexpected backup account");
+}
 export function assertPreview(project, deployment) {
   if (
     project.name !== PROJECT ||
+    typeof project.production_branch !== "string" ||
+    !project.production_branch ||
+    /\s/.test(project.production_branch) ||
     project.production_branch === BRANCH ||
-    !project.canonical_deployment?.id
+    typeof project.canonical_deployment?.id !== "string" ||
+    !project.canonical_deployment.id.trim()
   )
     throw new Error("Unexpected project or production branch; no upload");
   if (
@@ -66,6 +88,95 @@ export function assertPreview(project, deployment) {
       !HOST.test(deployment.url.replace(/\/$/, "") + "/"))
   )
     throw new Error("Not the exact authorized preview/source");
+}
+export function completeDeployments(response) {
+  const { result, result_info: page } = response;
+  if (
+    !Array.isArray(result) ||
+    !page ||
+    page.page !== 1 ||
+    page.per_page !== 25 ||
+    page.count !== result.length ||
+    page.total_count !== result.length ||
+    result.length > 25 ||
+    (page.total_pages !== 1 &&
+      !(result.length === 0 && page.total_pages === 0)) ||
+    result.some((item) => {
+      const branch = item?.deployment_trigger?.metadata?.branch;
+      return typeof branch !== "string" || !branch || /\s/.test(branch);
+    })
+  )
+    throw new Error("Incomplete deployment inventory; no automatic retry");
+  return result;
+}
+
+const deploymentId = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/;
+function runMessage(runId, workflowSha) {
+  return "JJI backup-only test run " + runId + " workflow " + workflowSha;
+}
+export function requireOperationInputs(env) {
+  const {
+    VERIFY_DEPLOYMENT_ID: id,
+    VERIFY_ORIGINAL_RUN_ID: issuer,
+    VERIFY_ORIGINAL_CONTROL_SHA: control,
+    VERIFY_OPERATION_SHA256: expected,
+  } = env;
+  if (!id && !issuer && !control && !expected) return;
+  if (
+    !deploymentId.test(id ?? "") ||
+    !/^[1-9][0-9]*$/.test(issuer ?? "") ||
+    issuer === env.GITHUB_RUN_ID ||
+    !/^[a-f0-9]{40}$/.test(control ?? "") ||
+    control !== env.GITHUB_SHA ||
+    !/^[a-f0-9]{64}$/.test(expected ?? "")
+  )
+    throw new Error("Incomplete or unenrolled backup operation approval");
+}
+
+export function verifyPreviewOperation(deployment, productionId, env) {
+  requireOperationInputs(env);
+  const issuerRunId = env.VERIFY_ORIGINAL_RUN_ID || env.GITHUB_RUN_ID;
+  const issuerControlSha = env.VERIFY_ORIGINAL_CONTROL_SHA || env.GITHUB_SHA;
+  const origin = (deployment.url ?? "").replace(/\/$/, "") + "/";
+  const createdAt = deployment.created_on;
+  const metadata = deployment.deployment_trigger?.metadata;
+  if (
+    !deploymentId.test(deployment.id ?? "") ||
+    deployment.id === productionId ||
+    (env.VERIFY_DEPLOYMENT_ID && deployment.id !== env.VERIFY_DEPLOYMENT_ID) ||
+    !HOST.test(origin) ||
+    deployment.environment !== "preview" ||
+    typeof createdAt !== "string" ||
+    !Number.isFinite(Date.parse(createdAt)) ||
+    metadata?.branch !== BRANCH ||
+    metadata.commit_hash !== SOURCE ||
+    metadata.commit_message !== runMessage(issuerRunId, issuerControlSha)
+  )
+    throw new Error(
+      "Preview provider operation does not match its authorized issuer and destination",
+    );
+
+  // Preserve these fields and their ordering for independently approved v1 operation hashes.
+  const identity = {
+    schema: "jji-backup-preview-operation-1",
+    repository: REPO,
+    project: PROJECT,
+    branch: BRANCH,
+    source: SOURCE,
+    release: RELEASE,
+    deploymentId: deployment.id,
+    origin,
+    createdAt,
+    originalProductionDeploymentId: productionId,
+    issuerRunId,
+    issuerControlSha,
+  };
+  const digest = sha(JSON.stringify(identity));
+  if (env.VERIFY_DEPLOYMENT_ID && digest !== env.VERIFY_OPERATION_SHA256)
+    throw new Error(
+      "Backup operation digest differs from the owner's approved checkpoint",
+    );
+  return { identity, digest };
 }
 async function routes() {
   return JSON.parse(
@@ -100,7 +211,11 @@ async function api(endpoint, token) {
   )
     throw new Error("Unapproved read-only Pages endpoint");
   try {
-    const r = await fetch("https://api.cloudflare.com/client/v4" + endpoint, {
+    const listing =
+      endpoint === `/accounts/${ACCOUNT}/pages/projects/${PROJECT}/deployments`;
+    const url = new URL("https://api.cloudflare.com/client/v4" + endpoint);
+    if (listing) url.search = "?page=1&per_page=25";
+    const r = await fetch(url, {
       headers: { authorization: "Bearer " + token },
       redirect: "error",
       signal: AbortSignal.timeout(15000),
@@ -108,7 +223,7 @@ async function api(endpoint, token) {
     if (!r.ok) throw new Error();
     const j = await r.json();
     if (j.success !== true) throw new Error();
-    return j.result;
+    return listing ? completeDeployments(j) : j.result;
   } catch {
     throw new Error("Pages metadata read failed; no scope expansion or retry");
   }
@@ -145,10 +260,7 @@ async function pinnedRunner(directory, token, runId, workflowSha) {
         "--project-name=" + PROJECT,
         "--branch=" + BRANCH,
         "--commit-hash=" + SOURCE,
-        "--commit-message=JJI backup-only test run " +
-          runId +
-          " workflow " +
-          workflowSha,
+        "--commit-message=" + runMessage(runId, workflowSha),
         "--commit-dirty=false",
       ],
       {
@@ -273,7 +385,7 @@ export async function deployAndVerify(
   let deployment, origin;
   const requested = env.VERIFY_DEPLOYMENT_ID;
   if (requested) {
-    if (!/^[a-f0-9-]{36}$/.test(requested))
+    if (!deploymentId.test(requested))
       throw new Error("Invalid verification-only deployment identity");
     deployment = await apiRead(base + "/deployments/" + requested, token);
     assertPreview(before, deployment);
@@ -302,15 +414,28 @@ export async function deployAndVerify(
       env.GITHUB_SHA,
     );
     const list = await apiRead(base + "/deployments", token);
-    deployment = list.find((d) => d.url.replace(/\/$/, "") + "/" === origin);
-    if (!deployment)
+    const matches = list.filter(
+      (d) => d.url.replace(/\/$/, "") + "/" === origin,
+    );
+    if (matches.length !== 1)
       throw new Error(
         "Upload receipt not found in provider metadata; inspect before retry",
       );
+    [deployment] = matches;
     assertPreview(before, deployment);
   }
+  const operation = verifyPreviewOperation(
+    deployment,
+    before.canonical_deployment.id,
+    env,
+  );
   if (deployment.latest_stage?.status !== "success")
     throw new Error("Preview deployment not successful; inspect before retry");
+  if (!requested && env.GITHUB_OUTPUT)
+    await appendFile(
+      env.GITHUB_OUTPUT,
+      `operation_sha256=${operation.digest}\n`,
+    );
   const issued = await createRecoveryReceipt({
     packageRoot: path.join(root, "package"),
     origin,
@@ -346,7 +471,10 @@ export async function deployAndVerify(
   )
     throw new Error("Project production deployment changed; stop");
   const provider = {
-    schema: "jji-backup-only-provider-test-1",
+    schema: "jji-backup-only-provider-test-2",
+    issuingOperation: operation.identity,
+    issuingOperationSha256: operation.digest,
+    verifier: { runId: env.GITHUB_RUN_ID, controlSha: env.GITHUB_SHA },
     repository: REPO,
     sourceCommit: SOURCE,
     workflowCommit: env.GITHUB_SHA,
