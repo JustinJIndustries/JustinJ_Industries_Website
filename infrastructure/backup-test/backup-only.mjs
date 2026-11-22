@@ -123,7 +123,7 @@ async function pinnedRunner(directory, token, runId, workflowSha) {
   );
   const cli = path.join(tool, "node_modules/wrangler/bin/wrangler.js");
   if (
-    pin.version !== "4.152.0" ||
+    pin.version !== "4.166.0" ||
     sha(await readFile(cli)) !== pin.cliSha256 ||
     lock.packages["node_modules/wrangler"].integrity !== pin.integrity ||
     Object.entries(lock.packages).some(

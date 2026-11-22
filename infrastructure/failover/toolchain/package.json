@@ -4,6 +4,6 @@
   "version": "1.0.0",
   "description": "Isolated pinned deployment tooling; excluded from public build",
   "devDependencies": {
-    "wrangler": "4.152.0"
+    "wrangler": "4.166.0"
   }
 }
