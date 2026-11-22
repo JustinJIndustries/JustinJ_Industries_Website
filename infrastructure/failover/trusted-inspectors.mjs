@@ -216,7 +216,7 @@ export async function verifyToolchain(root) {
     await readFile(path.join(root, "package-lock.json"), "utf8"),
   );
   if (
-    pin.version !== "4.152.0" ||
+    pin.version !== "4.166.0" ||
     pin.registry !== "https://registry.npmjs.org/" ||
     lock.packages?.["node_modules/wrangler"]?.version !== pin.version ||
     lock.packages["node_modules/wrangler"].integrity !== pin.integrity

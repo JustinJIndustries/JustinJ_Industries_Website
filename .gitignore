@@ -14,3 +14,9 @@ npm-debug.log*
 JJI-Workspace-*/
 
 *.xcworkspace/
+
+# Local account configuration and secret-bearing overrides
+.env
+.env.*
+.dev.vars
+.dev.vars.*
