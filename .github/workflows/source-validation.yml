@@ -40,6 +40,10 @@ jobs:
           printf '%s  chrome-linux64.zip\n' "$CHROME_SHA256" | sha256sum --check --strict
           unzip -q chrome-linux64.zip
           echo "PUPPETEER_EXECUTABLE_PATH=$RUNNER_TEMP/chrome-linux64/chrome" >> "$GITHUB_ENV"
+          # Ubuntu restricts user namespaces for Chrome outside its packaged path.
+          sandbox=/opt/google/chrome/chrome-sandbox
+          test "$(stat -Lc '%u:%a' "$sandbox")" = "0:4755"
+          echo "CHROME_DEVEL_SANDBOX=$sandbox" >> "$GITHUB_ENV"
       - name: Check inquiry consent on all six routes with intercepted requests
         run: node scripts/check-design-consent.mjs --require-pinned-browser
       - name: Verify the checks reject disposable negative fixtures

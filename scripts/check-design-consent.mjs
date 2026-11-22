@@ -28,6 +28,18 @@ try {
   const browserVersion = await browser.version();
   if (process.argv.includes("--require-pinned-browser")) {
     assert.equal(browserVersion, `Chrome/${PUPPETEER_REVISIONS.chrome}`);
+    if (process.platform === "linux") {
+      const sandbox = await browser.newPage();
+      await sandbox.goto("chrome://sandbox/");
+      await sandbox.waitForSelector("#evaluation:not(:empty)");
+      assert.equal(
+        await sandbox.$eval("#evaluation", (element) => element.textContent),
+        "You are adequately sandboxed.",
+        "Chrome must confirm that its renderer sandbox is active",
+      );
+      await sandbox.close();
+      console.log("PASS Chrome renderer sandbox");
+    }
   }
   console.log("Inquiry test browser:", browserVersion);
   for (const route of routes) {
