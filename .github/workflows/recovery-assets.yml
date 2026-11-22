@@ -72,10 +72,19 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
+      contents: read
       actions: read
       pages: write
       id-token: write
     steps:
+      - name: Verify current main after environment approval
+        env:
+          GH_TOKEN: ${{ github.token }}
+          APPROVED_WORKFLOW_COMMIT: ${{ inputs.approved_workflow_commit }}
+        run: |
+          set -euo pipefail
+          observed="$(gh api repos/JustinJIndustries/JustinJ_Industries_Website/git/ref/heads/main --jq 'select(.ref == "refs/heads/main" and .object.type == "commit") | .object.sha')"
+          [[ "$observed" =~ ^[0-9a-f]{40}$ && "$observed" == "$GITHUB_SHA" && "$observed" == "$APPROVED_WORKFLOW_COMMIT" ]]
       - uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
         with:
           artifact_name: recovery-union-${{ github.run_id }}
