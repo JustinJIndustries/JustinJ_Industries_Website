@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile, mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -50,22 +51,37 @@ test("approved chart guard still refuses other changes and held carousel content
   assert.equal(hold.homepageCarousel.status, "publication_hold");
   assert.equal(
     hold.homepageCarousel.publicationBaselineSha256,
-    "14a00877225868071370261c22ef0fb2401e7703d8d1a6d5660e4b74c76b39ff",
+    "7a9a03ba02fd627b5631177731d7eda9d0ee06ab5cb4eaad231eb3cec2404d38",
   );
   const dir = await mkdtemp(path.join(os.tmpdir(), "jji-chart-hold-"));
   t.after(() => rm(dir, { recursive: true, force: true }));
   await mkdir(path.join(dir, "config"));
-  await writeFile(
-    path.join(dir, "config/release-holds.json"),
-    JSON.stringify(hold),
-  );
+  const setHold = (homepageCarousel) =>
+    writeFile(
+      path.join(dir, "config/release-holds.json"),
+      JSON.stringify({ homepageCarousel }),
+    );
+  await setHold(hold.homepageCarousel);
   const set = (s) => writeFile(path.join(dir, "index.html"), s);
   await set(html);
   await checkReleaseHolds(dir);
-  await set(
-    html.replace("Website leads · 24-month trend", "Unapproved chart label"),
+  const review = html.replace(
+    "Website leads · 24-month trend",
+    "Local review fixture",
   );
+  const reviewSection = review.match(
+    /<section\s+id="next-step"[\s\S]*?<\/section>/,
+  )[0];
+  const reviewDigest = createHash("sha256").update(reviewSection).digest("hex");
+  assert.notEqual(reviewDigest, hold.homepageCarousel.publicationBaselineSha256);
+  await setHold({ ...hold.homepageCarousel, sha256: reviewDigest });
+  await set(review);
   await assert.rejects(checkReleaseHolds(dir), /publication is on hold/);
+  await set(html);
+  await checkReleaseHolds(dir);
+  await setHold({ ...hold.homepageCarousel, publicationBaselineSha256: undefined });
+  await assert.rejects(checkReleaseHolds(dir), /publication is on hold/);
+  await setHold(hold.homepageCarousel);
   await set(html + "home-journeys");
   await assert.rejects(checkReleaseHolds(dir), /publication is on hold/);
   await set(html);

@@ -1,7 +1,7 @@
 {
   "homepageCarousel": {
     "status": "publication_hold",
-    "referenceCommit": "b57ca1ad098d4ec18ffe896e5bf69e72de89c8b8",
+    "referenceCommit": "e90a3f79758690b922aa389e64f0af0fd7ee4ec6",
     "sectionId": "next-step",
     "sha256": "7a9a03ba02fd627b5631177731d7eda9d0ee06ab5cb4eaad231eb3cec2404d38",
     "forbiddenSources": [
@@ -14,7 +14,7 @@
       "business-stories"
     ],
     "approvalRequired": "Explicit owner approval is required before replacing the currently published section.",
-    "publicationBaselineSha256": "14a00877225868071370261c22ef0fb2401e7703d8d1a6d5660e4b74c76b39ff",
-    "localReviewScope": "Owner-approved chart label, accessible description and verified 24-month series alignment; publication not approved."
+    "publicationBaselineSha256": "7a9a03ba02fd627b5631177731d7eda9d0ee06ab5cb4eaad231eb3cec2404d38",
+    "localReviewScope": "Historical local approval covered the chart label, accessible description and verified 24-month series alignment. The publication baseline pins the source section corresponding to the retained primary release."
   }
 }

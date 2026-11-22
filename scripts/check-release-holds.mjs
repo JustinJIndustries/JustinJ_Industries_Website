@@ -21,7 +21,7 @@ export async function checkReleaseHolds(root) {
     .digest("hex");
   if (
     !section ||
-    hash !== hold.sha256 ||
+    hash !== hold.publicationBaselineSha256 ||
     hold.forbiddenMarkup.some((token) => html.includes(token))
   ) {
     throw new Error(
@@ -42,7 +42,7 @@ export async function checkReleaseHolds(root) {
       );
   }
   console.log(
-    "Verified publication hold: original homepage section retained; pending carousel assets absent.",
+    "Verified publication hold: approved homepage source section retained; pending carousel assets absent.",
   );
 }
 
