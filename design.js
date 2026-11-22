@@ -586,43 +586,44 @@ document.addEventListener("DOMContentLoaded", () => {
     heading.tabIndex = -1;
     heading.focus();
   };
-  const firstInvalid = () =>
-    [...steps[currentStep].querySelectorAll("input, select, textarea")].find(
-      (control) => !control.checkValidity(),
-    );
-  const validateStep = () => {
-    const invalid = firstInvalid();
-    if (invalid) {
-      showError("Please complete this field before continuing.", invalid);
+  const validateStep = (index) => {
+    const reject = (message, control) => {
+      if (index !== currentStep) showStep(index);
+      showError(message, control);
       return false;
+    };
+    if (index === steps.length - 1) {
+      const consent = form.elements.data_consent;
+      if (!consent.checked || consent.disabled)
+        return reject("Please confirm your consent before sending.", consent);
     }
-    if (
-      currentStep === 0 &&
-      !form.querySelector('input[name^="page_"]:checked')
-    ) {
-      showError(
+    const invalid = [
+      ...steps[index].querySelectorAll("input, select, textarea"),
+    ].find((control) => !control.checkValidity());
+    if (invalid) {
+      return reject("Please complete this field before continuing.", invalid);
+    }
+    if (index === 0 && !form.querySelector('input[name^="page_"]:checked')) {
+      return reject(
         "Choose at least one page.",
         form.querySelector('input[name^="page_"]'),
       );
-      return false;
     }
-    if (currentStep === 2) {
+    if (index === 2) {
       if (
         form.querySelector('input[name="timing"]:checked')?.value ===
           "Desired date" &&
         !dateInput.value
       ) {
-        showError("Enter your desired date.", dateInput);
-        return false;
+        return reject("Enter your desired date.", dateInput);
       }
       const email = form.elements.email;
       const phone = form.elements.phone;
       if (!email.value.trim() && !phone.value.trim()) {
-        showError(
+        return reject(
           "Provide an email address or phone number so we can respond.",
           email,
         );
-        return false;
       }
     }
     return true;
@@ -741,17 +742,38 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!hasDate) dateInput.value = "";
     }
   });
-  next.addEventListener("click", () => {
-    if (!validateStep()) return;
+  const advance = () => {
+    if (
+      sending ||
+      sent ||
+      currentStep >= steps.length - 1 ||
+      !validateStep(currentStep)
+    )
+      return;
     if (currentStep === 2) populateReview();
     showStep(currentStep + 1);
+  };
+  next.addEventListener("click", advance);
+  back.addEventListener("click", () => {
+    if (sending || sent || currentStep === 0) return;
+    form.elements.data_consent.checked = false;
+    showStep(currentStep - 1);
   });
-  back.addEventListener("click", () => showStep(currentStep - 1));
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    if (sending || sent) return;
-    if (!validateStep()) return;
+    if (!dialog.open || sending || sent) return;
+    if (currentStep !== steps.length - 1) {
+      advance();
+      return;
+    }
+    for (let index = 0; index < steps.length; index++) {
+      if (!validateStep(index)) {
+        form.elements.data_consent.checked = false;
+        return;
+      }
+    }
     sending = true;
+    back.disabled = true;
     submit.disabled = true;
     submit.textContent = "Sending…";
     clearError();
@@ -781,6 +803,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     } finally {
       sending = false;
+      back.disabled = false;
       submit.disabled = false;
       submit.textContent = "Send inquiry";
     }
