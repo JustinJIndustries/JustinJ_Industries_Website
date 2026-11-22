@@ -94,15 +94,16 @@ jobs:
         run: |
           set -euo pipefail
 
-          node <<'NODE'
-          const {realpathSync} = require("node:fs");
-          const {createRequire} = require("node:module");
+          node --input-type=module <<'NODE'
+          import {realpathSync} from "node:fs";
+          import {createRequire} from "node:module";
+          const require = createRequire(import.meta.url);
 
           const pa11yEntry = require.resolve("pa11y");
           const pa11yRequire = createRequire(pa11yEntry);
           const puppeteer = pa11yRequire("puppeteer");
           const expected = realpathSync(process.env.PUPPETEER_EXECUTABLE_PATH);
-          const resolved = realpathSync(puppeteer.executablePath());
+          const resolved = realpathSync(await puppeteer.executablePath());
           const pa11yVersion = require("pa11y/package.json").version;
           const puppeteerVersion = pa11yRequire("puppeteer/package.json").version;
           const {PUPPETEER_REVISIONS} = pa11yRequire("puppeteer-core/internal/revisions.js");
