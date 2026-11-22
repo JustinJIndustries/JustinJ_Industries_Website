@@ -44,7 +44,7 @@ const deployment = {
   environment: "preview",
   url: "https://1234abcd.jji-backup-20261023.pages.dev",
   deployment_trigger: {
-    metadata: { branch: "backup-ci-test-20261024", commit_hash: SOURCE },
+    metadata: { branch: "backup-ci-test-20261122-control-01", commit_hash: SOURCE },
   },
 };
 
@@ -324,10 +324,10 @@ test("project production branch and every deployment identity boundary fail clos
   assert.doesNotThrow(() => assertPreview(project, deployment));
   for (const p of [
     { ...project, name: "other" },
-    { ...project, production_branch: "backup-ci-test-20261024" },
+    { ...project, production_branch: "backup-ci-test-20261122-control-01" },
     { ...project, production_branch: undefined },
     { ...project, production_branch: "" },
-    { ...project, production_branch: " backup-ci-test-20261024" },
+    { ...project, production_branch: " backup-ci-test-20261122-control-01" },
     { ...project, production_branch: {} },
     { ...project, canonical_deployment: { id: {} } },
     { ...project, canonical_deployment: { id: " " } },
@@ -345,8 +345,14 @@ test("project production branch and every deployment identity boundary fail clos
     {
       ...deployment,
       deployment_trigger: {
+        metadata: { branch: "backup-ci-test-20261024", commit_hash: SOURCE },
+      },
+    },
+    {
+      ...deployment,
+      deployment_trigger: {
         metadata: {
-          branch: "backup-ci-test-20261024",
+          branch: "backup-ci-test-20261122-control-01",
           commit_hash: "f".repeat(40),
         },
       },

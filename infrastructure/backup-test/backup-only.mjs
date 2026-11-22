@@ -29,7 +29,7 @@ export const RELEASE =
 const REPO = "JustinJIndustries/JustinJ_Industries_Website";
 const ACCOUNT = "986b5334eba2d05d253ee98ca9842dfe";
 const PROJECT = "jji-backup-20261023",
-  BRANCH = "backup-ci-test-20261024";
+  BRANCH = "backup-ci-test-20261122-control-01";
 const RAW = "https://ac3af448.jji-backup-20261023.pages.dev/";
 const HOST = /^https:\/\/[a-f0-9]{8}\.jji-backup-20261023\.pages\.dev\/$/;
 const sha = (b) => createHash("sha256").update(b).digest("hex");
