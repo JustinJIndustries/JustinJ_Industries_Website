@@ -15,8 +15,8 @@ jobs:
         shell: bash
         working-directory: ${{ runner.temp }}
         env:
-          CHROME_VERSION: 148.0.7778.97
-          CHROME_SHA256: 8a760543807c67d3836d530cc4bc2e39c93e217f1629ec6ea311415fdfa21a75
+          CHROME_VERSION: 157.0.8103.78
+          CHROME_SHA256: 9223832977a13db3646201b1341c1f9cf08afa3ceae92540116d7b0c062364fb
         run: |
           set -euo pipefail
           archive=$(mktemp)
