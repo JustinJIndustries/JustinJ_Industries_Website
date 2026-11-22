@@ -1,5 +1,3 @@
-# Manual preview-only test. The infrastructure commit uses [skip ci] to prevent
-# the existing push publisher from deploying; that publisher is not modified.
 name: JJI backup-only preview test
 on:
   workflow_dispatch:
@@ -16,24 +14,19 @@ on:
       verify_deployment_id:
         description: Optional existing preview UUID for read-only verification after an uncertain test; never re-upload
         required: false
-permissions:
-  contents: read
-  actions: read
+permissions: {}
 concurrency:
   group: jji-backup-only-test
   cancel-in-progress: false
 jobs:
-  preview:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries'
-    environment: failover-sync
+  build:
+    if: github.repository == 'JustinJIndustries/JustinJ_Industries_Website' && github.ref == 'refs/heads/release-control' && github.sha == vars.JJI_BACKUP_CONTROL_SHA && github.sha == inputs.approved_workflow_sha && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1
     runs-on: ubuntu-latest
-    timeout-minutes: 25
-    env:
-      APPROVED_WORKFLOW_SHA: ${{ inputs.approved_workflow_sha }}
-      BUDGET_VERIFIED_AT: ${{ inputs.budget_verified_at }}
-      ZERO_SPEND_CONFIRMED: ${{ inputs.zero_spend_confirmed }}
-      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-      VERIFY_DEPLOYMENT_ID: ${{ inputs.verify_deployment_id }}
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    outputs:
+      manifest: ${{ steps.record.outputs.manifest }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
@@ -49,10 +42,8 @@ jobs:
         with:
           node-version: 24
           package-manager-cache: false
-      - name: Verify trusted manual context before any credential use
-        run: |
-          node --input-type=module -e 'import {assertContext} from "./control/infrastructure/backup-test/backup-only.mjs"; assertContext(process.env)'
-          test "$(git -C production rev-parse HEAD)" = d6574ede41a8620f838b6eafd3e7ba76ea7ebf68
+      - name: Verify fixed candidate checkout
+        run: test "$(git -C production rev-parse HEAD)" = d6574ede41a8620f838b6eafd3e7ba76ea7ebf68
       - name: Install exact source validation tools without lifecycle scripts or caches
         working-directory: production
         run: npm ci --ignore-scripts --no-audit --no-fund
@@ -62,13 +53,58 @@ jobs:
           npm run check:html
           npm run check:links
           npm run check:public-content
+      - name: Describe public bytes as untrusted data
+        id: record
+        run: node control/infrastructure/failover/build-handoff.mjs describe production/dist
+  preview:
+    needs: build
+    if: github.repository == 'JustinJIndustries/JustinJ_Industries_Website' && github.ref == 'refs/heads/release-control' && github.sha == vars.JJI_BACKUP_CONTROL_SHA && github.sha == inputs.approved_workflow_sha && github.event_name == 'workflow_dispatch' && github.actor == 'JustinJIndustries' && github.triggering_actor == 'JustinJIndustries' && github.run_attempt == 1
+    environment: backup-preview
+    permissions:
+      contents: read
+      actions: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      BACKUP_CONTROL_PIN: ${{ vars.JJI_BACKUP_CONTROL_SHA }}
+      APPROVED_WORKFLOW_SHA: ${{ inputs.approved_workflow_sha }}
+      BUDGET_VERIFIED_AT: ${{ inputs.budget_verified_at }}
+      ZERO_SPEND_CONFIRMED: ${{ inputs.zero_spend_confirmed }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      VERIFY_DEPLOYMENT_ID: ${{ inputs.verify_deployment_id }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Verify enrolled control, run and protected owner approval
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node control/infrastructure/backup-test/verify-run.mjs
+      - name: Restore only approved regular blobs without checking out or executing candidate code
+        working-directory: control
+        env:
+          BUILD_MANIFEST: ${{ needs.build.outputs.manifest }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 https://github.com/JustinJIndustries/JustinJ_Industries_Website.git d6574ede41a8620f838b6eafd3e7ba76ea7ebf68
+          node --input-type=module -e 'import {restore} from "./infrastructure/failover/build-handoff.mjs"; import {SOURCE, RELEASE} from "./infrastructure/backup-test/backup-only.mjs"; await restore(process.argv[1], process.env.BUILD_MANIFEST, SOURCE, RELEASE)' "$RUNNER_TEMP/verified-public"
       - name: Install isolated pinned Pages upload toolchain without lifecycle scripts
         run: npm ci --prefix control/infrastructure/backup-test/toolchain --ignore-scripts --no-audit --no-fund
       - name: Run focused preview-safety tests
         working-directory: control
         run: node --test tests/backup-test/*.test.mjs
       - name: Prepare namespaced preview and exact rollback material on runner disk only
-        run: node control/infrastructure/backup-test/backup-only.mjs prepare production/dist "$RUNNER_TEMP/jji-backup-only"
+        run: node control/infrastructure/backup-test/backup-only.mjs prepare "$RUNNER_TEMP/verified-public" "$RUNNER_TEMP/jji-backup-only"
+      - name: Recheck enrolled control, run and protected owner approval
+        env:
+          GH_READ_TOKEN: ${{ github.token }}
+        run: node control/infrastructure/backup-test/verify-run.mjs
       - name: Upload once to preview; verify provider receipt, all hashes, routes and recovery
         env:
           CLOUDFLARE_PAGES_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_TOKEN }}

@@ -1,0 +1,89 @@
+name: Verify backup build isolation
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/backup-isolation-check.yml"
+      - ".github/workflows/backup-only-test.yml"
+      - "infrastructure/backup-test/**"
+      - "infrastructure/failover/build-handoff.mjs"
+      - "infrastructure/failover/control-identity.mjs"
+      - "infrastructure/failover/package-limits.mjs"
+      - "tests/backup-test/**"
+permissions: {}
+jobs:
+  build:
+    if: github.repository == 'JustinJIndustries/JustinJ_Industries_Website' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    outputs:
+      manifest: ${{ steps.record.outputs.manifest }}
+      boot_hash: ${{ steps.witness.outputs.boot_hash }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: d6574ede41a8620f838b6eafd3e7ba76ea7ebf68
+          path: source
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Record the hosted build boundary
+        id: witness
+        run: |
+          set -euo pipefail
+          test "$RUNNER_ENVIRONMENT" = github-hosted
+          test -z "${ACTIONS_ID_TOKEN_REQUEST_URL+x}${CLOUDFLARE_PAGES_TOKEN+x}"
+          touch "$RUNNER_TEMP/jji-backup-build-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          echo "boot_hash=$(sha256sum /proc/sys/kernel/random/boot_id | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+      - name: Build the fixed source
+        working-directory: source
+        run: |
+          test "$(git rev-parse HEAD)" = d6574ede41a8620f838b6eafd3e7ba76ea7ebf68
+          node scripts/build-public.mjs
+      - name: Describe the source output
+        id: record
+        run: node control/infrastructure/failover/build-handoff.mjs describe source/dist
+  verify:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+      - name: Verify a fresh hosted runner and the control checkout
+        env:
+          EXPECTED_CONTROL: ${{ github.event.pull_request.head.sha }}
+          BUILD_BOOT_HASH: ${{ needs.build.outputs.boot_hash }}
+        run: |
+          set -euo pipefail
+          test "$RUNNER_ENVIRONMENT" = github-hosted
+          test -z "${ACTIONS_ID_TOKEN_REQUEST_URL+x}${CLOUDFLARE_PAGES_TOKEN+x}"
+          test "$(git rev-parse HEAD)" = "$EXPECTED_CONTROL"
+          [[ "$BUILD_BOOT_HASH" =~ ^[0-9a-f]{64}$ ]]
+          test "$(sha256sum /proc/sys/kernel/random/boot_id | cut -d ' ' -f 1)" != "$BUILD_BOOT_HASH"
+          test ! -e "$RUNNER_TEMP/jji-backup-build-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+      - name: Fetch approved Git objects without checking out the candidate
+        run: git fetch --no-tags --depth=1 https://github.com/JustinJIndustries/JustinJ_Industries_Website.git d6574ede41a8620f838b6eafd3e7ba76ea7ebf68
+      - name: Validate the received manifest, reconstructed files and local recovery
+        env:
+          BUILD_MANIFEST: ${{ needs.build.outputs.manifest }}
+        run: node tests/backup-test/rehearse-handoff.mjs
+      - name: Check backup safety contracts
+        run: node --test tests/backup-test/*.test.mjs

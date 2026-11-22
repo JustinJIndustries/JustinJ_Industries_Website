@@ -32,12 +32,18 @@ export function assertContext(env, now = Date.now()) {
   const budget = Number(env.BUDGET_VERIFIED_AT);
   if (
     env.GITHUB_REPOSITORY !== REPO ||
-    env.GITHUB_REF !== "refs/heads/main" ||
+    env.GITHUB_REF !== "refs/heads/release-control" ||
     env.GITHUB_EVENT_NAME !== "workflow_dispatch" ||
     env.GITHUB_ACTOR !== "JustinJIndustries" ||
+    env.GITHUB_TRIGGERING_ACTOR !== "JustinJIndustries" ||
+    env.BACKUP_CONTROL_PIN !== env.GITHUB_SHA ||
+    env.GITHUB_WORKFLOW_SHA !== env.GITHUB_SHA ||
+    env.GITHUB_WORKFLOW_REF !==
+      REPO +
+        "/.github/workflows/backup-only-test.yml@refs/heads/release-control" ||
     !/^[a-f0-9]{40}$/.test(env.GITHUB_SHA ?? "") ||
     env.APPROVED_WORKFLOW_SHA !== env.GITHUB_SHA ||
-    !/^\d+$/.test(env.GITHUB_RUN_ID ?? "") ||
+    !/^[1-9]\d*$/.test(env.GITHUB_RUN_ID ?? "") ||
     env.GITHUB_RUN_ATTEMPT !== "1" ||
     env.RUNNER_ENVIRONMENT !== "github-hosted" ||
     env.RUNNER_OS !== "Linux" ||
@@ -54,8 +60,12 @@ export function assertContext(env, now = Date.now()) {
 export function assertPreview(project, deployment) {
   if (
     project.name !== PROJECT ||
+    typeof project.production_branch !== "string" ||
+    !project.production_branch ||
+    /\s/.test(project.production_branch) ||
     project.production_branch === BRANCH ||
-    !project.canonical_deployment?.id
+    typeof project.canonical_deployment?.id !== "string" ||
+    !project.canonical_deployment.id.trim()
   )
     throw new Error("Unexpected project or production branch; no upload");
   if (
@@ -66,6 +76,49 @@ export function assertPreview(project, deployment) {
       !HOST.test(deployment.url.replace(/\/$/, "") + "/"))
   )
     throw new Error("Not the exact authorized preview/source");
+}
+export function completeDeployments(response) {
+  const { result, result_info: page } = response;
+  if (
+    !Array.isArray(result) ||
+    !page ||
+    page.page !== 1 ||
+    page.per_page !== 25 ||
+    page.count !== result.length ||
+    page.total_count !== result.length ||
+    result.length > 25 ||
+    (page.total_pages !== 1 &&
+      !(result.length === 0 && page.total_pages === 0)) ||
+    result.some((item) => {
+      const branch = item?.deployment_trigger?.metadata?.branch;
+      return typeof branch !== "string" || !branch || /\s/.test(branch);
+    })
+  )
+    throw new Error("Incomplete deployment inventory; no automatic retry");
+  return result;
+}
+
+const deploymentId = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/;
+function runMessage(runId, workflowSha) {
+  return "JJI backup-only test run " + runId + " workflow " + workflowSha;
+}
+export function verifyPreviewOperation(deployment, productionId, env) {
+  if (!deploymentId.test(deployment.id ?? "") || deployment.id === productionId)
+    throw new Error("Preview lacks a distinct provider deployment identity");
+  const message = deployment.deployment_trigger?.metadata?.commit_message;
+  if (env.VERIFY_DEPLOYMENT_ID) {
+    if (
+      deployment.id !== env.VERIFY_DEPLOYMENT_ID ||
+      !/^JJI backup-only test run [1-9][0-9]* workflow [a-f0-9]{40}$/.test(
+        message ?? "",
+      )
+    )
+      throw new Error("Verification-only deployment identity mismatch");
+  } else if (message !== runMessage(env.GITHUB_RUN_ID, env.GITHUB_SHA)) {
+    throw new Error(
+      "Preview provider record differs from the approved publishing run",
+    );
+  }
 }
 async function routes() {
   return JSON.parse(
@@ -100,7 +153,11 @@ async function api(endpoint, token) {
   )
     throw new Error("Unapproved read-only Pages endpoint");
   try {
-    const r = await fetch("https://api.cloudflare.com/client/v4" + endpoint, {
+    const listing =
+      endpoint === `/accounts/${ACCOUNT}/pages/projects/${PROJECT}/deployments`;
+    const url = new URL("https://api.cloudflare.com/client/v4" + endpoint);
+    if (listing) url.search = "?page=1&per_page=25";
+    const r = await fetch(url, {
       headers: { authorization: "Bearer " + token },
       redirect: "error",
       signal: AbortSignal.timeout(15000),
@@ -108,7 +165,7 @@ async function api(endpoint, token) {
     if (!r.ok) throw new Error();
     const j = await r.json();
     if (j.success !== true) throw new Error();
-    return j.result;
+    return listing ? completeDeployments(j) : j.result;
   } catch {
     throw new Error("Pages metadata read failed; no scope expansion or retry");
   }
@@ -145,10 +202,7 @@ async function pinnedRunner(directory, token, runId, workflowSha) {
         "--project-name=" + PROJECT,
         "--branch=" + BRANCH,
         "--commit-hash=" + SOURCE,
-        "--commit-message=JJI backup-only test run " +
-          runId +
-          " workflow " +
-          workflowSha,
+        "--commit-message=" + runMessage(runId, workflowSha),
         "--commit-dirty=false",
       ],
       {
@@ -273,7 +327,7 @@ export async function deployAndVerify(
   let deployment, origin;
   const requested = env.VERIFY_DEPLOYMENT_ID;
   if (requested) {
-    if (!/^[a-f0-9-]{36}$/.test(requested))
+    if (!deploymentId.test(requested))
       throw new Error("Invalid verification-only deployment identity");
     deployment = await apiRead(base + "/deployments/" + requested, token);
     assertPreview(before, deployment);
@@ -309,6 +363,7 @@ export async function deployAndVerify(
       );
     assertPreview(before, deployment);
   }
+  verifyPreviewOperation(deployment, before.canonical_deployment.id, env);
   if (deployment.latest_stage?.status !== "success")
     throw new Error("Preview deployment not successful; inspect before retry");
   const issued = await createRecoveryReceipt({
